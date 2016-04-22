@@ -1,0 +1,52 @@
+Port 2222
+Protocol 2
+AddressFamily inet
+ListenAddress 0.0.0.0
+PidFile /var/run/sshd.pid
+
+AllowUsers drduh
+HostKey /etc/ssh/ssh_host_key
+
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+RekeyLimit 256M
+
+UsePrivilegeSeparation sandbox
+
+SyslogFacility AUTH
+LogLevel VERBOSE
+
+MaxStartups 3
+MaxSessions 3
+LoginGraceTime 30s
+ClientAliveInterval 30
+ClientAliveCountMax 20
+
+PermitRootLogin no
+StrictModes yes
+UsePAM yes
+
+PubkeyAuthentication yes
+AuthorizedKeysFile %h/.ssh/authorized_keys
+IgnoreRhosts yes
+
+RSAAuthentication no
+PermitEmptyPasswords no
+GSSAPIAuthentication no
+PasswordAuthentication no
+KerberosAuthentication no
+HostbasedAuthentication no
+ChallengeResponseAuthentication no
+
+Compression delayed
+X11Forwarding no
+AllowTcpForwarding no
+GatewayPorts no
+PermitTunnel no
+TCPKeepAlive yes
+
+UseDNS no
+PrintMotd no
+PrintLastLog yes
+PermitUserEnvironment no
