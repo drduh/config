@@ -1,0 +1,14 @@
+Host github.com
+  IdentityFile ~/.ssh/github
+
+Host *
+  Protocol 2
+  HashKnownHosts yes
+  IdentitiesOnly yes
+  VisualHostKey yes
+  PasswordAuthentication no
+  StrictHostKeyChecking ask
+  ControlMaster auto
+  ControlPath ~/.ssh/master-%r@%h:%p
+  ControlPersist 2m
+  UseRoaming no
