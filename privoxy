@@ -1,0 +1,33 @@
+confdir /etc/privoxy
+actionsfile match-all.action
+actionsfile default.action
+actionsfile user.action
+filterfile default.filter
+filterfile user.filter
+
+logdir /var/log/privoxy
+logfile logfile
+
+listen-address 127.0.0.1:8000
+toggle 1
+
+accept-intercepted-requests 1
+allow-cgi-request-crunching 0
+buffer-limit 8096
+enable-remote-http-toggle  0
+enable-remote-toggle  0
+enable-edit-actions 0
+enforce-blocks 0
+forwarded-connect-retries 0
+split-large-forms 0
+tolerate-pipelining 1
+
+default-server-timeout 120
+keep-alive-timeout 120
+socket-timeout 120
+
+debug  1
+debug  32
+debug  128
+debug  1024
+debug  8192
