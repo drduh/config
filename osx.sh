@@ -31,6 +31,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write com.apple.ActivityMonitor IconType -int 5
 defaults write com.apple.ActivityMonitor ShowCategory -int 100
 defaults write com.apple.appstore ShowDebugMenu -bool true
+defaults write com.apple.CrashReporter DialogType none
 defaults write com.apple.dashboard mcx-disabled -bool true
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
@@ -90,9 +91,11 @@ defaults write com.apple.spotlight orderedItems -array \
   '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
   '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 
-sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool false
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
 sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -bool true
+sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool YES
 sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
