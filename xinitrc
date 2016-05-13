@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo ifconfig wlan1 hw ether $(openssl rand -hex 6 | sed 's%\(..\)%\1:%g; s%.$%%')
+
 [ -f ~/.fehbg ] && sh ~/.fehbg &
 
 while : ; do
