@@ -4,7 +4,7 @@ modules_enabled = {
     "tls";
     "private";
     "posix";
-    "otr";
+    "dialback";
 }
 
 log = {
@@ -14,7 +14,7 @@ log = {
 
 admins                 = { "admin@example.com" }
 allow_registration     = false
-authentication         = "internal_plain"
+authentication         = "internal_hashed"
 daemonize              = true
 c2s_require_encryption = true
 s2s_require_encryption = true
@@ -26,9 +26,7 @@ ssl = {
     key         = "/etc/pki/xmpp-key.pem";
     certificate = "/etc/pki/xmpp-cert.pem";
     dhparam     = "/etc/pki/dh.pem";
-    options     = { "no_sslv2", "no_sslv3", "no_ticket", "no_compression" };
     depth       = "1";
-    curve       = "secp384r1";
     protocols   = "tlsv1_2";
-    ciphers     = "kECDH:HIGH:!MEDIUM:!LOW:!NULL:!DSS:!AES128-SHA:!AES128-SHA256:!CAMELLIA128-SHA:!eNULL:!aNULL@STRENGTH";
+    ciphers     = "EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4";
 }
