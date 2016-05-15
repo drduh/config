@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -euo pipefail
+set -o errtrace
+set -o nounset
+set -o pipefail
 
 mkdir ~/build ; chmod 750 ~/build
 mkdir ~/config ; chmod 700 ~/config
@@ -9,6 +11,8 @@ mkdir ~/.ssh ; chmod 700 ~/.ssh
 mkdir -p ~/.vim/{backups,swaps,undo}
 
 sudo curl -s "https://sks-keyservers.net/sks-keyservers.netCA.pem" -o /etc/sks-keyservers.netCA.pem
+
+touch ~/.hushlogin
 
 chflags nohidden ~/Library
 
@@ -127,7 +131,32 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.c
 
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
+launchctl unload -w /System/Library/LaunchAgents/com.apple.AddressBook.SourceSync.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.AirPlayUIAgent.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.AOSPushRelay.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.bird.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.CallHistoryPluginHelper.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.CallHistorySyncHelper.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudfamilyrestrictionsd-mac.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.findmymacmessenger.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.gamed.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.helpd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.icloud.fmfd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.metadata.SpotlightNetHelper.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.SafariCloudHistoryPushAgent.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.safaridavclient.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.SafariNotificationAgent.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.sharingd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.telephonyutilities.callservicesd.plist
+
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.awacsd.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.blued.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.CrashReporterSupportHelper.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.GameController.gamecontrollerd.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.netbiosd.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist
 
 sudo mdutil -i on / > /dev/null
 sudo mdutil -E / > /dev/null
@@ -138,6 +167,8 @@ sudo nvram boot-args="-v"
 
 sudo pmset -a sms 0
 sudo pmset -a womp 0
+
+sudo systemsetup -setusingnetworktime on
 
 sudo spctl --master-enable
 
