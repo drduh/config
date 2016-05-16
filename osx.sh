@@ -12,6 +12,11 @@ mkdir -p ~/.vim/{backups,swaps,undo}
 
 sudo curl -s "https://sks-keyservers.net/sks-keyservers.netCA.pem" -o /etc/sks-keyservers.netCA.pem
 
+duti -s com.apple.Safari afp
+duti -s com.apple.Safari ftp
+duti -s com.apple.Safari nfs
+duti -s com.apple.Safari smb
+
 touch ~/.hushlogin
 
 chflags nohidden ~/Library
@@ -135,26 +140,39 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.AddressBook.SourceSyn
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AirPlayUIAgent.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AOSPushRelay.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.bird.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.CallHistoryPluginHelper.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.CallHistorySyncHelper.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudd.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudfamilyrestrictionsd-mac.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudpaird.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.diagnostics_agent.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.findmymacmessenger.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.gamed.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.helpd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.familycircled.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.familynotificationd.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.icloud.fmfd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.identityservicesd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.imagent.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.IMLoggingAgent.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.metadata.SpotlightNetHelper.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.photolibraryd.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.SafariCloudHistoryPushAgent.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.safaridavclient.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.SafariNotificationAgent.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.sharingd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.soagent.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.suggestd.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.telephonyutilities.callservicesd.plist
 
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.awacsd.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.blued.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.CrashReporterSupportHelper.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.diagnosticd.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.GameController.gamecontrollerd.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.locationd.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.netbiosd.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist
 
@@ -171,6 +189,13 @@ sudo pmset -a womp 0
 sudo systemsetup -setusingnetworktime on
 
 sudo spctl --master-enable
+
+sudo hostname -s mac
+sudo scutil --set ComputerName mac
+sudo scutil --set LocalHostName mac
+sudo scutil --set HostName mac
+sudo sysctl kern.hostname=mac
+echo "kern.hostname=mac" | sudo tee -a /etc/sysctl.conf
 
 sudo killall Dock
 sudo killall Finder
