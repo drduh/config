@@ -136,8 +136,17 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.c
 
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
+echo "Boot into Recovery Mode (or disable SIP), unlock the disk and run:"
+echo "cd /Volumes/Macintosh HD/System/Library"
+echo "chmod -x ./CoreServices/mapspushd"
+echo "chmod -x ./Frameworks/Security.framework/Versions/A/Resources/IDSKeychainSynchingProxy.bundle/Contents/MacOS/IDSKeychainSyncingProxy"
+echo "Otherwise, these two processes go nuts and crash repeatedly with the following agents/daemons disabled."
+
+launchctl unload -w /System/Library/LaunchAgents/com.apple.accountsd.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AddressBook.SourceSync.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AirPlayUIAgent.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.akd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.askpermissiond.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AOSPushRelay.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.bird.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist
@@ -146,6 +155,8 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.CallHistorySyncHelper
 launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudd.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudfamilyrestrictionsd-mac.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudpaird.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudphotosd.plist
+launchctl unload -w /System/Library/LaunchAgents/com.apple.CommCenter-osx.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.diagnostics_agent.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.findmymacmessenger.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.gamed.plist
