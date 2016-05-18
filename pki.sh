@@ -10,7 +10,7 @@
 #   or other signing and encryption functions.
 #
 # To disable OpenSSL cert name requirements (e.g. location):
-#   sudo sed -i.bak s/= match/= optional/g /usr/lib/ssl/openssl.cnf
+#   sudo sed -i.bak "s/= match/= optional/g" /usr/lib/ssl/openssl.cnf
 
 readonly OPENSSL="/usr/bin/openssl"
 readonly DEFAULT_MD="sha256"
@@ -25,7 +25,7 @@ readonly CN_CLIENT="Client #001"
 mkdir -p demoCA/newcerts ; touch demoCA/index.txt ; echo 1000 > demoCA/serial
 
 ${OPENSSL} genrsa -out ca.key ${KEYSIZE}
-${OPENSSL} req -new -x509 -days ${CA_DAYS}-${DEFAULT_MD} -extensions v3_ca \
+${OPENSSL} req -new -x509 -days ${CA_DAYS} -${DEFAULT_MD} -extensions v3_ca \
   -subj "/CN=${CN_AUTHORITY}" -key ca.key -out ca.pem
 
 ${OPENSSL} genrsa -out intermediate.key ${KEYSIZE}
