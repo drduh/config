@@ -26,6 +26,7 @@ setopt histignorealldups
 setopt histignorespace
 setopt histreduceblanks
 setopt nocaseglob
+setopt noclobber
 setopt nullglob
 setopt listtypes
 
@@ -57,6 +58,20 @@ function colours {
   done
 }
 
+function f {
+  find . -iname "*$1*"
+}
+
+function zshaddhistory {
+  whence ${${(z)1}[1]} >| /dev/null || return 1
+  local line cmd
+  line=${1%%$'\n'}
+  cmd=${line%% *}
+  [[ ${#line} -ge 5 \
+    && ${cmd} != ((p|)kill|(s|)rm|file|feh|man|cat|ls|cd)
+  ]]
+}
+
 function path {
   if [[ -d "$1" ]] ; then
     if [[ -z "$PATH" ]] ; then
@@ -70,10 +85,15 @@ function path {
 export PATH=''
 path /usr/local/sbin
 path /usr/local/bin
-path /sbin
-path /bin
 path /usr/sbin
 path /usr/bin
+path /sbin
+path /bin
+
+alias -g L='| less'
+alias -g H='| head'
+alias -g S='| sort'
+alias -g T='| tail'
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -97,5 +117,5 @@ alias rand="for i in {1..5} ; do \
   cat /dev/urandom | base64 | cut -c-40 | head -n5 ; done"
 
 alias gpg_restart="pkill gpg-agent ; pkill ssh-agent ; \
-  eval $(gpg-agent --daemon --enable-ssh-support --use-standard-socket \
+  eval \$(gpg-agent --daemon --enable-ssh-support --use-standard-socket \
   --log-file ~/.gnupg/gpg-agent.log --write-env-file)"
