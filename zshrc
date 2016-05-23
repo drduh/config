@@ -110,7 +110,8 @@ alias grep_ip="grep -Eo \
 alias grep_url="grep -Eo \
   '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'"
   
-alias mac="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
+alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
+alias mac_troll="printf 00:20:91:;openssl rand -hex 3|sed 's/\(..\)/\1:/g; s/.$//'"
 alias rand="for i in {1..5} ; do \
   gpg --gen-random --armor 1 30 ; \
   openssl rand -base64 30 ; \
