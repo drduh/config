@@ -103,6 +103,9 @@ alias l="ls -lha --color"
 alias ls="ls -lh --color"
 alias md="mkdir -p"
 
+alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
+alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
+
 alias web="chromium --proxy-server='127.0.0.1:8000'"
 
 alias grep_ip="grep -Eo \
