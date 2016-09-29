@@ -1,3 +1,3 @@
-lighty.content = {{ filename = "/var/www/gif/" .. math.random(0,999) .. ".gif" }}
-lighty.header["Content-Type"] = "image/gif"
+lighty.content = {{ filename = "/var/www/index.html" }}
+lighty.header["Content-Type"] = "text/html"
 return 200
