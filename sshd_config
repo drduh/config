@@ -4,7 +4,7 @@ AddressFamily inet
 ListenAddress 0.0.0.0
 PidFile /var/run/sshd.pid
 
-AllowUsers drduh
+AllowUsers sysadm
 HostKey /etc/ssh/ssh_host_key
 
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
