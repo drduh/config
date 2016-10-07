@@ -139,7 +139,7 @@ sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Vol
 echo "Boot into Recovery Mode (or disable SIP), unlock the disk and run:"
 echo "cd /Volumes/Macintosh HD/System/Library"
 echo "chmod -x ./CoreServices/mapspushd"
-echo "chmod -x ./Frameworks/Security.framework/Versions/A/Resources/IDSKeychainSynchingProxy.bundle/Contents/MacOS/IDSKeychainSyncingProxy"
+echo "chmod -x ./Frameworks/Security.framework/Versions/A/Resources/IDSKeychainSyncingProxy.bundle/Contents/MacOS/IDSKeychainSyncingProxy"
 echo "Otherwise, these two processes go nuts and crash repeatedly with the following agents/daemons disabled."
 
 launchctl unload -w /System/Library/LaunchAgents/com.apple.accountsd.plist
