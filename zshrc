@@ -83,6 +83,8 @@ function path {
 }
 
 export PATH=''
+path ~/homebrew/sbin
+path ~/homebrew/bin
 path /usr/local/sbin
 path /usr/local/bin
 path /usr/sbin
