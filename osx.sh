@@ -136,11 +136,13 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.c
 
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
-echo "Boot into Recovery Mode (or disable SIP), unlock the disk and run:"
+echo "Boot into Recovery Mode, unlock and mount the disk, then open Terminal and run the following commands:"
 echo "cd /Volumes/Macintosh HD/System/Library"
 echo "chmod -x ./CoreServices/mapspushd"
+echo "chmod -x ./PrivateFrameworks/PassKitCore.framework/passd"
 echo "chmod -x ./Frameworks/Security.framework/Versions/A/Resources/IDSKeychainSyncingProxy.bundle/Contents/MacOS/IDSKeychainSyncingProxy"
-echo "Otherwise, these two processes go nuts and crash repeatedly with the following agents/daemons disabled."
+echo "reboot"
+echo "If not stopped from executing, these processes go nuts and use 100% CPU with the following launch agents and daemons disabled."
 
 launchctl unload -w /System/Library/LaunchAgents/com.apple.accountsd.plist
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AddressBook.SourceSync.plist
