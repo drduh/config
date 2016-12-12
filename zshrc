@@ -125,3 +125,16 @@ alias rand="for i in {1..5} ; do \
 alias gpg_restart="pkill gpg-agent ; pkill ssh-agent ; \
   eval \$(gpg-agent --daemon --enable-ssh-support --use-standard-socket \
   --log-file ~/.gnupg/gpg-agent.log --write-env-file)"
+  
+alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
+alias audio_set="pacmd set-default-sink ${1}"
+
+alias netdown="sudo service networking stop ; \
+  sudo service dnsmasq stop ; \
+  sudo service privoxy stop ; \
+  sudo ifdown em0"
+
+alias netup="sudo service networking restart ; \
+  sudo service dnsmasq restart ; \
+  sudo service privoxy restart ; \
+  sudo ifup em0"
