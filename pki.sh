@@ -13,10 +13,12 @@
 #   sudo sed -i.bak "s/= match/= optional/g" /usr/lib/ssl/openssl.cnf
 
 readonly OPENSSL="/usr/bin/openssl"
-readonly DEFAULT_MD="sha256"
-readonly KEYSIZE="2048"
-readonly CA_DAYS="3650"
-readonly CERT_DAYS="120"
+readonly DEFAULT_MD="sha512"
+readonly KEYSIZE="4096"
+readonly CA_DAYS="365"
+readonly CERT_DAYS="90"
+
+# These strings will appear in plaintext in certificates.
 readonly CN_AUTHORITY="Example Authority"
 readonly CN_INTERMEDIATE="Example Intermediate Authority"
 readonly CN_SERVER="www.example.com"
