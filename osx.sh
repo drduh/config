@@ -149,10 +149,12 @@ echo "with the following launch agents and daemons disabled."
 echo
 
 launchctl unload -w /System/Library/LaunchAgents/com.apple.accountsd.plist 2>/dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.AddressBook.ContactsAccountsService.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AddressBook.SourceSync.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AirPlayUIAgent.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.akd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.askpermissiond.plist 2>/dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.AOSPushHeartbeat.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.AOSPushRelay.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.bird.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist 2>/dev/null
@@ -164,22 +166,24 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudpaird.plist 2>/d
 launchctl unload -w /System/Library/LaunchAgents/com.apple.cloudphotosd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.CommCenter-osx.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.diagnostics_agent.plist 2>/dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.familycircled.plist 2>/dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.familynotificationd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.findmymacmessenger.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.gamed.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.helpd.plist 2>/dev/null
-launchctl unload -w /System/Library/LaunchAgents/com.apple.familycircled.plist 2>/dev/null
-launchctl unload -w /System/Library/LaunchAgents/com.apple.familynotificationd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.icloud.fmfd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.identityservicesd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.imagent.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.IMLoggingAgent.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.metadata.SpotlightNetHelper.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.photolibraryd.plist 2>/dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.photoanalysisd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.SafariCloudHistoryPushAgent.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.safaridavclient.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.SafariNotificationAgent.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.sharingd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.soagent.plist 2>/dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.SocialPushAgent.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.suggestd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.swcd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.telephonyutilities.callservicesd.plist 2>/dev/null
@@ -187,7 +191,6 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.telephonyutilities.ca
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.awacsd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.awdd.plist 2>/dev/null
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.blued.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.CrashReporterSupportHelper.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ctkd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.diagnosticd.plist 2>/dev/null
@@ -196,6 +199,11 @@ sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.icloud.findmyde
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.locationd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mobileassetd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.netbiosd.plist 2>/dev/null
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.nfcd.plist 2>/dev/null
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.nfsd.plist 2>/dev/null
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.postfix.master.plist 2>/dev/null
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.postfix.newaliases.plist 2>/dev/null
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.seld.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.symptomsd.plist 2>/dev/null
 
