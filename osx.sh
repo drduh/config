@@ -175,6 +175,7 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.icloud.fmfd.plist 2>/
 launchctl unload -w /System/Library/LaunchAgents/com.apple.identityservicesd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.imagent.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.IMLoggingAgent.plist 2>/dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.mediaremoteagent.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.metadata.SpotlightNetHelper.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.photolibraryd.plist 2>/dev/null
 launchctl unload -w /System/Library/LaunchAgents/com.apple.photoanalysisd.plist 2>/dev/null
@@ -194,10 +195,12 @@ sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.awdd.plist 2>/d
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.CrashReporterSupportHelper.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ctkd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.diagnosticd.plist 2>/dev/null
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.findmymac.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.GameController.gamecontrollerd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.icloud.findmydeviced.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.locationd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mobileassetd.plist 2>/dev/null
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.nehelper.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.netbiosd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.nfcd.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.nfsd.plist 2>/dev/null
@@ -206,6 +209,7 @@ sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.postfix.newalia
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.seld.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.SubmitDiagInfo.plist 2>/dev/null
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.symptomsd.plist 2>/dev/null
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.tccd.plist 2>/dev/null
 
 sudo pkill Dock Finder mds SystemUIServer blued
 
