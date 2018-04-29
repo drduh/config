@@ -91,6 +91,7 @@ path /usr/sbin
 path /usr/bin
 path /sbin
 path /bin
+path /usr/X11R6/bin
 
 alias -g L='| less'
 alias -g H='| head'
@@ -100,9 +101,8 @@ alias -g T='| tail'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias grep="grep --color=always"
-alias l="ls -lha --color"
-alias ls="ls -lh --color"
+alias l="ls -lha"
+alias ls="ls -lh"
 alias md="mkdir -p"
 
 alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
@@ -128,13 +128,3 @@ alias gpg_restart="pkill gpg-agent ; pkill ssh-agent ; \
   
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
-
-alias netdown="sudo service networking stop ; \
-  sudo service dnsmasq stop ; \
-  sudo service privoxy stop ; \
-  sudo ifdown em0"
-
-alias netup="sudo service networking restart ; \
-  sudo service dnsmasq restart ; \
-  sudo service privoxy restart ; \
-  sudo ifup em0"
