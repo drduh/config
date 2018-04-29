@@ -123,8 +123,7 @@ alias rand="for i in {1..5} ; do \
   cat /dev/urandom | base64 | cut -c-40 | head -n5 ; done"
 
 alias gpg_restart="pkill gpg-agent ; pkill ssh-agent ; \
-  eval \$(gpg-agent --daemon --enable-ssh-support --use-standard-socket \
-  --log-file ~/.gnupg/gpg-agent.log --write-env-file)"
+  eval \$(gpg-agent --daemon --enable-ssh-support --log-file ~/.gnupg/gpg-agent.log)"
   
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
