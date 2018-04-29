@@ -1,0 +1,41 @@
+--- a/config.h	Sun Apr 29 15:00:00 2018
++++ b/config.h	Sun Apr 29 14:00:00 2018
+@@ -2,22 +2,24 @@
+ 
+ /* appearance */
+ static const char *fonts[] = {
+-	"monospace:size=10"
++	"Liberation Mono:size=24"
+ };
+-static const char dmenufont[]       = "monospace:size=10";
+-static const char normbordercolor[] = "#444444";
+-static const char normbgcolor[]     = "#222222";
+-static const char normfgcolor[]     = "#bbbbbb";
+-static const char selbordercolor[]  = "#005577";
+-static const char selbgcolor[]      = "#005577";
+-static const char selfgcolor[]      = "#eeeeee";
++static const char dmenufont[]       = "Liberation Mono:size=24";
++
++static const char normbordercolor[] = "#002b36";
++static const char normbgcolor[]     = "#002b36";
++static const char normfgcolor[]     = "#657b83";
++static const char selbordercolor[]  = "#93a1a1";
++static const char selbgcolor[]      = "#93a1a1";
++static const char selfgcolor[]      = "#002b36";
++
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const int showbar            = 1;        /* 0 means no bar */
+ static const int topbar             = 1;        /* 0 means bottom bar */
+ 
+ /* tagging */
+-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
++static const char *tags[] = { "a", "b", "c", "d", "0" };
+ 
+ static const Rule rules[] = {
+ 	/* xprop(1):
+@@ -110,4 +112,3 @@
+ 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
+ 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+ };
+-
