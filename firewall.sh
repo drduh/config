@@ -8,7 +8,7 @@ DMZ=eth2
 WIFI=wlan0
 
 INT_NET=172.16.1.0/24
-DMZ_NET=10.8.4.0/24
+DMZ_NET=10.8.1.0/24
 WIFI_NET=192.168.1.0/24
 
 echo "Flush rules"
@@ -61,9 +61,6 @@ iptables -t nat -A PREROUTING -i $DMZ -p tcp --dport 80 -j DNAT --to-destination
 iptables -A INPUT -i $WIFI -s $WIFI_NET -p tcp --dport 8118 -m conntrack --ctstate NEW -j ACCEPT
 iptables -t nat -A PREROUTING -i $WIFI -p tcp --dport 80 -j DNAT --to-destination 192.168.1.1:8118
 
-echo "Example of blocking traffic by IP address"
-iptables -A FORWARD -d 209.18.47.62 -j DROP
-
 echo "Allow outgoing to Internet"
 iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -j ACCEPT
 
@@ -78,8 +75,8 @@ iptables -A FORWARD -o $EXT -i $INT -s $INT_NET -m conntrack --ctstate NEW -j AC
 iptables -A FORWARD -o $EXT -i $DMZ -s $DMZ_NET -m conntrack --ctstate NEW -j ACCEPT
 iptables -A FORWARD -o $EXT -i $WIFI -s $WIFI_NET -m conntrack --ctstate NEW -j ACCEPT
 
-echo "Mangle TTL"
-iptables -t mangle -A POSTROUTING -j TTL --ttl-set 65
+# Un-comment to mangle TTL +1 (obscuring the fact packets were routed)
+#iptables -t mangle -A POSTROUTING -j TTL --ttl-set 65
 
 echo "Log dropped packets"
 iptables -A INPUT -m limit --limit 1/sec -j LOG --log-level debug --log-prefix 'IN>'
