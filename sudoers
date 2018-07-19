@@ -1,0 +1,10 @@
+Defaults        env_reset
+Defaults        mail_badpass
+Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+root    ALL=(ALL:ALL) ALL
+sysadm  ALL=(ALL:ALL) ALL
+
+Cmnd_Alias NP = /bin/dmesg, /usr/bin/apt-get autoclean, /usr/bin/apt-get autoremove, /usr/bin/apt-get dist-upgrade, /usr/bin/apt-get update, /usr/bin/apt-get upgrade, /sbin/cryptsetup luksClose /dev/mapper/disk*, /sbin/cryptsetup luksOpen /dev/sd*, /usr/bin/lsof -Pni, /usr/bin/minicom -D /dev/ttyUSB0, /bin/mount /dev/mapper/disk*, /usr/sbin/ntpdate -uv pool.ntp.org, /usr/sbin/openvpn --config client.ovpn, /usr/sbin/service dnsmasq restart, /usr/sbin/service networking restart, /usr/sbin/service privoxy restart, /usr/bin/tee /sys/class/backlight/intel_backlight/brightness, /sbin/wpa_supplicant -Dnl80211 -iwlp2s0 -cwpa.conf
+
+sysadm  ALL=(ALL) NOPASSWD: NP
