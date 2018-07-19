@@ -17,7 +17,6 @@ autoload -U promptinit && promptinit
 setopt alwaystoend
 setopt autocd
 setopt autopushd
-setopt nobeep
 setopt completeinword
 setopt correct
 setopt extendedglob
@@ -25,10 +24,11 @@ setopt extendedhistory
 setopt histignorealldups
 setopt histignorespace
 setopt histreduceblanks
+setopt listtypes
+setopt nobeep
 setopt nocaseglob
 setopt noclobber
 setopt nullglob
-setopt listtypes
 
 zstyle ':completion:*' auto-description 'specify %d'
 zstyle ':completion:*' cache-path ~/.zsh_cache
@@ -105,25 +105,35 @@ alias l="ls -lha"
 alias ls="ls -lh"
 alias md="mkdir -p"
 
-alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
-alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
+alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
+alias audio_set="pacmd set-default-sink ${1}"
 
-alias web="chromium --proxy-server='127.0.0.1:8000'"
+alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
+
+alias cert="openssl req -new -newkey rsa:4096 -sha256 -days 365 \
+  -nodes -x509 -keyout s.key -out s.crt && \
+  openssl x509 -in s.crt -noout -subject -issuer -enddate"
+
+alias dedupe="find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD"
+
+alias gpg_restart="pkill gpg-agent ; pkill ssh-agent ; \
+  eval \$(gpg-agent --daemon --enable-ssh-support --log-file ~/.gnupg/gpg-agent.log)"
 
 alias grep_ip="grep -Eo \
   '([0-9]{1,3}\.){3}[0-9]{1,3}'"
 alias grep_url="grep -Eo \
   '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'"
-  
+
+alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
+
 alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
-alias mac_troll="printf 00:20:91:;openssl rand -hex 3|sed 's/\(..\)/\1:/g; s/.$//'"
+alias mac_troll="printf 00:20:91:; openssl rand -hex 3|sed 's/\(..\)/\1:/g; s/.$//'"
+
 alias rand="for i in {1..5} ; do \
   gpg --gen-random --armor 1 30 ; \
   openssl rand -base64 30 ; \
   cat /dev/urandom | base64 | cut -c-40 | head -n5 ; done"
 
-alias gpg_restart="pkill gpg-agent ; pkill ssh-agent ; \
-  eval \$(gpg-agent --daemon --enable-ssh-support --log-file ~/.gnupg/gpg-agent.log)"
-  
-alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
-alias audio_set="pacmd set-default-sink ${1}"
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
