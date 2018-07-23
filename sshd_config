@@ -1,8 +1,8 @@
-Port 2222
 Protocol 2
+Port 22
+
 AddressFamily inet
 ListenAddress 0.0.0.0
-PidFile /var/run/sshd.pid
 
 AllowUsers sysadm
 HostKey /etc/ssh/ssh_host_key
@@ -11,8 +11,6 @@ Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com
 KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
 RekeyLimit 256M
-
-UsePrivilegeSeparation sandbox
 
 SyslogFacility AUTH
 LogLevel VERBOSE
@@ -25,17 +23,13 @@ ClientAliveCountMax 20
 
 PermitRootLogin no
 StrictModes yes
-UsePAM yes
 
 PubkeyAuthentication yes
 AuthorizedKeysFile %h/.ssh/authorized_keys
 IgnoreRhosts yes
 
-RSAAuthentication no
 PermitEmptyPasswords no
-GSSAPIAuthentication no
 PasswordAuthentication no
-KerberosAuthentication no
 HostbasedAuthentication no
 ChallengeResponseAuthentication no
 
