@@ -1,12 +1,39 @@
 --- a/config.h	Sun Apr 29 15:00:00 2018
 +++ b/config.h	Sun Apr 29 14:00:00 2018
-@@ -2,22 +2,24 @@
+@@ -1,23 +1,50 @@
+ /* See LICENSE file for copyright and license details. */
  
++void grid(Monitor *m) {
++        unsigned int i, n, cx, cy, cw, ch, aw, ah, cols, rows;
++        Client *c;
++
++        for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next))
++                n++;
++
++        /* grid dimensions */
++        for(rows = 0; rows <= n/2; rows++)
++                if(rows*rows >= n)
++                        break;
++        cols = (rows && (rows - 1) * rows >= n) ? rows - 1 : rows;
++
++        /* window geoms (cell height/width) */
++        ch = m->wh / (rows ? rows : 1);
++        cw = m->ww / (cols ? cols : 1);
++        for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
++                cx = m->wx + (i / rows) * cw;
++                cy = m->wy + (i % rows) * ch;
++                /* adjust height/width of last row/column's windows */
++                ah = ((i + 1) % rows == 0) ? m->wh - ch * rows : 0;
++                aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
++                resize(c, cx, cy, cw - 2 * c->bw + aw, ch - 2 * c->bw + ah, False);
++                i++;
++        }
++}
++
  /* appearance */
- static const char *fonts[] = {
+-static const char *fonts[] = {
 -	"monospace:size=10"
-+	"Liberation Mono:size=24"
- };
+-};
 -static const char dmenufont[]       = "monospace:size=10";
 -static const char normbordercolor[] = "#444444";
 -static const char normbgcolor[]     = "#222222";
@@ -14,7 +41,8 @@
 -static const char selbordercolor[]  = "#005577";
 -static const char selbgcolor[]      = "#005577";
 -static const char selfgcolor[]      = "#eeeeee";
-+static const char dmenufont[]       = "Liberation Mono:size=24";
++static const char *fonts[]          = { "Inconsolata:size=24" };
++static const char dmenufont[]       = "Inconsolata:size=24";
 +
 +static const char normbordercolor[] = "#002b36";
 +static const char normbgcolor[]     = "#002b36";
@@ -30,12 +58,35 @@
  
  /* tagging */
 -static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-+static const char *tags[] = { "a", "b", "c", "d", "0" };
++static const char *tags[] = { "a", "b", "c", "d" };
  
  static const Rule rules[] = {
  	/* xprop(1):
-@@ -110,4 +112,3 @@
- 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
- 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+@@ -32,13 +59,14 @@
+ /* layout(s) */
+ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+ static const int nmaster     = 1;    /* number of clients in master area */
+-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
++static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+ 
+ static const Layout layouts[] = {
+-	/* symbol     arrange function */
+-	{ "[]=",      tile },    /* first entry is default */
+-	{ "><>",      NULL },    /* no layout function means floating behavior */
+-	{ "[M]",      monocle },
++	/* symbol         arrange function */
++	{ "[tile]",       tile },    /* first entry is default */
++	{ "[float]",      NULL },    /* no layout function means floating behavior */
++	{ "[full]",       monocle },
++	{ "[grid]",       grid},
  };
--
+ 
+ /* key definitions */
+@@ -74,6 +102,7 @@
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
++  { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
+ 	{ MODKEY,                       XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
