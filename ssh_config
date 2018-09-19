@@ -1,14 +1,13 @@
+# https://github.com/drduh/config/blob/master/ssh_config
 Host github.com
   IdentityFile ~/.ssh/github
-
 Host *
   Protocol 2
   HashKnownHosts yes
-  IdentitiesOnly yes
   VisualHostKey yes
   PasswordAuthentication no
   StrictHostKeyChecking ask
   ControlMaster auto
   ControlPath ~/.ssh/master-%r@%h:%p
-  ControlPersist 2m
+  ControlPersist 5m
   UseRoaming no

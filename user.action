@@ -1,0 +1,147 @@
+# https://github.com/drduh/config/blob/master/user.action
+#{+hide-user-agent{Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0}}
+#/
+{{ alias }}
++crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
+-crunch-all-cookies = -crunch-incoming-cookies -crunch-outgoing-cookies
+allow-all-cookies   = -crunch-all-cookies -session-cookies-only -filter{content-cookies}
+allow-popups        = -filter{all-popups} -filter{unsolicited-popups}
++block-as-image     = +block{Blocked image request.} +handle-as-image
+-block-as-image     = -block
+fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-referer -prevent-compression
+{ fragile }
+.netflix.com
+.nflximg.
+.nflxext.com
+{ +block{html} }
+ad.
+adimg.
+admonkey.
+ads.
+ads2.
+adserver.
+/adheader.*
+/adhtml/.*
+/adplayer/*
+/adtest/*
+/adunit.php.*
+/advert*/*
+/ad-loader.js.*
+/ad_index_.*
+/analytics/
+{ +block{image} +handle-as-image }
+/adv_banner_.*
+/assets/social-.*
+/banner.php
+/btn_ad_.*
+/followus-buttons.*
+/iframe/ads/.*
+/iframe/ad/.*
+/images/ads.*
+/images/ads/.*
+/images/adv.*
+/images/ad/.*
+/images/sponsored/.*
+/images_ad/.*
+/image/ad/.*
+/imgad_.*
+/img.ads.*
+/img/ad-.*
+/img/ad_.*
+/img/social.*
+/socialicons.*
+/.*1x1.gif
+/.*adv.png
+/.*beacon.gif.*
+/.*buttons.js
+/.*event.gif.*
+/.*facebook.*
+/.*fb-icon.*
+/.*follow_us.*
+/.*images/social.*
+/.*linkedin.*
+/.*loading.gif
+/.*measure.gif.*
+/.*share-buttons.*
+/.*share-this.*
+/.*static/button.*
+/.*tracking-pixel.*
+{+set-image-blocker{http://10.8.8.8/}}
+/.*.[jpg|jpeg|gif|png|tif|tiff]$
+{ +redirect{s@google.com/amp/s/@@} }
+google.com/amp/s/.*
+{ +redirect{s@http://@https://@} }
+.accuweather.com
+.archive.is
+.archive.org
+.askubuntu.com
+.awsstatic.com
+.bing.com
+.blogblog.com
+.blogger.com
+.blogspot.com
+.cdninstagram.com
+.cdnme.se
+.chromium.org
+.creativecommons.org
+.dd-wrt.com
+.debian-administration.org
+.debian.net
+.flickr.com
+.gentoo.org
+.gfycat.com
+.ggpht.com
+.github.com
+.github.io
+.gnu.org
+.gnupg.org
+.google.com
+.googleapis.com
+.googlecode.com
+.googleusercontent.com
+.googlevideo.com
+.gstatic.com
+.gvt1.com
+.ietf.org
+.imgur.com
+.instagram.com
+.keybase.io
+.linuxforums.org
+.mail-archive.com
+.marc.info
+.media.tumblr.com
+.meetup.com
+.minus.com
+.nih.gov
+.noaa.gov
+.pinimg.com
+.quora.com
+.redhat.com
+.s3.amazonaws.com
+.serverfault.com
+.shopify.com
+.squarespace.com
+.stackexchange.com
+.stackoverflow.com
+.staticflickr.com
+.steamcommunity.com
+.superuser.com
+.symantec.com
+.torproject.org
+.twitter.com
+.ubuntuforums.org
+.vanguard.com
+.videolan.org
+.virustotal.com
+.vsco.co
+.wikibooks.org
+.wikimedia.org
+.wikipedia.org
+.wikiquote.org
+.wireshark.org
+.wp.com
+.yelpcdn.com
+.youtu.be
+.youtube.com
+.ytimg.com
+.yubico.com

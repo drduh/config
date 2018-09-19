@@ -1,18 +1,15 @@
+" https://github.com/drduh/config/blob/master/vimrc
 set nocompatible
 filetype plugin indent on
 syntax on
-
 nore ; :
 inoremap jj <Esc>
 map Y y$
 map <Leader>W :w !sudo tee % > /dev/null<CR>
-
 colorscheme slate
-let &colorcolumn=join(range(81,200),",")
 noremap <C-n> :tabnew<CR>
 noremap <C-l> :tabnext<CR>
 noremap <C-h> :tabNext<CR>
-
 set t_Co=256
 set background=dark
 set autoindent                  " copy indent from current line
@@ -45,13 +42,11 @@ set expandtab                   " use spaces instead of tabs
 set tabpagemax=15               " maximum 15 tabs
 set ttyfast                     " optimize for fast terminal connections
 set wildmenu                    " enchance cli completion
-
 set directory=~/.vim/swaps      " centralized swaps
 set backupdir=~/.vim/backups    " centralized backups
 set undodir=~/.vim/undo         " centralized undo history
-
+set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
 set cindent
 set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,while,do,for,switch,case
-
-set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
+"let &colorcolumn=join(range(81,200),",")

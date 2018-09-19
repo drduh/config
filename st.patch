@@ -1,12 +1,12 @@
---- a/config.h	Sun Apr 29 15:00:00 2018
-+++ b/config.h	Sun Apr 29 14:00:00 2018
+--- config.def.h	Wed Sep 19 15:00:00 2018
++++ config.h	Wed Sep 19 15:00:00 2018
 @@ -5,8 +5,8 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
 -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 -static int borderpx = 2;
-+static char *font = "Liberation Mono:pixelsize=24:antialias=true:autohint=true";
++static char *font = "Inconsolata:pixelsize=24:antialias=true:autohint=true";
 +static int borderpx = 24;
  
  /*

@@ -1,0 +1,31 @@
+set hostname = "mail.duh.to"
+set realname = "mail@duh.to"
+set from = "<mail@duh.to>"
+set imap_user = "mail@duh.to"
+set imap_pass = "xxx"
+set smtp_pass = "xxx"
+set folder = "imaps://imap.gmail.com:993/"
+set smtp_url = "smtp://mail@duh.to@smtp.gmail.com:587/"
+set edit_headers = yes
+set editor = "vim"
+set hidden_host
+set include = yes
+set mail_check = 120
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+set sort = reverse-threads
+set sort_aux = last-date-received
+set sort_browser = reverse-date
+set spoolfile = "+INBOX"
+set ssl_force_tls = yes
+set ssl_starttls = yes
+set timeout = 60
+set user_agent = no
+set certificate_file = ~/.mutt/certificates
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/messages
+alternative_order text/enriched text/plain text/html
+hdr_order Date From To Cc
+my_hdr User-Agent:
+push <show-version>
+source ~/.mutt/solarized.muttrc

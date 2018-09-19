@@ -1,23 +1,17 @@
-# https://www.privoxy.org/user-manual/config.html
 # https://github.com/drduh/config/blob/master/privoxy
-
 toggle 1
-
 confdir /etc/privoxy
 actionsfile default.action
 actionsfile match-all.action
 actionsfile user.action
 filterfile default.filter
 filterfile user.filter
-
 logdir /var/log/privoxy
 logfile logfile
-
 listen-address 127.0.0.1:8118
 #listen-address 10.8.1.1:8118
 #listen-address 172.16.1.1:8118
 #listen-address 192.168.1.1:8118
-
 accept-intercepted-requests 1
 allow-cgi-request-crunching 0
 buffer-limit 10240
@@ -28,11 +22,9 @@ enforce-blocks 0
 forwarded-connect-retries 0
 split-large-forms 0
 tolerate-pipelining 1
-
 default-server-timeout 10
 keep-alive-timeout 10
 socket-timeout 10
-
 debug 1
 debug 32
 debug 128

@@ -1,25 +1,19 @@
+# https://github.com/drduh/config/blob/master/torrc
 ORPort 9999
 ExtORPort auto
 ExitPolicy reject *:*
-
 BridgeRelay 1
 ServerTransportPlugin obfs4 exec /usr/local/bin/obfs4proxy
 ServerTransportListenAddr obfs4 0.0.0.0:10022
-
 ControlPort 9051
 DNSPort 127.26.255.1:53
-
 AccountingMax 100 GBytes
 AccountingStart month 3 15:00
-
 RelayBandwidthBurst 750 KBytes
 RelayBandwidthRate 2 MBytes
-
 Log debug file /var/log/tor/debug.log
 Log notice file /var/log/tor/notices.log
-
 #CookieAuthentication 1
 #HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
-
 #ContactInfo Random Person <nobody AT example dot com>
 #Nickname ididnteditheconfig
