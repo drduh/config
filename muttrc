@@ -1,11 +1,12 @@
-set hostname = "mail.duh.to"
-set realname = "mail@duh.to"
-set from = "<mail@duh.to>"
-set imap_user = "mail@duh.to"
+# https://github.com/drduh/config/blob/master/muttrc
+set hostname = "github.duh.to"
+set realname = "github@duh.to"
+set from = "<github@duh.to>"
+set imap_user = "github@duh.to"
 set imap_pass = "xxx"
 set smtp_pass = "xxx"
 set folder = "imaps://imap.gmail.com:993/"
-set smtp_url = "smtp://mail@duh.to@smtp.gmail.com:587/"
+set smtp_url = "smtp://github@duh.to@smtp.gmail.com:587/"
 set edit_headers = yes
 set editor = "vim"
 set hidden_host

@@ -1,3 +1,4 @@
+-- https://github.com/drduh/config/blob/master/prosody.cfg.lua
 modules_enabled = {
     "roster";
     "saslauth";
@@ -6,12 +7,10 @@ modules_enabled = {
     "posix";
     "dialback";
 }
-
 log = {
     debug       = "/var/log/prosody/prosody.log";
     error       = "/var/log/prosody/prosody.err";
 }
-
 admins                 = { "admin@example.com" }
 allow_registration     = false
 authentication         = "internal_hashed"
@@ -20,7 +19,6 @@ c2s_require_encryption = true
 s2s_require_encryption = true
 s2s_secure_auth        = false
 pidfile                = "/var/run/prosody/prosody.pid"
-
 VirtualHost "example.com"
 ssl = {
     key         = "/etc/pki/xmpp-key.pem";

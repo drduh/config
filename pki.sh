@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+# https://github.com/drduh/config/blob/master/pki.sh
 #
-# Creates an x509 public key infrastructure:
+# This script creates an x509 public key infrastructure:
 #   1) Root certificate authority (long-term, store offline)
 #   2) Intermediate certificate authority (for signing server and client certs)
 #   3) Server certificate (short-term, rotate frequently)
@@ -11,6 +12,7 @@
 #
 # To disable OpenSSL cert name requirements (e.g. location):
 #   sudo sed -i.bak "s/= match/= optional/g" /usr/lib/ssl/openssl.cnf
+# Or download and use https://github.com/drduh/config/blog/master/openssl.cnf
 
 readonly OPENSSL="/usr/bin/openssl"
 readonly DEFAULT_MD="sha512"
@@ -18,7 +20,7 @@ readonly KEYSIZE="4096"
 readonly CA_DAYS="365"
 readonly CERT_DAYS="90"
 
-# These strings will appear in plaintext in certificates.
+# The following commonName strings will appear in plaintext in certificates
 readonly CN_AUTHORITY="Example Authority"
 readonly CN_INTERMEDIATE="Example Intermediate Authority"
 readonly CN_SERVER="www.example.com"
