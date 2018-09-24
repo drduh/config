@@ -8,11 +8,9 @@ LC_CTYPE=$LANG
 HISTFILE=~/.zsh_history
 HISTSIZE=9999
 SAVEHIST=$HISTSIZE
-
 autoload -U colors && colors
 autoload -U compinit && compinit
 autoload -U promptinit && promptinit
-
 setopt alwaystoend
 setopt autocd
 setopt autopushd
@@ -28,7 +26,6 @@ setopt nobeep
 setopt nocaseglob
 setopt noclobber
 setopt nullglob
-
 zstyle ':completion:*' auto-description 'specify %d'
 zstyle ':completion:*' cache-path ~/.zsh_cache
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -63,7 +60,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != ((p|)kill|(s|)rm|(s|cp)|file|feh|man|cat|ls|cd|chmod|mv|tar|ent|less|head|mkdir)
+    && ${cmd} != ((p|)kill|(s|)rm|(s|cp)|file|feh|man|cat|ls|cd|chmod|mv|tar|ent|less|head|mkdir|ps)
   ]]
 }
 function path {
@@ -85,6 +82,11 @@ path /sbin
 path /bin
 #path /usr/X11R6/bin
 
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#gpgconf --launch gpg-agent
+#gpg-connect-agent updatestartuptty /bye >/dev/null
+
 alias -g L='| less'
 alias -g H='| head'
 alias -g S='| sort'
@@ -94,6 +96,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias l="ls -lha"
 alias ls="ls -lh"
+alias ff="firefox --ProfileManager"
 alias v="vim"
 alias md="mkdir -p"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
@@ -113,8 +116,3 @@ alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
 alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
 alias mac_troll="printf 00:20:91:; openssl rand -hex 3|sed 's/\(..\)/\1:/g; s/.$//'"
 alias rand="tr -dc '[:alnum:]<>()$%^&*+=' < /dev/urandom | fold -w30 | head -n 10"
-
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-#gpgconf --launch gpg-agent
-gpg-connect-agent updatestartuptty /bye >/dev/null

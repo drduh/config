@@ -1,0 +1,101 @@
+--- a/config.h	Sun Sep 23 00:00:00 2018
++++ b/config.h	Sun Sep 23 00:00:01 2018
+@@ -1,17 +1,41 @@
+ /* See LICENSE file for copyright and license details. */
+ 
++void grid(Monitor *m) {
++  unsigned int i, n, cx, cy, cw, ch, aw, ah, cols, rows;
++  Client *c;
++
++  for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next))
++    n++;
++
++  for(rows = 0; rows <= n/2; rows++)
++    if(rows*rows >= n)
++      break;
++  cols = (rows && (rows - 1) * rows >= n) ? rows - 1 : rows;
++
++  ch = m->wh / (rows ? rows : 1);
++  cw = m->ww / (cols ? cols : 1);
++  for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
++    cx = m->wx + (i / rows) * cw;
++    cy = m->wy + (i % rows) * ch;
++    ah = ((i + 1) % rows == 0) ? m->wh - ch * rows : 0;
++    aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
++    resize(c, cx, cy, cw - 2 * c->bw + aw, ch - 2 * c->bw + ah, False);
++    i++;
++  }
++}
++
+ /* appearance */
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const int showbar            = 1;        /* 0 means no bar */
+ static const int topbar             = 1;        /* 0 means bottom bar */
+-static const char *fonts[]          = { "monospace:size=10" };
+-static const char dmenufont[]       = "monospace:size=10";
+-static const char col_gray1[]       = "#222222";
+-static const char col_gray2[]       = "#444444";
+-static const char col_gray3[]       = "#bbbbbb";
+-static const char col_gray4[]       = "#eeeeee";
+-static const char col_cyan[]        = "#005577";
++static const char *fonts[]          = { "Inconsolata:size=18" };
++static const char dmenufont[]       = "Inconsolata:size=18";
++static const char col_gray1[]       = "#002b36";
++static const char col_gray2[]       = "#002b36";
++static const char col_gray3[]       = "#93a1a1";
++static const char col_gray4[]       = "#93a1a1";
++static const char col_cyan[]        = "#002b36";
+ static const char *colors[][3]      = {
+ 	/*               fg         bg         border   */
+ 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+@@ -19,28 +43,27 @@
+ };
+ 
+ /* tagging */
+-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
++static const char *tags[] = {
++  "sun", "mercury", "venus", "earth", "mars",
++  "jupiter", "saturn", "uranus", "neptune"
++};
+ 
+-static const Rule rules[] = {
+-	/* xprop(1):
+-	 *	WM_CLASS(STRING) = instance, class
+-	 *	WM_NAME(STRING) = title
+-	 */
+-	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++static Rule rules[] = {
++    /* class      instance    title       tags mask     isfloating   monitor */
++    { NULL,       NULL,       NULL,       0,            False,       -1 },
+ };
+ 
+ /* layout(s) */
+ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+ static const int nmaster     = 1;    /* number of clients in master area */
+-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
++static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+ 
+ static const Layout layouts[] = {
+-	/* symbol     arrange function */
+-	{ "[]=",      tile },    /* first entry is default */
+-	{ "><>",      NULL },    /* no layout function means floating behavior */
+-	{ "[M]",      monocle },
++ 	/* symbol         arrange function */
++ 	{ "[tile]",       tile },
++ 	{ "[float]",      NULL },
++ 	{ "[full]",       monocle },
++ 	{ "[grid]",       grid},
+ };
+ 
+ /* key definitions */
+@@ -76,6 +99,7 @@
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
++	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
+ 	{ MODKEY,                       XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

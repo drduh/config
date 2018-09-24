@@ -1,5 +1,5 @@
---- config.def.h	Wed Sep 19 15:00:00 2018
-+++ config.h	Wed Sep 19 15:00:00 2018
+--- a/config.h	Wed Sep 19 00:00:00 2018
++++ b/config.h	Wed Sep 19 00:00:01 2018
 @@ -5,8 +5,8 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
