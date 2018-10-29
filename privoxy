@@ -31,3 +31,4 @@ debug 128
 debug 1024
 debug 4096
 debug 8192
+#forward /  127.0.0.1:1234

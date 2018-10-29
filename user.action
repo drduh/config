@@ -87,6 +87,7 @@ google.com/amp/s/.*
 .dd-wrt.com
 .debian-administration.org
 .debian.net
+.duckduckgo.com
 .flickr.com
 .gentoo.org
 .gfycat.com
@@ -95,6 +96,9 @@ google.com/amp/s/.*
 .github.io
 .gnu.org
 .gnupg.org
+.godoc.org
+.golang.org
+.goo.gl
 .google.com
 .googleapis.com
 .googlecode.com
@@ -105,6 +109,8 @@ google.com/amp/s/.*
 .ietf.org
 .imgur.com
 .instagram.com
+.ixquick.com
+.jquery.com
 .keybase.io
 .linuxforums.org
 .mail-archive.com
@@ -112,10 +118,13 @@ google.com/amp/s/.*
 .media.tumblr.com
 .meetup.com
 .minus.com
+.netflix.com
 .nih.gov
 .noaa.gov
+.openvpn.net
 .pinimg.com
 .quora.com
+.reddit.com
 .redhat.com
 .s3.amazonaws.com
 .serverfault.com
@@ -125,13 +134,16 @@ google.com/amp/s/.*
 .stackoverflow.com
 .staticflickr.com
 .steamcommunity.com
+.suckless.org
 .superuser.com
 .symantec.com
+.t.co
 .torproject.org
 .twitter.com
 .ubuntuforums.org
 .vanguard.com
 .videolan.org
+.vimeo.com
 .virustotal.com
 .vsco.co
 .wikibooks.org
