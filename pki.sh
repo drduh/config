@@ -33,7 +33,7 @@ ${OPENSSL} req -new -x509 -days ${CA_DAYS} -${DEFAULT_MD} -extensions v3_ca \
   -subj "/CN=${CN_AUTHORITY}" -key ca.key -out ca.pem
 
 ${OPENSSL} genrsa -out intermediate.key ${KEYSIZE}
-${OPENSSL} req -new -${DEFAULT_MD} -new \
+${OPENSSL} req -new -${DEFAULT_MD} \
   -subj "/CN=${CN_INTERMEDIATE}" -key intermediate.key -out intermediate.csr
 ${OPENSSL} ca -extensions v3_ca -notext -md ${DEFAULT_MD} \
   -keyfile ca.key -cert ca.pem -in intermediate.csr -out intermediate.pem
