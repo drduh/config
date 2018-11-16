@@ -7,6 +7,7 @@ set imap_pass = "xxx"
 set smtp_pass = "xxx"
 set folder = "imaps://imap.gmail.com:993/"
 set smtp_url = "smtp://github@duh.to@smtp.gmail.com:587/"
+set trash = "imaps://imap.gmail.com/[Gmail]/Trash"
 set edit_headers = yes
 set editor = "vim"
 set hidden_host
