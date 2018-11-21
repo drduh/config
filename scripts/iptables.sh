@@ -1,5 +1,5 @@
-#!/bin/bash
-# https://github.com/drduh/config/blob/master/iptables.sh
+#!/usr/bin/env bash
+# https://github.com/drduh/config/scripts/blob/master/iptables.sh
 PATH='/sbin'
 EXT=eth0
 INT=eth1
