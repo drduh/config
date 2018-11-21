@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# https://github.com/drduh/config/blob/master/scripts/pf-blocklist.sh
 curl -sq \
   https://www.binarydefense.com/banlist.txt \
   https://rules.emergingthreats.net/blockrules/compromised-ips.txt \

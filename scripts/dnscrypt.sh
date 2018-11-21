@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/scripts/blob/master/dnscrypt.sh
+# https://github.com/drduh/config/blob/master/scripts/dnscrypt.sh
 rm -vf 0.crt 0.key public.key secret.key
 pkill dnscrypt-wrapper
 dnscrypt-wrapper --gen-provider-keypair --provider-name=abc.xyz \

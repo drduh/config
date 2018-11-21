@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/scripts/blob/master/pki.sh
+# https://github.com/drduh/config/blob/master/scripts/pki.sh
 #
 # This script creates an x509 public key infrastructure:
 #   1) Root certificate authority (long-term, store offline)
