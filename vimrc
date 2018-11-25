@@ -50,3 +50,27 @@ set cindent
 set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,while,do,for,switch,case
 "let &colorcolumn=join(range(81,200),",")
+let g:word_count="?"
+function WordCount()
+  return g:word_count
+endfunction
+function UpdateWordCount()
+  let lnum=1
+  let n=0
+  while lnum<=line('$')
+    let n=n+len(split(getline(lnum)))
+    let lnum=lnum+1
+  endwhile
+  let g:word_count=n
+endfunction
+set updatetime=1000
+augroup WordCounter
+  au! CursorHold,CursorHoldI * call UpdateWordCount()
+augroup END
+highlight User1 ctermbg=DarkGray guibg=Black ctermfg=LightGray guifg=Black
+set statusline=%1*
+set statusline+=%F
+set statusline+=%M
+set statusline+=%=
+set statusline+=\ %{WordCount()}\ words,
+set statusline+=\ %l/%L\ lines"
