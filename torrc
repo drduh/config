@@ -4,6 +4,7 @@ ORPort 9999
 ExtORPort auto
 ExitPolicy reject *:*
 BridgeRelay 1
+#PublishServerDescriptor 0
 ServerTransportPlugin obfs4 exec /usr/local/bin/obfs4proxy
 ServerTransportListenAddr obfs4 0.0.0.0:10022
 ControlPort 9051
