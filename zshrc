@@ -99,7 +99,7 @@ alias l="ls -lha"
 alias ls="ls -lh"
 alias cr="chrome --enable-unveil --incognito"
 alias ff="firefox --ProfileManager --no-remote"
-alias ff_resize="xdotool windowsize $(xdotool search --onlyvisible --name firefox) 2560 1660"
+alias ff_resize="xdotool windowsize \$(xdotool search --onlyvisible --name firefox) 2560 1660"
 alias v="vim"
 alias md="mkdir -p"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
@@ -109,7 +109,7 @@ alias cert="openssl req -new -newkey rsa:4096 -sha256 -days 365 \
   -nodes -x509 -keyout s.key -out s.crt && \
   openssl x509 -in s.crt -noout -subject -issuer -enddate"
 alias dedupe="find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD"
-alias gpg_restart="pkill gpg-agent ; pkill ssh-agent ; \
+alias gpg_restart="pkill pinentry ; pkill gpg-agent ; pkill ssh-agent ; \
   eval \$(gpg-agent --daemon --enable-ssh-support --log-file ~/.gnupg/gpg-agent.log)"
 alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"
 alias grep_url="grep -Eo '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'"
