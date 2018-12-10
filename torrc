@@ -1,5 +1,5 @@
 # https://github.com/drduh/config/blob/master/torrc
-User _tor
+#User _tor
 ORPort 9999
 ExtORPort auto
 ExitPolicy reject *:*
@@ -13,9 +13,11 @@ AccountingMax 100 GBytes
 AccountingStart month 3 15:00
 RelayBandwidthRate 750 KBytes
 RelayBandwidthBurst 2 MBytes
-Log debug file /var/log/tor/debug.log
 Log notice file /var/log/tor/notices.log
+#Log debug file /var/log/tor/debug.log
+#Nickname ididnteditheconfig
+#ContactInfo Random Person <nobody AT example dot com>
 #CookieAuthentication 1
 #HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
-#ContactInfo Random Person <nobody AT example dot com>
-#Nickname ididnteditheconfig
+#HiddenServiceDir /var/lib/tor/hidden_service/
+#HiddenServicePort 80 127.0.0.1:80
