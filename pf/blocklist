@@ -1,3 +1,4 @@
+# https://github.com/drduh/config/blob/master/pf/blocklist
 # To obtain netblocks for an AS, run:
 # whois -h whois.radb.net '!gAS32934' | tr " " "\n"
 ##########

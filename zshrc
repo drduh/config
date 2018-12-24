@@ -64,7 +64,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != ((p|)kill|(s|)rm|(s|cp)|file|feh|man|cat|ls|cd|chmod|mv|tar|ent|less|head|mkdir|ps)
+    && ${cmd} != (cat|cd|chmod|cp|curl|df|diff|dig|doas|du|ent|feh|file|git|gpg|grep|head|kill|less|ls|mail|make|man|mkdir|mv|pkill|ps|rcctl|rm|scp|sha256|sort|srm|ssh|sudo|tar|useradd|vi|vim|wc|which|whois|wireshark|xpdf|xxd)
   ]]
 }
 function path {
@@ -106,9 +106,12 @@ alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
 alias cert="openssl req -new -newkey rsa:4096 -sha256 -days 365 \
-  -nodes -x509 -keyout s.key -out s.crt && \
-  openssl x509 -in s.crt -noout -subject -issuer -enddate"
+  -nodes -x509 -keyout s.key -out s.crt && openssl x509 -in s.crt -noout -subject -issuer -enddate"
 alias dedupe="find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD"
+alias dump_pflog="doas tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap"
+alias dump_syn="doas tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&2!=0'"
+alias dump_udp="doas tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp'"
+alias dump_icmp="doas tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
 alias gpg_restart="pkill pinentry ; pkill gpg-agent ; pkill ssh-agent ; \
   eval \$(gpg-agent --daemon --enable-ssh-support --log-file ~/.gnupg/gpg-agent.log)"
 alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"
