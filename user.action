@@ -30,6 +30,7 @@ adserver.
 /ad_index_.*
 /analytics/
 { +block{image} +handle-as-image }
+/1x1.*
 /adv_banner_.*
 /assets/social-.*
 /banner.php
@@ -50,11 +51,11 @@ adserver.
 /img/ad_.*
 /img/social.*
 /socialicons.*
-/.*1x1.gif
-/.*adv.png
-/.*beacon.gif.*
+/.*1x1.*
+/.*adv.*
+/.*beacon.*
 /.*buttons.js
-/.*event.gif.*
+/.*event.*
 /.*facebook.*
 /.*fb-icon.*
 /.*follow_us.*
@@ -66,7 +67,7 @@ adserver.
 /.*share-this.*
 /.*static/button.*
 /.*tracking-pixel.*
-{+set-image-blocker{http://10.8.8.8/}}
+{+set-image-blocker{http://10.8.1.1/}}
 /.*.[jpg|jpeg|gif|png|tif|tiff]$
 { +redirect{s@google.com/amp/s/@@} }
 google.com/amp/s/.*
@@ -120,6 +121,7 @@ google.com/amp/s/.*
 .dropbox.com
 .duckduckgo.com
 .ebay.com
+.economist.com
 .edx.org
 .export.gov
 .express.co.uk
@@ -169,6 +171,7 @@ google.com/amp/s/.*
 .kernel.org
 .keybase.io
 .khanacademy.org
+.knowyourmeme.com
 .last.fm
 .letsencrypt.org
 .linuxforums.org
