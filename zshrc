@@ -113,7 +113,7 @@ alias dump_syn="doas tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&
 alias dump_udp="doas tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp'"
 alias dump_icmp="doas tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
 alias gpg_restart="pkill pinentry ; pkill gpg-agent ; pkill ssh-agent ; \
-  eval \$(gpg-agent --daemon --enable-ssh-support --log-file ~/.gnupg/gpg-agent.log)"
+  eval \$(gpg-agent --daemon --enable-ssh-support)"
 alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"
 alias grep_url="grep -Eo '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'"
 alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
