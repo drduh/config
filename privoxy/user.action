@@ -72,6 +72,8 @@ adserver.
 { +redirect{s@google.com/amp/s/@@} }
 google.com/amp/s/.*
 { +redirect{s@http://@https://@} }
+man.openbsd.org
+wiki.debian.org
 .0x0.st
 .abc.net.au
 .accuweather.com
@@ -177,6 +179,7 @@ google.com/amp/s/.*
 .linuxforums.org
 .lkml.org
 .lowes.com
+.llvm.org
 .lwn.net
 .lycos.com
 .mail-archive.com
