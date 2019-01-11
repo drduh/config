@@ -119,4 +119,10 @@ alias grep_url="grep -Eo '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-
 alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
 alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
 alias mac_troll="printf 00:20:91:; openssl rand -hex 3|sed 's/\(..\)/\1:/g; s/.$//'"
-alias rand="tr -dc '[:alnum:]<>()$%^&*+=' < /dev/urandom | fold -w30 | head -n 10"
+alias trim="fold -w40 | head -n5 | sed '-es/./ /'{1..40..10}"
+alias rand="printf '%040d\n' | trim ; \
+  tr -dc '[:digit:]' < /dev/urandom | trim ; \
+  tr -dc '[:upper:]' < /dev/urandom | trim ; \
+  tr -dc '[:xdigit:]' < /dev/urandom | trim ; \
+  tr -dc '[:alnum:]' < /dev/urandom | trim ; \
+  tr -dc '[:graph:]' < /dev/urandom | trim"

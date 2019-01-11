@@ -1,3 +1,6 @@
+// https://github.com/drduh/config/blob/master/user.js
+// https://github.com/pyllyukko/user.js
+// https://ffprofile.com/
 user_pref("accessibility.browsewithcaret", true);
 user_pref("accessibility.force_disabled", 1);
 user_pref("accessibility.typeaheadfind", true);
@@ -21,7 +24,7 @@ user_pref("browser.cache.disk.smart_size.enabled", false);
 user_pref("browser.cache.disk.smart_size.first_run", false);
 user_pref("browser.cache.disk.smart_size.use_old_max", false);
 user_pref("browser.cache.disk_cache_ssl", false);
-user_pref("browser.cache.offline.enable", false);
+user_pref("browser.cache.offline.enable", false);  // disable the cache
 user_pref("browser.cache.offline.insecure.enable", false);
 user_pref("browser.casting.enabled", false);
 user_pref("browser.chrome.errorReporter.submitUrl", "");
@@ -97,7 +100,7 @@ user_pref("browser.safebrowsing.appRepURL", "");
 user_pref("browser.safebrowsing.downloads.enabled", false);
 user_pref("browser.safebrowsing.downloads.remote.enabled", false);
 user_pref("browser.safebrowsing.downloads.remote.url", "");
-user_pref("browser.safebrowsing.enabled", true);
+user_pref("browser.safebrowsing.enabled", true);  // enable safe browsing
 user_pref("browser.safebrowsing.phishing.enabled", false);
 user_pref("browser.safebrowsing.provider.google.reportMalwareMistakeURL", "");
 user_pref("browser.safebrowsing.provider.google.reportPhishMistakeURL", "");
@@ -111,20 +114,19 @@ user_pref("browser.search.countryCode", "US");
 user_pref("browser.search.geoSpecificDefaults", false);
 user_pref("browser.search.geoSpecificDefaults.url", "");
 user_pref("browser.search.geoip.url", "");
-user_pref("browser.search.hiddenOneOffs", "Google,Bing,Amazon.com,eBay,Twitter");
 user_pref("browser.search.region", "US");
 user_pref("browser.search.suggest.enabled", false);
 user_pref("browser.search.update", false);
 user_pref("browser.search.widget.inNavBar", true);
 user_pref("browser.selfsupport.enabled", false);
 user_pref("browser.selfsupport.url", "");
-user_pref("browser.send_pings", false);
+user_pref("browser.send_pings", false);  // disable ping attributes
 user_pref("browser.send_pings.require_same_host", true);
 user_pref("browser.sessionhistory.max_entries", 10);
 user_pref("browser.sessionstore.interval", 30000);
-user_pref("browser.sessionstore.max_tabs_undo", 0);
+user_pref("browser.sessionstore.max_tabs_undo", 0);  // no recently closed tabs
 user_pref("browser.sessionstore.max_windows_undo", 0);
-user_pref("browser.sessionstore.privacy_level", 2);
+user_pref("browser.sessionstore.privacy_level", 2);  // disable session restore
 user_pref("browser.sessionstore.resume_from_crash", false);
 user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("browser.shell.shortcutFavicons", false);
@@ -148,7 +150,7 @@ user_pref("browser.urlbar.autoFill.typed", false);
 user_pref("browser.urlbar.autocomplete.enabled", false);
 user_pref("browser.urlbar.oneOffSearches", false);
 user_pref("browser.urlbar.searchSuggestionsChoice", false);
-user_pref("browser.urlbar.speculativeConnect.enabled", false);
+user_pref("browser.urlbar.speculativeConnect.enabled", false);  // disable preloading auto-complete URLs
 user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.openpage", false);
@@ -196,7 +198,7 @@ user_pref("dom.disable_window_open_feature.toolbar", true);
 user_pref("dom.enable_performance", false);
 user_pref("dom.enable_resource_timing", false);
 user_pref("dom.enable_user_timing", false);
-user_pref("dom.event.clipboardevents.enabled", false);
+user_pref("dom.event.clipboardevents.enabled", false);  // no notify on cb events
 user_pref("dom.flyweb.enabled", false);
 user_pref("dom.forms.autocomplete.formautofill", true);
 user_pref("dom.forms.datetime", false);
@@ -216,7 +218,7 @@ user_pref("dom.push.enabled", false);
 user_pref("dom.push.serverURL", "");
 user_pref("dom.serviceWorkers.enabled", false);
 user_pref("dom.serviceWorkers.enabled",false);
-//user_pref("dom.storage.enabled", false);
+//user_pref("dom.storage.enabled", false);  // breaks many sites
 user_pref("dom.telephony.enabled", false);
 user_pref("dom.vibrator.enabled", false);
 user_pref("dom.vr.enabled", false);
@@ -261,7 +263,7 @@ user_pref("full-screen-api.enabled", false);
 user_pref("gecko.handlerService.migrated", true);
 user_pref("gecko.handlerService.schemes.webcal.0.uriTemplate", "");
 user_pref("general.warnOnAboutConfig", false);
-user_pref("geo.enabled", false);
+user_pref("geo.enabled", false);  // no geo-location
 user_pref("geo.wifi.logging.enabled", false);
 user_pref("geo.wifi.uri", "");
 user_pref("gfx.downloadable_fonts.woff2.enabled", false);
@@ -274,8 +276,8 @@ user_pref("javascript.options.asmjs", false);
 user_pref("javascript.options.wasm", false);
 user_pref("javascript.use_us_english_locale", true);
 user_pref("keyword.enabled", false);
-user_pref("layers.acceleration.disabled", true);
-user_pref("layers.acceleration.force-enabled", true);
+//user_pref("layers.acceleration.disabled", true);
+//user_pref("layers.acceleration.force-enabled", true);
 user_pref("layout.css.devPixelsPerPx", "2");
 user_pref("layout.css.devPixelsPerPx", 2);
 user_pref("layout.css.font-loading-api.enabled", false);
@@ -288,7 +290,7 @@ user_pref("lightweightThemes.usedThemes", "[]");
 user_pref("loop.logDomains", false);
 user_pref("mathml.disabled", true);
 user_pref("media.autoplay.enabled", false);
-user_pref("media.eme.enabled", false);
+user_pref("media.eme.enabled", false);  // DRM HTML5 content
 user_pref("media.getusermedia.audiocapture.enabled", false);
 user_pref("media.getusermedia.screensharing.enabled", false);
 user_pref("media.gmp-gmpopenh264.abi", "x86_64");
@@ -302,11 +304,11 @@ user_pref("media.gmp-manager.url", "data:text/plain,");
 user_pref("media.gmp-manager.url.override", "data:text/plain,");
 user_pref("media.gmp-provider.enabled", false);
 user_pref("media.gmp-widevinecdm.autoupdate", false);
-user_pref("media.gmp-widevinecdm.enabled", false);
+user_pref("media.gmp-widevinecdm.enabled", false);  // DRM HTML5 content
 user_pref("media.gmp-widevinecdm.visible", false);
 user_pref("media.gmp.storage.version.observed", 1);
 user_pref("media.gmp.trial-create.enabled", false);
-user_pref("media.navigator.enabled", false);
+user_pref("media.navigator.enabled", false);  // no camera status
 user_pref("media.navigator.video.enabled", false);
 user_pref("media.peerconnection.enabled", false);
 user_pref("media.peerconnection.ice.default_address_only", true);
@@ -321,11 +323,11 @@ user_pref("media.peerconnection.video.enabled", false);
 user_pref("media.video_stats.enabled", false);
 user_pref("media.webspeech.recognition.enable",false);
 user_pref("media.webspeech.synth.enabled", false);
-user_pref("network.IDN_show_punycode", true);
+user_pref("network.IDN_show_punycode", true);  // reduce phishing risk
 user_pref("network.allow-experiments", false);
 user_pref("network.captive-portal-service.enabled", false);
-user_pref("network.cookie.cookieBehavior", 1);
-user_pref("network.cookie.lifetimePolicy", 2);
+user_pref("network.cookie.cookieBehavior", 1);  // block 3P cookies
+user_pref("network.cookie.lifetimePolicy", 2);  // session cookies only
 user_pref("network.cookie.prefsMigrated", true);
 user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true);
 user_pref("network.cookie.thirdparty.sessionOnly", true);
@@ -337,7 +339,7 @@ user_pref("network.file.disable_unc_paths", true);
 user_pref("network.http.altsvc.enabled", false);
 user_pref("network.http.altsvc.oe", false);
 user_pref("network.http.redirection-limit", 10);
-user_pref("network.http.referer.XOriginPolicy", 1);
+user_pref("network.http.referer.XOriginPolicy", 1);  // send Referer to same TLD
 user_pref("network.http.referer.hideOnionSource", true);
 user_pref("network.http.referer.spoofSource", true);
 user_pref("network.http.spdy.enabled", false);
@@ -454,13 +456,13 @@ user_pref("privacy.cpd.history", true);
 user_pref("privacy.cpd.offlineApps", true);
 user_pref("privacy.cpd.sessions", true);
 user_pref("privacy.donottrackheader.enabled", true);
-user_pref("privacy.firstparty.isolate", true);
+user_pref("privacy.firstparty.isolate", true); // isolate cookies to 1P
 user_pref("privacy.history.custom", true);
 user_pref("privacy.resistFingerprinting", true);
 user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);
 user_pref("privacy.sanitize.pending", "[]");
 user_pref("privacy.sanitize.timeSpan", 0);
-user_pref("privacy.trackingprotection.enabled", true);
+user_pref("privacy.trackingprotection.enabled", true);  // https://wiki.mozilla.org/Security/Tracking_protection
 user_pref("privacy.trackingprotection.introCount", 20);
 user_pref("privacy.trackingprotection.pbmode.enabled", false);
 user_pref("privacy.trackingprotection.ui.enabled", true);
@@ -530,7 +532,7 @@ user_pref("security.tls.enable_0rtt_data", false);
 user_pref("security.tls.unrestricted_rc4_fallback", false);
 user_pref("security.tls.version.fallback-limit", 3);
 user_pref("security.tls.version.min", 3);
-user_pref("security.webauth.u2f", true);
+//user_pref("security.webauth.u2f", true);
 user_pref("security.xpconnect.plugin.unrestricted", false);
 user_pref("services.blocklist.update_enabled", true);
 user_pref("services.sync.clients.lastSync", "0");
