@@ -1,5 +1,8 @@
---- a/config.h	Wed Sep 19 00:00:00 2018
-+++ b/config.h	Wed Sep 19 00:00:01 2018
+# https://github.com/drduh/config/blob/master/st.patch
+# Run 'make' before applying this file with 'patch < st.patch' then run 'make' again
+
+--- a/config.h	Sun Jan 1 00:00:00 2019
++++ b/config.h	Sun Jan 1 00:00:01 2019
 @@ -5,8 +5,8 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
@@ -75,3 +78,40 @@
  
  /*
   * Default shape of cursor
+
+--- a/config.mk Sun Jan 1 00:00:00 2019
++++ b/config.mk Sun Jan 1 00:00:01 2019
+@@ -1,5 +1,5 @@
+ # st version
+-VERSION = 0.8.1
++VERSION = 0.8.1-dev
+ 
+ # Customize below to fit your system
+ 
+@@ -26,10 +26,19 @@
+ STLDFLAGS = $(LIBS) $(LDFLAGS)
+ 
+ # OpenBSD:
+-#CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
+-#LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft \
+-#       `pkg-config --libs fontconfig` \
+-#       `pkg-config --libs freetype2`
++CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
++LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft \
++       `pkg-config --libs fontconfig` \
++       `pkg-config --libs freetype2`
+ 
+-# compiler and linker
+-# CC = c99
++CFLAGS = -std=c99 -Wno-deprecated-declarations -Os ${INCS} ${CPPFLAGS} \
++  -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -O3 -pipe \
++  -Wpedantic -Wall -Wextra -Wconversion -Wsign-conversion \
++  -Wformat -Wformat-security -Werror=format-security \
++  -Wstack-protector -fstack-protector-all \
++  --param ssp-buffer-size=1 \
++  -fasynchronous-unwind-tables \
++  -fexceptions -fpie -fpic \
++  -ftrapv -flto -fvisibility=hidden -fsanitize=cfi
++
++CC = cc
+

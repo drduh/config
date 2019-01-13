@@ -1,5 +1,8 @@
---- a/config.h	Sun Sep 23 00:00:00 2018
-+++ b/config.h	Sun Sep 23 00:00:01 2018
+# https://github.com/drduh/config/blob/master/dwm.patch
+# Run 'make' before applying this file with 'patch < dwm.patch' then run 'make' again
+
+--- a/config.h	Sun Jan 01 00:00:00 2019
++++ b/config.h	Sun Jan 01 00:00:01 2019
 @@ -1,17 +1,41 @@
  /* See LICENSE file for copyright and license details. */
  
@@ -99,3 +102,54 @@
  	{ MODKEY,                       XK_space,  setlayout,      {0} },
  	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
  	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+
+--- a/config.mk	Sun Jan 01 00:00:00 2019
++++ b/config.mk	Sun Jan 01 00:00:01 2019
+@@ -1,8 +1,6 @@
+ # dwm version
+-VERSION = 6.1
++VERSION = 6.1-dev
+ 
+-# Customize below to fit your system
+-
+ # paths
+ PREFIX = /usr/local
+ MANPREFIX = ${PREFIX}/share/man
+@@ -16,9 +14,9 @@
+ 
+ # freetype
+ FREETYPELIBS = -lfontconfig -lXft
+-FREETYPEINC = /usr/include/freetype2
+-# OpenBSD (uncomment)
+-#FREETYPEINC = ${X11INC}/freetype2
++#FREETYPEINC = /usr/include/freetype2
++# OpenBSD
++FREETYPEINC = ${X11INC}/freetype2
+ 
+ # includes and libs
+ INCS = -I${X11INC} -I${FREETYPEINC}
+@@ -26,13 +24,16 @@
+ 
+ # flags
+ CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=2 -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+-#CFLAGS   = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
+-CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os ${INCS} ${CPPFLAGS}
++CFLAGS = -std=c99 -Wno-deprecated-declarations -Os ${INCS} ${CPPFLAGS} \
++  -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -O3 -pipe \
++  -Wpedantic -Wall -Wextra -Wconversion -Wsign-conversion \
++  -Wformat -Wformat-security -Werror=format-security \
++  -Wstack-protector -fstack-protector-all \
++  --param ssp-buffer-size=1 \
++  -fasynchronous-unwind-tables \
++  -fexceptions -fpie -fpic \
++  -ftrapv -flto -fvisibility=hidden -fsanitize=cfi
++
+ LDFLAGS  = ${LIBS}
+ 
+-# Solaris
+-#CFLAGS = -fast ${INCS} -DVERSION=\"${VERSION}\"
+-#LDFLAGS = ${LIBS}
+-
+-# compiler and linker
+ CC = cc
+
