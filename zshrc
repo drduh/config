@@ -1,13 +1,13 @@
 # https://github.com/drduh/config/blob/master/zshrc
+HISTFILE=~/.zsh_history
+HISTSIZE=2000
+SAVEHIST=$HISTSIZE
 PAGER=less
 EDITOR=vim
 VISUAL=vim
 LANG=en_US.UTF-8
-LC_ALL=$LANG
-LC_CTYPE=$LANG
-HISTFILE=~/.zsh_history
-HISTSIZE=2000
-SAVEHIST=$HISTSIZE
+export LC_ALL=C
+export LC_CTYPE=C
 autoload -U colors && colors
 autoload -U compinit && compinit
 autoload -U promptinit && promptinit
@@ -100,12 +100,14 @@ alias ls="ls -lh"
 alias cr="chrome --enable-unveil --incognito --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
 alias ff="firefox --ProfileManager --no-remote"
 alias ff_resize="xdotool windowsize \$(xdotool search --onlyvisible --name firefox) 2560 1660"
+alias srl="doas cu -r -s 115200 -l cuaU0"
+alias vpn="ssh -NCL 5555:127.0.0.1:8118 vpn"
 alias v="vim"
 alias md="mkdir -p"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
-alias cert="openssl req -new -newkey rsa:4096 -sha256 -days 365 \
+alias cert="openssl req -new -newkey rsa:4096 -sha512 -days 365 \
   -nodes -x509 -keyout s.key -out s.crt && openssl x509 -in s.crt -noout -subject -issuer -enddate"
 alias dedupe="find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD"
 alias dump_pflog="doas tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap"
