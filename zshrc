@@ -39,7 +39,7 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' verbose yes
 PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
-function calc { awk "BEGIN { print "$*" }" }
+function calc { awk 'BEGIN { print "$*" }' }
 function f { find . -iname "*$1*" }
 function colours {
   for i in {0..255}; do
@@ -64,7 +64,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (cat|cd|chmod|cp|curl|df|diff|dig|doas|du|ent|feh|file|git|gpg|grep|head|kill|less|ls|mail|make|man|mkdir|mv|pkill|ps|rcctl|rm|scp|sha256|sort|srm|ssh|sudo|tar|useradd|vi|vim|wc|which|whois|wireshark|xpdf|xxd)
+    && ${cmd} != (cat|cd|chmod|cp|curl|df|diff|dig|doas|du|ent|exiftool|feh|file|find|git|gpg|grep|head|kill|less|ls|mail|make|man|mkdir|mv|ping|pkill|ps|rcctl|rm|scp|sha256|sort|srm|ssh|stat|sudo|tar|useradd|vi|vim|wc|which|whois|wireshark|xpdf|xxd)
   ]]
 }
 function path {
@@ -110,10 +110,10 @@ alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state
 alias cert="openssl req -new -newkey rsa:4096 -sha512 -days 365 \
   -nodes -x509 -keyout s.key -out s.crt && openssl x509 -in s.crt -noout -subject -issuer -enddate"
 alias dedupe="find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD"
-alias dump_pflog="doas tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap"
-alias dump_syn="doas tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&2!=0'"
-alias dump_udp="doas tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp'"
-alias dump_icmp="doas tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
+alias dump_pflog="tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap"
+alias dump_syn="tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&2!=0'"
+alias dump_udp="tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp'"
+alias dump_icmp="tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
 alias gpg_restart="pkill pinentry ; pkill gpg-agent ; pkill ssh-agent ; \
   eval \$(gpg-agent --daemon --enable-ssh-support)"
 alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"
@@ -122,7 +122,7 @@ alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
 alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
 alias mac_troll="printf 00:20:91:; openssl rand -hex 3|sed 's/\(..\)/\1:/g; s/.$//'"
 alias trim="fold -w40 | head -n5 | sed '-es/./ /'{1..40..10}"
-alias rand="printf '%040d\n' | trim ; \
+alias rand="tr -dc '01' < /dev/urandom | trim ; \
   tr -dc '[:digit:]' < /dev/urandom | trim ; \
   tr -dc '[:upper:]' < /dev/urandom | trim ; \
   tr -dc '[:xdigit:]' < /dev/urandom | trim ; \
