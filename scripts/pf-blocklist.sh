@@ -1,11 +1,42 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/master/scripts/pf-blocklist.sh
+#
+# Downloads and blocks IP addresses with PF from three categories:
+#   1) Published lists of ad/malware hosts
+#   2) Autonomous System assignments to orgs and corps
+#   3) Country assignments
+#
+# Example output:
+#
+#   $ doas ./pf-blocklist.sh
+#   current rules:    86177
+#   Continue? (y/n) y
+#      68762 pf-threats.2019-01-21
+#       2586 pf-custom.2019-01-21
+#      33251 pf-zones.2019-01-21
+#      96163 pf-blocklist.2019-01-21
+#   /etc/pf/blocklist -> /etc/pf/blocklist.2019-01-21
+#   pf-blocklist.2019-01-21 -> /etc/pf/blocklist
+#   pf disabled
+#   pf enabled
+#   new rules:    96163
+#
+# Example successful test output:
+#
+#   $ doas ./pf-blocklist.sh
+#   current rules:    96163
+#   Continue? (y/n) n
+#   testing blocked sites ...
+#   apple.com: * Immediate connect fail for 17.xxx: Permission denied
+#   facebook.com: * Immediate connect fail for 157.xxx: Permission denied
+#   microsoft.com: * Immediate connect fail for 40.xxx: Permission denied
+#   twitter.com: * Immediate connect fail for 104.xxx: Permission denied
+#
 custom=pf-custom.$(date +%F)
 threats=pf-threats.$(date +%F)
 zones=pf-zones.$(date +%F)
 blocklist=pf-blocklist.$(date +%F)
-
-doas whoami
+doas whoami >/dev/null && echo "have permission"
 
 printf "current rules: "
 doas pfctl -t blocklist -T show | wc -l
@@ -14,10 +45,11 @@ while [[ -z "${action}" ]] ;
   do read -n 1 -p "Continue? (y/n) " action
 done
 printf "\n"
+
 if [[ "${action}" =~ ^([yY])$ ]] ; then
   doas rm $custom $threats $zones $blocklist 2>/dev/null
-
   curl -sq \
+    "https://pgl.yoyo.org/adservers/iplist.php?ipformat=&showintro=0&mimetype=plaintext" \
     https://www.binarydefense.com/banlist.txt \
     https://rules.emergingthreats.net/blockrules/compromised-ips.txt \
     https://rules.emergingthreats.net/fwrules/emerging-Block-IPs.txt \
@@ -27,13 +59,9 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   grep -Ev "192.168.0.0|10.0.0.0|172.16.0.0|127.0.0.0|0.0.0.0" > $threats
   wc -l $threats
 
-  # Apple (AS714)
-  # Facebook (AS32934)
-  # Microsoft (AS8075)
-  # Twitter (AS13414)
-  # DoD (AS721)
-  # Note this returns blocks of addresses - not individual IPs!
-  rm $custom ; touch $custom
+  # Apple (AS714), Facebook (AS32934), Microsoft (AS8075), Twitter (AS13414), DoD (AS721)
+  # radb returns blocks of addresses - not individual IPs
+  touch $custom
   for nb in AS714 AS32934 AS8075 AS13414 AS721 ; do
     whois -h whois.radb.net !g$nb | \
     tr " " "\n" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}.+' | \
@@ -47,14 +75,11 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
       http://www.ipdeny.com/ipblocks/data/countries/$zn.zone >> $zones
   done
   wc -l $zones
-
   sort $threats $custom $zones | uniq > $blocklist
   wc -l $blocklist
-
   doas cp -v /etc/pf/blocklist /etc/pf/blocklist.$(date +%F)
   doas cp -v $blocklist /etc/pf/blocklist
   doas pfctl -d ; doas pfctl -e -f /etc/pf.conf
-
   printf "new rules: "
   doas pfctl -t blocklist -T show | wc -l
 else
@@ -65,4 +90,3 @@ else
       https://$(dig a $ws @1.1.1.1 +short | head -n1) 2>&1 | grep "Permission denied" || printf "BLOCK FAILED"
   done
 fi
-
