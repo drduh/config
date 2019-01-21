@@ -39,7 +39,7 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' verbose yes
 PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
-function calc { awk 'BEGIN { print "$*" }' }
+function calc { awk "BEGIN { print "$*" }" }
 function f { find . -iname "*$1*" }
 function colours {
   for i in {0..255}; do
@@ -64,7 +64,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (cat|cd|chmod|cp|curl|df|diff|dig|doas|du|ent|exiftool|feh|file|find|git|gpg|grep|head|kill|less|ls|mail|make|man|mkdir|mv|ping|pkill|ps|rcctl|rm|scp|sha256|sort|srm|ssh|stat|sudo|tar|useradd|vi|vim|wc|which|whois|wireshark|xpdf|xxd)
+    && ${cmd} != (cat|cd|chmod|cp|curl|df|diff|dig|doas|du|ent|exiftool|feh|file|find|git|gpg|grep|hdiutil|head|kill|less|ls|mail|make|man|mkdir|mupdf|mv|openssl|ping|pkill|ps|rcctl|rm|scp|sha256|sort|srm|ssh|stat|sudo|tar|useradd|vi|vim|wc|which|whois|wireshark|xpdf|xxd)
   ]]
 }
 function path {
@@ -84,10 +84,6 @@ path /usr/bin
 path /sbin
 path /bin
 #path /usr/X11R6/bin
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-#gpgconf --launch gpg-agent
-#gpg-connect-agent updatestartuptty /bye >/dev/null
 alias -g L='| less'
 alias -g H='| head'
 alias -g S='| sort'
@@ -102,6 +98,7 @@ alias ff="firefox --ProfileManager --no-remote"
 alias ff_resize="xdotool windowsize \$(xdotool search --onlyvisible --name firefox) 2560 1660"
 alias srl="doas cu -r -s 115200 -l cuaU0"
 alias vpn="ssh -NCL 5555:127.0.0.1:8118 vpn"
+alias pdf="mupdf -r180 -CFDF6E3 ${1}"
 alias v="vim"
 alias md="mkdir -p"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
@@ -128,3 +125,7 @@ alias rand="tr -dc '01' < /dev/urandom | trim ; \
   tr -dc '[:xdigit:]' < /dev/urandom | trim ; \
   tr -dc '[:alnum:]' < /dev/urandom | trim ; \
   tr -dc '[:graph:]' < /dev/urandom | trim"
+#export GPG_TTY="$(tty)"
+#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#gpgconf --launch gpg-agent
+#gpg-connect-agent updatestartuptty /bye >/dev/null

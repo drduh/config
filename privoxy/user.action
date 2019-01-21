@@ -77,7 +77,6 @@ fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-r
 /gather.asp.*
 /gfx/layer/*
 /gujAd/
-/images/banners/
 /log/webtracker
 /metriweb.*
 /track.*
@@ -87,6 +86,8 @@ ad.
 adimg.
 admonkey.
 ads.
+ads.*.co.*/
+ads.*.com/
 ads2.
 adserver.
 analytics.*.
@@ -114,6 +115,7 @@ pixel.redditmedia.com
 /assets/social-.*
 /banner.php
 /btn_ad_.*
+/cleardot.gif
 /followus-buttons.*
 /iframe/ad/.*
 /iframe/ads/.*
@@ -122,6 +124,7 @@ pixel.redditmedia.com
 /images/ads.*
 /images/ads/.*
 /images/adv.*
+/images/banners/
 /images/sponsored/.*
 /images_ad/.*
 /img.ads.*
