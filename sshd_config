@@ -16,6 +16,7 @@ LogLevel VERBOSE
 MaxStartups 1
 MaxSessions 1
 LoginGraceTime 10s
+MaxAuthTries 3
 ClientAliveInterval 30
 ClientAliveCountMax 20
 PermitRootLogin no
@@ -23,8 +24,8 @@ StrictModes yes
 PubkeyAuthentication yes
 AuthorizedKeysFile %h/.ssh/authorized_keys
 IgnoreRhosts yes
-PermitEmptyPasswords no
 PasswordAuthentication no
+PermitEmptyPasswords no
 HostbasedAuthentication no
 ChallengeResponseAuthentication no
 Compression delayed
@@ -37,3 +38,4 @@ UseDNS no
 PrintMotd no
 PrintLastLog yes
 PermitUserEnvironment no
+#Subsystem sftp  /usr/libexec/sftp-server

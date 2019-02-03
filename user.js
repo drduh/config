@@ -6,6 +6,7 @@
 //user_pref("browser.startup.homepage", "file:///home/web/index.html");  // custom start-up page
 //user_pref("browser.startup.page", 1);  // 0: blank; 1: home; 2: last visited; 3: resume last
 //user_pref("browser.uidensity", 1);  // reduce UI empty space
+//user_pref("browser.urlbar.suggest.bookmark", false);
 //user_pref("dom.enable_performance", false);  // disable DOM timing; may break sites
 //user_pref("dom.indexedDB.enabled", false);  // disable IndexedDB; may break sites/extension storage (uBlock)
 //user_pref("dom.serviceWorkers.enabled", false);  // disable service workers; may break sites
@@ -34,6 +35,7 @@
 //user_pref("privacy.window.maxInnerHeight", 720);
 //user_pref("privacy.window.maxInnerWidth", 1280);
 //user_pref("security.OCSP.require", true);  // force check certificate revocation
+//user_pref("security.dialog_enable_delay", 5000);  // ms delay on dialogs
 //user_pref("security.ssl3.rsa_aes_128_sha", false);  // may break sites
 //user_pref("security.ssl3.rsa_aes_256_sha", false);  // may break sites
 //user_pref("security.tls.version.min", 3);  // minimum TLS 1.2; may break sites
@@ -46,7 +48,7 @@ user_pref("accessibility.typeaheadfind.flashBar", 0);
 user_pref("app.normandy.api_url", "");
 user_pref("app.normandy.enabled", false);
 user_pref("app.normandy.first_run", false);
-user_pref("app.shield.optoutstudies.enabled", false);
+user_pref("app.shield.optoutstudies.enabled", false);  // disable studies
 user_pref("app.update.auto", false);  // disable auto update check
 user_pref("app.update.service.enabled", false);
 user_pref("app.update.silent", false);  // notify on all updates states
@@ -68,12 +70,12 @@ user_pref("browser.cache.offline.insecure.enable", false);
 user_pref("browser.chrome.errorReporter.enabled", false);  // disable browser error reporter
 user_pref("browser.chrome.errorReporter.submitUrl", "");
 user_pref("browser.contentHandlers.types.0.uri", "");
-user_pref("browser.contentblocking.enabled", true);  // enforce content blocking
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit", false);
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false);
 user_pref("browser.dictionaries.download.url", "");
 user_pref("browser.disableResetPrompt", true);
+user_pref("browser.discovery.enabled", false);  // disable extension recommendations
 user_pref("browser.download.autohideButton", false);
 user_pref("browser.download.forbid_open_with", true);  // disable Open With dialog
 user_pref("browser.download.hide_plugins_without_extensions", false);
@@ -161,7 +163,6 @@ user_pref("browser.urlbar.maxHistoricalSearchSuggestions", 0);  // disable local
 user_pref("browser.urlbar.oneOffSearches", false);
 user_pref("browser.urlbar.searchSuggestionsChoice", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);  // disable preloading auto-complete URLs
-user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.searches", false);
@@ -223,7 +224,7 @@ user_pref("dom.push.serverURL", "");
 user_pref("dom.push.userAgentID", "");
 user_pref("dom.vibrator.enabled", false);  // disable screen shake
 user_pref("dom.vr.enabled", false);  // disable VR devices
-user_pref("dom.w3c_pointer_events.enabled", false);
+user_pref("dom.w3c_pointer_events.enabled", false);  // disable PointerEvents
 user_pref("dom.w3c_touch_events.enabled", 0);  // disable touch events
 user_pref("dom.webaudio.enabled", false);  // disable web audio
 user_pref("dom.webnotifications.enabled", false);
@@ -327,7 +328,6 @@ user_pref("network.auth.subresource-http-auth-allow", 1);  // disable non-secure
 user_pref("network.captive-portal-service.enabled", false);  // disable captive portal helper
 user_pref("network.cookie.cookieBehavior", 1);  // block third-party cookies
 user_pref("network.cookie.leave-secure-alone", true);  // disable non-secure sites setting secure cookies
-user_pref("network.cookie.lifetimePolicy", 2);  // session cookies only
 user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true);
 user_pref("network.cookie.thirdparty.sessionOnly", true);
 user_pref("network.dns.disableIPv6", true);  // disable IPv6
@@ -344,6 +344,7 @@ user_pref("network.http.referer.hideOnionSource", true);
 user_pref("network.http.spdy.enabled", false);  // disable HTTP2
 user_pref("network.http.spdy.enabled.deps", false);
 user_pref("network.http.spdy.enabled.http2", false);
+user_pref("network.http.spdy.websockets", false);
 user_pref("network.http.speculative-parallel-limit", 0);
 user_pref("network.manage-offline-status", false);
 user_pref("network.negotiate-auth.allow-insecure-ntlm-v1", false);  // disable NTLMv1
@@ -438,7 +439,6 @@ user_pref("security.cert_pinning.enforcement_level", 2);  // strict pinning enfo
 user_pref("security.csp.enable", true);  // enforce Content Security Policy
 user_pref("security.csp.experimentalEnabled", true);  // enable experimental CSP features
 user_pref("security.data_uri.block_toplevel_data_uri_navigations", true);
-user_pref("security.dialog_enable_delay", 5000);  // time lock confirmations
 user_pref("security.fileuri.strict_origin_policy", true);
 user_pref("security.insecure_connection_icon.enabled", true);
 user_pref("security.insecure_connection_text.enabled", true);

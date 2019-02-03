@@ -13,6 +13,7 @@ Host *
   StrictHostKeyChecking ask
   VerifyHostKeyDNS yes
   ForwardAgent no
+  ForwardX11 no
   ForwardX11Trusted no
   #ControlMaster auto
   #ControlPath ~/.ssh/master-%r@%h:%p
