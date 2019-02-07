@@ -1,5 +1,4 @@
 # https://github.com/drduh/config/blob/master/sshd_config
-Protocol 2
 Port 22
 AddressFamily inet
 ListenAddress 0.0.0.0
