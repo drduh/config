@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/master/scripts/iptables.sh
 PATH='/sbin'
+#EXT=enp1s0
+#INT=enp2s0
+#DMZ=enp3s0
+#WIFI=wlp4s0
 EXT=eth0
 INT=eth1
 DMZ=eth2

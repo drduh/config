@@ -1,4 +1,5 @@
 // https://github.com/drduh/config/blob/master/user.js
+// https://github.com/ghacksuserjs/ghacks-user.js/wiki/1.1-Overview
 //user_pref("browser.display.use_document_fonts", 0);  // disable web pages picking fonts
 //user_pref("browser.newtab.url", "about:blank");  // blank new tab page
 //user_pref("browser.newtabpage.enabled", false);  // blank new tab page
@@ -92,6 +93,7 @@ user_pref("browser.link.open_newwindow", 3);  // open new windows in tabs instea
 user_pref("browser.link.open_newwindow.restriction", 0);
 user_pref("browser.newtab.preload", false);  // disable new tab tile preload
 user_pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");  // disable activity stream snippets
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);
 user_pref("browser.newtabpage.activity-stream.disableSnippets", true);
 user_pref("browser.newtabpage.activity-stream.enabled", false);
 user_pref("browser.newtabpage.activity-stream.feed.topsites", false);
@@ -265,6 +267,9 @@ user_pref("gecko.handlerService.migrated", true);
 user_pref("gecko.handlerService.schemes.webcal.0.uriTemplate", "");
 user_pref("general.warnOnAboutConfig", false);  // disable about:config warning
 user_pref("geo.enabled", false);  // no geo-location
+user_pref("geo.provider.ms-windows-location", false);  // disable geo on windows
+user_pref("geo.provider.use_corelocation", false);  // disable geo on mac
+user_pref("geo.provider.use_gpsd", false);  // disable geo on linux
 user_pref("geo.wifi.logging.enabled", false);
 user_pref("geo.wifi.uri", "");
 user_pref("gfx.downloadable_fonts.woff2.enabled", false);
