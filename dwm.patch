@@ -1,5 +1,5 @@
 # https://github.com/drduh/config/blob/master/dwm.patch
-# Run 'make' before applying this file with 'patch < dwm.patch' then run 'make' again
+# Run 'make' before applying with 'patch < dwm.patch' then run 'make' again
 
 --- a/config.h	Sun Jan 01 00:00:00 2019
 +++ b/config.h	Sun Jan 01 00:00:01 2019
@@ -105,16 +105,6 @@
 
 --- a/config.mk	Sun Jan 01 00:00:00 2019
 +++ b/config.mk	Sun Jan 01 00:00:01 2019
-@@ -1,8 +1,6 @@
- # dwm version
--VERSION = 6.1
-+VERSION = 6.1-dev
- 
--# Customize below to fit your system
--
- # paths
- PREFIX = /usr/local
- MANPREFIX = ${PREFIX}/share/man
 @@ -16,9 +14,9 @@
  
  # freetype

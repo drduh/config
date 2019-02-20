@@ -59,18 +59,19 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   grep -Ev "192.168.0.0|10.0.0.0|172.16.0.0|127.0.0.0|0.0.0.0" > $threats
   wc -l $threats
 
-  # Apple (AS714), Facebook (AS32934), Microsoft (AS8075), Twitter (AS13414), DoD (AS721)
+  # http://www.bgplookingglass.com/list-of-autonomous-system-numbers
   # radb returns blocks of addresses - not individual IPs
   touch $custom
-  for nb in AS714 AS32934 AS8075 AS13414 AS721 ; do
+  for nb in AS714 AS2709 AS32934 AS3598 AS6194 AS6291 AS6584 AS8068 AS8069 AS8070 AS8071 AS8072 AS8073 AS8074 AS8075 AS13399 AS13811 AS20046 AS26222 AS30135 AS30575 AS32476 AS13414 AS33739 AS14413 AS20049 AS20366 ; do
     whois -h whois.radb.net !g$nb | \
     tr " " "\n" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}.+' | \
     sort | uniq >> $custom
   done
   wc -l $custom
 
+  # https://www.abuseat.org/public/country.html
   touch $zones
-  for zn in ae af az bd cd cg cn eg gh ht iq ir jo ke kw kz lr ly me mk mn mv mx na ne ng ni nr pk pl pr qa ru rw sa sd sr sy td tj tn tr tt ua ug uz ve ye zm ; do
+  for zn in ae af az bd br cd cg cn dz eg gh ht id iq ir jo ke kw kz lr ly me mk mn mv mx na ne ng ni nr ph pk pr qa ru rw sa sd sr sy td tj tn tr tt ua ug uz ve vn ye zm ; do
     curl -sq \
       http://www.ipdeny.com/ipblocks/data/countries/$zn.zone >> $zones
   done

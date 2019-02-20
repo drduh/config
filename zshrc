@@ -64,7 +64,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|egrep|ent|exiftool|fdisk|feh|file|find|git|gpg|grep|hdiutil|head|kill|less|ls|mail|make|man|mkdir|mv|openssl|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|sha256|sort|srm|ssh|stat|sudo|tar|uname|useradd|vi|vim|wc|which|whoami|whois|wireshark|xxd)
+    && ${cmd} != (base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|egrep|ent|exiftool|fdisk|feh|file|find|git|gpg|grep|hdiutil|head|kill|less|ls|mail|make|man|mkdir|mv|openssl|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|sha256|sort|srm|ssh|stat|strip|sudo|tar|uname|useradd|vi|vim|wc|which|whoami|whois|wireshark|xxd)
   ]]
 }
 function path {
@@ -120,7 +120,6 @@ alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"
 alias grep_url="grep -Eo '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'"
 alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
 alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
-alias mac_troll="printf 00:20:91:; openssl rand -hex 3|sed 's/\(..\)/\1:/g; s/.$//'"
 alias trim="fold -w40 | head -n5 | sed '-es/./ /'{1..40..10}"
 alias rand="tr -dc '01' < /dev/urandom | trim ; \
   tr -dc '[:digit:]' < /dev/urandom | trim ; \

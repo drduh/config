@@ -173,7 +173,7 @@ user_pref("browser.urlbar.usepreloadedtopurls.enabled", false);  // disable pre-
 user_pref("browser.urlbar.userMadeSearchSuggestionsChoice", true);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 user_pref("canvas.capturestream.enabled", false);  // disable canvas capture stream
-user_pref("captivedetect.canonicalURL", "");
+user_pref("captivedetect.canonicalURL", "");  // disable captive portal helper
 user_pref("clipboard.autocopy", false);  // disable automatic clipboard selection
 user_pref("datareporting.healthreport.infoURL", "");
 user_pref("datareporting.healthreport.service.enabled", false);
@@ -335,6 +335,7 @@ user_pref("network.cookie.cookieBehavior", 1);  // block third-party cookies
 user_pref("network.cookie.leave-secure-alone", true);  // disable non-secure sites setting secure cookies
 user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true);
 user_pref("network.cookie.thirdparty.sessionOnly", true);
+user_pref("network.connectivity-service.enabled", false);  // disable network connectivity checks
 user_pref("network.dns.disableIPv6", true);  // disable IPv6
 user_pref("network.dns.disablePrefetch", true);  // disable DNS prefetch
 user_pref("network.dns.disablePrefetchFromHTTPS", true);

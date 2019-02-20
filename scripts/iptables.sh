@@ -38,6 +38,10 @@ echo "Allow DHCP"
 iptables -I INPUT -i $INT -p udp -m udp --dport 67 -m conntrack --ctstate NEW -j ACCEPT
 iptables -I INPUT -i $DMZ -p udp -m udp --dport 67 -m conntrack --ctstate NEW -j ACCEPT
 iptables -I INPUT -i $WIFI -p udp -m udp --dport 67 -m conntrack --ctstate NEW -j ACCEPT
+#echo "Allow NTP"
+#iptables -I INPUT -i $INT -p udp -m udp --dport 123 -m conntrack --ctstate NEW -j ACCEPT
+#iptables -I INPUT -i $DMZ -p udp -m udp --dport 123 -m conntrack --ctstate NEW -j ACCEPT
+#iptables -I INPUT -i $WIFI -p udp -m udp --dport 123 -m conntrack --ctstate NEW -j ACCEPT
 echo "Allow SSH from local Ethernet"
 iptables -A INPUT -i $INT -s $INT_NET -p tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
 echo "Allow DNS (UDP and TCP for large replies)"

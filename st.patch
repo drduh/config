@@ -1,5 +1,5 @@
 # https://github.com/drduh/config/blob/master/st.patch
-# Run 'make' before applying this file with 'patch < st.patch' then run 'make' again
+# Run 'make' before applying with 'patch < st.patch' then run 'make' again
 
 --- a/config.h	Sun Jan 1 00:00:00 2019
 +++ b/config.h	Sun Jan 1 00:00:01 2019
@@ -81,13 +81,6 @@
 
 --- a/config.mk Sun Jan 1 00:00:00 2019
 +++ b/config.mk Sun Jan 1 00:00:01 2019
-@@ -1,5 +1,5 @@
- # st version
--VERSION = 0.8.1
-+VERSION = 0.8.1-dev
- 
- # Customize below to fit your system
- 
 @@ -26,10 +26,19 @@
  STLDFLAGS = $(LIBS) $(LDFLAGS)
  
