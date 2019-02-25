@@ -39,7 +39,7 @@ debug     1 # Log the destination for each request Privoxy let through. See also
 #debug   256 # debug GIF de-animation
 #debug   512 # Common Log Format
 debug  1024 # Log the destination for requests Privoxy didn't let through, and the reason why.
-debug  2048 # CGI user interface
+#debug  2048 # CGI user interface
 debug  4096 # Startup banner and warnings.
 debug  8192 # Non-fatal errors
 #debug 32768 # log all data read from the network
