@@ -63,7 +63,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|egrep|ent|exiftool|fdisk|feh|file|find|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mv|openssl|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|sha256|sort|srm|ssh|stat|strip|sudo|tar|uname|useradd|vi|vim|wc|which|whoami|whois|wireshark|xxd)
+    && ${cmd} != (base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|egrep|ent|exiftool|fdisk|feh|file|find|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|openssl|patch|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|uptime|useradd|vlc|vi|vim|wc|which|whoami|whois|wireshark|xxd)
   ]]
 }
 function path {

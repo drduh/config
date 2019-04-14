@@ -3,7 +3,7 @@
 set -e
 host=cdn.openbsd.org
 plat=amd64
-vers=openbsd-64-base
+vers=openbsd-65-base
 printf "current version: "
 stat -f "%Sm" -t "%d-%h-%Y" /bsd.rd
 printf "latest version: "

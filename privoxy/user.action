@@ -21,6 +21,7 @@ fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-r
 .nflximg.net
 .nflxso.net
 .nflxvideo.net
+.ubuntu.com
 .vimeo.com
 .youtube.com
 
@@ -269,10 +270,12 @@ google.com/amp/s/.*
 .icanhazip.com
 .icann.org
 .ietf.org
+.images-amazon.com
 .imdb.com
 .imgur.com
 .independent.ie
 .instagram.com
+.intuit.com
 .irs.gov
 .ixquick.com
 .jquery.com
@@ -392,6 +395,7 @@ google.com/amp/s/.*
 .torproject.org
 .tripadvisor.com
 .tumblr.com
+.turbotax.com
 .twimg.com
 .twitter.com
 .typepad.com

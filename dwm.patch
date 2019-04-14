@@ -132,7 +132,7 @@
 +  --param ssp-buffer-size=1 \
 +  -fasynchronous-unwind-tables \
 +  -fexceptions -fpie -fpic \
-+  -ftrapv -flto -fvisibility=hidden -fsanitize=cfi
++  -ftrapv -flto -fvisibility=hidden
 +
  LDFLAGS  = ${LIBS}
  
