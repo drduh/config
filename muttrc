@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/muttrc
+# https://linux.die.net/man/5/muttrc
 set hostname = "github.duh.to"
 set realname = "github@duh.to"
 set from = "<github@duh.to>"

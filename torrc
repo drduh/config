@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/torrc
+# https://www.torproject.org/docs/tor-manual.html
 #User _tor
 ORPort 9999
 ExtORPort auto

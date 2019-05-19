@@ -197,6 +197,7 @@ google.com/amp/s/.*
 .creativecommons.org
 .crucial.com
 .cryptographyengineering.com
+.cryptomuseum.com
 .cs.cornell.edu
 .dailycaller.com
 .db.tt
@@ -274,10 +275,14 @@ google.com/amp/s/.*
 .imdb.com
 .imgur.com
 .independent.ie
+.indiegogo.com
 .instagram.com
 .intuit.com
 .irs.gov
+.isc.org
 .ixquick.com
+.jhu.edu
+.jobvite.com
 .jquery.com
 .jstor.org
 .justice.gov
@@ -326,6 +331,7 @@ google.com/amp/s/.*
 .nypost.com
 .nytimes.com
 .okta.com
+.openstreetmap.org
 .openvpn.net
 .openvpn.org
 .parallels.com
@@ -372,6 +378,7 @@ google.com/amp/s/.*
 .soundcloud.com
 .sourceforge.net
 .spacetelescope.org
+.splunk.com
 .squarespace.com
 .sstatic.net
 .stackauth.com

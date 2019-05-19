@@ -63,7 +63,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|egrep|ent|exiftool|fdisk|feh|file|find|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|openssl|patch|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|uptime|useradd|vlc|vi|vim|wc|which|whoami|whois|wireshark|xxd)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|egrep|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|openssl|patch|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|which|whoami|whois|wireshark|xxd|youtube-dl)
   ]]
 }
 function path {
@@ -83,10 +83,12 @@ path /usr/bin
 path /sbin
 path /bin
 #path /usr/X11R6/bin
-alias -g L='| less'
 alias -g H='| head'
+alias -g L='| less'
 alias -g S='| sort'
 alias -g T='| tail'
+alias -g C='| xclip -i'
+alias -g P='| xclip -o'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
