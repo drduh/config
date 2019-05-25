@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/ssh_config
+# https://linux.die.net/man/5/ssh_config
 Host github.com
   ControlMaster no
   IdentityFile ~/.ssh/github

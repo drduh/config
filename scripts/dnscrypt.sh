@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/master/scripts/dnscrypt.sh
+# https://github.com/cofyc/dnscrypt-wrapper
 expiry=3
 name=2.dnscrypt.$(tr -dc '[:alnum:]' < /dev/urandom | fold -w20 | head -n1)
 rm -vf 0.crt 0.key public.key secret.key

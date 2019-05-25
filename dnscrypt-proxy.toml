@@ -1,5 +1,5 @@
 # https://github.com/drduh/config/blob/master/dnscrypt-proxy.toml
-listen_addresses = ['127.0.0.1:5300']
+listen_addresses = ['127.0.0.1:4200']
 user_name = '_dnscrypt-proxy'
 server_names = ['abc']
 max_clients = 250

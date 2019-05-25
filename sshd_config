@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/sshd_config
+# https://linux.die.net/man/5/sshd_config
 Port 22
 AddressFamily inet
 ListenAddress 0.0.0.0

@@ -50,7 +50,9 @@ function convert_secs {
   ((s=${1}%60))
   printf "%02d:%02d:%02d\n" $h $m $s
 }
+function e { awk -v c=${1} -v l=${2} 'BEGIN { print log(c^l) }' }
 function f { find . -iname "*${1}*" }
+function fd { find . -iname "*${1}*" -type d }
 function png2jpg {
   for i in *.png ; do
     f=${i%.*}
@@ -63,7 +65,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|egrep|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|openssl|patch|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|which|whoami|whois|wireshark|xxd|youtube-dl)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|e|egrep|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|openssl|patch|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|which|whoami|whois|wireshark|xxd|youtube-dl)
   ]]
 }
 function path {
@@ -110,11 +112,13 @@ alias audio_set="pacmd set-default-sink ${1}"
 alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
 alias cert="openssl req -new -newkey rsa:4096 -sha512 -days 365 \
   -nodes -x509 -keyout s.key -out s.crt && openssl x509 -in s.crt -noout -subject -issuer -enddate"
+alias cidr="whois \$(curl -s https://icanhazip.com) | grep CIDR"
 alias dedupe="find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD"
 alias dump_pflog="tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap"
 alias dump_syn="tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&2!=0'"
 alias dump_udp="tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp and not port 443'"
 alias dump_icmp="tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
+alias gpg="gpg2"
 alias gpg_restart="pkill pinentry ; pkill gpg-agent ; pkill ssh-agent ; \
   eval \$(gpg-agent --daemon --enable-ssh-support)"
 alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"

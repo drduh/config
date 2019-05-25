@@ -1,4 +1,5 @@
 -- https://github.com/drduh/config/blob/master/prosody.cfg.lua
+-- https://prosody.im/doc/configure
 modules_enabled = {
     "roster";
     "saslauth";
