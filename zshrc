@@ -65,7 +65,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|dmesg|doas|du|e|egrep|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|openssl|patch|pdf|ping|pkill|ps|rcctl|rm|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|which|whoami|whois|wireshark|xxd|youtube-dl)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|openssl|patch|pdf|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|which|whoami|whois|wireshark|xxd|youtube-dl)
   ]]
 }
 function path {
@@ -89,8 +89,8 @@ alias -g H='| head'
 alias -g L='| less'
 alias -g S='| sort'
 alias -g T='| tail'
-alias -g C='| xclip -i'
-alias -g P='| xclip -o'
+alias -g XC='| xclip -i'
+alias -g XP='| xclip -o'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -136,3 +136,4 @@ alias rand="tr -dc '01' < /dev/urandom | trim ; \
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent
 #gpg-connect-agent updatestartuptty /bye >/dev/null
+#alias enc="gpg -e -a -r 0x0000 -r 0x0000 -o ~/out.enc ${1}"
