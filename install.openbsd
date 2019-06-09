@@ -1,3 +1,4 @@
+# https://github.com/drduh/config/blob/master/install.openbsd
 bash
 curl
 enigmail
@@ -19,5 +20,6 @@ usbutils
 vim
 wireshark
 xclip
+xdotool
 youtube-dl
 zsh

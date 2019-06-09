@@ -1,5 +1,6 @@
 address=/aaplimg.com/
 address=/apple-dns.net/
+address=/apple-finance.query.yahoo.com/
 address=/apple.com.akadns.net/
 address=/apple.com.edgekey.net.globalredir.akadns.net/
 address=/apple.com.edgekey.net/
@@ -7,7 +8,9 @@ address=/apple.com.edgesuite.net/
 address=/apple.com/
 address=/blobstore-apple.com.akadns.net/
 address=/cddbp.net/
+address=/cdn-apple.com.akadns.net/
 address=/cdn-apple.com/
+address=/courier-push-apple.com.akadns.net/
 address=/courier-push-applecom.akadns.net/
 address=/courier-sandbox-push-apple.com.akadns.net/
 address=/courier-sandbox-push-applecom.akadns.net/

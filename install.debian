@@ -1,4 +1,4 @@
-#vlc
+# https://github.com/drduh/config/blob/master/install.debian
 apt-transport-https
 at
 autoconf
@@ -32,6 +32,7 @@ libxft-dev
 libxinerama-dev
 m4
 mpv
+net-tools
 openssl
 pcsc-tools
 pcscd
@@ -42,6 +43,8 @@ rng-tools
 scdaemon
 scrot
 secure-delete
+ssh
+sshfs
 swig
 tmux
 tree
@@ -49,6 +52,7 @@ vim
 whois
 wireshark
 xclip
+xdotool
 yubikey-personalization
 zlib1g-dev
 zsh

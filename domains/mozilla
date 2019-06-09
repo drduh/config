@@ -1,7 +1,15 @@
+address=/blocked.cdn.mozilla.net/
+address=/crash-stats.mozilla.com/
+address=/detectportal.firefox.com/
+address=/experiments.mozilla.org/
+address=/fhr.cdn.mozilla.net/
 address=/firefox.com/
 address=/getpocket-cdn.prod.mozaws.net/
 address=/getpocket.cdn.mozilla.net/
 address=/services.mozilla.com/
+address=/snippets.cdn.mozilla.net/
+address=/stage.mozaws.net/
 address=/sumo.mozilla.net/
+address=/tbpl.mozilla.org/
 address=/telemetry-experiment.cdn.mozilla.net/
 address=/telemetry.mozilla.org/
