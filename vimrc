@@ -63,6 +63,7 @@ set statusline +=\%l/%L\        " number of lines
 set viminfo     ='10            " edited files
 set viminfo    +=/10            " pattern items
 set viminfo    +=n~/.vim/info   " viminfo file name
+"set viminfo     =""             " disable viminfo
 let g:wc        =''
 function WC()
   return g:wc

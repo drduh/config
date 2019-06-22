@@ -65,7 +65,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|openssl|patch|pdf|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|which|whoami|whois|wireshark|xxd|youtube-dl)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl)
   ]]
 }
 function path {
@@ -96,11 +96,13 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias l="ls -lha"
 alias ls="ls -lh"
+alias t="tail -f"
 alias v="vim -p"
 alias md="mkdir -p"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
+alias ea="cat /proc/sys/kernel/random/entropy_avail"
 alias cr="chrome --enable-unveil --incognito --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
 alias ff_resize="xdotool windowsize \$(xdotool search --onlyvisible --name firefox) 2560 1660"
 alias ff="firefox --ProfileManager --no-remote -jsconsole"
@@ -119,9 +121,6 @@ alias dump_pflog="tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap"
 alias dump_syn="tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&2!=0'"
 alias dump_udp="tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp and not port 443'"
 alias dump_icmp="tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
-alias gpg="gpg2"
-alias gpg_restart="pkill pinentry ; pkill gpg-agent ; pkill ssh-agent ; \
-  eval \$(gpg-agent --daemon --enable-ssh-support)"
 alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"
 alias grep_url="grep -Eo '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'"
 alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
@@ -133,8 +132,10 @@ alias rand="tr -dc '01' < /dev/urandom | trim ; \
   tr -dc '[:xdigit:]' < /dev/urandom | trim ; \
   tr -dc '[:alnum:]' < /dev/urandom | trim ; \
   tr -dc '[:graph:]' < /dev/urandom | trim"
+alias gpg_restart="pkill pinentry gpg ssh-agent;eval \$(gpg-agent --daemon --enable-ssh-support)"
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent
 #gpg-connect-agent updatestartuptty /bye >/dev/null
 #alias enc="gpg -e -a -r 0x0000 -r 0x0000 -o ~/out.enc ${1}"
+#alias gpg="gpg2"

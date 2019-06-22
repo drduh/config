@@ -1,30 +1,39 @@
 // https://github.com/drduh/config/blob/master/user.js
 // https://github.com/ghacksuserjs/ghacks-user.js
 // https://github.com/pyllyukko/user.js
+//user_pref("browser.cache.disk.capacity", 0);  // disable disk cache
+//user_pref("browser.cache.disk.enable", false);  // disable disk cache
 //user_pref("browser.newtab.url", "about:blank");  // blank new tab page
 //user_pref("browser.newtabpage.enabled", false);  // blank new tab page
 //user_pref("browser.privatebrowsing.autostart", true);  // private browsing mode only; may break sites
+//user_pref("browser.safebrowsing.malware.enabled", false);  // disable safebrowsing
+//user_pref("browser.safebrowsing.phishing.enabled", false);  // disable safebrowsing
 //user_pref("browser.startup.homepage", "file:///home/web/index.html");  // custom start-up page
 //user_pref("browser.startup.page", 1);  // 0: blank; 1: home; 2: last visited; 3: resume last
 //user_pref("browser.uidensity", 1);  // reduce UI empty space
-//user_pref("browser.urlbar.suggest.bookmark", false);
+//user_pref("browser.urlbar.suggest.bookmark", false);  // do not suggest bookmarks
+//user_pref("browser.urlbar.suggest.history", false);  // do not suggest history
 //user_pref("dom.enable_performance", false);  // disable DOM timing; may break sites
 //user_pref("dom.indexedDB.enabled", false);  // disable IndexedDB; may break sites/extension storage (uBlock)
 //user_pref("dom.serviceWorkers.enabled", false);  // disable service workers; may break sites
 //user_pref("dom.storage.enabled", false);  // disable DOM storage; may break sites
 //user_pref("dom.storageManager.enabled", false);  // disable storage; may break sites
+//user_pref("gfx.xrender.enabled", true);  // may improve performance
 //user_pref("javascript.options.baselinejit", false);  // disable JS JIT; may break sites
 //user_pref("javascript.options.ion", false);  // disable JS Ion; may break sites
 //user_pref("layers.acceleration.disabled", true);  // disable hardware acceleration; performance hit
+//user_pref("layers.acceleration.force-enabled", true);  // may improve performance on *nix
 //user_pref("layout.css.devPixelsPerPx", "1.5");  // increase UI size
 //user_pref("media.media-capabilities.enabled", false);  // disable media capabilities; may break sites
+//user_pref("network.cookie.cookieBehavior", 1);  // block third-party cookies
+//user_pref("network.cookie.lifetimePolicy", 2);  // expire cookies on browser close
 //user_pref("network.http.referer.XOriginTrimmingPolicy", 2);  // limit Cross Origin path; may break sites
 //user_pref("network.http.referer.defaultPolicy", 0);  // 0: no-ref; 1: same-origin; 2: strict-origin; 3: no-downgrade; may break sites
 //user_pref("network.http.referer.defaultPolicy.pbmode", 0);
 //user_pref("network.http.referer.trimmingPolicy", 2);  // trim Refer to scheme, host, port only; may break sites
 //user_pref("network.http.sendRefererHeader", 0);  // send Referer; 0: never; 1: clicks; 2: links and images; may break sites
 //user_pref("network.proxy.http", "127.0.0.1");  // proxy on localhost
-//user_pref("network.proxy.http_port", 5555);
+//user_pref("network.proxy.http_port", 5555);  // proxy on port 5555
 //user_pref("network.proxy.no_proxies_on", "localhost, 127.0.0.1");
 //user_pref("network.proxy.share_proxy_settings", true);
 //user_pref("network.proxy.socks", "127.0.0.1");
@@ -33,12 +42,18 @@
 //user_pref("network.proxy.ssl", "127.0.0.1");
 //user_pref("network.proxy.ssl_port", 5555);
 //user_pref("network.proxy.type", 1);
+//user_pref("privacy.clearOnShutdown.cookies", true);
+//user_pref("privacy.clearOnShutdown.history", true);
+//user_pref("privacy.cpd.cookies", true);
+//user_pref("privacy.cpd.history", true);
+//user_pref("privacy.donottrackheader.enabled", true);  // send DNT HTTP header
+//user_pref("privacy.sanitize.sanitizeOnShutdown", true);  // clear history on exit
 //user_pref("privacy.window.maxInnerHeight", 720);
 //user_pref("privacy.window.maxInnerWidth", 1280);
 //user_pref("security.OCSP.require", true);  // force check certificate revocation
 //user_pref("security.dialog_enable_delay", 5000);  // ms delay on dialogs
-//user_pref("security.ssl3.rsa_aes_128_sha", false);  // may break sites
-//user_pref("security.ssl3.rsa_aes_256_sha", false);  // may break sites
+//user_pref("security.ssl3.rsa_aes_128_sha", false);  // disable cipher; may break sites
+//user_pref("security.ssl3.rsa_aes_256_sha", false);  // disable cipher; may break sites
 //user_pref("security.tls.version.min", 3);  // minimum TLS 1.2; may break sites
 //user_pref("security.webauth.u2f", true);  // turn on U2F
 //user_pref("svg.disabled", true);  // disable SVG rendering; may break sites
@@ -60,8 +75,6 @@ user_pref("breakpad.reportURL", "");  // disable crash reports
 user_pref("browser.aboutHomeSnippets.updateUrl", "");
 user_pref("browser.bookmarks.max_backups", 0);
 user_pref("browser.bookmarks.restore_default_bookmarks", false);
-user_pref("browser.cache.disk.capacity", 0);  // disable disk cache
-user_pref("browser.cache.disk.enable", false);
 user_pref("browser.cache.disk.smart_size.enabled", false);
 user_pref("browser.cache.disk.smart_size.first_run", false);
 user_pref("browser.cache.disk.smart_size.use_old_max", false);
@@ -170,7 +183,6 @@ user_pref("browser.urlbar.maxHistoricalSearchSuggestions", 0);  // disable local
 user_pref("browser.urlbar.oneOffSearches", false);
 user_pref("browser.urlbar.searchSuggestionsChoice", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);  // disable preloading auto-complete URLs
-user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.trimURLs", false);  // disable trim HTTP off of URLs
@@ -245,10 +257,10 @@ user_pref("experiments.enabled", false);
 user_pref("experiments.manifest.uri", "");
 user_pref("experiments.supported", false);
 user_pref("extensions.autoDisableScopes", 15);
-user_pref("extensions.blocklist.enabled", true);
+user_pref("extensions.blocklist.enabled", false);  // disable extension blacklisting
 user_pref("extensions.blocklist.pingCountTotal", 4);
 user_pref("extensions.blocklist.pingCountVersion", 0);
-user_pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.com/v1/blocklist/3/%APP_ID%/%APP_VERSION%/");
+user_pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.com/v1/blocklist/3/%20/%20/");
 user_pref("extensions.enabledScopes", 1);  // lock down allowed extension directories
 user_pref("extensions.formautofill.addresses.enabled", false);  // disable form auto-fill
 user_pref("extensions.formautofill.available", "off");
@@ -343,9 +355,7 @@ user_pref("network.auth.subresource-http-auth-allow", 1);  // disable non-secure
 user_pref("network.captive-portal-service.enabled", false);  // disable captive portal helper
 user_pref("network.connectivity-service.enabled", false);  // disable network connectivity checks
 user_pref("network.connectivity-service.enabled", false);  // don't help with captive portals
-user_pref("network.cookie.cookieBehavior", 1);  // block third-party cookies
 user_pref("network.cookie.leave-secure-alone", true);  // disable non-secure sites setting secure cookies
-user_pref("network.cookie.lifetimePolicy", 2);  // expire cookies on browser close
 user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true);
 user_pref("network.cookie.thirdparty.sessionOnly", true);
 user_pref("network.dns.disableIPv6", true);  // disable IPv6
@@ -410,7 +420,6 @@ user_pref("permissions.default.geo", 2);
 user_pref("permissions.default.microphone", 2);
 user_pref("permissions.manager.defaultsUrl", "");
 user_pref("permissions.memory_only", true);  // disable storing permission changes
-user_pref("places.history.enabled", false);
 user_pref("plugin.default.state", 0);
 user_pref("plugin.defaultXpi.state", 0);
 user_pref("plugin.disable_full_page_plugin_for_types", "application/pdf");
@@ -423,28 +432,22 @@ user_pref("plugins.click_to_play", true);  // require plugin activation
 user_pref("pref.browser.homepage.disable_button.current_page", false);
 user_pref("pref.privacy.disable_button.cookie_exceptions", false);
 user_pref("privacy.clearOnShutdown.cache", true);
-user_pref("privacy.clearOnShutdown.cookies", true);
 user_pref("privacy.clearOnShutdown.downloads", true);
 user_pref("privacy.clearOnShutdown.formdata", true);
-user_pref("privacy.clearOnShutdown.history", true);
 user_pref("privacy.clearOnShutdown.offlineApps", true);
 user_pref("privacy.clearOnShutdown.openWindows", true);
 user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
 user_pref("privacy.cpd.cache", true);
-user_pref("privacy.cpd.cookies", true);
 user_pref("privacy.cpd.downloads", true);
 user_pref("privacy.cpd.formdata", true);
-user_pref("privacy.cpd.history", true);
 user_pref("privacy.cpd.offlineApps", true);
 user_pref("privacy.cpd.sessions", true);
-user_pref("privacy.donottrackheader.enabled", true);  // send DNT HTTP header
 user_pref("privacy.firstparty.isolate", true);  // isolate cookies to 1P
 user_pref("privacy.history.custom", true);
 user_pref("privacy.resistFingerprinting", true);  // enable anti-fingerprinting features
 user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);  // disable mozAddonManager
 user_pref("privacy.sanitize.pending", "[]");
-user_pref("privacy.sanitize.sanitizeOnShutdown", true);  // clear history on exit
 user_pref("privacy.sanitize.timeSpan", 0);  // set default clear history range to all time
 user_pref("privacy.trackingprotection.enabled", true);  // https://wiki.mozilla.org/Security/Tracking_protection
 user_pref("privacy.trackingprotection.introCount", 20);
@@ -567,7 +570,7 @@ user_pref("ui.use_standins_for_native_colors", true);  // disable exposing syste
 user_pref("webchannel.allowObject.urlWhitelist", "");
 user_pref("webgl.disable-extensions", true);  // disable Web Graphics Library
 user_pref("webgl.disable-fail-if-major-performance-caveat", true);
-user_pref("webgl.disabled", true);
+user_pref("webgl.disabled", true);  // disable WebGL
 user_pref("webgl.dxgl.enabled", false);
 user_pref("webgl.enable-debug-renderer-info", false);
 user_pref("webgl.enable-webgl2", false);

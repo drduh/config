@@ -2,21 +2,21 @@
 # https://linux.die.net/man/5/sshd_config
 Port 22
 AddressFamily inet
-ListenAddress 0.0.0.0
-#ListenAddress 172.16.255.1
+#ListenAddress 172.16.1.1
 #ListenAddress 10.8.1.1
-AllowUsers sysadm
-HostKey /etc/ssh/ssh_host_key
+ListenAddress 0.0.0.0
+HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_ed25519_key
+AllowUsers sysadm
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com
 KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
 RekeyLimit 256M
 SyslogFacility AUTH
 LogLevel VERBOSE
-MaxStartups 1
-MaxSessions 1
 LoginGraceTime 10s
+MaxStartups 1
+MaxSessions 2
 MaxAuthTries 3
 ClientAliveInterval 30
 ClientAliveCountMax 20
@@ -40,3 +40,5 @@ PrintMotd no
 PrintLastLog yes
 PermitUserEnvironment no
 #Subsystem sftp  /usr/libexec/sftp-server
+#Match User proxy
+#       AllowTcpForwarding yes
