@@ -4,8 +4,8 @@ set hostname = "github.duh.to"
 set realname = "github@duh.to"
 set from = "<github@duh.to>"
 set imap_user = "github@duh.to"
-set imap_pass = "xxx"
-set smtp_pass = "xxx"
+set imap_pass = 'xxx'
+set smtp_pass = 'xxx'
 set folder = "imaps://imap.gmail.com:993/"
 set smtp_url = "smtp://github@duh.to@smtp.gmail.com:587/"
 set trash = "imaps://imap.gmail.com/[Gmail]/Trash"
@@ -31,4 +31,4 @@ alternative_order text/enriched text/plain text/html
 hdr_order Date From To Cc
 my_hdr User-Agent:
 push <show-version>
-source ~/.mutt/solarized.muttrc
+#source ~/.mutt/solarized.muttrc

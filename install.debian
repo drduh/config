@@ -44,9 +44,11 @@ lsof
 m4
 make
 man-db
+motion
 mpv
 net-tools
 netcat
+nmap
 ntp
 openssl
 pcsc-tools

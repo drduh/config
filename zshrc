@@ -65,7 +65,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl)
   ]]
 }
 function path {

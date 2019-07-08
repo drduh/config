@@ -1,11 +1,11 @@
 # https://github.com/drduh/config/blob/master/torrc
 # https://www.torproject.org/docs/tor-manual.html
 #User _tor
+#PublishServerDescriptor 0
 ORPort 9999
 ExtORPort auto
 ExitPolicy reject *:*
 BridgeRelay 1
-#PublishServerDescriptor 0
 ServerTransportPlugin obfs4 exec /usr/local/bin/obfs4proxy
 ServerTransportListenAddr obfs4 0.0.0.0:10022
 SocksPort 127.0.0.1:9049
