@@ -1,18 +1,20 @@
 " https://github.com/drduh/config/blob/master/vimrc
+" https://vimhelp.org/vim_faq.txt.html
 set nocompatible
 filetype plugin indent on
 syntax on
 noremap ;               :
 noremap <C-a>           <Home>
 noremap <C-e>           <End>
-noremap <C-h>           :tabNext<CR>
-noremap <C-l>           :tabnext<CR>
-noremap <C-n>           :tabnew<CR>
+noremap <C-h>           :tabNext<cr>
+noremap <C-l>           :tabnext<cr>
+noremap <C-n>           :tabnew<cr>
 noremap <space><cr>     :nohlsearch<cr>
 noremap <space><del>    :quit!<cr>
 noremap <space><space>  :set list!<cr>
 noremap <space>exec     :!./%<cr>
 noremap <space>ws       :%s/\s\+$//<cr>
+noremap <space>s        :setlocal spell!<cr>
 set autoindent                  " copy indent from current line
 set cursorline                  " underline cursor line
 set expandtab                   " use spaces instead of tabs
@@ -20,7 +22,7 @@ set gdefault                    " use g flag to search/replace
 set hidden                      " switch buffers without saving
 set hlsearch                    " highlight searches
 set ignorecase                  " ignore case when searching
-set incsearch                   " dymanic pattern highlighting
+set incsearch                   " dynamic pattern highlighting
 set lazyredraw                  " no re-draw on untyped commands
 set linebreak                   " break on breakat chars
 set magic                       " magic search strings
@@ -36,7 +38,7 @@ set showmode                    " show current mode
 set smartcase                   " do not ignore capital letter search
 set title                       " set window title
 set ttyfast                     " optimize for fast terminal connections
-set wildmenu                    " enchanced completion
+set wildmenu                    " enhanced completion
 set wrap                        " wrap lines
 set backspace   =2              " intuitive backspacing in insert mode
 set cmdheight   =2              " never prompt for enter or command
@@ -85,3 +87,5 @@ hi Normal ctermfg=14 ctermbg=8
 hi LineNr ctermfg=10 ctermbg=0
 hi Comment ctermfg=9 ctermbg=0
 hi StatusLine ctermfg=0 ctermbg=3
+hi clear SpellBad
+hi SpellBad ctermbg=10

@@ -99,7 +99,6 @@ pixel.redditmedia.com
 /.*1x1.*
 /.*beacon.*
 /.*buttons.js
-/.*event.*
 /.*facebook.*
 /.*fb-icon.*
 /.*follow_us.*
@@ -352,7 +351,6 @@ google.com/amp/s/.*
 .quoracdn.net
 .qz.com
 .radioreference.com
-.raspberrypi.org
 .reason.com
 .recaptcha.net
 .redd.it

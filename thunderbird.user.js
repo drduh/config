@@ -87,6 +87,7 @@ user_pref("dom.webnotifications.serviceworker.enabled", false);
 user_pref("dom.workers.enabled", false);
 user_pref("extensions.enigmail.addHeaders", false);
 user_pref("extensions.enigmail.agentAdditionalParam", "--no-emit-version --no-comments");
+user_pref("extensions.enigmail.keyRefreshOn", false);
 user_pref("extensions.enigmail.mimeHashAlgorithm", 5);  // SHA-512
 user_pref("extensions.enigmail.protectedSubjectText", "");
 user_pref("extensions.enigmail.useDefaultComment", true);

@@ -6,6 +6,7 @@ PAGER=less
 EDITOR=vim
 VISUAL=vim
 LANG=en_US.UTF-8
+umask 077
 export LC_ALL=C
 export LC_CTYPE=C
 autoload -U colors && colors
@@ -65,7 +66,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl)
   ]]
 }
 function path {
@@ -123,7 +124,7 @@ alias dump_udp="tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp and not p
 alias dump_icmp="tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
 alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"
 alias grep_url="grep -Eo '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'"
-alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && sudo pm-suspend"
+alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && systemctl suspend"
 alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
 alias trim="fold -w40 | head -n5 | sed '-es/./ /'{1..40..10}"
 alias rand="tr -dc '01' < /dev/urandom | trim ; \

@@ -19,6 +19,7 @@
 //user_pref("dom.storage.enabled", false);  // disable DOM storage; may break sites
 //user_pref("dom.storageManager.enabled", false);  // disable storage; may break sites
 //user_pref("gfx.xrender.enabled", true);  // may improve performance
+//user_pref("javascript.enabled", false);  // disable javascript
 //user_pref("javascript.options.baselinejit", false);  // disable JS JIT; may break sites
 //user_pref("javascript.options.ion", false);  // disable JS Ion; may break sites
 //user_pref("layers.acceleration.disabled", true);  // disable hardware acceleration; performance hit
