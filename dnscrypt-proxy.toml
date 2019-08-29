@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/dnscrypt-proxy.toml
+# https://github.com/jedisct1/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
 #user_name = '_dnscrypt-proxy'
 listen_addresses = ['127.0.0.1:4200']
 server_names = ['abc']

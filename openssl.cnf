@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/openssl.cnf
+# https://github.com/openssl/openssl/blob/master/apps/openssl.cnf
 [ req ]
 default_bits	    	= 4096
 default_md		      = sha512

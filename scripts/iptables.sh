@@ -76,7 +76,7 @@ iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -j ACCEPT
 #iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -p tcp --dport 443 -j ACCEPT
 #echo "Allow outgoing NTP"
 #iptables -A OUTPUT -o $EXT -d 192.168.0.1 -p udp --dport 123 -j ACCEPT
-#echo "Allow outgoing whois lookups"
+#echo "Allow outgoing WHOIS lookups"
 #iptables -A OUTPUT -o $EXT -p tcp --dport 43 -j ACCEPT
 echo "Allow traffic from the firewall to local networks"
 iptables -A OUTPUT -o $INT -d $INT_NET -j ACCEPT

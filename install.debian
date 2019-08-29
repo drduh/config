@@ -1,7 +1,9 @@
 # https://github.com/drduh/config/blob/master/install.debian
 apt-transport-https
 at
+auditd
 autoconf
+binwalk
 bison
 build-essential
 cmake
@@ -55,6 +57,7 @@ netcat
 nmap
 ntp
 openssl
+parted
 pciutils
 pciutils-dev
 pcsc-tools
@@ -68,10 +71,15 @@ python-pip
 python-pyscard
 qemu
 qemu-system-x86
+radare2
+rename
 rng-tools
+rsync
 scdaemon
 scrot
 secure-delete
+selinux-basics
+selinux-policy-default
 signify-openbsd
 signify-openbsd-keys
 speedtest-cli
@@ -85,6 +93,7 @@ tor
 tree
 tshark
 vim
+wget
 whois
 wireshark
 xclip
