@@ -133,6 +133,7 @@ address=/csi.gstatic.com/
 address=/doubleclick.com/
 address=/doubleclick.net/
 address=/firebaseio.com/
+address=/firebaseremoteconfig.googleapis.com/
 address=/froogle.com/
 address=/gogle.com/
 address=/gogole.com/
