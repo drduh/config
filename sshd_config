@@ -5,8 +5,8 @@ AddressFamily inet
 #ListenAddress 172.16.1.1
 #ListenAddress 10.8.1.1
 ListenAddress 0.0.0.0
+HostKey /etc/ssh/ssh_host_key
 HostKey /etc/ssh/ssh_host_rsa_key
-#HostKey /etc/ssh/ssh_host_ed25519_key
 AllowUsers sysadm
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com
@@ -39,7 +39,7 @@ UseDNS no
 PrintMotd no
 PrintLastLog yes
 PermitUserEnvironment no
-#TrustedUserCAKeys /etc/ssh/ca.pub
 #Subsystem sftp  /usr/libexec/sftp-server
+#TrustedUserCAKeys /etc/ssh/ca.pub
 #Match User proxy
 #       AllowTcpForwarding yes

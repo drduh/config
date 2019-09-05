@@ -10,7 +10,6 @@ ServerTransportPlugin obfs4 exec /usr/local/bin/obfs4proxy
 ServerTransportListenAddr obfs4 0.0.0.0:10022
 SocksPort 127.0.0.1:9049
 SocksPort 127.0.0.1:9050
-ControlPort 9051
 DNSPort 127.26.255.1:53
 AccountingMax 100 GBytes
 AccountingStart month 3 15:00
@@ -20,6 +19,7 @@ Log notice file /var/log/tor/notices.log
 #Log debug file /var/log/tor/debug.log
 #Nickname ididnteditheconfig
 #ContactInfo Random Person <nobody AT example dot com>
+#ControlPort 9051
 #CookieAuthentication 1
 #HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
 #HiddenServiceDir /var/lib/tor/hidden_service/

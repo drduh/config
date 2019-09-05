@@ -65,6 +65,7 @@ pcscd
 pkg-config
 privoxy
 proxychains
+pylint
 python-gnupg
 python-pil
 python-pip

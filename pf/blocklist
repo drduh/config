@@ -1,6 +1,7 @@
 # https://github.com/drduh/config/blob/master/pf/blocklist
-# To obtain netblocks for an AS, run:
-# whois -h whois.radb.net '!gAS32934' | tr " " "\n"
+# To obtain netblocks for an autonomous system (AS):
+#   whois -h whois.radb.net '!gAS32934' | tr " " "\n"
+#
 # AS32934 - Facebook
 102.132.96.0/20
 102.132.96.0/24
