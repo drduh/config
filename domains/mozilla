@@ -1,4 +1,8 @@
 #address=/firefox.com/
+#address=/mozaws.net/
+#address=/mozilla.com/
+#address=/mozilla.net/
+#address=/mozilla.org/
 address=/accounts.firefox.com/
 address=/blocked.cdn.mozilla.net/
 address=/blocklist.addons.mozilla.org/

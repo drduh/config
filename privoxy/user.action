@@ -169,6 +169,7 @@ google.com/amp/s/.*
 .bbc.com
 .bbc.co.uk
 .bing.com
+.bitbucket.org
 .bit.ly
 .blogblog.com
 .blogger.com
@@ -189,11 +190,14 @@ google.com/amp/s/.*
 .chase.com
 .chromium.org
 .cia.gov
+.cisco.com
 .cloudflare.com
 .cloudfront.net
+.cnet.com
 .congress.gov
 .coreboot.org
 .cpb.gov
+.craigslist.org
 .creativecommons.org
 .crucial.com
 .cryptographyengineering.com
@@ -205,6 +209,7 @@ google.com/amp/s/.*
 .debian-administration.org
 .debian.net
 .debianforum.de
+.delta.com
 .dhs.gov
 .dropbox.com
 .dropboxatwork.com
@@ -231,6 +236,7 @@ google.com/amp/s/.*
 .gfycat.com
 .ggpht.com
 .gimp.org
+.giphy.com
 .github.com
 .github.io
 .githubapp.com
@@ -247,6 +253,7 @@ google.com/amp/s/.*
 .goo.gl
 .google.ca
 .google.com
+.google.co.uk
 .google.de
 .googleadservices.com
 .googleapis.com
@@ -267,6 +274,7 @@ google.com/amp/s/.*
 .hbr.org
 .homedepot.com
 .house.gov
+.houzz.com
 .iana.org
 .ibm.com
 .icanhazip.com
@@ -278,6 +286,7 @@ google.com/amp/s/.*
 .independent.ie
 .indiegogo.com
 .instagram.com
+.intel.com
 .intuit.com
 .irs.gov
 .isc.org
@@ -293,6 +302,7 @@ google.com/amp/s/.*
 .khanacademy.org
 .knowyourmeme.com
 .last.fm
+.latimes.com
 .letsencrypt.org
 .lighttpd.net
 .linuxforums.org
@@ -306,6 +316,7 @@ google.com/amp/s/.*
 .mail-archive.com
 .mapquest.com
 .marc.info
+.marriott.com
 .marshalls.com
 .mathoverflow.com
 .media.tumblr.com
@@ -332,6 +343,7 @@ google.com/amp/s/.*
 .nypost.com
 .nytimes.com
 .okta.com
+.oktacdn.com
 .openstreetmap.org
 .openvpn.net
 .openvpn.org
@@ -358,9 +370,12 @@ google.com/amp/s/.*
 .redditmedia.com
 .redditstatic.com
 .reddituploads.com
+.reddit-image.s3.amazonaws.com
+.redfin.com
 .redhat.com
 .researchgate.net
 .reuters.com
+.rottentomatoes.com
 .rust-lang.org
 .s3.amazonaws.com
 .schwab.com
@@ -369,6 +384,7 @@ google.com/amp/s/.*
 .sec.gov
 .senate.gov
 .serverfault.com
+.shodan.io
 .shopify.com
 .signal.org
 .slack-edge.com
@@ -381,6 +397,7 @@ google.com/amp/s/.*
 .spacetelescope.org
 .splunk.com
 .squarespace.com
+.squarespace-cdn.com
 .sstatic.net
 .stackauth.com
 .stackexchange.com
@@ -399,6 +416,7 @@ google.com/amp/s/.*
 .thehill.com
 .theverge.com
 .thinkprogress.org
+.tomshardware.com
 .tonic.to
 .torproject.org
 .tripadvisor.com
@@ -411,6 +429,7 @@ google.com/amp/s/.*
 .undeadly.org
 .unicef.org
 .ups.com
+.usatoday.com
 .usembassy.gov
 .usgs.gov
 .usps.com
@@ -428,12 +447,13 @@ google.com/amp/s/.*
 .washingtonpost.com
 .weather.gov
 .wellsfargo.com
-.whispersystem.org
+.whispersystems.org
 .whitehouse.gov
 .wikibooks.org
 .wikimedia.org
 .wikipedia.org
 .wikiquote.org
+.wiktionary.org
 .wired.com
 .wireshark.org
 .wix.com

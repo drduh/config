@@ -1,5 +1,6 @@
 # https://github.com/drduh/config/blob/master/install.openbsd
 adb
+arpwatch
 bash
 curl
 dnsmasq

@@ -65,7 +65,10 @@ iptables -t nat -A PREROUTING -i $DMZ -p tcp --dport 80 -j DNAT --to-destination
 iptables -t nat -A PREROUTING -i $LAB -p tcp --dport 80 -j DNAT --to-destination 10.4.1.1:8118
 iptables -t nat -A PREROUTING -i $WIFI -p tcp --dport 80 -j DNAT --to-destination 192.168.1.1:8118
 echo "Allow all outgoing"
-iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -j ACCEPT
+iptables -A OUTPUT -o $EXT -p tcp -d 0.0.0.0/0 -j ACCEPT
+iptables -A OUTPUT -o $EXT -p udp -d 0.0.0.0/0 -j ACCEPT
+#iptables -A OUTPUT -o $EXT -p icmp -d 0.0.0.0/0 -j ACCEPT
+#iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -j ACCEPT
 #echo "Allow outgoing SSH"
 #iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -p tcp --dport 22 -j ACCEPT
 #echo "Allow outgoing DNS"

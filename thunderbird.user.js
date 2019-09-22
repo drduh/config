@@ -4,6 +4,7 @@
 //user_pref("mail.inline_attachments", false);
 //user_pref("mailnews.display.prefer_plaintext", true);
 //user_pref("rss.display.prefer_plaintext", true);
+//user_pref("security.OCSP.require", true);
 user_pref("app.update.auto", false);
 user_pref("app.update.enabled", false);
 user_pref("beacon.enabled", false);
@@ -184,7 +185,6 @@ user_pref("purple.conversations.im.send_typing", false);
 user_pref("purple.logging.log_chats", false);
 user_pref("purple.logging.log_ims", false);
 user_pref("purple.logging.log_system", false);
-user_pref("security.OCSP.require", true);
 user_pref("security.cert_pinning.enforcement_level", 2);
 user_pref("security.family_safety.mode", 0);
 user_pref("security.fileuri.strict_origin_policy", true);

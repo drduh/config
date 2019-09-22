@@ -1,5 +1,6 @@
 # https://github.com/drduh/config/blob/master/install.debian
 apt-transport-https
+arduino
 at
 auditd
 autoconf
@@ -21,6 +22,7 @@ gcc
 git
 gnupg-agent
 gnupg2
+gpredict
 hopenpgp-tools
 hostapd
 htop
