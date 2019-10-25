@@ -39,6 +39,14 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' verbose yes
 PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
+function adbpkg {
+  for p in $(adb shell pm list package|awk -F"package:" '{print $2}'); \
+    do echo -n "$p: "
+      adb shell dumpsys package $p | \
+        grep -i versionname | \
+        awk -F"=" '{print $2}'
+  done > adb.pkg.$(date +%F)
+}
 function calc { awk "BEGIN { print "$*" }" }
 function colours {
   for i in {0..255} ; do
@@ -54,6 +62,7 @@ function convert_secs {
 function e { awk -v c=${1} -v l=${2} 'BEGIN { print log(c^l) }' }
 function f { find . -iname "*${1}*" }
 function fd { find . -iname "*${1}*" -type d }
+function gas { whois -h whois.radb.net '!g'${1} }
 function png2jpg {
   for i in *.png ; do
     f=${i%.*}
@@ -66,7 +75,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl)
   ]]
 }
 function path {
@@ -85,6 +94,7 @@ path /usr/sbin
 path /usr/bin
 path /sbin
 path /bin
+#path /usr/games
 #path /usr/X11R6/bin
 alias -g H='| head'
 alias -g L='| less'
@@ -96,7 +106,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias l="ls -ltrhsa"
-alias ls="ls -lh"
+alias ls="ls -lha"
 alias t="tail -f"
 alias v="vim -p"
 alias md="mkdir -p"
@@ -114,9 +124,9 @@ alias pdf="mupdf -r180 -CFDF6E3 ${1}"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
-alias cert="openssl req -new -newkey rsa:4096 -sha512 -days 365 \
-  -nodes -x509 -keyout s.key -out s.crt && openssl x509 -in s.crt -noout -subject -issuer -enddate"
+alias cert="openssl req -new -newkey rsa:4096 -sha512 -days 365 -nodes -x509 -keyout s.key -out s.crt && openssl x509 -in s.crt -noout -subject -issuer -enddate"
 alias cidr="whois \$(curl -s https://icanhazip.com) | grep CIDR"
+alias cpuv="tail -n +1 /sys/devices/system/cpu/vulnerabilities/*"
 alias dedupe="find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD"
 alias dump_pflog="tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap 'not icmp6'"
 alias dump_syn="tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&2!=0'"

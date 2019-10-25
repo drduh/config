@@ -62,7 +62,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   # http://www.bgplookingglass.com/list-of-autonomous-system-numbers
   # radb returns blocks of addresses - not individual IPs
   touch $custom
-  for nb in AS12076 AS13399 AS13414 AS13811 AS14413 AS14719 AS17345 AS20046 AS20049 AS20366 AS22692 AS23468 AS25796 AS26222 AS2709 AS30135 AS30575 AS31792 AS32476 AS32934 AS33739 AS3598 AS35995 AS36006 AS395496 AS395524 AS395851 AS396463 AS397466 AS40066 AS54888 AS5761 AS6182 AS6185 AS6194 AS6291 AS63293 AS63314 AS6584 AS714 AS8068 AS8069 AS8070 AS8071 AS8072 AS8073 AS8074 AS8075 ; do
+  for nb in $(cat asns/* | tr "\n" " "); do
     whois -h whois.radb.net !g$nb | \
     tr " " "\n" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}.+' | \
     sort | uniq >> $custom
@@ -85,9 +85,10 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   doas pfctl -t blocklist -T show | wc -l
 else
   printf "testing blocked sites ..."
-  for ws in apple.com facebook.com microsoft.com twitter.com ; do
-    printf "\n$ws: "
+  for ws in $(/bin/ls asns/) ; do
+    printf "\n$ws.com: "
     curl -v \
-      https://$(dig a $ws @1.1.1.1 +short | head -n1) 2>&1 | grep "Permission denied" || printf "BLOCK FAILED"
+      https://$(dig a $ws.com @1.1.1.1 +short|head -n1) 2>&1 | \
+        grep "Permission denied" || printf "BLOCK FAILED"
   done
 fi

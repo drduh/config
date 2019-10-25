@@ -2,7 +2,7 @@
 # https://www.privoxy.org/user-manual/actions-file.html
 # http://config.privoxy.org/show-url-info
 
-#{+hide-user-agent{Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0}}
+#{+hide-user-agent{Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0}}
 #/
 
 {{ alias }}
@@ -344,6 +344,7 @@ google.com/amp/s/.*
 .nytimes.com
 .okta.com
 .oktacdn.com
+.openra.net
 .openstreetmap.org
 .openvpn.net
 .openvpn.org

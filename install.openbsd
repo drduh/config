@@ -2,6 +2,7 @@
 adb
 arpwatch
 bash
+chirp
 curl
 dnsmasq
 enigmail
@@ -10,6 +11,7 @@ feh
 firefox
 flashrom
 free
+gimp
 git
 gnupg
 gnuradio
@@ -20,12 +22,16 @@ mpv
 mupdf
 mutt
 nmap
+openra
 p5-Image-ExifTool
 pciutils
 pcsc-tools
 pfstat
 pftop
+poppler-utils
 pv
+py3-pip
+rtl-sdr
 scrot
 sleuthkit
 thunderbird
@@ -40,4 +46,5 @@ wireshark
 xclip
 xdotool
 youtube-dl
+zeek
 zsh

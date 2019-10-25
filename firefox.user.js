@@ -52,7 +52,7 @@
 //user_pref("privacy.window.maxInnerHeight", 720);
 //user_pref("privacy.window.maxInnerWidth", 1280);
 //user_pref("security.OCSP.require", true);  // force check certificate revocation
-//user_pref("security.dialog_enable_delay", 5000);  // ms delay on dialogs
+//user_pref("security.dialog_enable_delay", 1000);  // ms delay on dialogs
 //user_pref("security.ssl3.rsa_aes_128_sha", false);  // disable cipher; may break sites
 //user_pref("security.ssl3.rsa_aes_256_sha", false);  // disable cipher; may break sites
 //user_pref("security.tls.version.min", 3);  // minimum TLS 1.2; may break sites
@@ -382,7 +382,7 @@ user_pref("network.negotiate-auth.allow-insecure-ntlm-v1-https", false);  // dis
 user_pref("network.predictor.cleaned-up", true);
 user_pref("network.predictor.enable-prefetch", false);  // disable prefetching
 user_pref("network.predictor.enabled", false);  // disable "Necko" predictive service
-user_pref("network.prefetch-next", false);
+user_pref("network.prefetch-next", false);  // disable prefetching
 user_pref("network.protocol-handler.expose-all", false);  // whitelist URL handlers
 user_pref("network.protocol-handler.expose.about", true);
 user_pref("network.protocol-handler.expose.blob", true);
@@ -450,7 +450,9 @@ user_pref("privacy.resistFingerprinting", true);  // enable anti-fingerprinting 
 user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);  // disable mozAddonManager
 user_pref("privacy.sanitize.pending", "[]");
 user_pref("privacy.sanitize.timeSpan", 0);  // set default clear history range to all time
+user_pref("privacy.trackingprotection.cryptomining.enabled", true);
 user_pref("privacy.trackingprotection.enabled", true);  // https://wiki.mozilla.org/Security/Tracking_protection
+user_pref("privacy.trackingprotection.fingerprinting.enabled", true);
 user_pref("privacy.trackingprotection.introCount", 20);
 user_pref("privacy.trackingprotection.pbmode.enabled", false);
 user_pref("privacy.trackingprotection.ui.enabled", true);
