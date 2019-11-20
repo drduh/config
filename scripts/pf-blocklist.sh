@@ -4,6 +4,7 @@
 # Downloads and blocks IP addresses with PF from three categories:
 #   1) Published lists of ad/malware hosts
 #   2) Autonomous System assignments to orgs and corps
+#      (Requires https://github.com/drduh/config/tree/master/asns)
 #   3) Country assignments
 #
 # Example output:
@@ -29,9 +30,11 @@
 #   testing blocked sites ...
 #   apple.com: * Immediate connect fail for 17.xxx: Permission denied
 #   facebook.com: * Immediate connect fail for 157.xxx: Permission denied
+#   linkedin.com: * Immediate connect fail for 108.xxx: Permission denied
 #   microsoft.com: * Immediate connect fail for 40.xxx: Permission denied
+#   myspace.com: * Immediate connect fail for 63.xxx Permission denied
 #   twitter.com: * Immediate connect fail for 104.xxx: Permission denied
-#
+
 custom=pf-custom.$(date +%F)
 threats=pf-threats.$(date +%F)
 zones=pf-zones.$(date +%F)
@@ -84,9 +87,9 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   printf "new rules: "
   doas pfctl -t blocklist -T show | wc -l
 else
-  printf "testing blocked sites ..."
+  printf "testing blocked sites ...\n"
   for ws in $(/bin/ls asns/) ; do
-    printf "\n$ws.com: "
+    printf "$ws.com: "
     curl -v \
       https://$(dig a $ws.com @1.1.1.1 +short|head -n1) 2>&1 | \
         grep "Permission denied" || printf "BLOCK FAILED"

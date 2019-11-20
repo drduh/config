@@ -10,6 +10,7 @@ bison
 build-essential
 chirp
 cmake
+cpufrequtils
 cryptsetup
 curl
 dirmngr
@@ -61,6 +62,7 @@ net-tools
 netcat
 nmap
 ntp
+openjdk-8-jdk-headless
 openssl
 parted
 pciutils

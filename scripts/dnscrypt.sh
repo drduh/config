@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/master/scripts/dnscrypt.sh
 # https://github.com/cofyc/dnscrypt-wrapper
-expiry=3
-name=2.dnscrypt.$(tr -dc '[:alnum:]' < /dev/urandom | fold -w20 | head -n1)
-rm -vf 0.crt 0.key public.key secret.key
+expiry=21
+name=2.dnscrypt-cert.$(tr -dc '[:alnum:]' < /dev/urandom | fold -w20 | head -n1)
+rm -f 0.crt 0.key public.key secret.key
 pkill -9 dnscrypt-wrapper
 dnscrypt-wrapper --gen-provider-keypair --provider-name=$name \
   --ext-address=$(curl -s https://icanhazip.com/) 2>/dev/null | grep sdns
