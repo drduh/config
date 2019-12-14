@@ -62,10 +62,10 @@ set statusline +=\ %F           " file path
 set statusline +=\%m\ %*        " file mode
 set statusline +=\ %{WC()}\     " number of words
 set statusline +=\%l/%L\        " number of lines
-set viminfo     ='10            " edited files
-set viminfo    +=/10            " pattern items
-set viminfo    +=n~/.vim/info   " viminfo file name
-"set viminfo     =""             " disable viminfo
+set viminfo     =""             " disable viminfo
+"set viminfo     ='10            " edited files
+"set viminfo    +=/10            " pattern items
+"set viminfo    +=n~/.vim/info   " viminfo file name
 let g:wc        =''
 function WC()
   return g:wc

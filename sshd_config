@@ -39,6 +39,7 @@ UseDNS no
 PrintMotd no
 PrintLastLog yes
 PermitUserEnvironment no
+#Subsystem sftp  /usr/lib/sftp-server
 #Subsystem sftp  /usr/libexec/sftp-server
 #TrustedUserCAKeys /etc/ssh/ca.pub
 #Match User proxy

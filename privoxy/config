@@ -4,8 +4,8 @@
 #listen-address 172.16.1.1:8118
 #listen-address 192.168.1.1:8118
 listen-address 127.0.0.1:8118
+#forward-socks5t / 127.0.0.1:9050 .  # forward to Tor
 #forward /  127.0.0.1:1234
-#forward-socks5t / 127.0.0.1:9050 .
 toggle 1
 confdir /etc/privoxy
 actionsfile default.action

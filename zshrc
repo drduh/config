@@ -75,7 +75,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|diff|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|ssh-keygen|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|ssh-keygen|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|./pwd.sh|./purse.sh)
   ]]
 }
 function path {
@@ -128,15 +128,18 @@ alias cert="openssl req -new -newkey rsa:4096 -sha512 -days 365 -nodes -x509 -ke
 alias cidr="whois \$(curl -s https://icanhazip.com) | grep CIDR"
 alias cpuv="tail -n +1 /sys/devices/system/cpu/vulnerabilities/*"
 alias dedupe="find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD"
-alias dump_pflog="tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap 'not icmp6'"
-alias dump_syn="tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&2!=0'"
-alias dump_udp="tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp and not port 443'"
-alias dump_icmp="tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
+alias dump_pflog="doas tcpdump -ni pflog0 -w pflog-\$(date +%F-%H:%M:%S).pcap 'not icmp6'"
+alias dump_syn="doas tcpdump -ni em0 -w syn-\$(date +%F-%H:%M:%S).pcap 'tcp[13]&2!=0'"
+alias dump_udp="doas tcpdump -ni em0 -w udp-\$(date +%F-%H:%M:%S).pcap 'udp and not port 443'"
+alias dump_icmp="doas tcpdump -ni em0 -w icmp-\$(date +%F-%H:%M:%S).pcap 'icmp'"
 alias gpg_restart="pkill pinentry gpg ssh-agent;eval \$(gpg-agent --daemon --enable-ssh-support)"
 alias grep_ip="grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'"
 alias grep_url="grep -Eo '(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'"
+alias Kill="kill -9"
 alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && systemctl suspend"
 alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
+alias mnt="doas mount /dev/sdb2 /mnt"
+alias umnt="doas umount /mnt"
 alias trim="fold -w40 | head -n5 | sed '-es/./ /'{1..40..10}"
 alias rand="tr -dc '01' < /dev/urandom | trim ; \
   tr -dc '[:digit:]' < /dev/urandom | trim ; \
@@ -144,8 +147,8 @@ alias rand="tr -dc '01' < /dev/urandom | trim ; \
   tr -dc '[:xdigit:]' < /dev/urandom | trim ; \
   tr -dc '[:alnum:]' < /dev/urandom | trim ; \
   tr -dc '[:graph:]' < /dev/urandom | trim"
-#alias enc="gpg -e -a -r foo@duh.to -r 0xFF3E7D88647EBCDB -o ~/out.enc ${1}"
 #alias gpg="gpg2"
+#alias enc="gpg -e -a -r foo@duh.to -r 0xFF3E7D88647EBCDB -o ~/out.enc ${1}"
 #alias sha256="sha256sum"
 #alias sha512="sha512sum"
 #export GPG_TTY="$(tty)"

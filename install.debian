@@ -21,7 +21,9 @@ feh
 file
 flashrom
 flex
+fswebcam
 gcc
+gimp
 git
 gnupg-agent
 gnupg2
@@ -30,6 +32,7 @@ hackrf
 hopenpgp-tools
 hostapd
 htop
+imagemagick
 iotop
 iperf
 iptables
@@ -62,7 +65,8 @@ net-tools
 netcat
 nmap
 ntp
-openjdk-8-jdk-headless
+ntpdate
+openjdk-11-jdk-headless
 openssl
 parted
 pciutils
@@ -71,6 +75,7 @@ pcsc-tools
 pcscd
 pkg-config
 poppler-utils
+printer-driver-brlaser
 privoxy
 proxychains
 pylint
@@ -83,6 +88,7 @@ qemu
 qemu-system-x86
 radare2
 rename
+rfkill
 rng-tools
 rsync
 rtl-sdr
@@ -96,6 +102,7 @@ signify-openbsd-keys
 speedtest-cli
 ssh
 sshfs
+strace
 sudo
 swig
 tcpdump
@@ -103,7 +110,10 @@ tmux
 tor
 tree
 tshark
+unzip
+upower
 vim
+virt-manager
 wget
 whois
 wireshark
