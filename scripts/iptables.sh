@@ -77,6 +77,10 @@ iptables -A OUTPUT -o $EXT -p udp -d 0.0.0.0/0 -j ACCEPT
 #iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -p tcp --dport 80 -j ACCEPT
 #echo "Allow outgoing HTTPS"
 #iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -p tcp --dport 443 -j ACCEPT
+#echo "Allow outgoing SMTP"
+#iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -p tcp --dport 465 -j ACCEPT
+#echo "Allow outgoing IMAP"
+#iptables -A OUTPUT -o $EXT -d 0.0.0.0/0 -p tcp --dport 993 -j ACCEPT
 #echo "Allow outgoing NTP"
 #iptables -A OUTPUT -o $EXT -d 192.168.0.1 -p udp --dport 123 -j ACCEPT
 #echo "Allow outgoing WHOIS lookups"

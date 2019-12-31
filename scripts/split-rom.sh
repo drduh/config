@@ -10,4 +10,4 @@ rm -f coreboot-bottom.rom coreboot-top.rom
 dd if=coreboot.rom of=coreboot-bottom.rom bs=1M count=8
 dd if=coreboot.rom of=coreboot-top.rom bs=1M skip=8
 mkdir -p ~/build/coreboot/write/$(date +%F)
-mv build/*.rom ~/build/coreboot/write/$(date +%F)
+mv *.rom ~/build/coreboot/write/$(date +%F)

@@ -75,7 +75,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|ssh-keygen|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|sort|srm|ssh|ssh-keygen|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
   ]]
 }
 function path {
@@ -120,7 +120,7 @@ alias ff="firefox --ProfileManager --no-remote -jsconsole"
 alias tb="thunderbird --ProfileManager --no-remote -jsconsole"
 alias srl="doas cu -r -s 115200 -l cuaU0||sudo minicom -D /dev/ttyUSB0"
 alias vpn="ssh -NCL 5555:127.0.0.1:8118 vpn"
-alias pdf="mupdf -r180 -CFDF6E3 ${1}"
+alias pdf="mupdf -r 180 -CFDF6E3 ${1}"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bat="upower -i /org/freedesktop/UPower/devices/battery_BAT0|grep -E 'state|to\ full|percentage'"
@@ -140,6 +140,7 @@ alias lock="date ; ( sleep 1 && slock ) & ; sleep 2 && systemctl suspend"
 alias mac_rand="openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/.$//'"
 alias mnt="doas mount /dev/sdb2 /mnt"
 alias umnt="doas umount /mnt"
+alias yt="youtube-dl"
 alias trim="fold -w40 | head -n5 | sed '-es/./ /'{1..40..10}"
 alias rand="tr -dc '01' < /dev/urandom | trim ; \
   tr -dc '[:digit:]' < /dev/urandom | trim ; \
@@ -151,6 +152,9 @@ alias rand="tr -dc '01' < /dev/urandom | trim ; \
 #alias enc="gpg -e -a -r foo@duh.to -r 0xFF3E7D88647EBCDB -o ~/out.enc ${1}"
 #alias sha256="sha256sum"
 #alias sha512="sha512sum"
+#export HOMEBREW_CASK_OPTS=--require-sha
+#export HOMEBREW_NO_ANALYTICS=1
+#export HOMEBREW_NO_INSECURE_REDIRECT=1
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent

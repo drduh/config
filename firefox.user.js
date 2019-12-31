@@ -15,10 +15,10 @@
 //user_pref("browser.urlbar.suggest.history", false);  // do not suggest history
 //user_pref("dom.enable_performance", false);  // disable DOM timing; may break sites
 //user_pref("dom.serviceWorkers.enabled", false);  // disable service workers; may break sites
-//user_pref("dom.storage.enabled", false);  // disable DOM storage; may break sites
+//user_pref("dom.storage.enabled", false);  // disable DOM storage; will break sites
 //user_pref("dom.storageManager.enabled", false);  // disable storage; may break sites
 //user_pref("gfx.xrender.enabled", true);  // may improve performance
-//user_pref("javascript.enabled", false);  // disable javascript
+//user_pref("javascript.enabled", false);  // disable javascript; will break sites
 //user_pref("javascript.options.baselinejit", false);  // disable JS JIT; may break sites
 //user_pref("javascript.options.ion", false);  // disable JS Ion; may break sites
 //user_pref("layers.acceleration.disabled", true);  // disable hardware acceleration; performance hit
