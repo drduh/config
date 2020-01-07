@@ -1,0 +1,33 @@
+<!-- https://github.com/drduh/config/blob/master/lighttpd/index.html
+     Simple file uploader
+		 Put into /var/www and see upload.cgi
+-->
+<html><head><title>Upload File</title>
+<style type="text/css">
+  body {
+    background-color: #002b36;
+    color: #839496;
+    font-family: "Open Sans", "Helvetica Neue", 
+      "Helvetica", "Arial", "sans-serif";
+  }
+  div {
+    background-color: #073642;
+    border-radius: 0.5em;
+    margin: 1em auto;
+    padding: 2em;
+    width: 600px;
+  }
+  h1 {
+    font-size: 2em;
+    padding-bottom: 1em;
+  }
+</style></head><body><div>
+  <h1>Upload file</h1>
+  <form action="cgi-bin/upload.cgi"
+        method="POST"
+        enctype="multipart/form-data">
+    <input name="file" type="file">
+    <input name="submit" type="submit" value="Upload">
+  </form>
+  <hr><h1><a href="./upload/">Download files</a></h1>
+</div></body></html>
