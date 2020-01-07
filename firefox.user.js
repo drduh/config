@@ -1,4 +1,4 @@
-// https://github.com/drduh/config/blob/master/user.js
+// https://github.com/drduh/config/blob/master/firefox.user.js
 // https://github.com/ghacksuserjs/ghacks-user.js
 // https://github.com/pyllyukko/user.js
 //user_pref("browser.cache.disk.capacity", 0);  // disable disk cache

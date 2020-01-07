@@ -46,7 +46,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   # http://www.bgplookingglass.com/list-of-autonomous-system-numbers
   # https://github.com/drduh/config/tree/master/asns/*
   printf "Checking asns ..."
-  for nb in $(cat asns/*) ; do
+  for nb in $(grep -v "^#" asns/*) ; do
     printf " $nb"
     whois -h whois.radb.net !g$nb | tr " " "\n" | \
       grep -Eo "([0-9]{1,3}\.){3}[0-9]{1,3}\/[0-9]+" >> $custom

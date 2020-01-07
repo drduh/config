@@ -32,7 +32,8 @@ HEADER = """
   </style>
 </head><body><div>"""
 ERROR = """
-<h1>Error: %s</h1></body></html>"""
+<h1>Error: %s</h1>
+</div></body></html>"""
 SUCCESS = """
 <h1>Saved <a href="../upload/%s">%s</a></h1>
 <h2><a href="../index.html">Upload another file</a></h2>

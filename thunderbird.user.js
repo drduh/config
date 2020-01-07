@@ -1,4 +1,4 @@
-// https://github.com/drduh/config/blob/master/prefs.js
+// https://github.com/drduh/config/blob/master/thunderbird.user.js
 // https://www.enigmail.net/index.php/en/user-manual/advanced-operations
 //user_pref("mail.calendar-integration.opt-out", true);
 //user_pref("mail.inline_attachments", false);

@@ -1,10 +1,49 @@
+# https://github.com/drduh/config/blob/master/sudoers
 Defaults        env_reset
 Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 root    ALL=(ALL:ALL) ALL
 sysadm  ALL=(ALL:ALL) ALL
 
-Cmnd_Alias NP = /bin/dmesg, /bin/dmesg -wH, /bin/dmesg -wHT, /bin/mount /dev/*, /bin/umount /mnt*, /sbin/cryptsetup luksClose /dev/mapper/*, /sbin/cryptsetup luksOpen /dev/sd*, /sbin/dhclient en*, /sbin/dhclient wl*, /sbin/fdisk -l, /sbin/ip route add default via 192.168.1.1 dev wlp2s0, /sbin/wpa_supplicant -Dnl80211 -iwlp2s0 -cwpa.conf, /usr/bin/apt autoclean, /usr/bin/apt autoremove, /usr/bin/apt dist-upgrade, /usr/bin/apt update, /usr/bin/apt upgrade, /usr/bin/apt-get autoclean, /usr/bin/apt-get autoremove, /usr/bin/apt-get dist-upgrade, /usr/bin/apt-get update, /usr/bin/apt-get upgrade, /usr/bin/jmtpfs /mnt/usb, /usr/bin/lsof -Pni, /usr/bin/minicom -D /dev/ttyUSB0, /usr/bin/screen /dev/ttyUSB0 115200 8n1, /usr/bin/tail -f /var/log/dnsmasq, /usr/bin/tail -f /var/log/privoxy/logfile, /usr/bin/tee /sys/class/backlight/intel_backlight/brightness, /usr/local/bin/hostapd /etc/hostapd.conf, /usr/sbin/ntpdate -uv *, /usr/sbin/openvpn --config client.ovpn, /usr/sbin/shutdown -h now, /usr/sbin/service dnsmasq restart, /usr/sbin/service networking restart, /usr/sbin/service privoxy restart, /usr/sbin/service rng-tools restart
+Cmnd_Alias NP = \
+  /bin/dmesg, \
+  /bin/dmesg -wH, \
+  /bin/mount /dev/*, \
+  /bin/umount /mnt*, \
+  /sbin/cryptsetup luksClose /dev/mapper/*, \
+  /sbin/cryptsetup luksOpen /dev/sd*, \
+  /sbin/dhclient en*, \
+  /sbin/dhclient wl*, \
+  /sbin/fdisk -l, \
+  /sbin/ip route add default via 192.168.1.1 dev wlp2s0, \
+  /sbin/wpa_supplicant -Dnl80211 -iwlp2s0 -cwpa.conf, \
+  /usr/bin/apt autoclean, \
+  /usr/bin/apt autoremove, \
+  /usr/bin/apt dist-upgrade, \
+  /usr/bin/apt update, \
+  /usr/bin/apt upgrade, \
+  /usr/bin/apt-get autoclean, \
+  /usr/bin/apt-get autoremove, \
+  /usr/bin/apt-get dist-upgrade, \
+  /usr/bin/apt-get update, \
+  /usr/bin/apt-get upgrade, \
+  /usr/bin/jmtpfs /mnt/usb, \
+  /usr/bin/lsof -Pni, \
+  /usr/bin/minicom -D /dev/ttyUSB0, \
+  /usr/bin/screen /dev/ttyUSB0 115200 8n1, \
+  /usr/bin/tail -f /tmp/dnsmasq, \
+  /usr/bin/tail -f /var/log/dnsmasq, \
+  /usr/bin/tail -f /var/log/privoxy/logfile, \
+  /usr/bin/tee /sys/class/backlight/intel_backlight/brightness, \
+  /usr/local/bin/hostapd /etc/hostapd.conf, \
+  /usr/sbin/ntpdate -uv 192.168.1.1, \
+  /usr/sbin/openvpn --config client.ovpn, \
+  /usr/sbin/reboot now, \
+  /usr/sbin/service dnsmasq restart, \
+  /usr/sbin/service networking restart, \
+  /usr/sbin/service privoxy restart, \
+  /usr/sbin/service rng-tools restart, \
+  /usr/sbin/shutdown -h now
 
-#sysadm  ALL=(ALL) NOPASSWD:ALL
 sysadm  ALL=(ALL) NOPASSWD:NP
+#sysadm  ALL=(ALL) NOPASSWD:ALL
