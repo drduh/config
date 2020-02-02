@@ -120,6 +120,7 @@ wireshark
 xclip
 xdotool
 xorg
+yubikey-manager
 yubikey-personalization
 zlib1g-dev
 zsh
