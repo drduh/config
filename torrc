@@ -7,7 +7,8 @@ ORPort 9999
 ExtORPort auto
 ExitPolicy reject *:*
 BridgeRelay 1
-ServerTransportPlugin obfs4 exec /usr/local/bin/obfs4proxy
+#ServerTransportPlugin obfs4 exec /usr/local/bin/obfs4proxy
+ServerTransportPlugin obfs4 exec /usr/bin/obfs4proxy
 ServerTransportListenAddr obfs4 0.0.0.0:10022
 SocksPort 127.0.0.1:9049
 SocksPort 127.0.0.1:9050
