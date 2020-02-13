@@ -9,7 +9,7 @@ Cmnd_Alias NP = \
   /bin/dmesg, \
   /bin/dmesg -wH, \
   /bin/mount /dev/*, \
-  /bin/umount /mnt*, \
+  /bin/umount /mnt/*, \
   /sbin/cryptsetup luksClose /dev/mapper/*, \
   /sbin/cryptsetup luksOpen /dev/sd*, \
   /sbin/dhclient en*, \
@@ -41,6 +41,7 @@ Cmnd_Alias NP = \
   /usr/sbin/reboot now, \
   /usr/sbin/service dnsmasq restart, \
   /usr/sbin/service networking restart, \
+  /usr/sbin/service ntp restart, \
   /usr/sbin/service privoxy restart, \
   /usr/sbin/service rng-tools restart, \
   /usr/sbin/shutdown -h now

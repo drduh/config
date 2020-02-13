@@ -7,8 +7,8 @@ HISTFILE=~/.histfile
 HISTSIZE=200
 SAVEHIST=${HISTSIZE}
 LANG=en_US.UTF-8
-LC_ALL=C
-LC_CTYPE=${LC_ALL}
+export LC_ALL=C
+export LC_CTYPE=${LC_ALL}
 PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
 NETWORK="$(/sbin/ifconfig | head -n1 | awk -F: '{print $1}')"
@@ -63,7 +63,7 @@ alias ea="cat /proc/sys/kernel/random/entropy_avail"
 alias cr="chrome --enable-unveil --incognito --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
 alias ff="firefox --ProfileManager --no-remote"
 alias tb="thunderbird --ProfileManager --no-remote"
-alias feh="feh --draw-filename --recursive --scale-down --verbose"
+alias feh="feh --auto-rotate --draw-filename --recursive --scale-down --verbose"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --no-call-home --force-ipv4 --format 'best[height<=720]'"
 alias today="date +%F"
 alias now="date +%F-%H:%M:%S"
@@ -76,6 +76,9 @@ function dedupe {
   find "${@}" ! -empty -type f -exec md5sum {} + | \
     sort | uniq -w32 -dD
 }
+
+function domain () {
+  awk -F "." '{print ( $(NF-1)"."$(NF) )}' "${1}" }
 
 function gpg_restart {
   pkill gpg
@@ -121,7 +124,7 @@ function cert {
 
 function cidr {
   whois -h "whois.arin.net" -- \
-    "n + $(curl -s https://icanhazip.com)" | \
+    "n + $(curl -s https://icanhazip.com/)" | \
       grep "CIDR:" }
 
 function colours {
@@ -182,13 +185,21 @@ function fd {
 function gas {
   whois -h whois.radb.net '!g'${1} }
 
+function myip {
+  curl -sq "https://icanhazip.com/" }
+
 function pdf {
   mupdf -r 180 -CFDF6E3 "${1}" }
 
 function png2jpg {
-  for i in *.png ; do
-    f=${i%.*}
-    convert "$f.png" "$f.jpg" ; done }
+  for png in $(find . -type f -name "*.png") ; do
+    image=${png%.*}
+    convert "${image}.png" "${image}.jpg" ; done }
+
+function nonlocal () {
+  egrep -ve "^#|^255.255.255.255|^127.|^0.|^::1|^ff..::|^fe80::" "${1}" | \
+    egrep -e "[1,2]|::"
+}
 
 function rand {
   for item in '01' \
@@ -204,6 +215,11 @@ function rand_mac {
 function resize_ff {
   xdotool windowsize $(xdotool search --name firefox | tail -n1) \
     1366 768 }
+
+function reveal {
+  output=$(echo "${1}" | rev | cut -c16- | rev)
+  gpg --decrypt --output ${output} "${1}" \
+    && echo "${1} -> ${output}" }
 
 function secret {
   output=~/"${1}".$(date +%s).enc
@@ -261,7 +277,9 @@ path "/bin"
 
 #export HOMEBREW_CASK_OPTS=--require-sha
 #export HOMEBREW_NO_ANALYTICS=1
+#export HOMEBREW_NO_AUTO_UPDATE=1
 #export HOMEBREW_NO_INSECURE_REDIRECT=1
+#export GOPATH=~/go
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent

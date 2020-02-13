@@ -38,18 +38,17 @@ update_pkgs() {
     printf "Downloading Duo ... "
     curl -sLfO "https://dl.duosecurity.com/${duo_vers}"
   fi
-  keytool -printcert -jarfile ${duo_vers} | grep -q $DUO || fail "could not verify Duo"
+  keytool -printcert -jarfile ${duo_vers} | grep -q ${DUO} || fail "could not verify Duo"
   printf "${duo_file} complete\n"
-
 
   # Signal
   signal_vers=$(curl -s "https://updates.signal.org/android/latest.json" | grep_url)
   signal_file=$(printf $(basename ${signal_vers}) | cut -d '.' -f 1-3)
   if [[ ! -f ${signal_file}.apk ]] ; then
     printf "Downloading Signal ... "
-    curl -sLfO "https://dl.duosecurity.com/${duo_vers}"
+    curl -sLfO "${signal_vers}"
   fi
-  keytool -printcert -jarfile ${signal_file}.apk | grep -q $SIGNAL || fail "could not verify Signal"
+  keytool -printcert -jarfile ${signal_file}.apk | grep -q ${SIGNAL} || fail "could not verify Signal"
   printf "${signal_file} complete\n"
 
   # NetGuard
@@ -59,7 +58,7 @@ update_pkgs() {
     printf "Downloading NetGuard ... "
     curl -sLfO "https://github.com/M66B/NetGuard/releases/download/${ng_vers}/NetGuard-v${ng_vers}-release.apk"
   fi
-  keytool -printcert -jarfile ${ng_file}.apk | grep -q $NETGUARD || fail "could not verify NetGuard"
+  keytool -printcert -jarfile ${ng_file}.apk | grep -q ${NETGUARD} || fail "could not verify NetGuard"
   printf "${ng_file} complete\n"
 
   # NewPipe
@@ -69,7 +68,7 @@ update_pkgs() {
     printf "Downloading NewPipe ... "
     curl -sLfO "https://github.com/TeamNewPipe/NewPipe/releases/download/${np_vers}/NewPipe_${np_vers}.apk"
   fi
-  keytool -printcert -jarfile ${np_file}.apk | grep -q $NEWPIPE || fail "could not verify NewPipe"
+  keytool -printcert -jarfile ${np_file}.apk | grep -q ${NEWPIPE} || fail "could not verify NewPipe"
   printf "${np_file} complete\n"
 
   # Firefox
@@ -79,7 +78,7 @@ update_pkgs() {
     printf "Downloading Firefox ... "
     curl -sLfO ${ff_vers}
   fi
-  keytool -printcert -jarfile ${ff_file} | grep -q $FIREFOX || fail "could not verify Firefox"
+  keytool -printcert -jarfile ${ff_file} | grep -q ${FIREFOX} || fail "could not verify Firefox"
   printf "${ff_file} complete\n"
 
   # Firefox Beta
@@ -89,7 +88,7 @@ update_pkgs() {
     printf "Downloading Firefox Beta ... "
     curl -sLfO ${ff_beta_vers}
   fi
-  keytool -printcert -jarfile ${ff_beta_file} | grep -q $FIREFOX || fail "could not verify Firefox Beta"
+  keytool -printcert -jarfile ${ff_beta_file} | grep -q ${FIREFOX} || fail "could not verify Firefox Beta"
   printf "${ff_beta_file} complete\n"
 }
 
