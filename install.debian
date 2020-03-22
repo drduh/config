@@ -87,6 +87,7 @@ python3-pip
 qemu
 qemu-system-x86
 radare2
+redshift
 rename
 rfkill
 rng-tools

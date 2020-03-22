@@ -10,6 +10,7 @@
 
 #set -x
 
+dns=1.1.1.1
 custom=pf-custom.$(date +%F)
 threats=pf-threats.$(date +%F)
 zones=pf-zones.$(date +%F)
@@ -46,10 +47,13 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   # http://www.bgplookingglass.com/list-of-autonomous-system-numbers
   # https://github.com/drduh/config/tree/master/asns/*
   printf "Checking asns ..."
-  for nb in $(grep -v "^#" asns/*) ; do
-    printf " $nb"
-    whois -h whois.radb.net !g$nb | tr " " "\n" | \
-      grep -Eo "([0-9]{1,3}\.){3}[0-9]{1,3}\/[0-9]+" >> $custom
+  for asn in $(find asns -type f) ; do
+    printf "# $asn\n" >> $custom
+    for nb in $(grep -v "^#" $asn) ; do
+      printf " $nb"
+      whois -h whois.radb.net !g$nb | tr " " "\n" | \
+        grep -Eo "([0-9]{1,3}\.){3}[0-9]{1,3}\/[0-9]+" >> $custom
+    done
   done
   wc -l $custom
 
@@ -81,7 +85,7 @@ else
   for ws in $(/bin/ls asns/) ; do
     printf "$ws.com: "
     curl -v \
-      https://$(dig a $ws.com @1.1.1.1 +short|head -n1) 2>&1 | \
+      https://$(dig a $ws.com @$dns +short|head -n1) 2>&1 | \
         grep "Permission denied" || printf "BLOCK FAILED"
   done
 fi

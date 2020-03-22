@@ -24,7 +24,6 @@ Host *
   #ControlPath ~/.ssh/master-%r@%h:%p
   #ControlPersist 300
   #AddKeysToAgent yes
-  UseRoaming no
   HashKnownHosts yes
   VisualHostKey yes
   PasswordAuthentication no

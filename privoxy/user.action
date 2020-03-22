@@ -1,11 +1,6 @@
 # https://github.com/drduh/config/blob/master/user.action
 # https://www.privoxy.org/user-manual/actions-file.html
 # http://config.privoxy.org/show-url-info
-
-#{+hide-user-agent{Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0}}
-#{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0}}
-#/
-
 {{ alias }}
 +crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
 -crunch-all-cookies = -crunch-incoming-cookies -crunch-outgoing-cookies
@@ -14,7 +9,6 @@ allow-popups        = -filter{all-popups} -filter{unsolicited-popups}
 +block-as-image     = +block{Blocked image request.} +handle-as-image
 -block-as-image     = -block
 fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-referer -prevent-compression
-
 { fragile }
 .googlevideo.com
 .netflix.com
@@ -25,7 +19,6 @@ fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-r
 .ubuntu.com
 .vimeo.com
 .youtube.com
-
 { +block{html} }
 /(.*/)adhandler/
 /(.*/)partnerads.*.js
@@ -96,7 +89,6 @@ analytics.*.
 emailtrk.*
 log.pinterest.com
 pixel.*
-
 { +block{image} +handle-as-image }
 /.*1x1.*
 /.*beacon.*
@@ -135,13 +127,10 @@ pixel.*
 /img/social.*
 /imgad_.*
 /socialicons.*
-
 {+set-image-blocker{http://10.8.1.1/}}
 /.*.[jpg|jpeg|gif|png|tif|tiff]$
-
 { +redirect{s@google.com/amp/s/@@} }
 google.com/amp/s/.*
-
 { +redirect{s@http://@https://@} }
 .0x0.st
 .abc.net.au
@@ -497,6 +486,7 @@ man.openbsd.org
 wiki.debian.org
 www.debian.org
 www.openbsd.org
-
 { -redirect{android} }
 connectivitycheck.gstatic.com/generate_204
+#{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0}}
+#/

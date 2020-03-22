@@ -16,6 +16,7 @@ Cmnd_Alias NP = \
   /sbin/dhclient wl*, \
   /sbin/fdisk -l, \
   /sbin/ip route add default via 192.168.1.1 dev wlp2s0, \
+  /sbin/ip route add -net 10.8.1.1 netmask 255.255.255.0 gw 192.168.1.1, \
   /sbin/wpa_supplicant -Dnl80211 -iwlp2s0 -cwpa.conf, \
   /usr/bin/apt autoclean, \
   /usr/bin/apt autoremove, \

@@ -101,7 +101,7 @@ user_pref("browser.download.autohideButton", false);
 user_pref("browser.download.forbid_open_with", true);  // disable Open With dialog
 user_pref("browser.download.hide_plugins_without_extensions", false);
 user_pref("browser.download.manager.addToRecentDocs", false);  // disable adding recent documents
-user_pref("browser.download.manager.retention", 0);
+user_pref("browser.download.manager.retention", 0);  // disable download history
 user_pref("browser.download.useDownloadDir", false);
 user_pref("browser.fixup.alternate.enabled", false);  // disable invalid name assistance
 user_pref("browser.fixup.hide_user_pass", true);
@@ -165,7 +165,7 @@ user_pref("browser.search.widget.inNavBar", true);
 user_pref("browser.selfsupport.url", "");  // disable user rating telemetry
 user_pref("browser.send_pings", false);  // disable ping attributes
 user_pref("browser.send_pings.require_same_host", true);
-user_pref("browser.sessionhistory.max_entries", 10);
+user_pref("browser.sessionhistory.max_entries", 10);  // limit session history
 user_pref("browser.sessionstore.interval", 30000);
 user_pref("browser.sessionstore.max_tabs_undo", 0);  // disable recently closed tabs
 user_pref("browser.sessionstore.max_windows_undo", 0);

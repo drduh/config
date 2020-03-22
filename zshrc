@@ -189,7 +189,7 @@ function myip {
   curl -sq "https://icanhazip.com/" }
 
 function pdf {
-  mupdf -r 180 -CFDF6E3 "${1}" }
+  mupdf -r 180 -C FDF6E3 "${1}" }
 
 function png2jpg {
   for png in $(find . -type f -name "*.png") ; do
@@ -221,6 +221,11 @@ function reveal {
   gpg --decrypt --output ${output} "${1}" \
     && echo "${1} -> ${output}" }
 
+function rs {
+  rsync --verbose --archive --human-readable \
+    --progress --stats --ipv4 --compress \
+    --log-file=$(mktemp) "${@}" }
+
 function secret {
   output=~/"${1}".$(date +%s).enc
   gpg --encrypt --armor \
@@ -251,7 +256,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
   ]]
 }
 
@@ -274,6 +279,7 @@ path "/sbin"
 path "/bin"
 #path "/usr/games"
 #path "/usr/X11R6/bin"
+#path "~/go/bin"
 
 #export HOMEBREW_CASK_OPTS=--require-sha
 #export HOMEBREW_NO_ANALYTICS=1
