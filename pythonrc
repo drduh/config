@@ -1,0 +1,5 @@
+# https://github.com/drduh/config/blob/master/pythonrc
+from pprint import pprint as p
+import pdb
+true = True
+false = False

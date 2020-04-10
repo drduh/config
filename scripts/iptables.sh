@@ -6,10 +6,12 @@ INT=enp2s0
 DMZ=enp3s0
 LAB=enp4s0
 WIFI=wlp5s0
+#VIR=virbr0
 INT_NET=172.16.1.0/24
 DMZ_NET=10.8.1.0/24
 LAB_NET=10.4.1.0/24
 WIFI_NET=192.168.1.0/24
+#VIR_NET=192.168.122.229/24
 echo "Flushing rules"
 iptables -F
 iptables -t nat -F
@@ -37,6 +39,7 @@ iptables -I INPUT -i $INT -p udp -m udp --dport 67 -m conntrack --ctstate NEW -j
 iptables -I INPUT -i $DMZ -p udp -m udp --dport 67 -m conntrack --ctstate NEW -j ACCEPT
 iptables -I INPUT -i $LAB -p udp -m udp --dport 67 -m conntrack --ctstate NEW -j ACCEPT
 iptables -I INPUT -i $WIFI -p udp -m udp --dport 67 -m conntrack --ctstate NEW -j ACCEPT
+#iptables -I INPUT -i $VIR -p udp -m udp --dport 67 -m conntrack --ctstate NEW -j ACCEPT
 #echo "Allow NTP"
 #iptables -I INPUT -i $INT -p udp -m udp --dport 123 -m conntrack --ctstate NEW -j ACCEPT
 #iptables -I INPUT -i $DMZ -p udp -m udp --dport 123 -m conntrack --ctstate NEW -j ACCEPT
@@ -90,12 +93,14 @@ iptables -A OUTPUT -o $INT -d $INT_NET -j ACCEPT
 iptables -A OUTPUT -o $DMZ -d $DMZ_NET -j ACCEPT
 iptables -A OUTPUT -o $LAB -d $LAB_NET -j ACCEPT
 iptables -A OUTPUT -o $WIFI -d $WIFI_NET -j ACCEPT
+#iptables -A OUTPUT -o $VIR -d $VIR_NET -j ACCEPT
 echo "Enable network address translation"
 iptables -t nat -A POSTROUTING -o $EXT -j MASQUERADE
 iptables -A FORWARD -o $EXT -i $INT -s $INT_NET -m conntrack --ctstate NEW -j ACCEPT
 iptables -A FORWARD -o $EXT -i $DMZ -s $DMZ_NET -m conntrack --ctstate NEW -j ACCEPT
 iptables -A FORWARD -o $EXT -i $LAB -s $LAB_NET -m conntrack --ctstate NEW -j ACCEPT
 iptables -A FORWARD -o $EXT -i $WIFI -s $WIFI_NET -m conntrack --ctstate NEW -j ACCEPT
+#iptables -A FORWARD -o $EXT -i $VIR -s $VIR_NET -m conntrack --ctstate NEW -j ACCEPT
 #iptables -t mangle -A POSTROUTING -j TTL --ttl-set 65
 echo "Do not reply with Destination Unreachable messages"
 iptables -A OUTPUT -p icmp --icmp-type destination-unreachable -j DROP

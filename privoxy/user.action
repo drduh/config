@@ -140,6 +140,8 @@ google.com/amp/s/.*
 .aexp-static.com
 .alternet.org
 .amazon.com
+.amazonaws.com
+.amd.com
 .americanexpress.com
 .android.com
 .answers.com
@@ -160,8 +162,8 @@ google.com/amp/s/.*
 .bbc.com
 .bbc.co.uk
 .bing.com
-.bitbucket.org
 .bit.ly
+.bitbucket.org
 .blogblog.com
 .blogger.com
 .bloglovin.com
@@ -201,9 +203,9 @@ google.com/amp/s/.*
 .dailycaller.com
 .db.tt
 .dd-wrt.com
-.debian-administration.org
 .debian.net
 .debianforum.de
+.debian-administration.org
 .delta.com
 .dhs.gov
 .dropbox.com
@@ -211,6 +213,7 @@ google.com/amp/s/.*
 .dropboxteam.com
 .duckduckgo.com
 .ebay.com
+.ebaystatic.com
 .economist.com
 .edgekey.net
 .edx.org
@@ -316,6 +319,7 @@ google.com/amp/s/.*
 .marriott.com
 .marshalls.com
 .mathoverflow.com
+.matrix.org
 .media.tumblr.com
 .medium.com
 .meetup.com
@@ -370,14 +374,13 @@ google.com/amp/s/.*
 .redditmedia.com
 .redditstatic.com
 .reddituploads.com
-.reddit-image.s3.amazonaws.com
 .redfin.com
 .redhat.com
+.rei.com
 .researchgate.net
 .reuters.com
 .rottentomatoes.com
 .rust-lang.org
-.s3.amazonaws.com
 .salesforce.com
 .schwab.com
 .scribd.com
@@ -388,9 +391,9 @@ google.com/amp/s/.*
 .shodan.io
 .shopify.com
 .signal.org
+.slack.com
 .slack-edge.com
 .slack-imgs.com
-.slack.com
 .slideshare.net
 .smh.com.au
 .soundcloud.com
@@ -411,6 +414,8 @@ google.com/amp/s/.*
 .superuser.com
 .symantec.com
 .t.co
+.tableau.com
+.tableausoftware.com
 .teamspeak.com
 .techdirt.com
 .theguardian.com
@@ -445,7 +450,6 @@ google.com/amp/s/.*
 .virustotal.com
 .vsco.co
 .w.org
-.wp.org
 .w3.org
 .washingtonpost.com
 .weather.gov
@@ -465,6 +469,7 @@ google.com/amp/s/.*
 .wordpress.com
 .wordpress.org
 .wp.com
+.wp.org
 .wsj.com
 .xfinity.com
 .yahoo.com
@@ -479,6 +484,7 @@ google.com/amp/s/.*
 .zappos.com
 .zillow.com
 .zillowstatic.com
+.zlcdn.com
 cdn.openbsd.org
 cvsweb.openbsd.org
 ftp.openbsd.org

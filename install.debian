@@ -16,6 +16,7 @@ curl
 dirmngr
 dnsmasq
 dnsutils
+evince
 exiftool
 feh
 file

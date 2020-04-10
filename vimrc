@@ -28,6 +28,7 @@ set linebreak                   " break on breakat chars
 set magic                       " magic search strings
 set noeol                       " no newline at eof
 set noerrorbells                " disable error bells
+set nomodeline                  " disable mode lines
 set nostartofline               " do not reset cursor to line start when moving
 set number                      " enable line numbers
 set paste                       " always use paste mode

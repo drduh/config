@@ -6,9 +6,16 @@ autoload -U compinit && compinit
 HISTFILE=~/.histfile
 HISTSIZE=200
 SAVEHIST=${HISTSIZE}
-LANG=en_US.UTF-8
-export LC_ALL=C
-export LC_CTYPE=${LC_ALL}
+LANG="en_US.UTF-8"
+export LC_ADDRESS=${LANG}
+export LC_ALL=${LANG}
+export LC_CTYPE=${LANG}
+export LC_NAME=${LANG}
+export LC_MONETARY=${LANG}
+export LC_PAPER=${LANG}
+export LC_TIME=${LANG}
+export LESSHISTFILE=-
+export LESSSECURE=1
 PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
 NETWORK="$(/sbin/ifconfig | head -n1 | awk -F: '{print $1}')"
@@ -256,7 +263,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
   ]]
 }
 
@@ -286,6 +293,7 @@ path "/bin"
 #export HOMEBREW_NO_AUTO_UPDATE=1
 #export HOMEBREW_NO_INSECURE_REDIRECT=1
 #export GOPATH=~/go
+#export PYTHONSTARTUP="$HOME/.pythonrc"
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent
