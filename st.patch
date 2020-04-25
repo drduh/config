@@ -107,4 +107,3 @@
 +  -ftrapv -flto -fvisibility=hidden
 +
 +CC = cc
-

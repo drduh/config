@@ -1,22 +1,20 @@
 # https://github.com/drduh/config/blob/master/sudoers
-Defaults        env_reset
-Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Defaults env_reset
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-root    ALL=(ALL:ALL) ALL
-sysadm  ALL=(ALL:ALL) ALL
+root ALL=(ALL:ALL) ALL
+sysadm ALL=(ALL:ALL) ALL
 
 Cmnd_Alias NP = \
   /bin/dmesg, \
   /bin/dmesg -wH, \
-  /bin/mount /dev/*, \
-  /bin/umount /mnt/*, \
+  /bin/mount /dev/[a-z0-9]*, \
+  /bin/umount /mnt/[a-z]*, \
   /sbin/cryptsetup luksClose /dev/mapper/*, \
   /sbin/cryptsetup luksOpen /dev/sd*, \
-  /sbin/dhclient en*, \
-  /sbin/dhclient wl*, \
+  /sbin/dhclient [a-z0-9]*, \
   /sbin/fdisk -l, \
   /sbin/ip route add default via 192.168.1.1 dev wlp2s0, \
-  /sbin/ip route add -net 10.8.1.1 netmask 255.255.255.0 gw 192.168.1.1, \
   /sbin/wpa_supplicant -Dnl80211 -iwlp2s0 -cwpa.conf, \
   /usr/bin/apt autoclean, \
   /usr/bin/apt autoremove, \
@@ -40,6 +38,7 @@ Cmnd_Alias NP = \
   /usr/sbin/ntpdate -uv 192.168.1.1, \
   /usr/sbin/openvpn --config client.ovpn, \
   /usr/sbin/reboot now, \
+  /usr/sbin/route add -net 10.8.1.1 netmask 255.255.255.0 gw 192.168.1.1, \
   /usr/sbin/service dnsmasq restart, \
   /usr/sbin/service networking restart, \
   /usr/sbin/service ntp restart, \
@@ -47,5 +46,5 @@ Cmnd_Alias NP = \
   /usr/sbin/service rng-tools restart, \
   /usr/sbin/shutdown -h now
 
-sysadm  ALL=(ALL) NOPASSWD:NP
-#sysadm  ALL=(ALL) NOPASSWD:ALL
+sysadm ALL=(ALL) NOPASSWD:NP
+#sysadm ALL=(ALL) NOPASSWD:ALL

@@ -10,7 +10,7 @@ set -o nounset
 set -o pipefail
 
 lineagedir="./update_verifier/"
-ostypes="angler sailfish"
+ostypes="sailfish"
 
 DUO="97:FC:DB:FF:C4:F3:0C:C3:14:1A:76:D7:17:9A:FB:42:97:4B:79:76:D6:8E:B0:AA:49:7C:12:E5:26:52:66:13"
 SIGNAL="29:F3:4E:5F:27:F2:11:B4:24:BC:5B:F9:D6:71:62:C0:EA:FB:A2:DA:35:AF:35:C1:64:16:FC:44:62:76:BA:26"

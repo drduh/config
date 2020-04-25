@@ -3,6 +3,16 @@ umask 077
 autoload -U colors && colors
 autoload -U compinit && compinit
 
+bindkey "^[[1;5C" vi-forward-word
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;5D" vi-backward-word
+bindkey "^[[1;3D" backward-word
+
+PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
+SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
+NETWORK="$(/sbin/ifconfig | head -n1 | awk -F: '{print $1}')"
+ROOT="$(command -v sudo || command -v doas)"
+UPLOAD="http://192.168.1.1/cgi-bin/upload.cgi"
 HISTFILE=~/.histfile
 HISTSIZE=200
 SAVEHIST=${HISTSIZE}
@@ -16,11 +26,6 @@ export LC_PAPER=${LANG}
 export LC_TIME=${LANG}
 export LESSHISTFILE=-
 export LESSSECURE=1
-PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
-SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
-NETWORK="$(/sbin/ifconfig | head -n1 | awk -F: '{print $1}')"
-ROOT="$(command -v sudo || command -v doas)"
-UPLOAD="http://192.168.1.1/cgi-bin/upload.cgi"
 
 setopt alwaystoend
 setopt autocd
@@ -49,6 +54,7 @@ zstyle ":completion:*" list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ":completion:*" menu select=long-list select=0
 zstyle ":completion:*" use-cache on
 zstyle ":completion:*" verbose yes
+zstyle ":completion:*:kill:*" command "ps -u $USER -o pid,%cpu,tty,cputime,cmd"
 
 alias -g H="| head"
 alias -g L="| less"
@@ -63,17 +69,20 @@ alias v="vim -p"
 alias md="mkdir -p"
 alias cp="cp -i"
 alias mv="mv -i"
+alias p="python3"
 alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
-alias ea="cat /proc/sys/kernel/random/entropy_avail"
 alias cr="chrome --enable-unveil --incognito --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
-alias ff="firefox --ProfileManager --no-remote"
-alias tb="thunderbird --ProfileManager --no-remote"
+alias ea="cat /proc/sys/kernel/random/entropy_avail"
 alias feh="feh --auto-rotate --draw-filename --recursive --scale-down --verbose"
+alias ff="firefox --ProfileManager --no-remote"
+alias grep="grep --text --color"
+alias tb="thunderbird --ProfileManager --no-remote"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --no-call-home --force-ipv4 --format 'best[height<=720]'"
-alias today="date +%F"
 alias now="date +%F-%H:%M:%S"
+alias today="date +%F"
+alias td="mkdir $(today) ; cd $(today)"
 
 function .. { cd ".." ; }
 function ... { cd "../.." ; }
@@ -95,7 +104,8 @@ function gpg_restart {
 
 function lock {
   date
-  (sleep 1 ; slock) &
+  xhost &>/dev/null || return
+  (sleep 1 ; slock) 2>/dev/null &
   sleep 1 ; systemctl suspend }
 
 function grep_ip {
@@ -263,7 +273,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
   ]]
 }
 

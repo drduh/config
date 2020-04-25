@@ -1,5 +1,7 @@
 # https://github.com/drduh/config/blob/master/pythonrc
 from pprint import pprint as p
+import urllib as u
+import base64
 import pdb
 true = True
 false = False

@@ -4,19 +4,24 @@
 import os
 import random
 import string
+import sys
 
-def main():
+def main(argv):
     """Find and rename files in path."""
-    path = "/mnt/sshfs/files/"
+    path = argv[1]
 
     for item in os.listdir(path):
         rand = "".join(
             random.sample(
-                string.ascii_lowercase, 20)) + \
+                string.ascii_lowercase, 8)) + \
                 os.path.splitext(item)[1]
 
         print("{} > {}".format(item, rand))
-        os.rename(path + item, path + rand)
+        if not os.path.isfile(path + rand):
+            os.rename(os.path.join(path, item),
+                      os.path.join(path, rand))
+        else:
+            print(path + rand, "already exists!")
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)
