@@ -4,7 +4,9 @@
 #address=/mozilla.com/
 #address=/mozilla.net/
 #address=/mozilla.org/
+#address=/thunderbird.net/
 address=/accounts.firefox.com/
+address=/aus5.mozilla.org/
 address=/blocked.cdn.mozilla.net/
 address=/blocklist.addons.mozilla.org/
 address=/crash-stats.mozilla.com/

@@ -35,6 +35,7 @@ Cmnd_Alias NP = \
   /usr/bin/tail -f /var/log/privoxy/logfile, \
   /usr/bin/tee /sys/class/backlight/intel_backlight/brightness, \
   /usr/local/bin/hostapd /etc/hostapd.conf, \
+  /usr/sbin/dmidecode -s bios-version, \
   /usr/sbin/ntpdate -uv 192.168.1.1, \
   /usr/sbin/openvpn --config client.ovpn, \
   /usr/sbin/reboot now, \

@@ -13,19 +13,29 @@ SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
 NETWORK="$(/sbin/ifconfig | head -n1 | awk -F: '{print $1}')"
 ROOT="$(command -v sudo || command -v doas)"
 UPLOAD="http://192.168.1.1/cgi-bin/upload.cgi"
-HISTFILE=~/.histfile
+HISTFILE="${HOME}/.histfile"
 HISTSIZE=200
 SAVEHIST=${HISTSIZE}
+
 LANG="en_US.UTF-8"
 export LC_ADDRESS=${LANG}
 export LC_ALL=${LANG}
+export LC_COLLATE=${LANG}
 export LC_CTYPE=${LANG}
-export LC_NAME=${LANG}
+export LC_IDENTIFICATION=${LANG}
+export LC_MEASUREMENT=${LANG}
+export LC_MESSAGES=${LANG}
 export LC_MONETARY=${LANG}
+export LC_NAME=${LANG}
 export LC_PAPER=${LANG}
+export LC_TELEPHONE=${LANG}
 export LC_TIME=${LANG}
+
+export LESS="-FRX"
+export LESSCHARSET="utf-8"
 export LESSHISTFILE=-
 export LESSSECURE=1
+export PYTHONSTARTUP="${HOME}/.pythonrc"
 
 setopt alwaystoend
 setopt autocd
@@ -44,7 +54,7 @@ setopt noclobber
 setopt nullglob
 
 zstyle ":completion:*" auto-description "specify %d"
-zstyle ":completion:*" cache-path ~/.zsh_cache
+zstyle ":completion:*" cache-path "${HOME}/.zsh_cache"
 zstyle ":completion:*" completer _expand _complete _correct _approximate
 zstyle ":completion:*" file-sort modification reverse
 zstyle ":completion:*" format "completing %d"
@@ -54,7 +64,7 @@ zstyle ":completion:*" list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ":completion:*" menu select=long-list select=0
 zstyle ":completion:*" use-cache on
 zstyle ":completion:*" verbose yes
-zstyle ":completion:*:kill:*" command "ps -u $USER -o pid,%cpu,tty,cputime,cmd"
+zstyle ":completion:*:kill:*" command "ps -u ${USER} -o pid,%cpu,tty,cputime,cmd"
 
 alias -g H="| head"
 alias -g L="| less"
@@ -73,16 +83,26 @@ alias p="python3"
 alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
+alias bios="${ROOT} dmidecode -s bios-version"
 alias cr="chrome --enable-unveil --incognito --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
+alias dif="diff"
 alias ea="cat /proc/sys/kernel/random/entropy_avail"
 alias feh="feh --auto-rotate --draw-filename --recursive --scale-down --verbose"
 alias ff="firefox --ProfileManager --no-remote"
+alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --text --color"
 alias tb="thunderbird --ProfileManager --no-remote"
-alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --no-call-home --force-ipv4 --format 'best[height<=720]'"
+alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4 --format 'best[height<=720]'"
+alias yt_max="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4"
+
 alias now="date +%F-%H:%M:%S"
 alias today="date +%F"
 alias td="mkdir $(today) ; cd $(today)"
+
+alias x230_read_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r bottom.rom.$(today)"
+alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r top.rom.$(today)"
+alias x230_write_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-bottom.rom"
+alias x230_write_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-top.rom"
 
 function .. { cd ".." ; }
 function ... { cd "../.." ; }
@@ -90,8 +110,7 @@ function .... { cd "../../.." ; }
 
 function dedupe {
   find "${@}" ! -empty -type f -exec md5sum {} + | \
-    sort | uniq -w32 -dD
-}
+    sort | uniq -w32 -dD }
 
 function domain () {
   awk -F "." '{print ( $(NF-1)"."$(NF) )}' "${1}" }
@@ -210,7 +229,7 @@ function pdf {
 
 function png2jpg {
   for png in $(find . -type f -name "*.png") ; do
-    image=${png%.*}
+    image="${png%.*}"
     convert "${image}.png" "${image}.jpg" ; done }
 
 function nonlocal () {
@@ -230,8 +249,8 @@ function rand_mac {
   openssl rand -hex 6 | sed "s/\(..\)/\1:/g; s/.$//" }
 
 function resize_ff {
-  xdotool windowsize $(xdotool search --name firefox | tail -n1) \
-    1366 768 }
+  xdotool windowsize \
+    $(xdotool search --name firefox | tail -n1) 1366 768 }
 
 function reveal {
   output=$(echo "${1}" | rev | cut -c16- | rev)
@@ -244,7 +263,7 @@ function rs {
     --log-file=$(mktemp) "${@}" }
 
 function secret {
-  output=~/"${1}".$(date +%s).enc
+  output="${HOME}/$(basename ${1}).$(date +%F).enc"
   gpg --encrypt --armor \
     --output ${output} \
     -r 0xFF3E7D88647EBCDB \
@@ -273,7 +292,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
   ]]
 }
 
@@ -296,18 +315,18 @@ path "/sbin"
 path "/bin"
 #path "/usr/games"
 #path "/usr/X11R6/bin"
-#path "~/go/bin"
+#path "${HOME}/go/bin"
 
+#alias gpg="gpg2"
+#alias sha256="sha256sum"
+#alias sha512="sha512sum"
 #export HOMEBREW_CASK_OPTS=--require-sha
 #export HOMEBREW_NO_ANALYTICS=1
 #export HOMEBREW_NO_AUTO_UPDATE=1
 #export HOMEBREW_NO_INSECURE_REDIRECT=1
-#export GOPATH=~/go
-#export PYTHONSTARTUP="$HOME/.pythonrc"
+#export GOPATH="${HOME}/go"
+#export GOBIN="${HOME}/go/bin"
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent
 #gpg-connect-agent updatestartuptty /bye >/dev/null
-#alias gpg="gpg2"
-#alias sha256="sha256sum"
-#alias sha512="sha512sum"

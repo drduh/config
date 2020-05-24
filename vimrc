@@ -30,6 +30,7 @@ set noeol                       " no newline at eof
 set noerrorbells                " disable error bells
 set nomodeline                  " disable mode lines
 set nostartofline               " do not reset cursor to line start when moving
+set noswapfile                  " no swap files
 set number                      " enable line numbers
 set paste                       " always use paste mode
 set relativenumber              " use line numbers relative to cursor

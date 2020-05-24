@@ -1,5 +1,3 @@
-# config
-
 This repository contains miscellaneous scripts and program configuration files used in:
 
 - [Debian-Privacy-Server-Guide](https://github.com/drduh/Debian-Privacy-Server-Guide)

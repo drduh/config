@@ -146,6 +146,7 @@ google.com/amp/s/.*
 .android.com
 .answers.com
 .apache.org
+.appimage.org
 .apple.com
 .archive.is
 .archive.org
@@ -216,6 +217,7 @@ google.com/amp/s/.*
 .ebaystatic.com
 .economist.com
 .edgekey.net
+.editmysite.com
 .edx.org
 .eff.org
 .emacswiki.org
@@ -228,6 +230,8 @@ google.com/amp/s/.*
 .fbinaa.org
 .fda.gov
 .fedex.com
+.ffmpeg.org
+.flicker.com
 .flickr.com
 .flickr.net
 .foreignpolicy.com
@@ -294,6 +298,7 @@ google.com/amp/s/.*
 .jhu.edu
 .jobvite.com
 .jquery.com
+.jsononline.com
 .jstor.org
 .justice.gov
 .kde.org
@@ -306,6 +311,7 @@ google.com/amp/s/.*
 .letsencrypt.org
 .lighttpd.net
 .linuxforums.org
+.litmos.com
 .lkml.org
 .llvm.org
 .loc.gov
@@ -323,6 +329,7 @@ google.com/amp/s/.*
 .media.tumblr.com
 .medium.com
 .meetup.com
+.metafilter.com
 .minus.com
 .mit.edu
 .morganstanley.com
@@ -359,6 +366,8 @@ google.com/amp/s/.*
 .paypal.com
 .pcengines.ch
 .pcpartpicker.com
+.phoronix.com
+.photobucket.com
 .phys.org
 .phys.uwm.edu
 .pinimg.com
@@ -386,6 +395,8 @@ google.com/amp/s/.*
 .rottentomatoes.com
 .rust-lang.org
 .salesforce.com
+.samsung.com
+.scene7.com
 .schwab.com
 .scribd.com
 .scribdassets.com
@@ -403,6 +414,7 @@ google.com/amp/s/.*
 .soundcloud.com
 .sourceforge.net
 .spacetelescope.org
+.sparkpostmail.com
 .splunk.com
 .squarespace.com
 .squarespace-cdn.com
@@ -455,6 +467,8 @@ google.com/amp/s/.*
 .vsco.co
 .w.org
 .w3.org
+.walmart.com
+.walmartimages.com
 .washingtonpost.com
 .weather.gov
 .wellsfargo.com
