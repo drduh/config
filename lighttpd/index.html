@@ -1,6 +1,6 @@
 <!-- https://github.com/drduh/config/blob/master/lighttpd/index.html
      Simple file uploader
-     Put into /var/www and see upload.cgi
+     Put into /var/www and see upload.py
 -->
 <html><head><title>Upload File</title>
 <style type="text/css">
@@ -23,7 +23,7 @@
   }
 </style></head><body><div>
   <h1>Upload file</h1>
-  <form action="cgi-bin/upload.cgi"
+  <form action="cgi-bin/upload.py"
         method="POST"
         enctype="multipart/form-data">
     <input name="file" type="file">

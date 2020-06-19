@@ -1,0 +1,18 @@
+# https://github.com/drduh/config/blob/master/gitconfig
+[user]
+	name = drduh
+	email = github@duh.to
+	signingkey = "0xFF3E7D88647EBCDB"
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	pager = less -XRF
+[remote "origin"]
+	#url = https://github.com/drduh/config
+	url = git@github.com:drduh/config.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master

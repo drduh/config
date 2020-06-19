@@ -10,9 +10,13 @@ bindkey "^[[1;3D" backward-word
 
 PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
+NOW="$(date +%F-%H:%M:%S)"
+TODAY="$(date +%F)"
+TS="$(date +%s)"
 NETWORK="$(/sbin/ifconfig | head -n1 | awk -F: '{print $1}')"
 ROOT="$(command -v sudo || command -v doas)"
-UPLOAD="http://192.168.1.1/cgi-bin/upload.cgi"
+DOWNLOAD="http://192.168.1.1/upload/"
+UPLOAD="http://192.168.1.1/cgi-bin/upload.py"
 HISTFILE="${HOME}/.histfile"
 HISTSIZE=200
 SAVEHIST=${HISTSIZE}
@@ -70,6 +74,7 @@ alias -g H="| head"
 alias -g L="| less"
 alias -g S="| sort"
 alias -g T="| tail"
+alias -g V="| vim -"
 alias -g XC="| xclip -i"
 alias -g XP="| xclip -o"
 alias l="ls -ltrhsa"
@@ -91,16 +96,15 @@ alias feh="feh --auto-rotate --draw-filename --recursive --scale-down --verbose"
 alias ff="firefox --ProfileManager --no-remote"
 alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --text --color"
+alias mnt="${ROOT} mount -o uid=1000 ${1}"
 alias tb="thunderbird --ProfileManager --no-remote"
+alias td="mkdir ${TODAY} ; cd ${TODAY}"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4 --format 'best[height<=720]'"
 alias yt_max="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4"
+alias vm="virt-manager"
 
-alias now="date +%F-%H:%M:%S"
-alias today="date +%F"
-alias td="mkdir $(today) ; cd $(today)"
-
-alias x230_read_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r bottom.rom.$(today)"
-alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r top.rom.$(today)"
+alias x230_read_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r bottom.rom.${TODAY}"
+alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r top.rom.${TODAY}"
 alias x230_write_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-bottom.rom"
 alias x230_write_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-top.rom"
 
@@ -143,6 +147,9 @@ function adbpkg {
           awk -F "=" '{print $2}'
   done > adb.pkg.$(date +%F) }
 
+function backup () {
+  cp -v "${1}" "${1}.${TS}" }
+
 function bat {
   upower -i /org/freedesktop/UPower/devices/battery_BAT0 | \
     grep -E "state|to\ full|percentage" }
@@ -151,44 +158,51 @@ function calc {
   awk "BEGIN { print "$*" }" }
 
 function cert {
-  openssl req -new -newkey rsa:4096 \
-    -subj "/CN=$(date +%s)" \
-      -sha512 -days 8 -nodes -x509 \
-        -keyout s.pem -out s.crt
-  openssl x509 -in s.crt -noout \
-    -subject -issuer -dates -fingerprint }
+  cn="${1:-${TS}}"
+  expire="${2:-8}"
+  openssl req -new \
+    -newkey rsa:4096 -nodes \
+    -subj "/CN=${cn}" \
+    -x509 -sha512 -days "${expire}" \
+    -keyout "s.${cn}.pem" -out "s.${cn}.crt"
+  openssl x509 -in "s.${cn}.crt" -noout \
+    -subject -issuer -dates -serial
+  for ft in \-sha1 \-sha256 \-sha512 ; do \
+    openssl x509 -in "s.${cn}.crt" -noout \
+    -fingerprint ${ft} | tr -d ":" ; done }
 
 function cidr {
   whois -h "whois.arin.net" -- \
-    "n + $(curl -s https://icanhazip.com/)" | \
-      grep "CIDR:" }
+  "n + $(curl -s https://icanhazip.com/)" | \
+    grep "CIDR:" }
 
 function colours {
-  for i in {0..255} ; do
-    printf "\x1b[38;5;${i}mcolour${i}\n" ; done }
+  for i in {255..001} ; do \
+    printf "\x1b[38;5;${i}m${i}\n" | \
+    tr "\n" " " ; done | fold -w 255 }
 
 function convert_secs {
   ((h=${1}/3600)) ; ((m=(${1}%3600)/60)) ; ((s=${1}%60))
   printf "%02d:%02d:%02d\n" ${h} ${m} ${s} }
 
 function dump_arp {
-  ${ROOT} tcpdump -eni ${NETWORK} -w arp-$(now).pcap \
+  ${ROOT} tcpdump -eni ${NETWORK} -w arp-${NOW}.pcap \
     "ether proto 0x0806" }
 
 function dump_icmp {
-  ${ROOT} tcpdump -ni ${NETWORK} -w icmp-$(now).pcap \
+  ${ROOT} tcpdump -ni ${NETWORK} -w icmp-${NOW}.pcap \
     "icmp" }
 
 function dump_pflog {
-  ${ROOT} tcpdump -ni pflog0 -w pflog-$(now).pcap \
+  ${ROOT} tcpdump -ni pflog0 -w pflog-${NOW}.pcap \
     "not icmp6 and not host ff02::16 and not host ff02::d" }
 
 function dump_syn {
-  ${ROOT} tcpdump -ni ${NETWORK} -w syn-$(now).pcap \
+  ${ROOT} tcpdump -ni ${NETWORK} -w syn-${NOW}.pcap \
     "tcp[13] & 2 != 0" }
 
 function dump_udp {
-  ${ROOT} tcpdump -ni ${NETWORK} -w udp-$(now).pcap \
+  ${ROOT} tcpdump -ni ${NETWORK} -w udp-${NOW}.pcap \
     "udp and not port 443" }
 
 function dump_dns {
@@ -209,7 +223,7 @@ function dump_ssl {
         -e x509sat.teletexString \
           -Eseparator=, }
 
-function e {
+function e {  # appx bits of entropy: e <chars> <length>
   awk -v c=${1} -v l=${2} "BEGIN { print log(c^l) }" }
 
 function f {
@@ -218,7 +232,7 @@ function f {
 function fd {
   find . -iname "*${1}*" -type d }
 
-function gas {
+function gas {  # get CIDRs for AS number
   whois -h whois.radb.net '!g'${1} }
 
 function myip {
@@ -242,8 +256,8 @@ function rand {
     '[:digit:]' '[:upper:]' \
     '[:xdigit:]' '[:alnum:]' '[:graph:]' ; do \
       tr -dc "${item}" < /dev/urandom | \
-        fold -w 40 | head -n 5 | \
-          sed "-es/./ /"{1..40..10} ; done }
+      fold -w 80 | head -n 3 | \
+      sed "-es/./ /"{1..80..20} ; done }
 
 function rand_mac {
   openssl rand -hex 6 | sed "s/\(..\)/\1:/g; s/.$//" }
@@ -262,7 +276,7 @@ function rs {
     --progress --stats --ipv4 --compress \
     --log-file=$(mktemp) "${@}" }
 
-function secret {
+function secret {  # list preferred id last
   output="${HOME}/$(basename ${1}).$(date +%F).enc"
   gpg --encrypt --armor \
     --output ${output} \
@@ -280,6 +294,9 @@ function top_history {
     for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
       column -c3 -s " " -t | sort -nr | nl |  head -n25 }
 
+function download () {
+  curl -O ${DOWNLOAD}/"${@}" }
+
 function upload {
   curl --http1.0 -F "file=@${@}" ${UPLOAD} }
 
@@ -292,7 +309,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|yt|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|download|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mnt|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|ykman|yt|./pwd.sh|./purse.sh)
   ]]
 }
 

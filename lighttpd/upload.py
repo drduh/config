@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# https://github.com/drduh/config/blob/master/lighttpd/upload.cgi
+# https://github.com/drduh/config/blob/master/lighttpd/upload.py
 # Simple file uploader
 # Put into /var/www/cgi-bin/, make executable and enable CGI
 

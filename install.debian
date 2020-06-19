@@ -9,6 +9,7 @@ auditd
 autoconf
 binwalk
 bison
+blueman
 build-essential
 chirp
 cmake
@@ -26,6 +27,7 @@ file
 firejail
 flashrom
 flex
+fonts-inconsolata
 foremost
 fswebcam
 gcc
@@ -50,6 +52,7 @@ libncurses5-dev
 libnl-3-dev
 libnl-genl-3-dev
 libpcsclite-dev
+libreoffice
 libsodium-dev
 libssl-dev
 libusb-dev
@@ -80,6 +83,7 @@ pciutils
 pciutils-dev
 pcscd
 pcsc-tools
+pdftk
 pkg-config
 poppler-utils
 printer-driver-brlaser
@@ -115,8 +119,10 @@ sudo
 swig
 tcpdump
 tcpflow
+thunderbird
 tmux
 tor
+torbrowser-launcher
 traceroute
 tree
 tshark
@@ -127,8 +133,10 @@ virt-manager
 wget
 whois
 wireshark
+xbacklight
 xclip
 xdotool
+xfce4-power-manager
 xorg
 yubikey-manager
 yubikey-personalization

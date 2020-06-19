@@ -1,0 +1,3 @@
+# https://github.com/drduh/config/blob/master/firejail/vlc.local
+# ~/.config/firejail/vlc.local
+net none
