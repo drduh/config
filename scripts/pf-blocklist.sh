@@ -47,7 +47,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   # http://www.bgplookingglass.com/list-of-autonomous-system-numbers
   # https://github.com/drduh/config/tree/master/asns/*
   printf "Checking asns ..."
-  for asn in $(find asns -type f) ; do
+  for asn in $(find ../asns -type f) ; do
     printf "# $asn\n" >> $custom
     for nb in $(grep -v "^#" $asn) ; do
       printf " $nb"
@@ -60,7 +60,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   # https://www.abuseat.org/public/country.html
   # https://github.com/drduh/config/tree/master/zones
   printf "Checking zones ..."
-  for zone in $(grep -v "^#" zones | sed "s/\ \ \#.*//g") ; do
+  for zone in $(grep -v "^#" ../zones | sed "s/\ \ \#.*//g") ; do
     printf " $zone"
     curl -sq \
       "https://www.ipdeny.com/ipblocks/data/countries/$zone.zone" >> $zones
@@ -82,7 +82,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
 
 else
   printf "\ntesting blocked sites ...\n"
-  for ws in $(/bin/ls asns/) ; do
+  for ws in $(/bin/ls ../asns) ; do
     printf "$ws.com: "
     curl -v \
       https://$(dig a $ws.com @$dns +short|head -n1) 2>&1 | \

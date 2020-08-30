@@ -283,11 +283,12 @@ user_pref("extensions.formautofill.addresses.enabled", false);  // disable form 
 user_pref("extensions.formautofill.available", "off");
 user_pref("extensions.formautofill.creditCards.enabled", false);
 user_pref("extensions.formautofill.heuristics.enabled", false);
+user_pref("extensions.fxmonitor.enabled", false);  // disable Monitor
 user_pref("extensions.getAddons.cache.enabled", false);  // disable add-on metadata updates
 user_pref("extensions.getAddons.databaseSchema", 5);
 user_pref("extensions.getAddons.showPane", false);
 user_pref("extensions.pocket.enabled", false);  // disable Pocket
-user_pref("extensions.screenshots.disabled", true);
+user_pref("extensions.screenshots.disabled", true);  // disable Screenshots
 user_pref("extensions.screenshots.upload-disabled", true);
 user_pref("extensions.shield-recipe-client.api_url", "");
 user_pref("extensions.shield-recipe-client.enabled", false);

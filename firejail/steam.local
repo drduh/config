@@ -1,0 +1,4 @@
+# https://github.com/drduh/config/blob/master/firejail/steam.local
+# ~/.config/firejail/steam.local
+ignore private-dev
+ignore seccomp

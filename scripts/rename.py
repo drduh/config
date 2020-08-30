@@ -11,10 +11,12 @@ def main(argv):
     path = argv[1]
 
     for item in os.listdir(path):
+        ext = os.path.splitext(item)[1].lower()
+        if ext == ".jpeg":
+            ext = ".jpg"
         rand = "".join(
             random.sample(
-                string.ascii_lowercase, 8)) + \
-                os.path.splitext(item)[1]
+                string.ascii_lowercase, 8)) + ext
 
         print("{} > {}".format(item, rand))
         if not os.path.isfile(path + rand):
