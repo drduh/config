@@ -27,3 +27,10 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv)
+#!/usr/bin/env python3
+# https://github.com/drduh/config/blob/master/scripts/rename.py
+
+import os
+import random
+import string
+import sys
