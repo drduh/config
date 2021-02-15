@@ -62,3 +62,14 @@ emailAddress            = optional
 subjectKeyIdentifier=hash
 authorityKeyIdentifier=keyid:always,issuer
 basicConstraints = critical,CA:true
+[ tls_client ]
+basicConstraints = CA:FALSE
+nsCertType       = client
+keyUsage         = digitalSignature, keyEncipherment, dataEncipherment
+extendedKeyUsage = clientAuth
+[ tls_server ]
+basicConstraints     = CA:FALSE
+nsCertType           = server
+keyUsage             = digitalSignature, keyEncipherment
+extendedKeyUsage     = serverAuth
+subjectKeyIdentifier = hash

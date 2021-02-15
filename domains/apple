@@ -1,8 +1,10 @@
 # https://github.com/drduh/config/blob/master/domains/apple
 address=/aaplimg.com/
+address=/apple-cloudkit.com/
 address=/apple-dns.net/
 address=/apple-finance.query.yahoo.com/
 address=/apple.com.akadns.net/
+address=/apple.com.c.footprint.net/
 address=/apple.com.cn/
 address=/apple.com.edgekey.net.globalredir.akadns.net/
 address=/apple.com.edgekey.net/

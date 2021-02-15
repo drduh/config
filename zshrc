@@ -41,6 +41,9 @@ export LESSHISTFILE=-
 export LESSSECURE=1
 export PYTHONSTARTUP="${HOME}/.pythonrc"
 
+export http_proxy="127.0.0.1:8118"
+export https_proxy="127.0.0.1:8118"
+
 setopt alwaystoend
 setopt autocd
 setopt autopushd
@@ -89,15 +92,17 @@ alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bios="${ROOT} dmidecode -s bios-version"
-alias cr="chrome --enable-unveil --incognito --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
+alias cr="chrome --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
 alias dif="diff"
 alias ea="cat /proc/sys/kernel/random/entropy_avail"
 alias feh="feh --auto-rotate --draw-filename --recursive --scale-down --verbose"
 alias ff="firefox --ProfileManager --no-remote"
 alias ftb="firejail --profile=firejailed-tor-browser ${HOME}/Browser/start-tor-browser"
+alias gitdiff="git diff"
 alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --text --color"
 alias mnt="${ROOT} mount -o uid=1000 ${1}"
+alias resize_view="xrandr --output Virtual1 --mode 1600x1200"
 alias tb="thunderbird --ProfileManager --no-remote"
 alias td="mkdir ${TODAY} ; cd ${TODAY}"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4 --format 'best[height<=720]'"
@@ -299,7 +304,8 @@ function download () {
   curl -O ${DOWNLOAD}/"${@}" }
 
 function upload {
-  curl --http1.0 -F "file=@${@}" ${UPLOAD} }
+   curl -sq -F "file=@${@}" ${UPLOAD} | \
+     grep -q "Saved" && printf "Uploaded ${@}\n" }
 
 function vpn {
   ssh -C -N -L 5555:127.0.0.1:8118 vpn }
@@ -310,7 +316,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|download|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|ls|mail|make|man|mkdir|mnt|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|ykman|yt|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|convert|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|download|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|ffplay|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|libreoffice|lp|ls|mail|make|man|mkdir|mnt|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|ykman|yt|./pwd.sh|./purse.sh)
   ]]
 }
 
