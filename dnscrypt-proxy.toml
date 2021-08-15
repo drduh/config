@@ -35,18 +35,17 @@ log_files_max_age = 7
 log_files_max_backups = 1
 [query_log]
   file = 'query.log'
-  format = 'tsv'
 [nx_log]
   file = 'nx.log'
-  format = 'tsv'
-[blacklist]
-  blacklist_file = 'blacklist.txt'
+[blocked_names]
+  blocked_names_file = 'blocklist.txt'
   log_file = 'blocked.log'
-  log_format = 'tsv'
-[ip_blacklist]
-  blacklist_file = 'ip-blacklist.txt'
+[blocked_ips]
+  blocked_ips_file = 'ip-blocklist.txt'
   log_file = 'ip-blocked.log'
-  log_format = 'tsv'
+#[allowed_names]
+#  allowed_names_file = 'allowed.txt'
+#  log_file = 'allowed-names.log'
 #[sources]
 #  [sources.'public-resolvers']
 #  urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v2/public-resolvers.md', 'https://download.dnscrypt.info/resolvers-list/v2/public-resolvers.md']

@@ -85,7 +85,6 @@ pciutils
 pciutils-dev
 pcsc-tools
 pcscd
-pdftk
 pkg-config
 poppler-utils
 printer-driver-brlaser
@@ -98,6 +97,7 @@ python3-pip
 python3-pyscard
 qemu
 qemu-system-x86
+qpdf
 redshift
 rename
 rfkill

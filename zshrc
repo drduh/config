@@ -15,8 +15,9 @@ TODAY="$(date +%F)"
 TS="$(date +%s)"
 NETWORK="$(/sbin/ifconfig | head -n1 | awk -F: '{print $1}')"
 ROOT="$(command -v sudo || command -v doas)"
-DOWNLOAD="http://192.168.1.1/upload/"
-UPLOAD="http://192.168.1.1/cgi-bin/upload.py"
+SERVER="http://192.168.1.1"
+DOWNLOAD="${SERVER}/upload/"
+UPLOAD="${SERVER}/cgi-bin/upload.py"
 HISTFILE="${HOME}/.histfile"
 HISTSIZE=200
 SAVEHIST=${HISTSIZE}
@@ -82,10 +83,12 @@ alias -g XC="| xclip -i"
 alias -g XP="| xclip -o"
 alias l="ls -ltrhsa"
 alias ls="ls -lha"
+alias lo="libreoffice"
 alias t="tail -f"
 alias v="vim -p"
-alias md="mkdir -p"
+alias cat="cat -t"
 alias cp="cp -i"
+alias md="mkdir -p"
 alias mv="mv -i"
 alias p="python3"
 alias rm="rm -i"
@@ -230,7 +233,7 @@ function dump_ssl {
           -Eseparator=, }
 
 function e {  # appx bits of entropy: e <chars> <length>
-  awk -v c=${1} -v l=${2} "BEGIN { print log(c^l) }" }
+  awk -v c=${1} -v l=${2} "BEGIN { print log(c^l)/log(2) }" }
 
 function f {
   find . -iname "*${1}*" }

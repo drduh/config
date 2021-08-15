@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/master/scripts/iptables.sh
+set -o errtrace
+set -o nounset
+set -o pipefail
 PATH="/sbin"
 EXT=enp1s0
 INT=enp2s0
