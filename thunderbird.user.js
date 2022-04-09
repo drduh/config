@@ -2,6 +2,7 @@
 // https://www.enigmail.net/index.php/en/user-manual/advanced-operations
 //user_pref("mail.calendar-integration.opt-out", true);
 //user_pref("mail.inline_attachments", false);
+//user_pref("mail.phishing.detection.enabled", false);
 //user_pref("mailnews.display.prefer_plaintext", true);
 //user_pref("rss.display.prefer_plaintext", true);
 //user_pref("security.OCSP.require", true);
@@ -23,7 +24,8 @@ user_pref("browser.search.suggest.enabled", false);
 user_pref("browser.search.update", false);
 user_pref("browser.send_pings", false);
 user_pref("calender.integration.notify", false);
-user_pref("datareporting.policy.dataSubmissionEnabled", false);
+user_pref("datareporting.healthreport.uploadEnabled", false);  // disable technical and interaction data collection
+user_pref("datareporting.policy.dataSubmissionEnabled", false);  // disable crash reports
 user_pref("dom.allow_cut_copy", false);
 user_pref("dom.allow_scripts_to_close_windows", false);
 user_pref("dom.archivereader.enabled", false);
@@ -136,6 +138,7 @@ user_pref("mailnews.auto_config.fetchFromISP.sendEmailAddress", false);
 user_pref("mailnews.auto_config.guess.enabled", false);
 user_pref("mailnews.auto_config_url", "");
 user_pref("mailnews.display.original_date", false);
+user_pref("mailnews.downloadToTempFile", false);  // disable "Allow antivirus clients to quarantine ..."
 user_pref("mailnews.message_display.allow_plugins", false);
 user_pref("mailnews.reply_in_default_charset", true);
 user_pref("mailnews.send_default_charset", "UTF-8");
@@ -158,7 +161,7 @@ user_pref("messenger.status.awayWhenIdle", false);
 user_pref("messenger.status.reportIdle", false);
 user_pref("network.IDN_show_punycode", true);
 user_pref("network.allow-experiments", false);
-user_pref("network.cookie.cookieBehavior", 1);
+user_pref("network.cookie.cookieBehavior", 2);  // 0: all cookies allowed; 1: no 3p cookies; 2: disable cookies
 user_pref("network.cookie.lifetimePolicy", 2);
 user_pref("network.cookie.prefsMigrated", true);
 user_pref("network.dns.disablePrefetch", true);

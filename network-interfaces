@@ -1,10 +1,19 @@
 # https://github.com/drduh/config/blob/master/network-interfaces
 auto lo
 iface lo inet loopback
+
 auto eno0
 #allow-hotplug eno0
 iface eno0 inet static
-#address 10.8.1.1
 address 10.8.1.10
 netmask 255.255.255.0
 gateway 10.8.1.1
+
+#auto wlp5s0
+allow-hotplug wlp5s0
+iface wlp5s0 inet dhcp
+#address 192.168.1.2
+#netmask 255.255.255.0
+#gateway 192.168.1.1
+  wpa-ssid ssid
+  wpa-psk ,password$
