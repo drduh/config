@@ -1,8 +1,26 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/master/scripts/android-update.sh
+#
 # Requires:
 #   pip3 install oscrypto
 #   git clone https://github.com/LineageOS/update_verifier
+#
+# Update packages:
+# $ adb install -r package.apk
+#
+# Update OS:
+# $ adb reboot bootloader
+# $ adb sideload lineage-*.zip
+#
+# Modify system files:
+# $ adb push ~/git/hosts/hosts /sdcard/Documents/
+# $ adb root shell
+# $ adb shell
+# # mount -o rw,remount -t ext4 /system
+# # mount -o rw,remount -t ext4 /
+# # mv /sdcard/Documents/hosts /etc/hosts
+# # exit
+# $ adb unroot
 
 #set -x
 set -o errtrace
@@ -10,9 +28,9 @@ set -o nounset
 set -o pipefail
 
 lineagedir="./update_verifier/"
-ostypes="sailfish guacamole"
+ostypes="guacamole lemonadep sailfish"
 
-DUO="BE:5A:A8:A5:43:6E:99:71:21:E5:E5:5E:4C:A7:E0:47:84:48:88:09:14:B9:F9:4C:24:2C:5E:4F:DB:E8:D8:98"
+AEGIS="C6:DB:80:A8:E1:4E:52:30:C1:DE:84:15:EF:82:0D:13:DC:90:1D:8F:E3:3C:F3:AC:B5:7B:68:62:D8:58:A8:23"
 SIGNAL="29:F3:4E:5F:27:F2:11:B4:24:BC:5B:F9:D6:71:62:C0:EA:FB:A2:DA:35:AF:35:C1:64:16:FC:44:62:76:BA:26"
 FIREFOX="A7:8B:62:A5:16:5B:44:94:B2:FE:AD:9E:76:A2:80:D2:2D:93:7F:EE:62:51:AE:CE:59:94:46:B2:EA:31:9B:04"
 NETGUARD="E4:A2:60:A2:DC:E7:B7:AF:23:EE:91:9C:48:9E:15:FD:01:02:B9:3F:9E:7C:9D:82:B0:9C:0B:39:50:00:E4:D4"
@@ -30,16 +48,6 @@ grep_url() {
 
 update_pkgs() {
   printf "\n"
-
-  # Duo
-  duo_vers=$(curl -sI "https://dl.duosecurity.com/DuoMobile-latest.apk" 2>&1 | grep apk | grep -Eo '"(.*)"' | tr -d \" | head -n1)
-  duo_file=$(printf ${duo_vers} | cut -d '.' -f 1-3)
-  if [[ ! -f ${duo_file}.apk ]] ; then
-    printf "Downloading Duo ... "
-    curl -sLfO "https://dl.duosecurity.com/${duo_vers}"
-  fi
-  keytool -printcert -jarfile ${duo_vers} | grep -q ${DUO} || fail "could not verify Duo"
-  printf "${duo_file} complete\n"
 
   # Signal
   signal_vers=$(curl -s "https://updates.signal.org/android/latest.json" | grep_url)
@@ -66,45 +74,38 @@ update_pkgs() {
   np_file=$(printf "NewPipe_${np_vers}")
   if [[ ! -f ${np_file}.apk ]] ; then
     printf "Downloading NewPipe ... "
-    curl -sLfO "https://github.com/TeamNewPipe/NewPipe/releases/download/${np_vers}/NewPipe_${np_vers}.apk"
+    curl -sLfO "https://github.com/TeamNewPipe/NewPipe/releases/download/${np_vers}/${np_file}.apk"
   fi
   keytool -printcert -jarfile ${np_file}.apk | grep -q ${NEWPIPE} || fail "could not verify NewPipe"
   printf "${np_file} complete\n"
 
+  # Aegis
+  aegis_vers=$(curl -s "https://api.github.com/repos/beemdevelopment/Aegis/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1)
+  aegis_file=$(printf "aegis-${aegis_vers}")
+  if [[ ! -f ${aegis_file}.apk ]] ; then
+    printf "Downloading Aegis ... "
+    curl -sLfO "https://github.com/beemdevelopment/Aegis/releases/download/${aegis_vers}/${aegis_file}.apk"
+  fi
+  keytool -printcert -jarfile ${aegis_file}.apk | grep -q ${AEGIS} || fail "could not verify Aegis"
+  printf "${aegis_file} complete\n"
+
+
   # Firefox
-  ff_vers=$(curl -sI "https://download.mozilla.org/?product=fennec-latest&os=android&lang=multi" | grep_url)
-  ff_file=$(basename ${ff_vers})
+  ff_vers=$(curl -s "https://api.github.com/repos/mozilla-mobile/fenix/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1 | tr -d "v")
+  ff_file="fenix-${ff_vers}-arm64-v8a.apk"
   if [[ ! -f ${ff_file} ]] ; then
     printf "Downloading Firefox ... "
-    curl -sLfO ${ff_vers}
+    curl -sLfO "https://github.com/mozilla-mobile/fenix/releases/download/v${ff_vers}/${ff_file}"
   fi
   keytool -printcert -jarfile ${ff_file} | grep -q ${FIREFOX} || fail "could not verify Firefox"
   printf "${ff_file} complete\n"
-
-  # Firefox Beta
-  ff_beta_vers=$(curl -sI "https://download.mozilla.org/?product=fennec-beta-latest&os=android&lang=multi" | grep_url)
-  ff_beta_file=$(basename ${ff_beta_vers})
-  if [[ ! -f ${ff_beta_file} ]] ; then
-    printf "Downloading Firefox Beta ... "
-    curl -sLfO ${ff_beta_vers}
-  fi
-  keytool -printcert -jarfile ${ff_beta_file} | grep -q ${FIREFOX} || fail "could not verify Firefox Beta"
-  printf "${ff_beta_file} complete\n"
 }
 
 hash_pkgs() {
   sha256sum *.apk > android-pkgs.$(date +%F)
 }
 
-install_pkgs() {
-  printf "\n"
-  for pkg in $(awk '{print $2}' android-pkgs.$(date +%F)) ; do
-    # TODO: check for existing install
-    printf "  adb install -r ${pkg}\n"
-  done
-}
-
-update_lineage() {
+update_os() {
   printf "\n"
 
   for os in ${ostypes} ; do
@@ -123,60 +124,8 @@ update_lineage() {
   done
 }
 
-print_help() {
-  printf """
-  TODO"""
-}
-
-print_post_lineage_update_msg() {
-  printf """
-  To update:
-
-  $ adb reboot bootloader
-  $ adb sideload lineage-*.zip
-
-  To modify system files:
-
-  $ adb push ~/git/hosts/hosts /sdcard/Documents/
-  $ adb root shell
-  $ adb shell
-
-  # mount -o rw,remount -t ext4 /system
-  # mount -o rw,remount -t ext4 /
-  # mv /sdcard/Documents/hosts /etc/hosts
-  # exit
-
-  $ adb unroot
-  """
-}
-
-backup_sdcard() {
-  adb pull "/sdcard/" ./sdcard.$(date +%F)
-}
-
-
-action=""
-if [[ -n "${1+x}" ]] ; then
-  action="${1}"
-fi
-
-while [[ -z "${action}" ]] ;
-  do read -n 1 -p "
-  Update [P]ackages or [O]S (or Help): " action
-  printf "\n"
-done
-
-if [[ "${action}" =~ ^([hH])$ ]] ; then
-  print_help
-elif [[ "${action}" =~ ^([oO])$ ]] ; then
-  update_lineage
-  print_post_lineage_update_msg
-elif [[ "${action}" =~ ^([pP])$ ]] ; then
-  update_pkgs
-  hash_pkgs
-  install_pkgs
-else
-  print_help
-fi
+update_os
+update_pkgs
+hash_pkgs
 
 printf "\n" ; tput setaf 2 2 2 ; printf "Done\n" ; tput sgr0

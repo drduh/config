@@ -1,8 +1,7 @@
 # https://github.com/drduh/config/blob/master/st.patch
 # Run 'make' before applying with 'patch < st.patch' then run 'make' again
-
---- a/config.h	Sun Jan 1 00:00:00 2019
-+++ b/config.h	Sun Jan 1 00:00:01 2019
+--- a/config.h	2022-01-11 00:00:00
++++ b/config.h	2022-01-11 00:00:01
 @@ -5,8 +5,8 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
@@ -14,7 +13,7 @@
  
  /*
   * What program is execed by st depends of these precedence rules:
-@@ -84,31 +84,23 @@
+@@ -95,44 +95,32 @@
  
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
@@ -43,59 +42,49 @@
 -	/* more colors can be added after 255 to use with DefaultXX */
 -	"#cccccc",
 -	"#555555",
-+	/* solarized dark */
-+	"#073642",  /*  0: black    */
-+	"#dc322f",  /*  1: red      */
-+	"#859900",  /*  2: green    */
-+	"#b58900",  /*  3: yellow   */
-+	"#268bd2",  /*  4: blue     */
-+	"#d33682",  /*  5: magenta  */
-+	"#2aa198",  /*  6: cyan     */
-+	"#eee8d5",  /*  7: white    */
-+	"#002b36",  /*  8: brblack  */
-+	"#cb4b16",  /*  9: brred    */
-+	"#586e75",  /* 10: brgreen  */
-+	"#657b83",  /* 11: bryellow */
-+	"#839496",  /* 12: brblue   */
-+	"#6c71c4",  /* 13: brmagenta*/
-+	"#93a1a1",  /* 14: brcyan   */
-+	"#fdf6e3",  /* 15: brwhite  */
+-	"gray90", /* default foreground colour */
+-	"black", /* default background colour */
++  "#073642",
++  "#dc322f",
++  "#859900",
++  "#b58900",
++  "#268bd2",
++  "#d33682",
++  "#2aa198",
++  "#eee8d5",
++  "#002b36",
++  "#cb4b16",
++  "#586e75",
++  "#657b83",
++  "#839496",
++  "#6c71c4",
++  "#93a1a1",
++  "#fdf6e3",
  };
  
- 
-@@ -116,10 +108,10 @@
+-
+ /*
   * Default colors (colorname index)
   * foreground, background, cursor, reverse cursor
   */
--unsigned int defaultfg = 7;
--unsigned int defaultbg = 0;
--static unsigned int defaultcs = 256;
+-unsigned int defaultfg = 258;
+-unsigned int defaultbg = 259;
+-unsigned int defaultcs = 256;
 -static unsigned int defaultrcs = 257;
 +unsigned int defaultfg = 12;
 +unsigned int defaultbg = 8;
-+static unsigned int defaultcs = 14;
++unsigned int defaultcs = 14;
 +static unsigned int defaultrcs = 15;
  
  /*
   * Default shape of cursor
 
---- a/config.mk Sun Jan 1 00:00:00 2019
-+++ b/config.mk Sun Jan 1 00:00:01 2019
-@@ -26,10 +26,19 @@
- STLDFLAGS = $(LIBS) $(LDFLAGS)
- 
- # OpenBSD:
--#CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
--#LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft \
--#       `pkg-config --libs fontconfig` \
--#       `pkg-config --libs freetype2`
-+CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
-+LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft \
-+       `pkg-config --libs fontconfig` \
-+       `pkg-config --libs freetype2`
- 
--# compiler and linker
--# CC = c99
+--- a/config.mk	2022-01-11 00:00:00
++++ b/config.mk	2022-01-11 00:00:01
+@@ -31,5 +31,15 @@
+ #       `$(PKG_CONFIG) --libs fontconfig` \
+ #       `$(PKG_CONFIG) --libs freetype2`
+
 +CFLAGS = -std=c99 -Wno-deprecated-declarations -Os ${INCS} ${CPPFLAGS} \
 +  -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -O3 -pipe \
 +  -Wpedantic -Wall -Wextra -Wconversion -Wsign-conversion \
@@ -106,4 +95,6 @@
 +  -fexceptions -fpie -fpic \
 +  -ftrapv -flto -fvisibility=hidden
 +
-+CC = cc
+ # compiler and linker
+-# CC = c99
++CC = c99
