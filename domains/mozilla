@@ -1,8 +1,14 @@
 # https://github.com/drduh/config/blob/master/domains/mozilla
+#address=/firefox.com-v2.edgesuite.net/
 #address=/firefox.com/
+#address=/firefoxusercontent.com/
+#address=/getfirefox.com/
+#address=/moz.works/
 #address=/mozaws.net/
+#address=/mozgcp.net/
 #address=/mozilla.com/
 #address=/mozilla.net/
+#address=/mozilla.org.cdn.cloudflare.net/
 #address=/mozilla.org/
 #address=/thunderbird.net/
 address=/accounts.firefox.com/

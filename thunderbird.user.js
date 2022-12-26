@@ -1,4 +1,5 @@
 // https://github.com/drduh/config/blob/master/thunderbird.user.js
+// https://kb.mozillazine.org/Mail_and_news_settings
 // https://www.enigmail.net/index.php/en/user-manual/advanced-operations
 //user_pref("mail.calendar-integration.opt-out", true);
 //user_pref("mail.inline_attachments", false);
@@ -112,18 +113,23 @@ user_pref("javascript.options.shared_memory", false);
 user_pref("layout.css.visited_links_enabled", false);
 user_pref("mail.SpellCheckBeforeSend", true);
 user_pref("mail.biff.play_sound", false);
+user_pref("mail.biff.show_alert", false);  // disable pop-up new message alerts
 user_pref("mail.chat.enabled", false);
 user_pref("mail.cloud_files.enabled", false);
 user_pref("mail.cloud_files.learn_more_url", "");
 user_pref("mail.collect_addressbook", false);
 user_pref("mail.collect_email_address_outgoing", false);
+user_pref("mail.compose.attachment_reminder", false);  // disable attachment reminder
+user_pref("mail.compose.autosaveinterval", 10);  // save drafts every 10 minutes
 user_pref("mail.display_glyph", false);
 user_pref("mail.html_compose", false);
 user_pref("mail.identity.default.compose_html", false);
 user_pref("mail.imap.mime_parts_on_demand", true);
 user_pref("mail.imap.ssl.show_insecure_images", false);
 user_pref("mail.inline_attachments", false);
+user_pref("mail.mdn.report.enabled", false);  // disable return receipts
 user_pref("mail.openMessageBehavior.version", 1);
+user_pref("mail.prompt_purge_threshhold", false);  // don't compact folders to save space
 user_pref("mail.provider.enabled", false);
 user_pref("mail.rights.version", 1);
 user_pref("mail.shell.checkDefaultClient", false);
@@ -137,7 +143,9 @@ user_pref("mailnews.auto_config.fetchFromISP.enabled", false);
 user_pref("mailnews.auto_config.fetchFromISP.sendEmailAddress", false);
 user_pref("mailnews.auto_config.guess.enabled", false);
 user_pref("mailnews.auto_config_url", "");
+user_pref("mailnews.display.html_as", 1);  // display incoming mail as plaintext
 user_pref("mailnews.display.original_date", false);
+user_pref("mailnews.display.prefer_plaintext", true);
 user_pref("mailnews.downloadToTempFile", false);  // disable "Allow antivirus clients to quarantine ..."
 user_pref("mailnews.message_display.allow_plugins", false);
 user_pref("mailnews.reply_in_default_charset", true);
@@ -188,6 +196,7 @@ user_pref("purple.conversations.im.send_typing", false);
 user_pref("purple.logging.log_chats", false);
 user_pref("purple.logging.log_ims", false);
 user_pref("purple.logging.log_system", false);
+user_pref("rss.display.prefer_plaintext", true);
 user_pref("security.cert_pinning.enforcement_level", 2);
 user_pref("security.family_safety.mode", 0);
 user_pref("security.fileuri.strict_origin_policy", true);

@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/domains/tlds
+#address=/deals/
 address=/ad/
 address=/arpa/
 address=/ax/
@@ -20,7 +21,6 @@ address=/comhttps/
 address=/comp/
 address=/comr/
 address=/date/
-address=/deals/
 address=/desi/
 address=/dk/
 address=/download/
@@ -29,9 +29,11 @@ address=/exe/
 address=/fit/
 address=/ga/
 address=/gdn/
+address=/gom/
 address=/gq/
 address=/guru/
 address=/internal/
+address=/irg/
 address=/key/
 address=/kr/
 address=/life/

@@ -1,5 +1,6 @@
 # https://github.com/drduh/config/blob/master/domains/facebook
 #address=/giphy.com/
+#address=/giphy.map.fastly.net/
 address=/cdninstagram.com/
 address=/facebook-hardware.com/
 address=/facebook-studio.com/
@@ -51,6 +52,7 @@ address=/messenger.com/
 address=/messengerkids.com/
 address=/oculus.com/
 address=/oculusvr.com/
+address=/pingback.giphy.com/
 address=/snapchat.com/
 address=/tfbnw.net/
 address=/thefacebook.com/

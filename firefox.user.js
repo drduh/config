@@ -124,6 +124,7 @@ user_pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);  // disable extension recommendations
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+user_pref("browser.newtabpage.activity-stream.default.sites", "");
 user_pref("browser.newtabpage.activity-stream.disableSnippets", true);
 user_pref("browser.newtabpage.activity-stream.discoverystream.optOut.0", true);
 user_pref("browser.newtabpage.activity-stream.enabled", false);
@@ -201,12 +202,13 @@ user_pref("browser.urlbar.filter.javascript", true);  // hide JS in history
 user_pref("browser.urlbar.maxHistoricalSearchSuggestions", 0);  // disable local search history
 user_pref("browser.urlbar.oneOffSearches", false);
 user_pref("browser.urlbar.placeholderName", "DuckDuckGo");
-user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);  // disable suggestions
-user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);  // disable sponsored suggestions
 user_pref("browser.urlbar.searchSuggestionsChoice", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);  // disable preloading auto-complete URLs
 user_pref("browser.urlbar.suggest.openpage", false);
+user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);  // disable suggestions
+user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);  // disable sponsored suggestions
 user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.trimURLs", false);  // disable trim HTTP off of URLs
 user_pref("browser.urlbar.usepreloadedtopurls.enabled", false);  // disable pre-loaded URLs
 user_pref("browser.urlbar.userMadeSearchSuggestionsChoice", true);

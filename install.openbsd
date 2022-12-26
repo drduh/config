@@ -16,7 +16,9 @@ git
 gnupg
 gnuradio
 htop
+imagemagick
 iperf
+libreoffice
 minetest
 mpv
 mupdf
@@ -31,6 +33,7 @@ pftop
 poppler-utils
 pv
 py3-pip
+rsync
 rtl-sdr
 scrot
 sleuthkit
