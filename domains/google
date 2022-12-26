@@ -87,6 +87,7 @@
 #address=/chromium.org/
 #address=/codespot.com/
 #address=/csi.gstatic.com/
+#address=/forms.gle/
 #address=/ggpht.cn/
 #address=/ggpht.com/
 #address=/gle/
@@ -94,6 +95,7 @@
 #address=/gmail.com/
 #address=/golang.com/
 #address=/goo.gl/
+#address=/goog/
 #address=/google.ac/
 #address=/google.ad/
 #address=/google.ae/
@@ -348,6 +350,7 @@
 #address=/pki.goog/
 #address=/recaptcha.net/
 #address=/sketchup.com/
+#address=/telephony.goog/
 #address=/urchin.com/
 #address=/withgoogle.com/
 #address=/withyoutube.com/

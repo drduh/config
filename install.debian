@@ -1,8 +1,9 @@
 # https://github.com/drduh/config/blob/master/install.debian
-aapt
 adb
+alsa-utils
 apparmor
 apparmor-utils
+apt
 apt-transport-https
 arduino
 at
@@ -11,6 +12,7 @@ autoconf
 binwalk
 bison
 blueman
+bsdmainutils
 build-essential
 chirp
 chkrootkit
@@ -19,6 +21,7 @@ cmus
 cpufrequtils
 cryptsetup
 curl
+dcraw
 debsecan
 debsums
 dirmngr
@@ -36,6 +39,7 @@ fonts-inconsolata
 foremost
 fswebcam
 gcc
+geeqie
 gimp
 git
 gnupg2
@@ -58,6 +62,7 @@ libnl-3-dev
 libnl-genl-3-dev
 libpcsclite-dev
 libreoffice
+libseccomp-dev
 libsodium-dev
 libssl-dev
 libusb-dev
@@ -76,6 +81,7 @@ minicom
 motion
 mpv
 mupdf
+ncal
 netcat
 net-tools
 nmap
@@ -91,6 +97,7 @@ poppler-utils
 printer-driver-brlaser
 privoxy
 proxychains
+pv
 pylint
 python3-gnupg
 python3-pil
@@ -125,7 +132,6 @@ tcpflow
 thunderbird
 tmux
 tor
-torbrowser-launcher
 traceroute
 tree
 tshark

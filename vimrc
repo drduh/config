@@ -84,10 +84,10 @@ endfunction
 augroup WordCounter
   au! CursorHold,CursorHoldI * call UpdateWordCount()
 augroup END
-colorscheme slate
 hi Normal ctermfg=14 ctermbg=8
 hi LineNr ctermfg=10 ctermbg=0
 hi Comment ctermfg=9 ctermbg=0
 hi StatusLine ctermfg=0 ctermbg=3
 hi clear SpellBad
 hi SpellBad ctermbg=10
+colorscheme slate

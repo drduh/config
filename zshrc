@@ -117,6 +117,50 @@ alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/s
 alias x230_write_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-bottom.rom"
 alias x230_write_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-top.rom"
 
+alias bw-firefox="""
+bwrap \
+--symlink usr/lib /lib \
+--symlink usr/lib64 /lib64 \
+--symlink usr/bin /bin \
+--symlink usr/bin /sbin \
+--ro-bind /usr/lib /usr/lib \
+--ro-bind /usr/lib64 /usr/lib64 \
+--ro-bind /usr/bin /usr/bin \
+--ro-bind /usr/share/applications /usr/share/applications \
+--ro-bind /usr/share/fontconfig /usr/share/fontconfig \
+--ro-bind /usr/share/drirc.d /usr/share/drirc.d \
+--ro-bind /usr/share/fonts /usr/share/fonts \
+--ro-bind /usr/share/glib-2.0 /usr/share/glib-2.0 \
+--ro-bind /usr/share/glvnd /usr/share/glvnd \
+--ro-bind /usr/share/icons /usr/share/icons \
+--ro-bind /usr/share/libdrm /usr/share/libdrm \
+--ro-bind /usr/share/mime /usr/share/mime \
+--ro-bind /usr/share/X11/xkb /usr/share/X11/xkb \
+--ro-bind /usr/share/icons /usr/share/icons \
+--ro-bind /usr/share/mime /usr/share/mime \
+--ro-bind /etc/fonts /etc/fonts \
+--ro-bind /usr/share/ca-certificates /usr/share/ca-certificates \
+--ro-bind /etc/ssl /etc/ssl \
+--ro-bind /etc/ca-certificates /etc/ca-certificates \
+--dir /run/user/"$(id -u)" \
+--ro-bind /run/user/"$(id -u)"/pulse /run/user/"$(id -u)"/pulse \
+--dev /dev \
+--dev-bind /dev/dri /dev/dri \
+--ro-bind /sys/dev/char /sys/dev/char \
+--ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00 \
+--proc /proc \
+--tmpfs /tmp \
+--bind-try ~/.mozilla ~/.mozilla \
+--bind-try ~/Downloads ~/Downloads \
+--bind-try ~/.cache/mozilla ~/.cache/mozilla \
+--setenv PATH /usr/bin \
+--hostname RESTRICTED \
+--unshare-all \
+--share-net \
+--die-with-parent \
+--new-session \
+/usr/bin/firefox"""  # remove pulse bind to disable audio
+
 function .. { cd ".." ; }
 function ... { cd "../.." ; }
 function .... { cd "../../.." ; }
@@ -125,7 +169,7 @@ function dedupe {
   find "${@}" ! -empty -type f -exec md5sum {} + | \
     sort | uniq -w32 -dD }
 
-function domain () {
+function domain () {  # truncate to top level domain
   awk -F "." '{print ( $(NF-1)"."$(NF) )}' "${1}" }
 
 function gpg_restart {
@@ -161,7 +205,7 @@ function backup () {
 
 function bat {
   upower -i /org/freedesktop/UPower/devices/battery_BAT0 | \
-    grep -E "state|to\ full|percentage" }
+    grep -E "state|to\ full|percentage" || apm }
 
 function calc {
   awk "BEGIN { print "$*" }" }
@@ -293,10 +337,13 @@ function secret {  # list preferred id last
     -r github@duh.to \
     "${1}" && echo "${1} -> ${output}" }
 
+function sort_ip {
+  sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n "${@}" }
+
 function srl {
   doas cu -r -s 115200 -l cuaU0 2>/dev/null || \
     sudo minicom -D /dev/ttyUSB0 2>/dev/null || \
-      printf "disconnected\n" }
+      printf "serial console disconnected\n" }
 
 function top_history {
   history 1 | awk '{CMD[$2]++;count++;}END {

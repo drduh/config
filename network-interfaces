@@ -10,6 +10,7 @@ netmask 255.255.255.0
 gateway 10.8.1.1
 
 #auto wlp5s0
+#allow-hotplug wlp4s0
 allow-hotplug wlp5s0
 iface wlp5s0 inet dhcp
 #address 192.168.1.2
