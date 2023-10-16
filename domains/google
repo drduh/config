@@ -1,6 +1,7 @@
 # https://github.com/drduh/config/blob/master/domains/google
 #address=/1e100.net/
 #address=/android.com/
+#address=/app/
 #address=/appspot.com/
 #address=/blog.google/
 #address=/blogger.com/
@@ -87,7 +88,9 @@
 #address=/chromium.org/
 #address=/codespot.com/
 #address=/csi.gstatic.com/
+#address=/feedproxy.google.com/
 #address=/forms.gle/
+#address=/g.page/
 #address=/ggpht.cn/
 #address=/ggpht.com/
 #address=/gle/
@@ -352,6 +355,7 @@
 #address=/sketchup.com/
 #address=/telephony.goog/
 #address=/urchin.com/
+#address=/web.app/
 #address=/withgoogle.com/
 #address=/withyoutube.com/
 #address=/youtu.be/
@@ -379,6 +383,7 @@ address=/adwords.com/
 address=/agoogleaday.com/
 address=/ai.google/
 address=/ampproject.org/
+address=/analytics.google.com/
 address=/blogpsot.com/
 address=/chart.googleapis.com/
 address=/chromeexperiments.com/
@@ -446,6 +451,8 @@ address=/keyhole.com/
 address=/like.com/
 address=/localhost.com/
 address=/mail-ads.google.com/
+address=/mail.googlecom/
+address=/maps.googlecom/
 address=/metric.gstatic.com/
 address=/mtalk.google.com/
 address=/ogs.google.com/

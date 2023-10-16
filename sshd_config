@@ -1,6 +1,6 @@
 # https://github.com/drduh/config/blob/master/sshd_config
 # https://linux.die.net/man/5/sshd_config
-Port 22
+Port 2400
 AddressFamily inet
 #ListenAddress 172.16.1.1
 #ListenAddress 10.8.1.1

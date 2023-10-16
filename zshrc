@@ -42,8 +42,8 @@ export LESSHISTFILE=-
 export LESSSECURE=1
 export PYTHONSTARTUP="${HOME}/.pythonrc"
 
-export http_proxy="127.0.0.1:8118"
-export https_proxy="127.0.0.1:8118"
+#export http_proxy="127.0.0.1:8118"
+#export https_proxy="127.0.0.1:8118"
 
 setopt alwaystoend
 setopt autocd
@@ -74,13 +74,16 @@ zstyle ":completion:*" use-cache on
 zstyle ":completion:*" verbose yes
 zstyle ":completion:*:kill:*" command "ps -u ${USER} -o pid,%cpu,tty,cputime,cmd"
 
+alias -g G="| grep -i"
 alias -g H="| head"
 alias -g L="| less"
 alias -g S="| sort"
 alias -g T="| tail"
+alias -g U="| uniq"
 alias -g V="| vim -"
 alias -g XC="| xclip -i"
 alias -g XP="| xclip -o"
+
 alias l="ls -ltrhsa"
 alias ls="ls -lha"
 alias lo="libreoffice"
@@ -95,13 +98,15 @@ alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bios="${ROOT} dmidecode -s bios-version"
-alias cr="chrome --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
+alias cr="chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
 alias dif="diff"
 alias ea="cat /proc/sys/kernel/random/entropy_avail"
 alias feh="feh --auto-rotate --draw-filename --recursive --scale-down --verbose"
 alias ff="firefox --ProfileManager --no-remote"
 alias ftb="firejail --profile=firejailed-tor-browser ${HOME}/Browser/start-tor-browser"
 alias gitdiff="git diff"
+alias gitpull="git gull"
+alias gitpush="git push"
 alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --text --color"
 alias mnt="${ROOT} mount -o uid=1000 ${1}"
@@ -111,6 +116,7 @@ alias td="mkdir ${TODAY} ; cd ${TODAY}"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4 --format 'best[height<=720]'"
 alias yt_max="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4"
 alias vm="virt-manager"
+alias x="startx"
 
 alias x230_read_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r bottom.rom.${TODAY}"
 alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r top.rom.${TODAY}"
