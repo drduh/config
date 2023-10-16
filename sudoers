@@ -1,17 +1,18 @@
 # https://github.com/drduh/config/blob/master/sudoers
 Defaults env_reset
+Defaults mail_badpass
 Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Defaults use_pty
 
-root ALL=(ALL:ALL) ALL
-sysadm ALL=(ALL:ALL) ALL
+root	ALL=(ALL:ALL) ALL
+sysadm	ALL=(ALL:ALL) ALL
 
 Cmnd_Alias NP = \
   /bin/dmesg, \
-  /bin/dmesg -wH, \
   /bin/mount /dev/[a-z0-9]*, \
   /bin/umount /mnt/[a-z]*, \
   /sbin/cryptsetup luksClose /dev/mapper/*, \
-  /sbin/cryptsetup luksOpen /dev/sd*, \
+  /sbin/cryptsetup luksOpen /dev/*, \
   /sbin/dhclient [a-z0-9]*, \
   /sbin/fdisk -l, \
   /sbin/ip route add default via 192.168.1.1 dev wlp2s0, \
@@ -21,11 +22,6 @@ Cmnd_Alias NP = \
   /usr/bin/apt dist-upgrade, \
   /usr/bin/apt update, \
   /usr/bin/apt upgrade, \
-  /usr/bin/apt-get autoclean, \
-  /usr/bin/apt-get autoremove, \
-  /usr/bin/apt-get dist-upgrade, \
-  /usr/bin/apt-get update, \
-  /usr/bin/apt-get upgrade, \
   /usr/bin/jmtpfs /mnt/usb, \
   /usr/bin/lsof -Pni, \
   /usr/bin/minicom -D /dev/ttyUSB0, \
@@ -37,7 +33,7 @@ Cmnd_Alias NP = \
   /usr/local/bin/hostapd /etc/hostapd.conf, \
   /usr/sbin/dmidecode -s bios-version, \
   /usr/sbin/ntpdate -uv 192.168.1.1, \
-  /usr/sbin/openvpn --config client.ovpn, \
+  /usr/sbin/ntpdate -uv pool.ntp.org, \
   /usr/sbin/reboot now, \
   /usr/sbin/route add -net 10.8.1.1 netmask 255.255.255.0 gw 192.168.1.1, \
   /usr/sbin/service dnsmasq restart, \
@@ -47,5 +43,7 @@ Cmnd_Alias NP = \
   /usr/sbin/service rng-tools restart, \
   /usr/sbin/shutdown -h now
 
-sysadm ALL=(ALL) NOPASSWD:NP
-#sysadm ALL=(ALL) NOPASSWD:ALL
+sysadm	ALL=(ALL) NOPASSWD:NP
+#sysadm	ALL=(ALL) NOPASSWD:ALL
+
+#@includedir /etc/sudoers.d

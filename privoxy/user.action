@@ -12,11 +12,11 @@ fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-r
 { fragile }
 connectivitycheck.gstatic.com/generate_204
 www.google.com/gen_204
-.netflix.com
-.nflxext.com
-.nflximg.net
-.nflxso.net
-.nflxvideo.net
+#.netflix.com
+#.nflxext.com
+#.nflximg.net
+#.nflxso.net
+#.nflxvideo.net
 .ubuntu.com
 { +block{html} }
 /(.*/)adhandler/
@@ -131,23 +131,6 @@ pixel.*
 { +redirect{s@google.com/amp/s/@@} }
 google.com/amp/s/.*
 { +redirect{s@http://@https://@} }
-accounts.google.com
-calendar.google.com
-cdn.openbsd.org
-cvsweb.openbsd.org
-docs.google.com
-drive.google.com
-ftp.openbsd.org
-mail.google.com
-man.openbsd.org
-maps.google.com
-meet.google.com
-photos.google.com
-voice.google.com
-wiki.debian.org
-www.debian.org
-www.google.com
-www.openbsd.org
 .0x0.st
 .4are.com
 .abc.net.au
@@ -161,6 +144,7 @@ www.openbsd.org
 .amazon.com
 .amazonaws.com
 .amd.com
+.americanbar.org
 .americanexpress.com
 .amsecusa.com
 .android.com
@@ -170,6 +154,8 @@ www.openbsd.org
 .apache.org
 .appimage.org
 .apple.com
+.appspot.com
+.arcgis.com
 .archive.is
 .archive.org
 .archlinux.org
@@ -177,15 +163,21 @@ www.openbsd.org
 .arstechnica.com
 .askubuntu.com
 .asus.com
+.ati.com
+.atlassian.com
 .auspost.com.au
 .auth0.com
 .authorize.net
+.autotrader.com
 .awesomeopensource.com
 .awsstatic.com
 .azurestandard.com
 .bankofamerica.com
+.barrons.com
 .bbc.co.uk
 .bbc.com
+.benjaminmoore.com
+.bestbuy.com
 .bhphoto.com
 .bing.com
 .bit.ly
@@ -195,14 +187,19 @@ www.openbsd.org
 .blogger.com
 .bloglovin.com
 .blogspot.com
+.blu-ray.com
 .bootc.net
 .bootstrapcdn.com
 .boum.org
+.box.com
 .box.net
+.boxcloud.com
 .britishcouncil.org
+.buildkite.com
 .byexamples.com
 .ca.gov
 .canadapost.ca
+.canon.com
 .cbc.ca
 .cbsnews.com
 .ccc.de
@@ -217,6 +214,7 @@ www.openbsd.org
 .chrono24.com
 .cia.gov
 .cisco.com
+.cleverbot.com
 .cloudflare.com
 .cloudfront.net
 .cnbc.com
@@ -231,6 +229,7 @@ www.openbsd.org
 .cpb.gov
 .craigslist.org
 .creativecommons.org
+.crt.sh
 .crucial.com
 .cryptographyengineering.com
 .cryptomuseum.com
@@ -244,10 +243,12 @@ www.openbsd.org
 .definitions.net
 .delta.com
 .dhs.gov
+.digitalgov.gov
 .dropbox.com
 .dropboxatwork.com
 .dropboxteam.com
 .duckduckgo.com
+.duosecurity.com
 .ebay.com
 .ebaystatic.com
 .economist.com
@@ -256,6 +257,7 @@ www.openbsd.org
 .edx.org
 .eff.org
 .emacswiki.org
+.epicgames.com
 .eso.org
 .etsy.com
 .etsystatic.com
@@ -272,6 +274,7 @@ www.openbsd.org
 .flicker.com
 .flickr.com
 .flickr.net
+.flightradar24.com
 .foreignpolicy.com
 .ftc.gov
 .garmin.com
@@ -293,6 +296,7 @@ www.openbsd.org
 .gnu.org
 .gnupg.org
 .godoc.org
+.gofundme.com
 .gog-statics.com
 .gog.com
 .golang.com
@@ -312,15 +316,18 @@ www.openbsd.org
 .googlevideo.com
 .governmentattic.org
 .gravatar.com
+.greenhouse.io
 .gstatic.com
 .gvt1.com
 .gvt2.com
 .gvt3.com
+.hashicorp.com
 .haxx.se
 .hbr.org
 .hireright.com
 .homedepot.com
 .homefinity.com
+.hostux.net
 .house.gov
 .houzz.com
 .hulu.com
@@ -329,6 +336,8 @@ www.openbsd.org
 .icanhazip.com
 .icann.org
 .ietf.org
+.ign.com
+.ihouseelite.com
 .images-amazon.com
 .imageshack.com
 .imageshack.us
@@ -357,19 +366,22 @@ www.openbsd.org
 .landrover.com
 .last.fm
 .latimes.com
+.lenovo.com
 .letsencrypt.org
 .levels.fyi
+.lexus.com
 .lighttpd.net
 .linuxforums.org
+.list-manage.com
 .litmos.com
 .lkml.org
 .llvm.org
 .loc.gov
 .logicalincrements.com
 .lowes.com
+.lucid.co
 .lush.com
 .lwn.net
-.lycos.com
 .mail-archive.com
 .mapquest.com
 .marc.info
@@ -390,6 +402,7 @@ www.openbsd.org
 .mozilla.org
 .mozillazine.org
 .msi.com
+.muckrack.com
 .namecheap.com
 .nasa.gov
 .nationalreview.com
@@ -410,6 +423,7 @@ www.openbsd.org
 .okta.com
 .oktacdn.com
 .oneplus.com
+.opencensus.io
 .openh264.org
 .openra.net
 .openstreetmap.org
@@ -425,6 +439,7 @@ www.openbsd.org
 .paypal.com
 .pcengines.ch
 .pcpartpicker.com
+.petfinder.com
 .phoronix.com
 .photobucket.com
 .phys.org
@@ -437,6 +452,7 @@ www.openbsd.org
 .porscheusa.com
 .potterybarn.com
 .princeton.edu
+.purpleair.com
 .python.org
 .pythonhosted.org
 .quora.com
@@ -454,6 +470,8 @@ www.openbsd.org
 .redfin.com
 .redhat.com
 .rei.com
+.reolink.com
+.republicoftea.com
 .researchgate.net
 .reuters.com
 .rolex.com
@@ -496,6 +514,7 @@ www.openbsd.org
 .stackoverflow.com
 .startpage.com
 .state.gov
+.state.gov
 .staticflickr.com
 .steamcommunity.com
 .steampowered.com
@@ -518,10 +537,12 @@ www.openbsd.org
 .thehomedepot.com
 .theverge.com
 .thinkprogress.org
+.thunderbird.net
 .timex.com
 .tomshardware.com
 .tonic.to
 .torproject.org
+.toyota.com
 .tractorsupply.com
 .tradingview.com
 .tripadvisor.com
@@ -571,9 +592,11 @@ www.openbsd.org
 .wikipedia.org
 .wikiquote.org
 .wiktionary.org
+.windows.net
 .wired.com
 .wireshark.org
 .wix.com
+.wiz.io
 .wmflabs.org
 .woot.com
 .wordpress.com
@@ -594,10 +617,30 @@ www.openbsd.org
 .ytimg.com
 .yubico.com
 .zappos.com
+.zendesk.com
 .zillow.com
 .zillowstatic.com
 .zlcdn.com
+.zoom.us
+accounts.google.com
+calendar.google.com
+cdn.openbsd.org
+cvsweb.openbsd.org
+docs.google.com
+drive.google.com
+ftp.openbsd.org
+mail.google.com
+man.openbsd.org
+maps.google.com
+meet.google.com
+photos.google.com
+voice.google.com
+wiki.debian.org
+www.debian.org
+www.google.com
+www.openbsd.org
 { -redirect{android} }
 connectivitycheck.gstatic.com/generate_204
-#{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0}}
+#{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36}}
+#{+hide-user-agent{Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36}}
 #/

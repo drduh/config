@@ -1,35 +1,10 @@
 # https://github.com/drduh/config/blob/master/dwm.patch
-# Run 'make' before applying with 'patch < dwm.patch' then run 'make' again
-
---- a/config.h	Sun Jan 01 00:00:00 2019
-+++ b/config.h	Sun Jan 01 00:00:01 2019
-@@ -1,17 +1,41 @@
+# Run 'make' before applying 'patch < dwm.patch' then 'make' again
+--- a/config.h	Sun Jan 01 00:00:00 2022
++++ b/config.h	Sun Jan 01 00:00:01 2022
+@@ -1,17 +1,17 @@
  /* See LICENSE file for copyright and license details. */
  
-+void grid(Monitor *m) {
-+  unsigned int i, n, cx, cy, cw, ch, aw, ah, cols, rows;
-+  Client *c;
-+
-+  for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next))
-+    n++;
-+
-+  for(rows = 0; rows <= n/2; rows++)
-+    if(rows*rows >= n)
-+      break;
-+  cols = (rows && (rows - 1) * rows >= n) ? rows - 1 : rows;
-+
-+  ch = m->wh / (rows ? rows : 1);
-+  cw = m->ww / (cols ? cols : 1);
-+  for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
-+    cx = m->wx + (i / rows) * cw;
-+    cy = m->wy + (i % rows) * ch;
-+    ah = ((i + 1) % rows == 0) ? m->wh - ch * rows : 0;
-+    aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
-+    resize(c, cx, cy, cw - 2 * c->bw + aw, ch - 2 * c->bw + ah, False);
-+    i++;
-+  }
-+}
-+
  /* appearance */
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
  static const unsigned int snap      = 32;       /* snap pixel */
@@ -103,21 +78,8 @@
  	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
  	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 
---- a/config.mk	Sun Jan 01 00:00:00 2019
-+++ b/config.mk	Sun Jan 01 00:00:01 2019
-@@ -16,9 +14,9 @@
- 
- # freetype
- FREETYPELIBS = -lfontconfig -lXft
--FREETYPEINC = /usr/include/freetype2
--# OpenBSD (uncomment)
--#FREETYPEINC = ${X11INC}/freetype2
-+#FREETYPEINC = /usr/include/freetype2
-+# OpenBSD
-+FREETYPEINC = ${X11INC}/freetype2
- 
- # includes and libs
- INCS = -I${X11INC} -I${FREETYPEINC}
+--- a/config.mk	Sun Jan 01 00:00:00 2022
++++ b/config.mk	Sun Jan 01 00:00:01 2022
 @@ -26,13 +24,16 @@
  
  # flags

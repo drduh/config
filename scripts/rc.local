@@ -1,4 +1,0 @@
-#!/bin/sh
-# https://github.com/drduh/config/blob/master/scripts/rc.local
-#sudo /usr/bin/macchanger -r eno0 &
-exit 0
