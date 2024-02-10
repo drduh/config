@@ -1,3 +1,4 @@
+# https://github.com/drduh/config/blob/master/grub
 #GRUB_GFXMODE=2160x1350
 GRUB_GFXMODE=2560x1440
 GRUB_DEFAULT=0
