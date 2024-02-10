@@ -12,11 +12,6 @@ fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-r
 { fragile }
 connectivitycheck.gstatic.com/generate_204
 www.google.com/gen_204
-#.netflix.com
-#.nflxext.com
-#.nflximg.net
-#.nflxso.net
-#.nflxvideo.net
 .ubuntu.com
 { +block{html} }
 /(.*/)adhandler/
@@ -186,6 +181,7 @@ google.com/amp/s/.*
 .blogblog.com
 .blogger.com
 .bloglovin.com
+.blogspot.co.uk
 .blogspot.com
 .blu-ray.com
 .bootc.net
@@ -234,6 +230,7 @@ google.com/amp/s/.*
 .cryptographyengineering.com
 .cryptomuseum.com
 .cs.cornell.edu
+.custhelp.com
 .dailycaller.com
 .db.tt
 .dd-wrt.com
@@ -251,6 +248,7 @@ google.com/amp/s/.*
 .duosecurity.com
 .ebay.com
 .ebaystatic.com
+.ecfr.gov
 .economist.com
 .edgekey.net
 .editmysite.com
@@ -330,6 +328,7 @@ google.com/amp/s/.*
 .hostux.net
 .house.gov
 .houzz.com
+.hps.org
 .hulu.com
 .iana.org
 .ibm.com
@@ -342,6 +341,7 @@ google.com/amp/s/.*
 .imageshack.com
 .imageshack.us
 .imdb.com
+.imgbox.com
 .imgur.com
 .independent.ie
 .indiegogo.com
@@ -448,6 +448,7 @@ google.com/amp/s/.*
 .pinimg.com
 .pinterest.com
 .plos.org
+.plosone.org
 .popular.pics
 .porscheusa.com
 .potterybarn.com
@@ -470,6 +471,7 @@ google.com/amp/s/.*
 .redfin.com
 .redhat.com
 .rei.com
+.rentalcars.com
 .reolink.com
 .republicoftea.com
 .researchgate.net
@@ -504,6 +506,7 @@ google.com/amp/s/.*
 .sourceforge.net
 .spacetelescope.org
 .spaceweather.com
+.spacex.com
 .sparkpostmail.com
 .splunk.com
 .squarespace-cdn.com
@@ -513,7 +516,6 @@ google.com/amp/s/.*
 .stackexchange.com
 .stackoverflow.com
 .startpage.com
-.state.gov
 .state.gov
 .staticflickr.com
 .steamcommunity.com
@@ -529,6 +531,7 @@ google.com/amp/s/.*
 .tableausoftware.com
 .target.com
 .tastyworks.com
+.taxfoundation.org
 .teamspeak.com
 .techdirt.com
 .teddit.net
@@ -565,6 +568,7 @@ google.com/amp/s/.*
 .usembassy.gov
 .usgs.gov
 .usps.com
+.utah.gov
 .vanguard.com
 .verizon.com
 .verizonwireless.com
@@ -585,6 +589,7 @@ google.com/amp/s/.*
 .wayfair.com
 .weather.gov
 .wellsfargo.com
+.westmarine.com
 .whispersystems.org
 .whitehouse.gov
 .wikibooks.org

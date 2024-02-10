@@ -1,24 +1,24 @@
 # https://github.com/drduh/config/blob/master/sshd_config
 # https://linux.die.net/man/5/sshd_config
-Port 2400
-AddressFamily inet
 #ListenAddress 172.16.1.1
 #ListenAddress 10.8.1.1
 ListenAddress 0.0.0.0
+Port 2400
+AddressFamily inet
 HostKey /etc/ssh/ssh_host_key
 HostKey /etc/ssh/ssh_host_rsa_key
 AllowUsers sysadm
-Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+Ciphers aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com
 KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
-HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa
-RekeyLimit 256M 1H
+HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-ed25519
+RekeyLimit 1G 1H
 SyslogFacility AUTH
 LogLevel VERBOSE
 LoginGraceTime 10s
 MaxStartups 1
 MaxSessions 2
-MaxAuthTries 3
+MaxAuthTries 2
 ClientAliveInterval 30
 ClientAliveCountMax 20
 PermitRootLogin no
@@ -31,11 +31,11 @@ PermitEmptyPasswords no
 HostbasedAuthentication no
 ChallengeResponseAuthentication no
 Compression delayed
+AllowAgentForwarding no
 AllowTcpForwarding no
 X11Forwarding no
 GatewayPorts no
 PermitTunnel no
-TCPKeepAlive yes
 UseDNS no
 PrintMotd no
 PrintLastLog yes

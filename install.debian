@@ -24,7 +24,6 @@ dirmngr
 dnsmasq
 dnsutils
 evince
-exiftool
 feh
 ffmpeg
 file
@@ -41,7 +40,6 @@ gnupg2
 gnupg-agent
 gpredict
 hackrf
-hopenpgp-tools
 hostapd
 htop
 imagemagick
@@ -52,6 +50,7 @@ iptables-persistent
 jmtpfs
 kdenlive
 libevent-dev
+libimage-exiftool-perl
 libncurses5-dev
 libnl-3-dev
 libnl-genl-3-dev
@@ -66,7 +65,7 @@ libxft-dev
 libxinerama-dev
 libxrandr-dev
 lighttpd
-lighttpd-mod-magnet
+lighttpd-modules-lua
 lshw
 lsof
 m4
@@ -96,17 +95,17 @@ python3-gnupg
 python3-pil
 python3-pip
 python3-pyscard
-qemu-system
 qemu-system-x86
 qpdf
 redshift
 rename
 rfkill
 rkhunter
-rng-tools
+rng-tools-debian
 rsync
 rtl-sdr
 scdaemon
+screenfetch
 scrot
 secure-delete
 selinux-basics

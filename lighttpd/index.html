@@ -1,33 +1,93 @@
 <!-- https://github.com/drduh/config/blob/master/lighttpd/index.html
-     Simple file uploader
-     Put into /var/www and see upload.py
--->
-<html><head><title>Upload File</title>
+     Simple file uploader. Put into /var/www and see upload.py -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload File</title>
+</head>
+<script>
+function identify() {
+  var d = new Date();
+  var page = window.location.href;
+  var history = window.history.length;
+  var color = screen.colorDepth;
+  var cookie = navigator.cookieEnabled;
+  var cpus = navigator.hardwareConcurrency;
+  var pdf = navigator.pdfViewerEnabled;
+  var local_time  = d.toLocaleTimeString();
+  var user_agent = navigator.userAgent;
+  var screen_res = screen.width + " x " + screen.height
+  var language = navigator.language;
+  var os = navigator.oscpu;
+  var plat = navigator.platform;
+  var app_version = navigator.appVersion;
+  var browser = navigator.appName;
+  document.cookie = "cookie";
+  var test_cookie = document.cookie.match("cookie")
+  document.getElementById("cookie").innerHTML = test_cookie
+  document.getElementById("time").innerHTML = "The current time is " + local_time
+  document.getElementById("user_agent").innerHTML = user_agent
+  document.getElementById("resolution").innerHTML = screen_res
+  document.getElementById("system").innerHTML = os + " / " + plat
+  document.getElementById("browser").innerHTML = browser + " " + app_version
+  document.getElementById("language").innerHTML = "Language: " + language
+  document.getElementById("cpus").innerHTML = "Processors: " + cpus
+  document.getElementById("pdf").innerHTML = "PDF viewer enabled: " + pdf
+  document.getElementById("cookie").innerHTML = "Cookies enabled: " + cookie
+  document.getElementById("page").innerHTML = page
+  document.getElementById("color").innerHTML = "Color depth: " + color
+  document.getElementById("history").innerHTML = "History length: " + history
+  document.getElementById("headers").innerHTML = headers
+}
+</script>
 <style type="text/css">
   body {
-    background-color: #002b36;
+    text-align: center;
+    background: rgb(0,43,54);
     color: #839496;
-    font-family: "Open Sans", "Helvetica Neue", 
-      "Helvetica", "Arial", "sans-serif";
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
   }
   div {
-    background-color: #073642;
-    border-radius: 0.5em;
+    background: linear-gradient(0deg, rgba(0,43,54,1) 0%, rgba(7,54,66,1) 100%);
+    border-radius: 1em;
     margin: 1em auto;
     padding: 2em;
-    width: 600px;
+    width: 400px;
   }
   h1 {
     font-size: 2em;
+    font-weight: bold;
     padding-bottom: 1em;
   }
-</style></head><body><div>
-  <h1>Upload file</h1>
-  <form action="cgi-bin/upload.py"
-        method="POST"
-        enctype="multipart/form-data">
-    <input name="file" type="file">
-    <input name="submit" type="submit" value="Upload">
-  </form>
-  <hr><h1><a href="./upload/">Download files</a></h1>
-</div></body></html>
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style></head>
+<body>
+  <div>
+    <form action="cgi-bin/upload.py"
+      method="POST"
+      enctype="multipart/form-data">
+      <input name="file" type="file">
+      <input name="submit" type="submit" value="Upload">
+    </form>
+    <h1><a href="./upload/">Download files</a></h1>
+    <button onclick="identify()">Identify</button>
+    <p id="time"></p>
+    <p id="user_agent"></p>
+    <p id="resolution"></p>
+    <p id="system"></p>
+    <p id="browser"></p>
+    <p id="language"></p>
+    <p id="cpus"></p>
+    <p id="pdf"></p>
+    <p id="cookie"></p>
+    <p id="color"></p>
+    <p id="history"></p>
+    <p id="page"></p>
+  </div>
+</body></html>

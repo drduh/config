@@ -1,7 +1,28 @@
-# https://github.com/drduh/config/blob/master/grub
+#GRUB_GFXMODE=2160x1350
+GRUB_GFXMODE=2560x1440
 GRUB_DEFAULT=0
 GRUB_TIMEOUT=1
 GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
-GRUB_CMDLINE_LINUX_DEFAULT="slab_nomerge init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1 pti=on vsyscall=none debugfs=off oops=panic module.sig_enforce=1 lockdown=confidentiality mce=0 quiet loglevel=0"
-GRUB_CMDLINE_LINUX=" security=selinux"
-#GRUB_GFXMODE=2160x1350
+GRUB_CMDLINE_LINUX="oops=panic"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX randomize_kstack_offset=on"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX module.sig_enforce=1"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX lockdown=confidentiality"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX slab_nomerge"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX init_on_alloc=1 init_on_free=1"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX mce=0"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX pti=on"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX vsyscall=none"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX page_alloc.shuffle=1"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX quiet loglevel=0"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX debugfs=off"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX spectre_v2=on"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX spec_store_bypass_disable=on"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX tsx=off tsx_async_abort=full,nosmt"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX mds=full,nosmt"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX l1tf=full,force"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX nosmt=force"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX kvm.nx_huge_pages=force"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX random.trust_cpu=off"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX intel_iommu=on amd_iommu=on"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX efi=disable_early_pci_dma"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX ipv6.disable=1"

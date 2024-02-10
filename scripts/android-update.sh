@@ -2,8 +2,10 @@
 # https://github.com/drduh/config/blob/master/scripts/android-update.sh
 #
 # Requires:
-#   pip3 install oscrypto
-#   git clone https://github.com/LineageOS/update_verifier
+# $ git clone https://github.com/LineageOS/update_verifier
+# $ sudo apt install python3.11-venv
+# $ mkdir venv ; python3 -m venv venv
+# $ ./venv/bin/python ./venv/bin/pip install oscrypto
 #
 # Update packages:
 # $ adb install -r package.apk
@@ -28,7 +30,7 @@ set -o nounset
 set -o pipefail
 
 lineagedir="./update_verifier/"
-ostypes="guacamole lemonadep sailfish"
+ostypes="lemonadep sailfish"
 
 AEGIS="C6:DB:80:A8:E1:4E:52:30:C1:DE:84:15:EF:82:0D:13:DC:90:1D:8F:E3:3C:F3:AC:B5:7B:68:62:D8:58:A8:23"
 SIGNAL="29:F3:4E:5F:27:F2:11:B4:24:BC:5B:F9:D6:71:62:C0:EA:FB:A2:DA:35:AF:35:C1:64:16:FC:44:62:76:BA:26"
@@ -38,7 +40,7 @@ NEWPIPE="CB:84:06:9B:D6:81:16:BA:FA:E5:EE:4E:E5:B0:8A:56:7A:A6:D8:98:40:4E:7C:B1
 
 fail () {
   printf "\n\n"
-  tput setaf 1 1 1 ; printf "Error: ${1}\n" ; tput sgr0
+  tput setaf 1 ; printf "Error: ${1}\n" ; tput sgr0
   exit 1
 }
 
@@ -89,7 +91,6 @@ update_pkgs() {
   keytool -printcert -jarfile ${aegis_file}.apk | grep -q ${AEGIS} || fail "could not verify Aegis"
   printf "${aegis_file} complete\n"
 
-
   # Firefox
   ff_vers=$(curl -s "https://api.github.com/repos/mozilla-mobile/fenix/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1 | tr -d "v")
   ff_file="fenix-${ff_vers}-arm64-v8a.apk"
@@ -109,7 +110,9 @@ update_os() {
   printf "\n"
 
   for os in ${ostypes} ; do
-    lineage_os=$(curl -s "https://download.lineageos.org/${os}" | grep ".zip" | grep_url | head -n1)
+    lineage_os=$(curl -s \
+        "https://download.lineageos.org/api/v2/devices/${os}/builds" | \
+            sed 's/","/\n/g' | grep_url | head -1)
     if [[ ! -f $(basename ${lineage_os}) ]] ; then
       printf "Downloading ${lineage_os} ... "
       curl -sLfO ${lineage_os} ; fi
@@ -117,8 +120,9 @@ update_os() {
     if [[ ! -d ${lineagedir} ]] ; then
       echo "No Lineage update verifier" ; exit 1 ; fi
 
-    python3 ${lineagedir}/update_verifier.py \
-        ${lineagedir}/lineageos_pubkey $(basename ${lineage_os}) 2>/dev/null || fail "could not verify ${lineage_os}"
+    ./venv/bin/python ${lineagedir}/update_verifier.py \
+        ${lineagedir}/lineageos_pubkey $(basename ${lineage_os}) 2>/dev/null || \
+            fail "could not verify ${lineage_os}"
 
     printf "$(basename ${lineage_os}) complete\n"
   done
@@ -126,6 +130,6 @@ update_os() {
 
 update_os
 update_pkgs
-hash_pkgs
+#hash_pkgs
 
-printf "\n" ; tput setaf 2 2 2 ; printf "Done\n" ; tput sgr0
+printf "\n" ; tput setaf 2 ; printf "Done\n" ; tput sgr0
