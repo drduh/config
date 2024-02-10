@@ -83,7 +83,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
 else
   printf "\ntesting blocked sites ...\n"
   for ws in $(/bin/ls ../asns) ; do
-    printf "$ws.com: "
+    printf "\n$ws.com: "
     curl -v \
       https://$(dig a $ws.com @$dns +short|head -n1) 2>&1 | \
         grep "Permission denied" || printf "BLOCK FAILED"

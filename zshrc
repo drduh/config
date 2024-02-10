@@ -13,7 +13,7 @@ SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
 NOW="$(date +%F-%H:%M:%S)"
 TODAY="$(date +%F)"
 TS="$(date +%s)"
-NETWORK="$(/sbin/ifconfig | head -n1 | awk -F: '{print $1}')"
+NETWORK="$(/sbin/ifconfig | grep UP | grep -v LOOPBACK | awk -F: '{print $1}')"
 ROOT="$(command -v sudo || command -v doas)"
 SERVER="http://192.168.1.1"
 DOWNLOAD="${SERVER}/upload/"
@@ -83,7 +83,6 @@ alias -g U="| uniq"
 alias -g V="| vim -"
 alias -g XC="| xclip -i"
 alias -g XP="| xclip -o"
-
 alias l="ls -ltrhsa"
 alias ls="ls -lha"
 alias lo="libreoffice"
@@ -94,18 +93,20 @@ alias cp="cp -i"
 alias md="mkdir -p"
 alias mv="mv -i"
 alias p="python3"
+alias ping1="ping -4 -c3 -i.5 -v 1.1.1.1"
+alias ping8="ping -4 -c3 -i.5 -v 8.8.8.8"
 alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bios="${ROOT} dmidecode -s bios-version"
-alias cr="chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
+alias cr="firejail --dbus-user=none chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
 alias dif="diff"
 alias ea="cat /proc/sys/kernel/random/entropy_avail"
-alias feh="feh --auto-rotate --draw-filename --recursive --scale-down --verbose"
+alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --verbose"
 alias ff="firefox --ProfileManager --no-remote"
 alias ftb="firejail --profile=firejailed-tor-browser ${HOME}/Browser/start-tor-browser"
 alias gitdiff="git diff"
-alias gitpull="git gull"
+alias gitpull="git pull"
 alias gitpush="git push"
 alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --text --color"
@@ -113,10 +114,11 @@ alias mnt="${ROOT} mount -o uid=1000 ${1}"
 alias resize_view="xrandr --output Virtual1 --mode 1600x1200"
 alias tb="thunderbird --ProfileManager --no-remote"
 alias td="mkdir ${TODAY} ; cd ${TODAY}"
+alias vm="virt-manager"
+alias wifich="iwlist ${NETWORK} channel | grep Current | awk -F: '{print \$2}'"
+alias x="startx"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4 --format 'best[height<=720]'"
 alias yt_max="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4"
-alias vm="virt-manager"
-alias x="startx"
 
 alias x230_read_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r bottom.rom.${TODAY}"
 alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r top.rom.${TODAY}"
@@ -236,7 +238,7 @@ function cidr {
     grep "CIDR:" }
 
 function colours {
-  for i in {255..001} ; do \
+  for i in {001..255} ; do \
     printf "\x1b[38;5;${i}m${i}\n" | \
     tr "\n" " " ; done | fold -w 255 }
 
@@ -295,7 +297,8 @@ function gas {  # get CIDRs for AS number
   whois -h whois.radb.net '!g'${1} }
 
 function myip {
-  curl -sq "https://icanhazip.com/" }
+  curl -sq "https://icanhazip.com/" || \
+    dig @resolver1.opendns.com ANY myip.opendns.com +short }
 
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
@@ -311,12 +314,12 @@ function nonlocal () {
 }
 
 function rand {
-  for item in '01' \
+  for item in \
     '[:digit:]' '[:upper:]' \
     '[:xdigit:]' '[:alnum:]' '[:graph:]' ; do \
       tr -dc "${item}" < /dev/urandom | \
-      fold -w 80 | head -n 3 | \
-      sed "-es/./ /"{1..80..20} ; done }
+      fold -w 64 | head -n 3 | \
+      sed "-es/./ /"{1..64..16} ; done }
 
 function rand_mac {
   openssl rand -hex 6 | sed "s/\(..\)/\1:/g; s/.$//" }

@@ -16,13 +16,14 @@ if [[ ! -f "openssl.cnf" ]] ; then
 fi
 
 readonly OPENSSL="/usr/bin/openssl"
+readonly CA_DAYS="3653"
+readonly CERT_DAYS="90"
 readonly DEFAULT_MD="sha512"
 readonly KEYSIZE="4096"
-readonly CA_DAYS="1000"
-readonly CERT_DAYS="100"
-readonly CN_AUTHORITY=$(tr -dc '[:xdigit:]' < /dev/urandom | fold -w 10 | head -n1)
-readonly CN_SERVER=$(tr -dc '[:xdigit:]' < /dev/urandom | fold -w 10 | head -n1)
-readonly CN_CLIENT=$(tr -dc '[:xdigit:]' < /dev/urandom | fold -w 10 | head -n1)
+
+for name in CN_AUTHORITY CN_SERVER CN_CLIENT ; do
+  readonly $name=$(tr -dc '[:xdigit:]' < /dev/urandom | fold -w 10 | head -n1)
+done
 
 for key in ca client server ; do
   ${OPENSSL} genrsa -out $key.key ${KEYSIZE}

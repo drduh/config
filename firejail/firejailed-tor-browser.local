@@ -1,0 +1,4 @@
+# https://github.com/drduh/config/blob/master/firejail/firejailed-tor-browser.local
+# un-comment the following line to allow add-on installation/updates
+#noblacklist /tmp
+include firejailed-tor-browser-x11.inc
