@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/user.action
+# https://github.com/drduh/config/blob/master/privoxy/user.action
 # https://www.privoxy.org/user-manual/actions-file.html
 # http://config.privoxy.org/show-url-info
 {{ alias }}
@@ -9,122 +9,67 @@ allow-popups        = -filter{all-popups} -filter{unsolicited-popups}
 +block-as-image     = +block{Blocked image request.} +handle-as-image
 -block-as-image     = -block
 fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-referer -prevent-compression
+
 { fragile }
-connectivitycheck.gstatic.com/generate_204
-www.google.com/gen_204
-.ubuntu.com
-{ +block{html} }
-/(.*/)adhandler/
-/(.*/)partnerads.*.js
-/(aff|adx|scrollad).php
-/.*adEvents.*
-/.*adimage*/*
-/.*ads.js
-/.*ads/.*
-/.*adserver/*
-/.*adtech.*
-/.*advert.js.*
-/.*advtcontent*/*
-/.*affiliate/
-/.*analytics.js.*
-/.*banner*/*
-/.*email=.*
-/.*facebook.*
-/.*fb.js.*
-/.*linkedin.*
-/.*php?stats.*
-/.*rate.php
-/.*shareBar.js
-/.*smartads.*
-/.*sponsor*/*
-/.*track/ping.*
-/.*tracking.*.js.*
-/.adserv/
-/?wordfence_logHuman.*
-/FloatingAd.*.js
-/ad-loader.js.*
-/ad.html
-/adGallery.html
-/adReload.html
-/ad_index_.*
-/adheader.*
-/adhtml/.*
-/adplayer/*
-/adtest/*
-/adunit.php.*
-/advert*/*
-/affiliate.js
-/ajax/ligatus/*
-/analytics/
-/banner*.*
-/beacon.*
-/cms_media/module_adbanner/
-/cnt.php.*
-/connect.ashx.*
-/displayads/
-/extjs/smartad.*\.js
-/gather.asp.*
-/gfx/layer/*
-/gujAd/
-/log/webtracker
-/metriweb.*
-/track.*
-/urldata.act.*
-/vtrack/
-ad.
-adimg.
-admonkey.
-ads.
-ads.*.co.*/
-ads.*.com/
-ads2.
-adserver.
-analytics.*.
-emailtrk.*
-log.pinterest.com
+cdn.cloudflare.net
+cdn.optimizely.com
+dnscrypt.info
+edgekey.net
+edgesuite.net
+fastly.net
+github.com
+github.io
+google.com
+gstatic.com
+gvt0.com
+gvt1.com
+gvt2.com
+gvt3.com
+ocsp.apple.com
+raw.githubusercontent.com
+storage.googleapis.com
+ubuntu.com
+youtu.be
+youtube.com
+
+{ +block{facebook} }
+.facebook.
+.fb.
+.fbcdn.
+
+{ +block{ads} }
+ad.*
+adnxs.*
+ads.*
+analytics.*
+appdynamics.*
+banner.*
+banners.*
+beacon.*
+click.*
+clickmeter.*
+count.*
+counter.*
+creatives.*
+metric.*
+metrics.*
+mmetrics.*
+oas.*
+oascentral.*
 pixel.*
-{ +block{image} +handle-as-image }
-/.*1x1.*
-/.*beacon.*
-/.*buttons.js
-/.*facebook.*
-/.*fb-icon.*
-/.*follow_us.*
-/.*images/social.*
-/.*linkedin.*
-/.*loading.gif
-/.*measure.gif
-/.*myspace.*
-/.*share-buttons.*
-/.*share-this.*
-/.*static/button.*
-/.*tracking-pixel.*
-/adv_banner_.*
-/assets/social-.*
-/banner.php
-/btn_ad_.*
-/cleardot.gif
-/followus-buttons.*
-/iframe/ad/.*
-/iframe/ads/.*
-/image/ad/.*
-/images/ad/.*
-/images/ads.*
-/images/ads/.*
-/images/adv.*
-/images/banners/
-/images/sponsored/.*
-/images_ad/.*
-/img.ads.*
-/img/ad-.*
-/img/ad_.*
-/img/social.*
-/imgad_.*
-/socialicons.*
-{+set-image-blocker{http://10.8.1.1/}}
-/.*.[jpg|jpeg|gif|png|tif|tiff]$
+smartadserver.*
+smetrics.*
+stats.*
+tag.*
+telemetry.*
+track.*
+tracker.*
+tracking.*
+trk.*
+
 { +redirect{s@google.com/amp/s/@@} }
 google.com/amp/s/.*
+
 { +redirect{s@http://@https://@} }
 .0x0.st
 .4are.com
@@ -230,7 +175,6 @@ google.com/amp/s/.*
 .cryptographyengineering.com
 .cryptomuseum.com
 .cs.cornell.edu
-.custhelp.com
 .dailycaller.com
 .db.tt
 .dd-wrt.com
@@ -316,6 +260,7 @@ google.com/amp/s/.*
 .gravatar.com
 .greenhouse.io
 .gstatic.com
+.gvt0.com
 .gvt1.com
 .gvt2.com
 .gvt3.com
@@ -413,8 +358,10 @@ google.com/amp/s/.*
 .newegg.com
 .neweggimages.com
 .nflxext.com
+.nh.us
 .nih.gov
 .noaa.gov
+.nordstrom.com
 .npr.org
 .nsf.gov
 .nxlfimg.net
@@ -436,6 +383,7 @@ google.com/amp/s/.*
 .ovh.net
 .ovh.us
 .parallels.com
+.patreon.com
 .paypal.com
 .pcengines.ch
 .pcpartpicker.com
@@ -644,8 +592,13 @@ wiki.debian.org
 www.debian.org
 www.google.com
 www.openbsd.org
+
 { -redirect{android} }
 connectivitycheck.gstatic.com/generate_204
+
 #{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36}}
 #{+hide-user-agent{Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36}}
 #/
+
+#{+set-image-blocker{http://10.8.1.1/}}
+#/.*.[jpg|jpeg|gif|png|webp]$

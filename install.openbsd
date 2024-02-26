@@ -28,6 +28,7 @@ openra
 p5-Image-ExifTool
 pciutils
 pcsc-tools
+pdfid
 pfstat
 pftop
 poppler-utils
@@ -38,8 +39,7 @@ rtl-sdr
 scrot
 sleuthkit
 thunderbird
-tor
-tor-browser
+tree
 tshark
 unzip
 usbutils

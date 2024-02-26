@@ -42,6 +42,9 @@ export LESSHISTFILE=-
 export LESSSECURE=1
 export PYTHONSTARTUP="${HOME}/.pythonrc"
 
+export GOPATH="${HOME}/go"
+export GOBIN="${HOME}/go/bin"
+
 #export http_proxy="127.0.0.1:8118"
 #export https_proxy="127.0.0.1:8118"
 
@@ -99,18 +102,22 @@ alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bios="${ROOT} dmidecode -s bios-version"
-alias cr="firejail --dbus-user=none chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2 --cipher-suite-blacklist=0x009c,0x009d,0x002f,0x0035,0x000a,0xc013,0xc014"
+alias cr="firejail --dbus-user=none chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2"
 alias dif="diff"
-alias ea="cat /proc/sys/kernel/random/entropy_avail"
 alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --verbose"
 alias ff="firefox --ProfileManager --no-remote"
 alias ftb="firejail --profile=firejailed-tor-browser ${HOME}/Browser/start-tor-browser"
+alias gitadd="git add"
+alias gitcommit="git commit"
 alias gitdiff="git diff"
 alias gitpull="git pull"
 alias gitpush="git push"
+alias gitstatus="git status"
 alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
-alias grep="grep --text --color"
+alias grep="grep --color --text"
+alias grepv="grep --invert-match"
 alias mnt="${ROOT} mount -o uid=1000 ${1}"
+alias rebootfw="systemctl reboot --firmware-setup"
 alias resize_view="xrandr --output Virtual1 --mode 1600x1200"
 alias tb="thunderbird --ProfileManager --no-remote"
 alias td="mkdir ${TODAY} ; cd ${TODAY}"
@@ -267,22 +274,19 @@ function dump_udp {
     "udp and not port 443" }
 
 function dump_dns {
-  tshark -Y "dns.flags.response == 1" -Tfields \
-    -e frame.time_delta -e dns.qry.name -e dns.a \
-      -Eseparator=, }
+  tshark -i ${NETWORK} -Y "dns.flags.response == 1" -Tfields \
+    -e frame.time_delta -e dns.qry.name -e dns.a -Eseparator=, }
 
 function dump_http {
-  tshark -Y "http.request or http.response" -Tfields \
+  tshark -i ${NETWORK} -Y "http.request or http.response" -Tfields \
     -e ip.dst -e http.request.full_uri -e http.request.method \
-      -e http.response.code -e http.response.phrase \
-        -Eseparator=, }
+      -e http.response.code -e http.response.phrase -Eseparator=, }
 
 function dump_ssl {
-  tshark -Y "ssl.handshake.certificate" -Tfields \
+  tshark -i ${NETWORK} -Y "ssl.handshake.certificate" -Tfields \
     -e ip.src -e x509sat.uTF8String -e x509sat.printableString \
       -e x509sat.universalString -e x509sat.IA5String \
-        -e x509sat.teletexString \
-          -Eseparator=, }
+        -e x509sat.teletexString -Eseparator=, }
 
 function e {  # appx bits of entropy: e <chars> <length>
   awk -v c=${1} -v l=${2} "BEGIN { print log(c^l)/log(2) }" }
@@ -297,7 +301,7 @@ function gas {  # get CIDRs for AS number
   whois -h whois.radb.net '!g'${1} }
 
 function myip {
-  curl -sq "https://icanhazip.com/" || \
+  curl -s "https://icanhazip.com/" || \
     dig @resolver1.opendns.com ANY myip.opendns.com +short }
 
 function pdf {
@@ -313,6 +317,11 @@ function nonlocal () {
     egrep -e "[1,2]|::"
 }
 
+function nxdomains {
+  for x in $(${ROOT} grep NXDOMAIN /var/log/dnsmasq | \
+    awk '{print $6}' | sort | uniq) ; do printf "0.0.0.0 $x\n" ; done
+}
+
 function rand {
   for item in \
     '[:digit:]' '[:upper:]' \
@@ -323,6 +332,11 @@ function rand {
 
 function rand_mac {
   openssl rand -hex 6 | sed "s/\(..\)/\1:/g; s/.$//" }
+
+function rand_pass {
+  LC_ALL=C tr -dc 'A-Z1-9' < /dev/urandom | \
+    tr -d "1IOS5U" | fold -w 30 | head -n10 | \
+    sed "-es/./ /"{1..26..5} | cut -c2- | tr " " "-" }
 
 function resize_ff {
   xdotool windowsize \
@@ -338,12 +352,12 @@ function rs {
     --progress --stats --ipv4 --compress \
     --log-file=$(mktemp) "${@}" }
 
-function secret {  # list preferred id last
+function secret {  # preferred id last
   output="${HOME}/$(basename ${1}).$(date +%F).enc"
   gpg --encrypt --armor \
     --output ${output} \
-    -r 0xFF3E7D88647EBCDB \
-    -r github@duh.to \
+    -r 0xFF00000000000000 \
+    -r yubikey@example \
     "${1}" && echo "${1} -> ${output}" }
 
 function sort_ip {
@@ -363,7 +377,7 @@ function download () {
   curl -O ${DOWNLOAD}/"${@}" }
 
 function upload {
-   curl -sq -F "file=@${@}" ${UPLOAD} | \
+   curl -s -F "file=@${@}" ${UPLOAD} | \
      grep -q "Saved" && printf "Uploaded ${@}\n" }
 
 function vpn {
@@ -378,6 +392,10 @@ function zshaddhistory {
     && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|convert|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|download|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|ffplay|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|libreoffice|lp|ls|mail|make|man|mkdir|mnt|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|ykman|yt|./pwd.sh|./purse.sh)
   ]]
 }
+
+function zzz {
+  /usr/sbin/zzz 2>/dev/null || \
+    systemctl suspend }
 
 function path {
   if [[ -d "${1}" ]] ; then
@@ -407,8 +425,6 @@ path "/bin"
 #export HOMEBREW_NO_ANALYTICS=1
 #export HOMEBREW_NO_AUTO_UPDATE=1
 #export HOMEBREW_NO_INSECURE_REDIRECT=1
-#export GOPATH="${HOME}/go"
-#export GOBIN="${HOME}/go/bin"
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent
