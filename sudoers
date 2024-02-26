@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/sudoers
+# https://www.sudo.ws/docs/man/sudoers.man/
 Defaults env_reset
 Defaults mail_badpass
 Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

@@ -1,2 +1,4 @@
 *.apk
 *.zip
+update_verifier/
+venv/

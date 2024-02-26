@@ -36,8 +36,9 @@ gcc
 geeqie
 gimp
 git
-gnupg2
+gnat
 gnupg-agent
+gnupg2
 gpredict
 hackrf
 hostapd
@@ -75,16 +76,17 @@ minicom
 mpv
 mupdf
 ncal
-netcat-openbsd
 net-tools
+netcat-openbsd
 nmap
 ntp
 ntpdate
 openssl
+paperkey
 parted
 pciutils
-pcscd
 pcsc-tools
+pcscd
 pkg-config
 poppler-utils
 printer-driver-brlaser
@@ -97,6 +99,7 @@ python3-pip
 python3-pyscard
 qemu-system-x86
 qpdf
+qrencode
 redshift
 rename
 rfkill
@@ -142,5 +145,6 @@ xfce4-power-manager
 xorg
 yubikey-manager
 yubikey-personalization
+zbar-tools
 zlib1g-dev
 zsh

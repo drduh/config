@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/domains/mozilla
+# https://support.mozilla.org/en-US/kb/domains-allow-firefox
 #address=/atp.fox/
 #address=/firefox.com-v2.edgesuite.net/
 #address=/firefox.com/
@@ -21,9 +22,11 @@ address=/detectportal.firefox.com/
 address=/dynamicua.cdn.mozilla.net/
 address=/experiments.mozilla.org/
 address=/fhr.cdn.mozilla.net/
+address=/firefox-settings-attachments.cdn.mozilla.net/
 address=/getpocket-cdn.prod.mozaws.net/
 address=/getpocket.cdn.mozilla.net/
 address=/getpocket.com/
+address=/img-getpocket.cdn.mozilla.net/
 address=/input.mozilla.org/
 address=/install.mozilla.org/
 address=/mozorg.cdn.mozilla.net/
@@ -33,6 +36,7 @@ address=/services.mozilla.com/
 address=/snippets.cdn.mozilla.net/
 address=/stage.mozaws.net/
 address=/sumo.mozilla.net/
+address=/sync.services.mozilla.com/
 address=/tbpl.mozilla.org/
 address=/telemetry-experiment.cdn.mozilla.net/
 address=/telemetry.mozilla.org/
