@@ -16,7 +16,7 @@ user_pref("app.update.auto", false);
 user_pref("app.update.background.scheduling.enabled", false);
 user_pref("breakpad.reportURL", "");
 user_pref("browser.display.use_document_fonts", 0);
-user_pref("browser.eme.ui.enabled", false)
+user_pref("browser.eme.ui.enabled", false);
 user_pref("browser.ping-centre.telemetry", false);
 user_pref("browser.safebrowsing.downloads.enabled", false);
 user_pref("browser.safebrowsing.downloads.remote.enabled", false);

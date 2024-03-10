@@ -13,7 +13,7 @@ SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
 NOW="$(date +%F-%H:%M:%S)"
 TODAY="$(date +%F)"
 TS="$(date +%s)"
-NETWORK="$(/sbin/ifconfig | grep UP | grep -v LOOPBACK | awk -F: '{print $1}')"
+NETWORK="$(/sbin/ifconfig | grep UP | grep -Ev 'virbr|LOOP' | awk -F: '{print $1}')"
 ROOT="$(command -v sudo || command -v doas)"
 SERVER="http://192.168.1.1"
 DOWNLOAD="${SERVER}/upload/"
@@ -98,13 +98,14 @@ alias mv="mv -i"
 alias p="python3"
 alias ping1="ping -4 -c3 -i.5 -v 1.1.1.1"
 alias ping8="ping -4 -c3 -i.5 -v 8.8.8.8"
+alias rebootfw="systemctl reboot --firmware-setup"
 alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bios="${ROOT} dmidecode -s bios-version"
 alias cr="firejail --dbus-user=none chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2"
 alias dif="diff"
-alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --verbose"
+alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --image-bg black --verbose"
 alias ff="firefox --ProfileManager --no-remote"
 alias ftb="firejail --profile=firejailed-tor-browser ${HOME}/Browser/start-tor-browser"
 alias gitadd="git add"
@@ -185,12 +186,10 @@ function dedupe {
     sort | uniq -w32 -dD }
 
 function domain () {  # truncate to top level domain
-  awk -F "." '{print ( $(NF-1)"."$(NF) )}' "${1}" }
+  awk -F "." '!/^\s*$/{print ( $(NF-1)"."$(NF) )}' "${1}" }
 
 function gpg_restart {
-  pkill gpg
-  pkill pinentry
-  pkill ssh-agent
+  pkill "gpg|pinentry|ssh-agent"
   eval $(gpg-agent --daemon --enable-ssh-support) }
 
 function lock {
@@ -248,6 +247,9 @@ function colours {
   for i in {001..255} ; do \
     printf "\x1b[38;5;${i}m${i}\n" | \
     tr "\n" " " ; done | fold -w 255 }
+
+function convert_epoch {
+  date -d "@${1}" }
 
 function convert_secs {
   ((h=${1}/3600)) ; ((m=(${1}%3600)/60)) ; ((s=${1}%60))
@@ -314,13 +316,11 @@ function png2jpg {
 
 function nonlocal () {
   egrep -ve "^#|^255.255.255.255|^127.|^0.|^::1|^ff..::|^fe80::" "${1}" | \
-    egrep -e "[1,2]|::"
-}
+    egrep -e "[1,2]|::" }
 
 function nxdomains {
   for x in $(${ROOT} grep NXDOMAIN /var/log/dnsmasq | \
-    awk '{print $6}' | sort | uniq) ; do printf "0.0.0.0 $x\n" ; done
-}
+    awk '{print $6}' | sort | uniq) ; do printf "0.0.0.0 $x\n" ; done }
 
 function rand {
   for item in \

@@ -1,25 +1,24 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/master/scripts/pki.sh
 # https://tools.ietf.org/html/rfc5280
-
 set -o errtrace
 set -o nounset
 set -o pipefail
-
 #set -x # uncomment to debug
 
 umask 077
 
-if [[ ! -f "openssl.cnf" ]] ; then
-  printf "need config/openssl.cnf\n"
-  exit 1
-fi
-
 readonly OPENSSL="/usr/bin/openssl"
+readonly OPENSSL_CONF="../openssl.cnf"
 readonly CA_DAYS="3653"
 readonly CERT_DAYS="90"
 readonly DEFAULT_MD="sha512"
 readonly KEYSIZE="4096"
+
+if [[ ! -f ${OPENSSL_CONF} ]] ; then
+  printf "need config/openssl.cnf\n"
+  exit 1
+fi
 
 for name in CN_AUTHORITY CN_SERVER CN_CLIENT ; do
   readonly $name=$(tr -dc '[:xdigit:]' < /dev/urandom | fold -w 10 | head -n1)
@@ -31,7 +30,7 @@ done
 
 ${OPENSSL} req -new -x509 -days ${CA_DAYS} -${DEFAULT_MD} \
   -subj "/CN=${CN_AUTHORITY}" \
-  -config openssl.cnf -extensions v3_ca \
+  -config ${OPENSSL_CONF} -extensions v3_ca \
   -set_serial "0x$(${OPENSSL} rand -hex 32)" \
   -key ca.key -out ca.pem
 
@@ -44,13 +43,13 @@ ${OPENSSL} req -new -${DEFAULT_MD} \
   -key client.key -out client.csr
 
 ${OPENSSL} x509 -req -days ${CERT_DAYS} -${DEFAULT_MD} \
-  -extfile openssl.cnf -extensions tls_server \
+  -extfile ${OPENSSL_CONF} -extensions tls_server \
   -CA ca.pem -CAkey ca.key \
   -set_serial "0x$(${OPENSSL} rand -hex 32)" \
   -in server.csr -out server.pem
 
 ${OPENSSL} x509 -req -days ${CERT_DAYS} -${DEFAULT_MD} \
-  -extfile openssl.cnf -extensions tls_client \
+  -extfile ${OPENSSL_CONF} -extensions tls_client \
   -CA ca.pem -CAkey ca.key \
   -set_serial "0x$(${OPENSSL} rand -hex 32)" \
   -in client.csr -out client.pem
