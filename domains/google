@@ -87,10 +87,13 @@
 #address=/chromebook.com/
 #address=/chromecast.com/
 #address=/chromium.org/
+#address=/chronicle.security/
 #address=/codespot.com/
 #address=/csi.gstatic.com/
 #address=/feedproxy.google.com/
 #address=/forms.gle/
+#address=/g.cn/
+#address=/g.co/
 #address=/g.page/
 #address=/ggpht.cn/
 #address=/ggpht.com/
@@ -244,6 +247,7 @@
 #address=/google.hu/
 #address=/google.ie/
 #address=/google.im/
+#address=/google.in/
 #address=/google.io/
 #address=/google.iq/
 #address=/google.is/
@@ -315,6 +319,7 @@
 #address=/googleblog.com/
 #address=/googlecapital.com/
 #address=/googlecode.com/
+#address=/googledownloads.cn/
 #address=/googleearth.cn/
 #address=/googleearth.com.cn/
 #address=/googleearth.com/
@@ -327,6 +332,7 @@
 #address=/googlemaps.com/
 #address=/googlemember.com/
 #address=/googlemembers.com/
+#address=/googleoptimize.com/
 #address=/googleplay.com/
 #address=/googlescholar.cn/
 #address=/googlescholar.com.cn/
@@ -338,6 +344,8 @@
 #address=/googlevideo.cn/
 #address=/googlevideo.com.cn/
 #address=/googlevideo.com/
+#address=/googleweblight.in/
+#address=/googlezip.net/
 #address=/gstatic.cn/
 #address=/gstatic.com/
 #address=/gstatic.org/
@@ -348,6 +356,7 @@
 #address=/gvt3.com/
 #address=/localguidesconnect.com/
 #address=/madewithcode.com/
+#address=/oo.gl/
 #address=/pagespeedmobilizer.com/
 #address=/panoramio.com/
 #address=/picasa.com/
@@ -356,6 +365,7 @@
 #address=/sketchup.com/
 #address=/telephony.goog/
 #address=/urchin.com/
+#address=/virustotal.com/
 #address=/web.app/
 #address=/withgoogle.com/
 #address=/withyoutube.com/

@@ -1,6 +1,6 @@
 #!/bin/sh
 # https://github.com/drduh/config/blob/master/xsession
-# https://manpages.debian.org/man/Xsession
+# https://manpages.debian.org/bookworm/x11-common/Xsession.5.en.html
 set -x
 [ -f ~/.fehbg ] && /bin/sh ~/.fehbg &
 #xidle &

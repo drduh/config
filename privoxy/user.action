@@ -1,96 +1,117 @@
 # https://github.com/drduh/config/blob/master/privoxy/user.action
 # https://www.privoxy.org/user-manual/actions-file.html
 # http://config.privoxy.org/show-url-info
-{{ alias }}
-+crunch-all-cookies = +crunch-incoming-cookies +crunch-outgoing-cookies
--crunch-all-cookies = -crunch-incoming-cookies -crunch-outgoing-cookies
-allow-all-cookies   = -crunch-all-cookies -session-cookies-only -filter{content-cookies}
-allow-popups        = -filter{all-popups} -filter{unsolicited-popups}
-+block-as-image     = +block{Blocked image request.} +handle-as-image
--block-as-image     = -block
-fragile             = -block -crunch-all-cookies -filter -fast-redirects -hide-referer -prevent-compression
 
-{ fragile }
-cdn.cloudflare.net
-cdn.optimizely.com
-dnscrypt.info
-edgekey.net
-edgesuite.net
-fastly.net
-github.com
-github.io
-google.com
-gstatic.com
-gvt0.com
-gvt1.com
-gvt2.com
-gvt3.com
-ocsp.apple.com
-raw.githubusercontent.com
-storage.googleapis.com
-ubuntu.com
-youtu.be
-youtube.com
+#{ +block{all} }
+#.
 
 { +block{facebook} }
-.facebook.
+.facebook*.
 .fb.
-.fbcdn.
+.fbcdn*.
+.fbinfra.
+.fbsbx.
+.fbsv.
+.tfbnw.
+.thefacebook.
+fb*.akamaihd.net
 
 { +block{ads} }
-ad.*
-adnxs.*
-ads.*
-analytics.*
-appdynamics.*
-banner.*
-banners.*
-beacon.*
-click.*
-clickmeter.*
-count.*
-counter.*
-creatives.*
-metric.*
-metrics.*
-mmetrics.*
-oas.*
-oascentral.*
-pixel.*
-smartadserver.*
-smetrics.*
-stats.*
-tag.*
-telemetry.*
-track.*
-tracker.*
-tracking.*
-trk.*
+ad.
+adnxs.
+ads.
+analytics.
+appdynamics.
+banner.
+banners.
+beacon.
+click.
+clickmeter.
+count.
+counter.
+creatives.
+metric.
+metrics.
+mmetrics.
+oas.
+oascentral.
+pixel.
+smartadserver.
+smetrics.
+stats.
+tag.
+telemetry.
+track.
+tracker.
+tracking.
+trk.
 
-{ +redirect{s@google.com/amp/s/@@} }
-google.com/amp/s/.*
+{ -block }
+10.0.
+172.16.
+192.168.
+.amazontrust.com
+.arpa
+.gov
+.lencr.org
+ntp.org
+ocsp.
+pki.goog
+.ubuntu.com
 
-{ +redirect{s@http://@https://@} }
+{ -block +redirect{s@http://@https://@} }
+#.com
+#.net
+#.org
+#.edu
+#.ai
+#.dev
+#.fyi
+#.gg
+#.info
+#.io
+#.mil
+#.tech
+#.us
+.*cdn.com
+.*media.com
+.*news.com
+.*wiki.com
 .0x0.st
 .4are.com
+.aaplimg.com
 .abc.net.au
+.ac.jp
+.ac.uk
 .accuweather.com
+.acm.org
+.adblockplus.org
 .adobe.com
 .ae.com
 .aexp-static.com
 .aftership.com
+.akadns.net
+.akadns88.net
+.akamai.com
+.akamai.net
+.akamaiedge.net
 .akamaihd.net
+.akamaitech.net
+.akamaized.net
+.algolia.
 .alternet.org
 .amazon.com
 .amazonaws.com
 .amd.com
 .americanbar.org
 .americanexpress.com
+.amiunique.org
 .amsecusa.com
 .android.com
 .annualcreditreport.com
 .answers.com
 .anthropologie.com
+.ap.org
 .apache.org
 .appimage.org
 .apple.com
@@ -101,6 +122,7 @@ google.com/amp/s/.*
 .archlinux.org
 .arduino.cc
 .arstechnica.com
+.arxiv.org
 .askubuntu.com
 .asus.com
 .ati.com
@@ -126,8 +148,7 @@ google.com/amp/s/.*
 .blogblog.com
 .blogger.com
 .bloglovin.com
-.blogspot.co.uk
-.blogspot.com
+.blogspot.
 .blu-ray.com
 .bootc.net
 .bootstrapcdn.com
@@ -142,9 +163,9 @@ google.com/amp/s/.*
 .canadapost.ca
 .canon.com
 .cbc.ca
-.cbsnews.com
 .ccc.de
 .cdc.gov
+.cdn-apple.com
 .cdninstagram.com
 .cdnme.se
 .cdnst.net
@@ -156,12 +177,13 @@ google.com/amp/s/.*
 .cia.gov
 .cisco.com
 .cleverbot.com
-.cloudflare.com
+.cloudflare.
 .cloudfront.net
 .cnbc.com
 .cnet.com
 .cnn.com
 .cnn.io
+.codeberg.org
 .colorado.gov
 .colostate.edu
 .comcast.net
@@ -175,6 +197,8 @@ google.com/amp/s/.*
 .cryptographyengineering.com
 .cryptomuseum.com
 .cs.cornell.edu
+.ctfassets.net
+.custhelp.com
 .dailycaller.com
 .db.tt
 .dd-wrt.com
@@ -185,16 +209,22 @@ google.com/amp/s/.*
 .delta.com
 .dhs.gov
 .digitalgov.gov
+.doi.org
 .dropbox.com
 .dropboxatwork.com
 .dropboxteam.com
 .duckduckgo.com
 .duosecurity.com
 .ebay.com
+.ebaycdn.net
+.ebaydesc.com
+.ebayimg.com
+.ebayrtm.com
 .ebaystatic.com
 .ecfr.gov
 .economist.com
 .edgekey.net
+.edgesuite.net
 .editmysite.com
 .edx.org
 .eff.org
@@ -203,9 +233,12 @@ google.com/amp/s/.*
 .eso.org
 .etsy.com
 .etsystatic.com
+.expedia.com
 .export.gov
+.fandom.com
 .fastly.com
 .fastly.net
+.fastlydns.net
 .fbi.gov
 .fbinaa.org
 .fda.gov
@@ -218,6 +251,7 @@ google.com/amp/s/.*
 .flickr.net
 .flightradar24.com
 .foreignpolicy.com
+.freebsd.org
 .ftc.gov
 .garmin.com
 .generac.com
@@ -244,11 +278,7 @@ google.com/amp/s/.*
 .golang.com
 .golang.org
 .goo.gl
-.google.ca
-.google.co.uk
-.google.com
-.google.de
-.google.net
+.google.
 .googleapis.com
 .googleblog.com
 .googlecode.com
@@ -260,6 +290,7 @@ google.com/amp/s/.*
 .gravatar.com
 .greenhouse.io
 .gstatic.com
+.guim.co.uk
 .gvt0.com
 .gvt1.com
 .gvt2.com
@@ -267,6 +298,7 @@ google.com/amp/s/.*
 .hashicorp.com
 .haxx.se
 .hbr.org
+.he.net
 .hireright.com
 .homedepot.com
 .homefinity.com
@@ -279,6 +311,7 @@ google.com/amp/s/.*
 .ibm.com
 .icanhazip.com
 .icann.org
+.icannwiki.org
 .ietf.org
 .ign.com
 .ihouseelite.com
@@ -293,6 +326,7 @@ google.com/amp/s/.*
 .instagram.com
 .intel.com
 .intuit.com
+.invidious.io
 .irs.gov
 .isc.org
 .ixquick.com
@@ -314,9 +348,12 @@ google.com/amp/s/.*
 .lenovo.com
 .letsencrypt.org
 .levels.fyi
+.lever.co
 .lexus.com
+.lg.com
 .lighttpd.net
 .linuxforums.org
+.linuxjournal.com
 .list-manage.com
 .litmos.com
 .lkml.org
@@ -335,9 +372,11 @@ google.com/amp/s/.*
 .marshalls.com
 .mathoverflow.com
 .matrix.org
+.media-amazon.com
 .media.tumblr.com
 .medium.com
 .meetup.com
+.meetupstatic.com
 .metafilter.com
 .minus.com
 .mit.edu
@@ -346,26 +385,33 @@ google.com/amp/s/.*
 .mozilla.net
 .mozilla.org
 .mozillazine.org
+.mqcdn.com  # mapquest
 .msi.com
 .muckrack.com
+.muckrock.com
 .namecheap.com
 .nasa.gov
 .nationalreview.com
 .nbcuni.com
+.nc-img.com
 .ncbi.nlm.nih.gov
 .netdna-ssl.com
 .netflix.com
+.netify.ai
 .newegg.com
 .neweggimages.com
+.nextdoor.com
 .nflxext.com
 .nh.us
 .nih.gov
 .noaa.gov
 .nordstrom.com
 .npr.org
+.nro.net
 .nsf.gov
 .nxlfimg.net
 .nypost.com
+.nyt.com
 .nytimes.com
 .okta.com
 .oktacdn.com
@@ -374,8 +420,10 @@ google.com/amp/s/.*
 .openh264.org
 .openra.net
 .openstreetmap.org
+.opensuse.org
 .openvpn.net
 .openvpn.org
+.optimizely.com
 .optionstrat.com
 .optoutprescreen.com
 .overstock.com
@@ -384,23 +432,26 @@ google.com/amp/s/.*
 .ovh.us
 .parallels.com
 .patreon.com
+.patreonusercontent.com
 .paypal.com
 .pcengines.ch
 .pcpartpicker.com
 .petfinder.com
+.pewresearch.org
 .phoronix.com
 .photobucket.com
 .phys.org
-.phys.uwm.edu
+.pi-hole.net
 .pinboard.in
 .pinimg.com
-.pinterest.com
+.pinterest.
 .plos.org
 .plosone.org
 .popular.pics
 .porscheusa.com
 .potterybarn.com
 .princeton.edu
+.privoxy.org
 .purpleair.com
 .python.org
 .pythonhosted.org
@@ -421,9 +472,11 @@ google.com/amp/s/.*
 .rei.com
 .rentalcars.com
 .reolink.com
+.reolink.us
 .republicoftea.com
 .researchgate.net
 .reuters.com
+.ripe.net
 .rolex.com
 .rottentomatoes.com
 .rust-lang.org
@@ -432,6 +485,7 @@ google.com/amp/s/.*
 .scene7.com
 .schwab.com
 .sciencemag.org
+.scotusblog.com
 .scribd.com
 .scribdassets.com
 .sec.gov
@@ -440,7 +494,11 @@ google.com/amp/s/.*
 .serverfault.com
 .shipstation.com
 .shodan.io
+.shop.app
 .shopify.com
+.shopifycdn.
+.shopifycs.com
+.shopifysvc.com
 .signal.org
 .singleapi.com
 .singleplatform.com
@@ -451,6 +509,7 @@ google.com/amp/s/.*
 .smapi.io
 .smh.com.au
 .soundcloud.com
+.sourceforge.io
 .sourceforge.net
 .spacetelescope.org
 .spaceweather.com
@@ -459,15 +518,21 @@ google.com/amp/s/.*
 .splunk.com
 .squarespace-cdn.com
 .squarespace.com
+.ssl-images-amazon.com
 .sstatic.net
 .stackauth.com
 .stackexchange.com
 .stackoverflow.com
 .startpage.com
 .state.gov
+.static-bluray.com
 .staticflickr.com
 .steamcommunity.com
+.steamcontent.com  # streams
+.steamdb.info
+.steamgames.com
 .steampowered.com
+.steamserver.net
 .steamstatic.com
 .streamable.com
 .suckless.org
@@ -477,18 +542,22 @@ google.com/amp/s/.*
 .t.co
 .tableau.com
 .tableausoftware.com
+.tacdn.com  # tripadvisor
 .target.com
+.targetimg1.com
 .tastyworks.com
 .taxfoundation.org
-.teamspeak.com
 .techdirt.com
 .teddit.net
+.thdstatic.com
 .theguardian.com
 .thehill.com
 .thehomedepot.com
+.thennowmovielocations.com
 .theverge.com
 .thinkprogress.org
 .thunderbird.net
+.time.gov
 .timex.com
 .tomshardware.com
 .tonic.to
@@ -496,6 +565,7 @@ google.com/amp/s/.*
 .toyota.com
 .tractorsupply.com
 .tradingview.com
+.travel-assets.com
 .tripadvisor.com
 .trulia.com
 .trumba.com
@@ -520,6 +590,7 @@ google.com/amp/s/.*
 .vanguard.com
 .verizon.com
 .verizonwireless.com
+.vermont.gov
 .vice.com
 .videolan.org
 .vimeo.com
@@ -540,8 +611,10 @@ google.com/amp/s/.*
 .westmarine.com
 .whispersystems.org
 .whitehouse.gov
+.whois.com
 .wikibooks.org
 .wikimedia.org
+.wikimediafoundation.org
 .wikipedia.org
 .wikiquote.org
 .wiktionary.org
@@ -557,11 +630,12 @@ google.com/amp/s/.*
 .wp.com
 .wp.org
 .wsj.com
+.x.com
 .xfinity.com
-.yahoo.com
-.yahoo.net
+.yahoo.
 .yahooapis.com
 .ycombinator.com
+.yelp.com
 .yelpcdn.com
 .youtu.be
 .youtube-dl.org
@@ -572,6 +646,7 @@ google.com/amp/s/.*
 .zappos.com
 .zendesk.com
 .zillow.com
+.zillow.net
 .zillowstatic.com
 .zlcdn.com
 .zoom.us
@@ -582,6 +657,7 @@ cvsweb.openbsd.org
 docs.google.com
 drive.google.com
 ftp.openbsd.org
+libreddit.
 mail.google.com
 man.openbsd.org
 maps.google.com

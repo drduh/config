@@ -1,4 +1,7 @@
 *.apk
+*.csr
+*.key
+*.pem
 *.zip
 update_verifier/
 venv/
