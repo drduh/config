@@ -103,6 +103,7 @@ alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bios="${ROOT} dmidecode -s bios-version"
+alias card-status="gpg --card-status"
 alias cr="firejail --dbus-user=none chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2"
 alias dif="diff"
 alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --image-bg black --verbose"
@@ -291,7 +292,7 @@ function dump_ssl {
         -e x509sat.teletexString -Eseparator=, }
 
 function e {  # appx bits of entropy: e <chars> <length>
-  awk -v c=${1} -v l=${2} "BEGIN { print log(c^l)/log(2) }" }
+  awk -v c="${1}" -v l="${2}" "BEGIN { print log(c^l)/log(2) }" }
 
 function f {
   find . -iname "*${1}*" }
@@ -308,6 +309,9 @@ function myip {
 
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
+
+function percent_diff {
+  awk -v x="${1}" -v y="${2}" "BEGIN { print (y-x)/x * 100 }" }
 
 function png2jpg {
   for png in $(find . -type f -name "*.png") ; do
@@ -425,6 +429,7 @@ path "/bin"
 #export HOMEBREW_NO_ANALYTICS=1
 #export HOMEBREW_NO_AUTO_UPDATE=1
 #export HOMEBREW_NO_INSECURE_REDIRECT=1
+#export GNUPGHOME="${HOME}/.gnupg"
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent

@@ -29,11 +29,13 @@ ffmpeg
 file
 firejail
 flashrom
+flatpak
 flex
 fonts-inconsolata
 foremost
 gcc
 geeqie
+genisoimage
 gimp
 git
 gnat

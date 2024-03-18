@@ -23,6 +23,7 @@ Cmnd_Alias NP = \
   /usr/bin/apt dist-upgrade, \
   /usr/bin/apt update, \
   /usr/bin/apt upgrade, \
+  /usr/bin/apt -y upgrade, \
   /usr/bin/lsof -Pni, \
   /usr/bin/minicom -D /dev/ttyUSB0, \
   /usr/bin/screen /dev/ttyUSB0 115200 8n1, \

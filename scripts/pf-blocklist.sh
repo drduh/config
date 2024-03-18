@@ -44,7 +44,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   grep -E "^[0-9]" >> $threats
   wc -l $threats
 
-  # http://www.bgplookingglass.com/list-of-autonomous-system-numbers
+  # https://bgp.he.net/
   # https://github.com/drduh/config/tree/master/asns/*
   printf "Checking asns ..."
   for asn in $(find ../asns -type f) ; do
@@ -57,7 +57,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   done
   wc -l $custom
 
-  # https://www.abuseat.org/public/country.html
+  # https://www.ipdeny.com/ipblocks/
   # https://github.com/drduh/config/tree/master/zones
   printf "Checking zones ..."
   for zone in $(grep -v "^#" ../zones | sed "s/\ \ \#.*//g") ; do
