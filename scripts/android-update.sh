@@ -24,7 +24,7 @@
 # # exit
 # $ adb unroot
 
-#set -x
+#set -x  # uncomment to debug
 set -o errtrace
 set -o nounset
 set -o pipefail
@@ -39,8 +39,9 @@ NETGUARD="E4:A2:60:A2:DC:E7:B7:AF:23:EE:91:9C:48:9E:15:FD:01:02:B9:3F:9E:7C:9D:8
 NEWPIPE="CB:84:06:9B:D6:81:16:BA:FA:E5:EE:4E:E5:B0:8A:56:7A:A6:D8:98:40:4E:7C:B1:2F:9E:75:6D:F5:CF:5C:AB"
 
 fail () {
-  printf "\n\n"
-  tput setaf 1 ; printf "Error: ${1}\n" ; tput sgr0
+  # Print an error message and exit.
+
+  tput setaf 1 ; printf "\nError: %s\n" "${1}" ; tput sgr0
   exit 1
 }
 
@@ -92,18 +93,18 @@ update_pkgs() {
   printf "${aegis_file} complete\n"
 
   # Firefox
-  ff_vers=$(curl -s "https://api.github.com/repos/mozilla-mobile/fenix/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1 | tr -d "v")
+  # TODO(any): update to https://github.com/mozilla-mobile/firefox-android releases
+  #ff_vers=$(curl -s "https://api.github.com/repos/mozilla-mobile/fenix/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1 | tr -d "v")
+  #if [[ ! -f ${ff_file} ]] ; then
+  #  printf "Downloading Firefox ... "
+  #  curl -sLfO "https://github.com/mozilla-mobile/fenix/releases/download/v${ff_vers}/${ff_file}"
+  #fi
+  ff_vers="123.1.0"
   ff_file="fenix-${ff_vers}-arm64-v8a.apk"
-  if [[ ! -f ${ff_file} ]] ; then
-    printf "Downloading Firefox ... "
-    curl -sLfO "https://github.com/mozilla-mobile/fenix/releases/download/v${ff_vers}/${ff_file}"
+  if [[ -f ${ff_file} ]] ; then
+    keytool -printcert -jarfile ${ff_file} | grep -q ${FIREFOX} || fail "could not verify Firefox"
+    printf "${ff_file} complete\n"
   fi
-  keytool -printcert -jarfile ${ff_file} | grep -q ${FIREFOX} || fail "could not verify Firefox"
-  printf "${ff_file} complete\n"
-}
-
-hash_pkgs() {
-  sha256sum *.apk > android-pkgs.$(date +%F)
 }
 
 update_os() {
@@ -130,6 +131,5 @@ update_os() {
 
 update_os
 update_pkgs
-#hash_pkgs
 
-printf "\n" ; tput setaf 2 ; printf "Done\n" ; tput sgr0
+tput setaf 2 ; printf "\nDone\n" ; tput sgr0
