@@ -7,12 +7,12 @@
 # $ mkdir venv ; python3 -m venv venv
 # $ ./venv/bin/python ./venv/bin/pip install oscrypto
 #
-# Update packages:
-# $ adb install -r package.apk
-#
 # Update OS:
 # $ adb reboot bootloader
 # $ adb sideload lineage-*.zip
+#
+# Update packages:
+# $ adb install -r package.apk
 #
 # Modify system files:
 # $ adb push ~/git/hosts/hosts /sdcard/Documents/
@@ -39,9 +39,9 @@ NETGUARD="E4:A2:60:A2:DC:E7:B7:AF:23:EE:91:9C:48:9E:15:FD:01:02:B9:3F:9E:7C:9D:8
 NEWPIPE="CB:84:06:9B:D6:81:16:BA:FA:E5:EE:4E:E5:B0:8A:56:7A:A6:D8:98:40:4E:7C:B1:2F:9E:75:6D:F5:CF:5C:AB"
 
 fail () {
-  # Print an error message and exit.
+  # Print an error in red and exit.
 
-  tput setaf 1 ; printf "\nError: %s\n" "${1}" ; tput sgr0
+  tput setaf 1 ; printf "\nERROR: %s\n" "${1}" ; tput sgr0
   exit 1
 }
 
@@ -54,57 +54,57 @@ update_pkgs() {
 
   # Signal
   signal_vers=$(curl -s "https://updates.signal.org/android/latest.json" | grep_url)
-  signal_file=$(printf $(basename ${signal_vers}) | cut -d '.' -f 1-3)
+  signal_file="$(basename "${signal_vers}" | cut -d "." -f 1-3)"
   if [[ ! -f ${signal_file}.apk ]] ; then
     printf "Downloading Signal ... "
     curl -sLfO "${signal_vers}"
   fi
-  keytool -printcert -jarfile ${signal_file}.apk | grep -q ${SIGNAL} || fail "could not verify Signal"
-  printf "${signal_file} complete\n"
+  keytool -printcert -jarfile "${signal_file}.apk" | grep -q ${SIGNAL} || fail "could not verify Signal"
+  printf "%s complete\n" "${signal_file}"
 
   # NetGuard
-  ng_vers=$(curl -s "https://api.github.com/repos/M66B/netguard/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1)
-  ng_file=$(printf "NetGuard-v${ng_vers}-release")
+  ng_vers=$(curl -s "https://api.github.com/repos/M66B/netguard/releases/latest" | \
+    sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1)
+  ng_file="NetGuard-v${ng_vers}-release"
   if [[ ! -f ${ng_file}.apk ]] ; then
     printf "Downloading NetGuard ... "
     curl -sLfO "https://github.com/M66B/NetGuard/releases/download/${ng_vers}/NetGuard-v${ng_vers}-release.apk"
   fi
-  keytool -printcert -jarfile ${ng_file}.apk | grep -q ${NETGUARD} || fail "could not verify NetGuard"
-  printf "${ng_file} complete\n"
+  keytool -printcert -jarfile "${ng_file}.apk" | grep -q ${NETGUARD} || fail "could not verify NetGuard"
+  printf "%s complete\n" "${ng_file}"
 
   # NewPipe
-  np_vers=$(curl -s "https://api.github.com/repos/TeamNewPipe/NewPipe/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1)
-  np_file=$(printf "NewPipe_${np_vers}")
+  np_vers=$(curl -s "https://api.github.com/repos/TeamNewPipe/NewPipe/releases/latest" | \
+    sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1)
+  np_file="NewPipe_${np_vers}"
   if [[ ! -f ${np_file}.apk ]] ; then
     printf "Downloading NewPipe ... "
     curl -sLfO "https://github.com/TeamNewPipe/NewPipe/releases/download/${np_vers}/${np_file}.apk"
   fi
-  keytool -printcert -jarfile ${np_file}.apk | grep -q ${NEWPIPE} || fail "could not verify NewPipe"
-  printf "${np_file} complete\n"
+  keytool -printcert -jarfile "${np_file}.apk" | grep -q ${NEWPIPE} || fail "could not verify NewPipe"
+  printf "%s complete\n" "${np_file}"
 
   # Aegis
-  aegis_vers=$(curl -s "https://api.github.com/repos/beemdevelopment/Aegis/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1)
-  aegis_file=$(printf "aegis-${aegis_vers}")
+  aegis_vers=$(curl -s "https://api.github.com/repos/beemdevelopment/Aegis/releases/latest" | \
+    sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1)
+  aegis_file="aegis-${aegis_vers}"
   if [[ ! -f ${aegis_file}.apk ]] ; then
     printf "Downloading Aegis ... "
     curl -sLfO "https://github.com/beemdevelopment/Aegis/releases/download/${aegis_vers}/${aegis_file}.apk"
   fi
-  keytool -printcert -jarfile ${aegis_file}.apk | grep -q ${AEGIS} || fail "could not verify Aegis"
-  printf "${aegis_file} complete\n"
+  keytool -printcert -jarfile "${aegis_file}.apk" | grep -q ${AEGIS} || fail "could not verify Aegis"
+  printf "%s complete\n" "${aegis_file}"
 
   # Firefox
-  # TODO(any): update to https://github.com/mozilla-mobile/firefox-android releases
-  #ff_vers=$(curl -s "https://api.github.com/repos/mozilla-mobile/fenix/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -1 | tr -d "v")
-  #if [[ ! -f ${ff_file} ]] ; then
-  #  printf "Downloading Firefox ... "
-  #  curl -sLfO "https://github.com/mozilla-mobile/fenix/releases/download/v${ff_vers}/${ff_file}"
-  #fi
-  ff_vers="123.1.0"
-  ff_file="fenix-${ff_vers}-arm64-v8a.apk"
-  if [[ -f ${ff_file} ]] ; then
-    keytool -printcert -jarfile ${ff_file} | grep -q ${FIREFOX} || fail "could not verify Firefox"
-    printf "${ff_file} complete\n"
+  ff_vers=$(curl -s "https://archive.mozilla.org/pub/fenix/releases/" | \
+    grep -Eo "[0-9]{1,}.[0-9]{1,}.[0-9]{1,}" | sort -V | grep -v b | tail -1)
+  ff_file="fenix-${ff_vers}.multi.android-arm64-v8a.apk"
+  if [[ ! -f ${ff_file} ]] ; then
+    printf "Downloading Firefox ... "
+    curl -sLfO "https://archive.mozilla.org/pub/fenix/releases/${ff_vers}/android/fenix-${ff_vers}-android-arm64-v8a/${ff_file}"
   fi
+  keytool -printcert -jarfile "${ff_file}" | grep -q ${FIREFOX} || fail "could not verify Firefox"
+  printf "%s complete\n" "${ff_file}"
 }
 
 update_os() {
@@ -112,24 +112,25 @@ update_os() {
 
   for os in ${ostypes} ; do
     lineage_os=$(curl -s \
-        "https://download.lineageos.org/api/v2/devices/${os}/builds" | \
-            sed 's/","/\n/g' | grep_url | head -1)
-    if [[ ! -f $(basename ${lineage_os}) ]] ; then
-      printf "Downloading ${lineage_os} ... "
-      curl -sLfO ${lineage_os} ; fi
+      "https://download.lineageos.org/api/v2/devices/${os}/builds" | \
+        sed 's/","/\n/g' | grep_url | head -1)
+    los_basename="$(basename "${lineage_os}")"
+    if [[ ! -f $los_basename ]] ; then
+      printf "Downloading %s ..." "${lineage_os}"
+      curl -sLfO "${lineage_os}" ; fi
 
     if [[ ! -d ${lineagedir} ]] ; then
       echo "No Lineage update verifier" ; exit 1 ; fi
 
     ./venv/bin/python ${lineagedir}/update_verifier.py \
-        ${lineagedir}/lineageos_pubkey $(basename ${lineage_os}) 2>/dev/null || \
+        ${lineagedir}/lineageos_pubkey "$los_basename" 2>/dev/null || \
             fail "could not verify ${lineage_os}"
 
-    printf "$(basename ${lineage_os}) complete\n"
+    printf "%s complete\n" "$los_basename"
   done
 }
 
-update_os
 update_pkgs
+update_os
 
 tput setaf 2 ; printf "\nDone\n" ; tput sgr0

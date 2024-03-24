@@ -29,6 +29,7 @@ address=/getpocket.com/
 address=/img-getpocket.cdn.mozilla.net/
 address=/input.mozilla.org/
 address=/install.mozilla.org/
+address=/mozit.cloud/
 address=/mozorg.cdn.mozilla.net/
 address=/mz.la/
 address=/normandy.cdn.mozilla.net/

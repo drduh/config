@@ -115,6 +115,7 @@ trk.
 #.fastly.net
 #.fastlydns.net
 #.jsdelivr.net
+#.salesforce-sites.com
 #.shop.app
 #.shopify.com
 #.shopifyapps.com
@@ -126,9 +127,12 @@ trk.
 #.website-files.com
 #assets*.
 #cdn.
+#cdnjs.
+#community.
 #documentation.
 #forum.
 #gitlab.
+#js.
 #pages.dev  # Cloudflare Pages
 #shop.
 #static.
@@ -146,6 +150,7 @@ trk.
 .aexp.com
 .aftership.com
 .algolia.
+.alienvault.com
 .alternet.org
 .amazon.com
 .amazonaws.com
@@ -174,6 +179,7 @@ trk.
 .askubuntu.com
 .asrock.com
 .asus.com
+.atl-paas.net  # atlassian
 .atlassian.com
 .auspost.com.au
 .auth0.com
@@ -211,6 +217,7 @@ trk.
 .buildkite.com
 .businesswire.com
 .byexamples.com
+.bytebucket.org
 .ca.gov
 .canadapost.ca
 .canarytokens.org
@@ -239,6 +246,7 @@ trk.
 .cpubenchmark.net
 .craigslist.org
 .creativecommons.org
+.crowdsupply.com
 .crt.sh
 .crucial.com
 .cryptographyengineering.com
@@ -258,6 +266,8 @@ trk.
 .dell.com
 .dev.to
 .dhs.gov
+.die.net
+.digicert.com
 .digitalgov.gov
 .documentcloud.org
 .docusign.com
@@ -295,6 +305,7 @@ trk.
 .fbinaa.org
 .fda.gov
 .fedex.com
+.fedoraproject.org
 .ffmpeg.org
 .fidelity.com
 .finviz.com
@@ -400,6 +411,7 @@ trk.
 .khanacademy.org
 .knowyourmeme.com
 .last.fm
+.launchpad.net
 .lenovo.com
 .letsblock.it
 .letsencrypt.org
@@ -458,6 +470,7 @@ trk.
 .newegg.com
 .neweggimages.com
 .nextdoor.com
+.nexusmods.com
 .nh.us
 .nih.gov
 .noaa.gov
@@ -477,7 +490,6 @@ trk.
 .onerng.info
 .openai.com
 .opencensus.io
-.openh264.org
 .openra.net
 .openstreetmap.org
 .opensuse.org
@@ -488,6 +500,7 @@ trk.
 .ovh.com
 .ovh.net
 .ovh.us
+.owasp.org
 .parallels.com
 .patreon.com
 .patreonusercontent.com
@@ -520,6 +533,7 @@ trk.
 .quad9.net
 .qubes-os.org
 .qz.com
+.radb.net
 .radioreference.com
 .raspberrypi.org
 .recaptcha.net
@@ -543,7 +557,6 @@ trk.
 .rottentomatoes.com
 .rtings.com
 .rust-lang.org
-.salesforce.com
 .samsung.com
 .sans.edu
 .sans.org
@@ -566,9 +579,11 @@ trk.
 .slack.com
 .slideshare.net
 .smapi.io
+.snapcraft.io
 .soundcloud.com
 .sourceforge.io
 .sourceforge.net
+.space.com
 .spacetelescope.org
 .spaceweather.com
 .spacex.com
@@ -606,11 +621,13 @@ trk.
 .taxfoundation.org
 .techradar.com
 .thdstatic.com
+.theguardian.com
 .thehomedepot.com
 .theverge.com
 .threatpost.com
 .thunderbird.net
 .time.gov
+.tldp.org
 .tomshardware.com
 .tonic.to
 .torproject.org
@@ -627,6 +644,8 @@ trk.
 .ui.com
 .undeadly.org
 .unicef.org
+.unix.com
+.unsplash.com
 .ups.com
 .usembassy.gov
 .userbenchmark.com
@@ -696,7 +715,11 @@ trk.
 .zoominfo.com
 accounts.google.com
 calendar.google.com
+cdimage.debian.org
 cdn.openbsd.org
+cdnjs.cloudflare.com
+challenges.cloudflare.com  # cloudflare captcha
+cr.yp.to
 cvsweb.openbsd.org
 docs.google.com
 drive.google.com
@@ -707,6 +730,7 @@ man.openbsd.org
 maps.google.com
 meet.google.com
 photos.google.com
+steamuserimages-a.akamaihd.net
 voice.google.com
 wiki.debian.org
 www.debian.org
@@ -718,18 +742,25 @@ www.openbsd.org
 .arpa
 .gov
 .lencr.org
+.openh264.org
 .speedtest.net
+.ss2.us
 .ubuntu.com
 10.0.
 172.16.
 192.168.
+cacerts.
+crl.
 myspeed.
 ntp.org
 ocsp.
 pki.goog
 speedtest.
+status.rapidssl.com
+status.thawte.com
 
 { -redirect{steam} }
+ping.archlinux.org/nm-check.txt
 test.steampowered.com/204
 
 { -redirect{android} }
