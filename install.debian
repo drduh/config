@@ -41,6 +41,7 @@ git
 gnat
 gnupg-agent
 gnupg2
+golang
 gpredict
 hackrf
 hostapd

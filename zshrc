@@ -8,11 +8,10 @@ bindkey "^[[1;3C" forward-word
 bindkey "^[[1;5D" vi-backward-word
 bindkey "^[[1;3D" backward-word
 
+today="$(date +%F)"
+ts="$(date +%s)"
 PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
-NOW="$(date +%F-%H:%M:%S)"
-TODAY="$(date +%F)"
-TS="$(date +%s)"
 NETWORK="$(/sbin/ifconfig | grep UP | grep -Ev 'virbr|LOOP' | awk -F: '{print $1}')"
 ROOT="$(command -v sudo || command -v doas)"
 SERVER="http://192.168.1.1"
@@ -21,6 +20,11 @@ UPLOAD="${SERVER}/cgi-bin/upload.py"
 HISTFILE="${HOME}/.histfile"
 HISTSIZE=200
 SAVEHIST=${HISTSIZE}
+
+#export http_proxy="127.0.0.1:8118"
+#export https_proxy="127.0.0.1:8118"
+#export http_proxy="http://127.0.0.1:8118"
+#export https_proxy="http://127.0.0.1:8118"
 
 LANG="en_US.UTF-8"
 export LC_ADDRESS=${LANG}
@@ -40,13 +44,9 @@ export LESS="-FRX"
 export LESSCHARSET="utf-8"
 export LESSHISTFILE=-
 export LESSSECURE=1
-export PYTHONSTARTUP="${HOME}/.pythonrc"
-
 export GOPATH="${HOME}/go"
 export GOBIN="${HOME}/go/bin"
-
-#export http_proxy="127.0.0.1:8118"
-#export https_proxy="127.0.0.1:8118"
+export PYTHONSTARTUP="${HOME}/.pythonrc"
 
 setopt alwaystoend
 setopt autocd
@@ -122,72 +122,35 @@ alias mnt="${ROOT} mount -o uid=1000 ${1}"
 alias rebootfw="systemctl reboot --firmware-setup"
 alias resize_view="xrandr --output Virtual1 --mode 1600x1200"
 alias tb="thunderbird --ProfileManager --no-remote"
-alias td="mkdir ${TODAY} ; cd ${TODAY}"
+alias td="mkdir ${today} ; cd ${today}"
 alias vm="virt-manager"
 alias wifich="iwlist ${NETWORK} channel | grep Current | awk -F: '{print \$2}'"
 alias x="startx"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4 --format 'best[height<=720]'"
 alias yt_max="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4"
 
-alias x230_read_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r bottom.rom.${TODAY}"
-alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r top.rom.${TODAY}"
+alias x230_read_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r bottom.rom.${today}"
+alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -r top.rom.${today}"
 alias x230_write_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-bottom.rom"
 alias x230_write_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-top.rom"
-
-alias bw-firefox="""
-bwrap \
---symlink usr/lib /lib \
---symlink usr/lib64 /lib64 \
---symlink usr/bin /bin \
---symlink usr/bin /sbin \
---ro-bind /usr/lib /usr/lib \
---ro-bind /usr/lib64 /usr/lib64 \
---ro-bind /usr/bin /usr/bin \
---ro-bind /usr/share/applications /usr/share/applications \
---ro-bind /usr/share/fontconfig /usr/share/fontconfig \
---ro-bind /usr/share/drirc.d /usr/share/drirc.d \
---ro-bind /usr/share/fonts /usr/share/fonts \
---ro-bind /usr/share/glib-2.0 /usr/share/glib-2.0 \
---ro-bind /usr/share/glvnd /usr/share/glvnd \
---ro-bind /usr/share/icons /usr/share/icons \
---ro-bind /usr/share/libdrm /usr/share/libdrm \
---ro-bind /usr/share/mime /usr/share/mime \
---ro-bind /usr/share/X11/xkb /usr/share/X11/xkb \
---ro-bind /usr/share/icons /usr/share/icons \
---ro-bind /usr/share/mime /usr/share/mime \
---ro-bind /etc/fonts /etc/fonts \
---ro-bind /usr/share/ca-certificates /usr/share/ca-certificates \
---ro-bind /etc/ssl /etc/ssl \
---ro-bind /etc/ca-certificates /etc/ca-certificates \
---dir /run/user/"$(id -u)" \
---ro-bind /run/user/"$(id -u)"/pulse /run/user/"$(id -u)"/pulse \
---dev /dev \
---dev-bind /dev/dri /dev/dri \
---ro-bind /sys/dev/char /sys/dev/char \
---ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00 \
---proc /proc \
---tmpfs /tmp \
---bind-try ~/.mozilla ~/.mozilla \
---bind-try ~/Downloads ~/Downloads \
---bind-try ~/.cache/mozilla ~/.cache/mozilla \
---setenv PATH /usr/bin \
---hostname RESTRICTED \
---unshare-all \
---share-net \
---die-with-parent \
---new-session \
-/usr/bin/firefox"""  # remove pulse bind to disable audio
 
 function .. { cd ".." ; }
 function ... { cd "../.." ; }
 function .... { cd "../../.." ; }
 
 function dedupe {
-  find "${@}" ! -empty -type f -exec md5sum {} + | \
+  time find "${@}" ! -empty -type f -exec md5sum {} + | \
     sort | uniq -w32 -dD }
+
+function dedupe_fast {
+  time find "${@}" ! -empty -type f -exec crc32 {} + | \
+    sort | uniq -w8 -D }
 
 function domain () {  # truncate to top level domain
   awk -F "." '!/^\s*$/{print ( $(NF-1)"."$(NF) )}' "${1}" }
+
+function download () {
+  curl -O ${DOWNLOAD}/"${@}" }
 
 function gpg_restart {
   pkill "gpg|pinentry|ssh-agent"
@@ -213,10 +176,10 @@ function adbpkg {
       adb shell dumpsys package $p | \
         grep -i versionname | \
           awk -F "=" '{print $2}'
-  done > adb.pkg.$(date +%F) }
+  done > adb.pkg.${today} }
 
 function backup () {
-  cp -v "${1}" "${1}.${TS}" }
+  cp -v "${1}" "${1}.${ts}" }
 
 function bat {
   upower -i /org/freedesktop/UPower/devices/battery_BAT0 | \
@@ -226,7 +189,7 @@ function calc {
   awk "BEGIN { print "$*" }" }
 
 function cert {
-  cn="${1:-${TS}}"
+  cn="${1:-${ts}}"
   expire="${2:-8}"
   openssl req -new \
     -newkey rsa:4096 -nodes \
@@ -257,23 +220,23 @@ function convert_secs {
   printf "%02d:%02d:%02d\n" ${h} ${m} ${s} }
 
 function dump_arp {
-  ${ROOT} tcpdump -eni ${NETWORK} -w arp-${NOW}.pcap \
+  ${ROOT} tcpdump -eni ${NETWORK} -w arp-${ts}.pcap \
     "ether proto 0x0806" }
 
 function dump_icmp {
-  ${ROOT} tcpdump -ni ${NETWORK} -w icmp-${NOW}.pcap \
+  ${ROOT} tcpdump -ni ${NETWORK} -w icmp-${ts}.pcap \
     "icmp" }
 
 function dump_pflog {
-  ${ROOT} tcpdump -ni pflog0 -w pflog-${NOW}.pcap \
+  ${ROOT} tcpdump -ni pflog0 -w pflog-${ts}.pcap \
     "not icmp6 and not host ff02::16 and not host ff02::d" }
 
 function dump_syn {
-  ${ROOT} tcpdump -ni ${NETWORK} -w syn-${NOW}.pcap \
+  ${ROOT} tcpdump -ni ${NETWORK} -w syn-${ts}.pcap \
     "tcp[13] & 2 != 0" }
 
 function dump_udp {
-  ${ROOT} tcpdump -ni ${NETWORK} -w udp-${NOW}.pcap \
+  ${ROOT} tcpdump -ni ${NETWORK} -w udp-${ts}.pcap \
     "udp and not port 443" }
 
 function dump_dns {
@@ -293,6 +256,14 @@ function dump_ssl {
 
 function e {  # appx bits of entropy: e <chars> <length>
   awk -v c="${1}" -v l="${2}" "BEGIN { print log(c^l)/log(2) }" }
+
+function encrypt {  # list preferred id last
+  output="${HOME}/$(basename ${1}).${today}.enc"
+  gpg --armor --encrypt \
+    --output ${output} \
+    -r 0xFF00000000000000 \
+    -r yubikey@example \
+    "${1}" && echo "${1} -> ${output}" }
 
 function f {
   find . -iname "*${1}*" }
@@ -353,16 +324,14 @@ function reveal {
 
 function rs {
   rsync --verbose --archive --human-readable \
-    --progress --stats --ipv4 --compress \
-    --log-file=$(mktemp) "${@}" }
+        --progress --stats --ipv4 --compress \
+        --log-file=$(mktemp) "${@}" }
 
-function secret {  # preferred id last
-  output="${HOME}/$(basename ${1}).$(date +%F).enc"
-  gpg --encrypt --armor \
-    --output ${output} \
-    -r 0xFF00000000000000 \
-    -r yubikey@example \
-    "${1}" && echo "${1} -> ${output}" }
+function secret {
+  output="${HOME}/$(basename ${1}).${today}.enc"
+  gpg --armor --symmetric \
+      --output ${output} \
+      "${1}" && echo "${1} -> ${output}" }
 
 function sort_ip {
   sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n "${@}" }
@@ -376,9 +345,6 @@ function top_history {
   history 1 | awk '{CMD[$2]++;count++;}END {
     for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
       column -c3 -s " " -t | sort -nr | nl |  head -n25 }
-
-function download () {
-  curl -O ${DOWNLOAD}/"${@}" }
 
 function upload {
    curl -s -F "file=@${@}" ${UPLOAD} | \
@@ -422,9 +388,16 @@ path "/bin"
 #path "/usr/X11R6/bin"
 #path "${HOME}/go/bin"
 
-#alias gpg="gpg2"
-#alias sha256="sha256sum"
-#alias sha512="sha512sum"
+#export PWDSH_DEST="screen"
+#export PWDSH_TIME=5
+#export PWDSH_COMMENT="pwd.sh ${HOST} ${today}"
+#export PWDSH_DAILY=1
+#export PWDSH_COPY=1
+#export PWDSH_LEN=20
+#export PWDSH_SAFE="safe"
+#export PWDSH_INDEX="pwd.index"
+#export PWDSH_BACKUP="pwd.${HOST}.${today}.${ts}.tar"
+
 #export HOMEBREW_CASK_OPTS=--require-sha
 #export HOMEBREW_NO_ANALYTICS=1
 #export HOMEBREW_NO_AUTO_UPDATE=1
