@@ -2,8 +2,12 @@
 # https://www.privoxy.org/user-manual/actions-file.html
 # http://config.privoxy.org/show-url-info
 
+{{alias}}
+upgrade = -block +redirect{s@http://@https://@}
+unblock = -block -redirect
+
 #{ +block{all} }
-#.
+#/  # block all requests
 
 { +block{social} }
 .discord.
@@ -13,6 +17,7 @@
 .myspace.
 .tiktok.
 .tiktokcdn.
+.twimg.
 .twitter.
 .twttr.
 .x.
@@ -21,6 +26,8 @@
 .cdninstagram.
 .facebook*.
 .fb.
+.fbstatic*.
+.instagr.am
 .fbcdn*.
 .fbinfra.
 .fbsbx.
@@ -30,7 +37,7 @@
 .thefacebook.
 fb*.akamaihd.net
 
-{ +block{ads} }
+{ +block{ads and trackers} }
 ad.
 adnxs.
 adsrv.
@@ -45,6 +52,7 @@ clickmeter.
 count.
 counter.
 creatives.
+location.
 metric.
 metrics.
 mmetrics.
@@ -62,17 +70,17 @@ tracker.
 tracking.
 trk.
 
-{ -block +redirect{s@http://@https://@} }
+{ upgrade{tlds} }
 #.com
 #.net
 #.org
 #.edu
+#.ai
 #.co.uk
 #.org.uk
 #.ac.jp
 #.ac.uk
 #.co
-#.ai
 #.dev
 #.fyi
 #.gg
@@ -82,6 +90,7 @@ trk.
 #.tech
 #.us
 
+{ upgrade{patterns} }
 #.*air.com
 #.*api.com
 #.*cdn.com
@@ -96,12 +105,14 @@ trk.
 #.*wiki.com
 #.akadns.net
 #.akadns88.net
+#.akam.net
 #.akamai.com
 #.akamai.net
 #.akamaiedge.net
 #.akamaihd.net
 #.akamaitech.net
 #.akamaized.net
+#.awswaf.com
 #.azure.
 #.azureedge.net
 #.bootstrapcdn.com
@@ -126,23 +137,31 @@ trk.
 #.statically.io
 #.website-files.com
 #assets*.
+#blog.
 #cdn.
 #cdnjs.
 #community.
+#docs.
 #documentation.
-#forum.
+#form.
+#forum*.
+#git.
 #gitlab.
+#images.
 #js.
+#mirror*.
 #pages.dev  # Cloudflare Pages
 #shop.
 #static.
 #support.
 #wiki.
 
+{ upgrade{everything else} }
 .0x0.st
 .3m.com
 .aaplimg.com
 .acm.org
+.adafruit.com
 .adblockplus.org
 .adtidy.org
 .ae.com
@@ -161,6 +180,8 @@ trk.
 .amsat.org
 .amsecusa.com
 .amzn.to
+.anaconda.com
+.anaconda.org
 .android.com
 .annualcreditreport.com
 .ap.org
@@ -168,10 +189,12 @@ trk.
 .appimage.org
 .apple.com
 .arcgis.com
+.arcgisonline.com
 .archive.is
 .archive.org
 .archlinux.org
 .arduino.cc
+.arm.com
 .arrl.org
 .arstechnica.com
 .arstechnica.net
@@ -181,12 +204,15 @@ trk.
 .asus.com
 .atl-paas.net  # atlassian
 .atlassian.com
+.atlassian.net
 .auspost.com.au
 .auth0.com
 .authorize.net
+.autocheck.com
 .autotrader.com
 .awesomeopensource.com
 .awsstatic.com
+.azureedge.net
 .azurestandard.com
 .bankofamerica.com
 .barrons.com
@@ -197,6 +223,8 @@ trk.
 .benjaminmoore.com
 .bestbuy.com
 .bhphoto.com
+.bhphotovideo.com
+.bigcommerce.com
 .binarydefense.com
 .bitbucket.org
 .blackhat.com
@@ -211,8 +239,10 @@ trk.
 .boum.org
 .box.com
 .box.net
+.boxcdn.net
 .boxcloud.com
 .brew.sh
+.broadcom.com
 .bsigroup.com
 .buildkite.com
 .businesswire.com
@@ -234,9 +264,14 @@ trk.
 .chrono24.com
 .cia.gov
 .cisco.com
+.cisecurity.org
 .citizenlab.ca
+.cloudflarestorage.com
+.cloudfront.net
 .cnet.com
 .codeberg.org
+.codecov.io
+.coderpad.io
 .colorado.gov
 .colostate.edu
 .comcast.net
@@ -249,10 +284,12 @@ trk.
 .crowdsupply.com
 .crt.sh
 .crucial.com
+.cryptography.io
 .cryptographyengineering.com
 .cryptomuseum.com
 .cs.cornell.edu
 .ctfassets.net
+.ctftime.org
 .custhelp.com
 .cve.org
 .cvedetails.com
@@ -268,13 +305,19 @@ trk.
 .dhs.gov
 .die.net
 .digicert.com
+.digikey.com
 .digitalgov.gov
+.digitalocean.com
+.discourse-cdn.com
+.docker.com
+.docker.io
 .documentcloud.org
 .docusign.com
 .doi.org
 .dropbox.com
 .dropboxatwork.com
 .dropboxteam.com
+.duo.com
 .duosecurity.com
 .ebay.com
 .ebaycdn.net
@@ -317,14 +360,17 @@ trk.
 .flightradar24.com
 .forbes.com
 .freebsd.org
+.freelists.org
 .fsdn.com  # sourceforge
 .fsf.org
 .ftc.gov
 .fwupd.org
 .garmin.com
+.geeqie.org
 .gentoo.org
 .gfycat.com
 .ggpht.com
+.ghcr.io
 .gimp.org
 .giphy.com
 .github.blog
@@ -365,15 +411,21 @@ trk.
 .gvt1.com
 .gvt2.com
 .gvt3.com
+.happycow.net
 .hashicorp.com
 .haxx.se
 .hbr.org
 .he.net
+.hf.co
+.hf.space
 .hireright.com
 .homedepot.com
 .house.gov
 .houzz.com
 .hps.org
+.huggingface.co
+.hybrid-analysis.com
+.iacr.org
 .iana.org
 .ibm.com
 .icanhazip.com
@@ -395,6 +447,7 @@ trk.
 .ipdeny.com
 .irs.gov
 .isc.org
+.itsfoss.com
 .ixquick.com
 .jhu.edu
 .jobvite.com
@@ -405,11 +458,13 @@ trk.
 .justice.gov
 .jwplatform.com
 .kde.org
+.kdenlive.org
 .kernel.org
 .keybase.io
 .keylength.com
 .khanacademy.org
 .knowyourmeme.com
+.kubernetes.io
 .last.fm
 .launchpad.net
 .lenovo.com
@@ -418,6 +473,8 @@ trk.
 .levels.fyi
 .lever.co
 .lg.com
+.libreoffice.org
+.libssh.org
 .lighttpd.net
 .lineageos.com
 .lineageos.org
@@ -439,11 +496,16 @@ trk.
 .macmillan.com
 .mail-archive.com
 .mailbox.org
+.mamba.pm
+.manjaro.org
 .mapquest.com
 .marc.info
 .marketwatch.com
 .mastodon.social
+.mastodon.world
+.mathopolis.com
 .mathoverflow.com
+.mathsisfun.com
 .matrix.org
 .media-amazon.com
 .medium.com
@@ -464,16 +526,17 @@ trk.
 .namecheap.com
 .nasa.gov
 .nc-img.com
-.ncbi.nlm.nih.gov
 .netdna-ssl.com
 .netify.ai
 .newegg.com
 .neweggimages.com
 .nextdoor.com
 .nexusmods.com
+.nginx.org
 .nh.us
 .nih.gov
 .noaa.gov
+.nodejs.org
 .nordstrom.com
 .noscript.net
 .npr.org
@@ -483,9 +546,11 @@ trk.
 .nypost.com
 .nyt.com
 .nytimes.com
+.octocaptcha.com
 .okstate.edu
 .okta.com
 .oktacdn.com
+.ollama.com
 .oneplus.com
 .onerng.info
 .openai.com
@@ -495,13 +560,18 @@ trk.
 .opensuse.org
 .openvpn.net
 .openvpn.org
+.openwall.com
+.openwebui.com
 .optionstrat.com
 .optoutprescreen.com
 .ovh.com
 .ovh.net
 .ovh.us
 .owasp.org
+.pages.dev
+.pandoc.org
 .parallels.com
+.pastebin.com
 .patreon.com
 .patreonusercontent.com
 .paypal.com
@@ -510,6 +580,7 @@ trk.
 .pcpartpicker.com
 .petfinder.com
 .pewresearch.org
+.pfsense.org
 .phoronix.com
 .phoronix.net
 .photobucket.com
@@ -520,6 +591,7 @@ trk.
 .pinterest.
 .plos.org
 .plosone.org
+.podman.io
 .popular.pics
 .posteo.de
 .princeton.edu
@@ -527,15 +599,20 @@ trk.
 .privoxy.org
 .propublica.org
 .proton.me
+.publicsuffix.org
 .purpleair.com
+.pypi.org
 .python.org
 .pythonhosted.org
+.pytorch.org
 .quad9.net
 .qubes-os.org
 .qz.com
 .radb.net
 .radioreference.com
+.raspberrypi.com
 .raspberrypi.org
+.readthedocs.io
 .recaptcha.net
 .redd.it
 .reddit.com
@@ -556,12 +633,16 @@ trk.
 .riseup.net
 .rottentomatoes.com
 .rtings.com
+.rubygems.org
 .rust-lang.org
+.rustup.rs
+.sagepub.com
 .samsung.com
 .sans.edu
 .sans.org
 .satnogs.org
 .schwab.com
+.sciencedirect.com
 .scotusblog.com
 .scribd.com
 .scribdassets.com
@@ -574,19 +655,24 @@ trk.
 .shipstation.com
 .shodan.io
 .signal.org
+.singleplatform.com
 .slack-edge.com
 .slack-imgs.com
 .slack.com
 .slideshare.net
+.smallstep.com
 .smapi.io
 .snapcraft.io
+.someonewhocares.org
 .soundcloud.com
 .sourceforge.io
 .sourceforge.net
 .space.com
 .spacetelescope.org
 .spaceweather.com
+.spaceweathergallery2.com
 .spacex.com
+.sparkfun.com
 .splunk.com
 .squarespace-cdn.com
 .squarespace.com
@@ -598,16 +684,21 @@ trk.
 .startpage.com
 .state.gov
 .static-bluray.com
+.static.pub
 .staticflickr.com
+.statuspage.io
 .steamcommunity.com
 .steamcontent.com  # streams
 .steamdb.info
+.steamdeck.com
 .steamgames.com
+.steamos.cloud
 .steampowered.com
 .steamserver.net
 .steamstatic.com
 .stlouisfed.org
 .streamable.com
+.stunnel.org
 .suckless.org
 .superuser.com
 .suse.com
@@ -620,6 +711,7 @@ trk.
 .targetimg1.com
 .taxfoundation.org
 .techradar.com
+.terraform.io
 .thdstatic.com
 .theguardian.com
 .thehomedepot.com
@@ -642,6 +734,7 @@ trk.
 .ubuntuforums.org
 .ubuntuhandbook.org
 .ui.com
+.umu.se
 .undeadly.org
 .unicef.org
 .unix.com
@@ -667,6 +760,7 @@ trk.
 .w.org
 .w1.fi
 .w3.org
+.w3schools.com
 .walmart.com
 .walmartimages.com
 .weather.gov
@@ -689,11 +783,14 @@ trk.
 .wired.com
 .wireshark.org
 .wix.com
+.wixsite.com
 .wiz.io
 .wordpress.com
 .wordpress.org
 .wp.com
 .wp.org
+.xcp-ng.org
+.xda-developers.com
 .xfinity.com
 .xmpp.org
 .yahoo.
@@ -701,6 +798,7 @@ trk.
 .ycombinator.com
 .yelp.com
 .yelpcdn.com
+.yimg.com  # yahoo
 .youtu.be
 .youtube-dl.org
 .youtube-nocookie.com
@@ -721,6 +819,7 @@ cdnjs.cloudflare.com
 challenges.cloudflare.com  # cloudflare captcha
 cr.yp.to
 cvsweb.openbsd.org
+developer.chrome.com
 docs.google.com
 drive.google.com
 ftp.openbsd.org
@@ -729,7 +828,9 @@ mail.google.com
 man.openbsd.org
 maps.google.com
 meet.google.com
+openbsd.org
 photos.google.com
+security-tracker.debian.org
 steamuserimages-a.akamaihd.net
 voice.google.com
 wiki.debian.org
@@ -737,33 +838,39 @@ www.debian.org
 www.google.com
 www.openbsd.org
 
-{ -block -redirect }
+{ unblock{local} }
+127.0.0.1
+10.0.
+172.16.
+192.168.
+
+{ unblock{infra} }
 .amazontrust.com
 .arpa
 .gov
 .lencr.org
 .openh264.org
-.speedtest.net
 .ss2.us
 .ubuntu.com
-10.0.
-172.16.
-192.168.
 cacerts.
 crl.
-myspeed.
 ntp.org
 ocsp.
 pki.goog
-speedtest.
 status.rapidssl.com
 status.thawte.com
+zerossl.ocsp.sectigo.com
 
-{ -redirect{steam} }
+{ unblock{speedtest} }
+.speedtest.net
+speedtest.
+myspeed.
+
+{ unblock{steam} }
 ping.archlinux.org/nm-check.txt
 test.steampowered.com/204
 
-{ -redirect{android} }
+{ unblock{android} }
 connectivitycheck.gstatic.com/generate_204
 
 #{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36}}

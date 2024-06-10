@@ -22,6 +22,7 @@ address=/detectportal.firefox.com/
 address=/dynamicua.cdn.mozilla.net/
 address=/experiments.mozilla.org/
 address=/fhr.cdn.mozilla.net/
+address=/firefox-api-proxy.cdn.mozilla.net/
 address=/firefox-settings-attachments.cdn.mozilla.net/
 address=/getpocket-cdn.prod.mozaws.net/
 address=/getpocket.cdn.mozilla.net/

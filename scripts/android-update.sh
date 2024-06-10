@@ -30,7 +30,7 @@ set -o nounset
 set -o pipefail
 
 lineagedir="./update_verifier/"
-ostypes="lemonadep sailfish"
+ostypes="lemonadep"
 
 AEGIS="C6:DB:80:A8:E1:4E:52:30:C1:DE:84:15:EF:82:0D:13:DC:90:1D:8F:E3:3C:F3:AC:B5:7B:68:62:D8:58:A8:23"
 SIGNAL="29:F3:4E:5F:27:F2:11:B4:24:BC:5B:F9:D6:71:62:C0:EA:FB:A2:DA:35:AF:35:C1:64:16:FC:44:62:76:BA:26"

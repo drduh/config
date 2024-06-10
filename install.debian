@@ -39,12 +39,14 @@ genisoimage
 gimp
 git
 gnat
+gnome-tweaks
 gnupg-agent
 gnupg2
 golang
 gpredict
 hackrf
 hostapd
+html2text
 htop
 imagemagick
 iotop
@@ -53,11 +55,14 @@ iptables
 iptables-persistent
 jmtpfs
 kdenlive
+kiwix
 libevent-dev
 libimage-exiftool-perl
 libncurses5-dev
+libnftables-dev
 libnl-3-dev
 libnl-genl-3-dev
+libpcre3-dev
 libpcsclite-dev
 libreoffice
 libseccomp-dev
@@ -84,6 +89,7 @@ netcat-openbsd
 nmap
 ntp
 ntpdate
+nvtop
 openssl
 paperkey
 parted
@@ -100,6 +106,7 @@ python3-gnupg
 python3-pil
 python3-pip
 python3-pyscard
+python3-venv
 qemu-system-x86
 qpdf
 qrencode
@@ -124,6 +131,7 @@ ssh
 sshfs
 sslscan
 strace
+stunnel
 sudo
 swig
 tcpdump
@@ -133,6 +141,7 @@ tmux
 traceroute
 tree
 tshark
+ufw
 unzip
 upower
 vim

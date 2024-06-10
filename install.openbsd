@@ -5,7 +5,6 @@ bash
 chirp
 curl
 dnsmasq
-enigmail
 ent
 feh
 firefox
@@ -14,7 +13,6 @@ free
 gimp
 git
 gnupg
-gnuradio
 htop
 imagemagick
 iperf

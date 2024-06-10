@@ -2,6 +2,7 @@
 *.csr
 *.key
 *.pem
+*.tmp
 *.zip
 update_verifier/
 venv/
