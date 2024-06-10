@@ -1,6 +1,4 @@
 # https://github.com/drduh/config/blob/master/domains/tlds
-#address=/arpa/
-#address=/deals/
 address=/ad/
 address=/ax/
 address=/bar/

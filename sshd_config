@@ -1,7 +1,7 @@
 # https://github.com/drduh/config/blob/master/sshd_config
 # https://linux.die.net/man/5/sshd_config
 #ListenAddress 0.0.0.0
-#Port 2400
+#Port 2400  # /etc/systemd/system/sockets.target.wants/ssh.socket
 AddressFamily inet
 HostKey /etc/ssh/ssh_host_key
 HostKey /etc/ssh/ssh_host_rsa_key

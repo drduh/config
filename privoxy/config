@@ -16,7 +16,6 @@ accept-intercepted-requests 1
 tolerate-pipelining 1
 keep-alive-timeout 10
 socket-timeout 10
-buffer-limit 8192
 debug     1 # Log the destination for each request. See also debug 1024.
 #debug     2 # show each connection status
 #debug     4 # show tagging-related messages

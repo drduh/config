@@ -95,9 +95,6 @@ alias cat="cat -t"
 alias cp="cp -i"
 alias md="mkdir -p"
 alias mv="mv -i"
-alias p="python3"
-alias ping1="ping -4 -c3 -i.5 -v 1.1.1.1"
-alias ping8="ping -4 -c3 -i.5 -v 8.8.8.8"
 alias rebootfw="systemctl reboot --firmware-setup"
 alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
@@ -106,6 +103,7 @@ alias bios="${ROOT} dmidecode -s bios-version"
 alias card-status="gpg --card-status"
 alias cr="firejail --dbus-user=none chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2"
 alias dif="diff"
+alias et="exiftool"
 alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --image-bg black --verbose"
 alias ff="firefox --ProfileManager --no-remote"
 alias ftb="firejail --profile=firejailed-tor-browser ${HOME}/Browser/start-tor-browser"
@@ -118,13 +116,19 @@ alias gitstatus="git status"
 alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --color --text"
 alias grepv="grep --invert-match"
+alias html="html2text | tr -d '^I' | sed '/^[[:space:]]*$/d'"
 alias mnt="${ROOT} mount -o uid=1000 ${1}"
+alias ollama="docker exec ollama ollama"
+alias pkg-info="apt-cache show"
+alias proc="ps axjf"
 alias rebootfw="systemctl reboot --firmware-setup"
 alias resize_view="xrandr --output Virtual1 --mode 1600x1200"
+alias start_ollama="docker run --network=host -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama"
+alias start_webui="docker run --network=host -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:latest"
 alias tb="thunderbird --ProfileManager --no-remote"
 alias td="mkdir ${today} ; cd ${today}"
 alias vm="virt-manager"
-alias wifich="iwlist ${NETWORK} channel | grep Current | awk -F: '{print \$2}'"
+alias wifich="iwlist ${NETWORK} channel | sed -n '/Current/ s/.*://p'"
 alias x="startx"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4 --format 'best[height<=720]'"
 alias yt_max="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4"
@@ -137,6 +141,9 @@ alias x230_write_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/
 function .. { cd ".." ; }
 function ... { cd "../.." ; }
 function .... { cd "../../.." ; }
+
+function days_until() {
+  echo $(( ($(date -d "${1}" +%s) - $(date +%s)) / 86400 )) }
 
 function dedupe {
   time find "${@}" ! -empty -type f -exec md5sum {} + | \
@@ -278,6 +285,9 @@ function myip {
   curl -s "https://icanhazip.com/" || \
     dig @resolver1.opendns.com ANY myip.opendns.com +short }
 
+function p {
+  ping -D -4 -c5 -i.5 "${1:-1.1.1.1}" }
+
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
 
@@ -288,6 +298,9 @@ function png2jpg {
   for png in $(find . -type f -name "*.png") ; do
     image="${png%.*}"
     convert "${image}.png" "${image}.jpg" ; done }
+
+function newline_to_comma {
+  sed -z 's/\n/,/g' ${1} }
 
 function nonlocal () {
   egrep -ve "^#|^255.255.255.255|^127.|^0.|^::1|^ff..::|^fe80::" "${1}" | \
@@ -359,7 +372,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|convert|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|download|du|e|egrep|enc|ent|exiftool|f|fdisk|feh|ffplay|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|libreoffice|lp|ls|mail|make|man|mkdir|mnt|mount|mpv|mv|nc|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rcctl|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|youtube-dl|ykman|yt|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|convert|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|download|du|e|egrep|enc|ent|et|exiftool|f|fdisk|feh|ffplay|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|libreoffice|lp|ls|mail|make|man|mkdir|mnt|mount|mpv|mv|nc|nvtop|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|ykman|yt|./pwd.sh|./purse.sh)
   ]]
 }
 
@@ -393,15 +406,32 @@ path "/bin"
 #export PWDSH_COMMENT="pwd.sh ${HOST} ${today}"
 #export PWDSH_DAILY=1
 #export PWDSH_COPY=1
+#export PWDSH_ECHO="*"
 #export PWDSH_LEN=20
 #export PWDSH_SAFE="safe"
 #export PWDSH_INDEX="pwd.index"
 #export PWDSH_BACKUP="pwd.${HOST}.${today}.${ts}.tar"
+#export PWDSH_CHARS="A-Z0-9!?"
+#export PWDSH_PEPPER="${HOME}/pwd.pepper"
+
+#export PURSE_DEST=$PWDSH_DEST
+#export PURSE_TIME=$PWDSH_TIME
+#export PURSE_COMMENT="purse ${HOST} ${today}"
+#export PURSE_DAILY=$PWDSH_DAILY
+#export PURSE_COPY=$PWDSH_COPY
+#export PURSE_ECHO=$PWDSH_ECHO
+#export PURSE_LEN=$PWDSH_LEN
+#export PURSE_SAFE=$PWDSH_SAFE
+#export PURSE_INDEX="purse.index"
+#export PURSE_BACKUP="purse.${HOST}.${today}.${ts}.tar"
+#export PURSE_CHARS=$PWDSH_CHARS
+#export PURSE_ENCIX=1
 
 #export HOMEBREW_CASK_OPTS=--require-sha
 #export HOMEBREW_NO_ANALYTICS=1
 #export HOMEBREW_NO_AUTO_UPDATE=1
 #export HOMEBREW_NO_INSECURE_REDIRECT=1
+
 #export GNUPGHOME="${HOME}/.gnupg"
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)

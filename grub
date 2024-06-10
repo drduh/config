@@ -3,6 +3,7 @@
 #GRUB_SERIAL_COMMAND="serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1"
 GRUB_GFXMODE=2560x1440
 GRUB_DEFAULT=0
+GRUB_RECORDFAIL_TIMEOUT=1
 GRUB_TIMEOUT=1
 GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
 GRUB_CMDLINE_LINUX="oops=panic"

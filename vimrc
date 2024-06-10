@@ -91,3 +91,5 @@ hi StatusLine ctermfg=0 ctermbg=3
 hi clear SpellBad
 hi SpellBad ctermbg=10
 colorscheme slate
+autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
+highlight ExtraWhitespace ctermbg=red

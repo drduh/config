@@ -140,6 +140,7 @@ user_pref("dom.popup_allowed_events", "click dblclick");  // limit pop-up trigge
 user_pref("dom.push.enabled", false);  // disable push notifications
 user_pref("dom.push.userAgentID", "");  // remove push notification subscriptions
 user_pref("dom.webaudio.enabled", false);  // disable web audio
+user_pref("dom.webgpu.enabled", false);  // disable GPU access
 user_pref("dom.webnotifications.enabled", false);  // disable web notifications
 user_pref("extensions.enabledScopes", 5);  // limit extensions to profile and application directories
 user_pref("extensions.formautofill.addresses.enabled", false);
@@ -155,6 +156,7 @@ user_pref("geo.provider.ms-windows-location", false);  // disable geo on windows
 user_pref("geo.provider.use_corelocation", false);  // disable geo on mac
 user_pref("geo.provider.use_geoclue", false);  // disable geo on linux
 user_pref("geo.provider.use_gpsd", false);  // disable geo on linux
+user_pref("gfx.webgpu.force-enabled", false);  // disable GPU access
 user_pref("identity.fxaccounts.enabled", false);  // disable Firefox accounts sync
 user_pref("javascript.options.asmjs", false);
 user_pref("javascript.options.baselinejit", false);  // disable JS JIT; may break sites
@@ -223,6 +225,7 @@ user_pref("privacy.resistFingerprinting", true);  // enable strict fingerprintin
 user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);  // disable mozAddonManager
 user_pref("privacy.resistFingerprinting.letterboxing", true);  // letterbox window
 user_pref("privacy.resistFingerprinting.pbmode", true);
+user_pref("privacy.resistFingerprinting.target_video_res", 2160);  // default to high-res videos
 user_pref("privacy.trackingprotection.enabled", true);  // https://wiki.mozilla.org/Security/Tracking_protection
 user_pref("privacy.trackingprotection.introCount", 20);
 user_pref("privacy.userContext.enabled", true);  // enable container tabs
