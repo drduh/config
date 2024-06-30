@@ -43,9 +43,6 @@ gnome-tweaks
 gnupg-agent
 gnupg2
 golang
-gpredict
-hackrf
-hostapd
 html2text
 htop
 imagemagick
@@ -53,7 +50,6 @@ iotop
 iperf
 iptables
 iptables-persistent
-jmtpfs
 kdenlive
 kiwix
 libevent-dev
@@ -73,8 +69,6 @@ libx11-dev
 libxft-dev
 libxinerama-dev
 libxrandr-dev
-lighttpd
-lighttpd-modules-lua
 lshw
 lsof
 m4
@@ -102,15 +96,16 @@ printer-driver-brlaser
 privoxy
 pv
 pylint
+python3-flask
 python3-gnupg
 python3-pil
 python3-pip
 python3-pyscard
 python3-venv
+python3-watchdog
 qemu-system-x86
 qpdf
 qrencode
-redshift
 rename
 rfkill
 rkhunter
@@ -153,7 +148,6 @@ wireshark
 xbacklight
 xclip
 xdotool
-xfce4-power-manager
 xorg
 yubikey-manager
 yubikey-personalization

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/master/scripts/dig.sh
 # https://en.wikipedia.org/wiki/List_of_DNS_record_types
-pause="5"
+pause="1"
 server="1.1.1.1"
 types="""A  # 32-bit ipv4
 AAAA        # 128-bit ipv6
@@ -29,11 +29,11 @@ NAPTR       # naming auth pointer
 TLSA        # dane association
 """
 
-for type in $types ; do
-  if [[ $type =~ [A-Z] ]] ; then
-    printf "\n$type\n"
-    dig @$server +short \
-      $(printf $type | sed "s/\ \ \#.*//g") ${1} 2>/dev/null
-    sleep $pause
+for type in ${types} ; do
+  if [[ ${type} =~ [A-Z] ]] ; then
+    printf "\n%s: " "${type}"
+    dig @${server} +short \
+      $(printf "%s" "${type}" | sed "s/\ \ \#.*//g") "${1}" 2>/dev/null
+    sleep "${pause}"
   fi
 done

@@ -90,6 +90,6 @@ hi Comment ctermfg=9 ctermbg=0
 hi StatusLine ctermfg=0 ctermbg=3
 hi clear SpellBad
 hi SpellBad ctermbg=10
-colorscheme slate
+colorscheme solarized
 autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 highlight ExtraWhitespace ctermbg=red
