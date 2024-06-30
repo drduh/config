@@ -12,7 +12,7 @@ today="$(date +%F)"
 ts="$(date +%s)"
 PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
-NETWORK="$(/sbin/ifconfig | grep UP | grep -Ev 'virbr|LOOP' | awk -F: '{print $1}')"
+NETWORK="$(ip a | sed -n '/state UP/ s/.: //p' | sed 's/:.*//g')"
 ROOT="$(command -v sudo || command -v doas)"
 SERVER="http://192.168.1.1"
 DOWNLOAD="${SERVER}/upload/"
@@ -39,7 +39,6 @@ export LC_NAME=${LANG}
 export LC_PAPER=${LANG}
 export LC_TELEPHONE=${LANG}
 export LC_TIME=${LANG}
-
 export LESS="-FRX"
 export LESSCHARSET="utf-8"
 export LESSHISTFILE=-
@@ -47,6 +46,7 @@ export LESSSECURE=1
 export GOPATH="${HOME}/go"
 export GOBIN="${HOME}/go/bin"
 export PYTHONSTARTUP="${HOME}/.pythonrc"
+#export TZ="UTC"
 
 setopt alwaystoend
 setopt autocd
@@ -93,16 +93,17 @@ alias t="tail -f"
 alias v="vim -p"
 alias cat="cat -t"
 alias cp="cp -i"
-alias md="mkdir -p"
 alias mv="mv -i"
 alias rebootfw="systemctl reboot --firmware-setup"
 alias rm="rm -i"
 alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
+alias bim="vim"
 alias bios="${ROOT} dmidecode -s bios-version"
 alias card-status="gpg --card-status"
 alias cr="firejail --dbus-user=none chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2"
 alias dif="diff"
+alias dmsg="${ROOT} dmesg -wHT"
 alias et="exiftool"
 alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --image-bg black --verbose"
 alias ff="firefox --ProfileManager --no-remote"
@@ -117,16 +118,17 @@ alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --color --text"
 alias grepv="grep --invert-match"
 alias html="html2text | tr -d '^I' | sed '/^[[:space:]]*$/d'"
+alias mail="ssh -Y openbsd -t thunderbird"
 alias mnt="${ROOT} mount -o uid=1000 ${1}"
 alias ollama="docker exec ollama ollama"
 alias pkg-info="apt-cache show"
 alias proc="ps axjf"
 alias rebootfw="systemctl reboot --firmware-setup"
 alias resize_view="xrandr --output Virtual1 --mode 1600x1200"
+alias slow_startup="systemd-analyze blame"
 alias start_ollama="docker run --network=host -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama"
 alias start_webui="docker run --network=host -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:latest"
 alias tb="thunderbird --ProfileManager --no-remote"
-alias td="mkdir ${today} ; cd ${today}"
 alias vm="virt-manager"
 alias wifich="iwlist ${NETWORK} channel | sed -n '/Current/ s/.*://p'"
 alias x="startx"
@@ -281,6 +283,9 @@ function fd {
 function gas {  # get CIDRs for AS number
   whois -h whois.radb.net '!g'${1} }
 
+function md {
+  mkdir -p "${1:-${today}}" && cd "${1:-${today}}" }
+
 function myip {
   curl -s "https://icanhazip.com/" || \
     dig @resolver1.opendns.com ANY myip.opendns.com +short }
@@ -363,6 +368,15 @@ function upload {
    curl -s -F "file=@${@}" ${UPLOAD} | \
      grep -q "Saved" && printf "Uploaded ${@}\n" }
 
+function username () {  # "username 8" - generate 8 usernames
+  for i in {1..${1}} ; do
+  printf "%s%s\n" \
+    "$(awk 'length > 2 && length < 12 {print(tolower($0))}' \
+    /usr/share/dict/words | grep -v "'" | sort -R | head -n2 | \
+    tr "\n" "_" | iconv -f utf-8 -t ascii//TRANSLIT)" \
+    "$(tr -dc "[:digit:]" < /dev/urandom | fold -w 4 | head -1)"
+  done }
+
 function vpn {
   ssh -C -N -L 5555:127.0.0.1:8118 vpn }
 
@@ -437,3 +451,5 @@ path "/bin"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 #gpgconf --launch gpg-agent
 #gpg-connect-agent updatestartuptty /bye >/dev/null
+
+#export VAULT_ADDR="http://127.0.0.1:8200"

@@ -1,29 +1,70 @@
 #!/usr/bin/env python3
-# https://github.com/drduh/config/blob/master/scripts/rename.py
+"""
+https://github.com/drduh/config/blob/master/scripts/rename.py
+
+Random rename of files at path.
+"""
 
 import os
 import random
 import string
 import sys
 
-def main(argv):
-    """Find and rename files in path."""
-    path = argv[1]
+CHARSET = string.ascii_lowercase
 
-    for item in os.listdir(path):
+
+def confirmation(path):
+    """Ask for confirmation."""
+    if input(f"Rename '{path}'? ").lower().startswith("y"):
+        return True
+    return False
+
+
+def rename(path, length=8):
+    """Find and rename files in path, normalize extensions.
+
+    Args:
+        path: string, directory with files to rename
+        length: int, length of renamed filename.
+    """
+    target = os.listdir(path)
+    print(f"Renaming {len(target)} files ...")
+
+    for item in target:
         ext = os.path.splitext(item)[1].lower()
         if ext == ".jpeg":
             ext = ".jpg"
-        rand = "".join(
-            random.sample(
-                string.ascii_lowercase, 8)) + ext
+        rand = "".join(random.sample(CHARSET, length)) + ext
 
-        print("{} > {}".format(item, rand))
         if not os.path.isfile(path + rand):
             os.rename(os.path.join(path, item),
                       os.path.join(path, rand))
+            print(f"Renamed {item} to {rand}")
         else:
-            print(path + rand, "already exists!")
+            print(f"{path} {rand} already exists!")
+
+
+def main(argv):
+    """Main function."""
+    if len(argv) < 2:
+        argv.append(".")
+
+    path = os.path.abspath(argv[1])
+    if not os.path.isdir(path):
+        print(f"Path '{path}' does not exist!")
+        return
+
+    length = 8
+    if len(sys.argv) > 2:
+        length = argv[2]
+
+    if int(length) > len(CHARSET):
+        print(f"Length cannot exceed {len(CHARSET)}!")
+        return
+
+    if confirmation(path):
+        rename(path, int(length))
+
 
 if __name__ == "__main__":
     main(sys.argv)
