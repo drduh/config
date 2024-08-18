@@ -29,7 +29,8 @@ Cmnd_Alias NP = \
   /usr/bin/screen /dev/ttyUSB0 115200 8n1, \
   /usr/bin/tail -F /var/log/dnsmasq, \
   /usr/bin/tail -F /var/log/privoxy/logfile, \
-  /usr/bin/tee /sys/class/backlight/intel_backlight/brightness, \
+  /usr/bin/tee /sys/class/backlight/*/brightness, \
+  /usr/bin/vim /etc/privoxy/user.action, \
   /usr/sbin/dmidecode -s bios-version, \
   /usr/sbin/ntpdate -uv 192.168.1.1, \
   /usr/sbin/reboot now, \

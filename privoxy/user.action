@@ -1,7 +1,6 @@
 # https://github.com/drduh/config/blob/master/privoxy/user.action
 # https://www.privoxy.org/user-manual/actions-file.html
 # http://config.privoxy.org/show-url-info
-
 {{alias}}
 upgrade = -block +redirect{s@http://@https://@}
 unblock = -block -redirect
@@ -38,6 +37,7 @@ unblock = -block -redirect
 fb*.akamaihd.net
 
 { +block{ads and trackers} }
+.google-analytics.
 ad.
 adnxs.
 adsrv.
@@ -60,6 +60,7 @@ oas.
 oascentral.
 pixel.
 seal.
+seals.
 smartadserver.
 smetrics.
 stats.
@@ -126,6 +127,7 @@ trk.
 #.fastly.net
 #.fastlydns.net
 #.jsdelivr.net
+#.mywebsitebuilder.com
 #.salesforce-sites.com
 #.shop.app
 #.shopify.com
@@ -160,6 +162,7 @@ trk.
 #services.
 #shop.
 #static.
+#store.
 #support.
 #wiki.
 
@@ -177,6 +180,7 @@ trk.
 .aftership.com
 .algolia.
 .alienvault.com
+.alpinelinux.org
 .alternet.org
 .amazon.com
 .amazonaws.com
@@ -200,12 +204,14 @@ trk.
 .arcgisonline.com
 .archive.is
 .archive.org
+.archive.ph
 .archlinux.org
 .arduino.cc
 .arm.com
 .arrl.org
 .arstechnica.com
 .arstechnica.net
+.arubanetworks.com
 .arxiv.org
 .askubuntu.com
 .asrock.com
@@ -222,6 +228,7 @@ trk.
 .awsstatic.com
 .azureedge.net
 .azurestandard.com
+.badssl.com
 .bankofamerica.com
 .barrons.com
 .basher.it
@@ -230,6 +237,7 @@ trk.
 .bbystatic.com
 .beamng.com
 .benjaminmoore.com
+.benq.com
 .bestbuy.com
 .bhphoto.com
 .bhphotovideo.com
@@ -244,6 +252,7 @@ trk.
 .bloglovin.com
 .blogspot.
 .blu-ray.com
+.bmj.com
 .bootc.net
 .boum.org
 .box.com
@@ -253,6 +262,7 @@ trk.
 .brew.sh
 .bringatrailer.com
 .broadcom.com
+.brother-usa.com
 .bsigroup.com
 .buildkite.com
 .businesswire.com
@@ -262,13 +272,16 @@ trk.
 .canadapost.ca
 .canarytokens.org
 .canon.com
+.canonical.com
 .cbc.ca
 .ccc.de
 .cdc.gov
 .cdn-apple.com
+.cdn-redfin.com
 .celestrak.com
 .centos.org
 .chase.com
+.chatgpt.com
 .chewy.com
 .chromium.org
 .chrono24.com
@@ -287,6 +300,7 @@ trk.
 .comcast.net
 .congress.gov
 .coreboot.org
+.cornell.edu
 .cpb.gov
 .cpubenchmark.net
 .craigslist.org
@@ -372,6 +386,9 @@ trk.
 .flightradar24.com
 .forbes.com
 .freebsd.org
+.freebsdfoundation.org
+.freedesktop.org
+.freedomhouse.org
 .freelists.org
 .fsdn.com  # sourceforge
 .fsf.org
@@ -399,6 +416,7 @@ trk.
 .gnu.org
 .gnupg.net
 .gnupg.org
+.go.dev
 .godoc.org
 .gofundme.com
 .gog-statics.com
@@ -416,6 +434,7 @@ trk.
 .googleusercontent.com
 .googlevideo.com
 .governmentattic.org
+.gparted.org
 .grapheneos.org
 .greenhouse.io
 .gstatic.com
@@ -477,6 +496,7 @@ trk.
 .keybase.io
 .keylength.com
 .khanacademy.org
+.kiwix.org
 .knowyourmeme.com
 .kubernetes.io
 .last.fm
@@ -522,6 +542,7 @@ trk.
 .mathoverflow.com
 .mathsisfun.com
 .matrix.org
+.matterport.com
 .media-amazon.com
 .medium.com
 .meetup.com
@@ -538,6 +559,7 @@ trk.
 .msi.com
 .muckrack.com
 .muckrock.com
+.mwl.io
 .namecheap.com
 .nasa.gov
 .nc-img.com
@@ -573,6 +595,7 @@ trk.
 .opencensus.io
 .openra.net
 .openshot.org
+.openssl.org
 .openstreetmap.org
 .opensuse.org
 .openvpn.net
@@ -694,6 +717,7 @@ trk.
 .squarespace-cdn.com
 .squarespace.com
 .ssl-images-amazon.com
+.ssllabs.com
 .sstatic.net
 .stackauth.com
 .stackexchange.com
@@ -720,6 +744,7 @@ trk.
 .superuser.com
 .suse.com
 .swappa.com
+.sweetwater.com
 .sysctl-explorer.net
 .tableau.com
 .tableausoftware.com
@@ -750,6 +775,7 @@ trk.
 .twitch.tv
 .ubuntuforums.org
 .ubuntuhandbook.org
+.uefi.org
 .ui.com
 .umu.se
 .undeadly.org
@@ -773,6 +799,7 @@ trk.
 .vimeocdn.com
 .virustotal.com
 .vmware.com
+.voidlinux.org
 .vt.edu
 .w.org
 .w1.fi
@@ -838,17 +865,20 @@ cdnjs.cloudflare.com
 challenges.cloudflare.com  # cloudflare captcha
 cr.yp.to
 cvsweb.openbsd.org
+debian.org
 developer.chrome.com
 docs.google.com
 drive.google.com
 ftp.openbsd.org
 libreddit.
+lists.debian.org
 mail.google.com
 man.openbsd.org
 maps.google.com
 meet.google.com
 openbsd.org
 photos.google.com
+release.debian.org
 security-tracker.debian.org
 steamuserimages-a.akamaihd.net
 voice.google.com
@@ -892,8 +922,8 @@ test.steampowered.com/204
 { unblock{android} }
 connectivitycheck.gstatic.com/generate_204
 
-#{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36}}
-#{+hide-user-agent{Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36}}
+#{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36}}
+#{+hide-user-agent{Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.1}}
 #/
 
 #{+set-image-blocker{http://10.8.1.1/}}

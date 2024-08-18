@@ -15,6 +15,7 @@
 //user_pref("browser.urlbar.suggest.history", false);
 //user_pref("browser.urlbar.suggest.openpage", false);
 //user_pref("browser.urlbar.suggest.topsites", false);
+//user_pref("device.sensors.enabled", false);  // disable device sensors
 //user_pref("dom.enable_performance", false);  // disable DOM timing; may break sites
 //user_pref("dom.security.https_only_mode", true);
 //user_pref("extensions.blocklist.enabled", false);  // disable extension blacklisting (includes revocations)
@@ -29,6 +30,7 @@
 //user_pref("javascript.enabled", false);  // disable javascript; will break sites
 //user_pref("layout.css.devPixelsPerPx", "1.5");  // increase UI size
 //user_pref("layout.css.visited_links_enabled", false);
+//user_pref("mathml.disabled", true);  // disable Mathematical Markup Language
 //user_pref("media.ondevicechange.enabled", false);  // disable media devices change detection
 //user_pref("media.video_stats.enabled", false);  // disable video statistics
 //user_pref("media.webspeech.synth.enabled", false);  // disable speech synthesis
@@ -67,6 +69,7 @@ user_pref("browser.bookmarks.max_backups", 0);
 user_pref("browser.bookmarks.restore_default_bookmarks", false);
 user_pref("browser.cache.disk.enable", false);  // disable disk cache
 user_pref("browser.contentHandlers.types.0.uri", "");
+user_pref("browser.contentanalysis.default_allow", false);
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);  // control-tab cycles tabs
 user_pref("browser.dictionaries.download.url", "");
 user_pref("browser.disableResetPrompt", true);
@@ -82,7 +85,6 @@ user_pref("browser.geolocation.warning.infoURL", "");
 user_pref("browser.helperApps.deleteTempFileOnExit", true);
 user_pref("browser.link.open_newwindow", 3);  // open new windows in tabs instead
 user_pref("browser.link.open_newwindow.restriction", 0);
-user_pref("browser.messaging-system.whatsNewPanel.enabled", false);  // disable what's new toolbar icon
 user_pref("browser.newtabpage.activity-stream.default.sites", "");
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
@@ -93,7 +95,6 @@ user_pref("browser.newtabpage.remote", false);
 user_pref("browser.pagethumbnails.capturing_disabled", true);
 user_pref("browser.ping-centre.production.endpoint", "");
 user_pref("browser.ping-centre.staging.endpoint", "");
-user_pref("browser.ping-centre.telemetry", false);  // disable PingCentre telemetry
 user_pref("browser.places.speculativeConnect.enabled", false);
 user_pref("browser.privatebrowsing.forceMediaMemoryCache", true);
 user_pref("browser.safebrowsing.downloads.enabled", false);
@@ -115,10 +116,12 @@ user_pref("browser.uitour.enabled", false);  // disable UI tour
 user_pref("browser.uitour.url", "");
 user_pref("browser.urlbar.addons.featureGate", false);
 user_pref("browser.urlbar.mdn.featureGate", false);
+user_pref("browser.urlbar.pocket.featureGate", false);
 user_pref("browser.urlbar.showSearchTerms.enabled", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.trending.featureGate", false);
+user_pref("browser.urlbar.weather.featureGate", false);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 user_pref("captivedetect.canonicalURL", "");  // disable captive portal helper
 user_pref("clipboard.autocopy", false);  // disable automatic clipboard selection
@@ -126,7 +129,6 @@ user_pref("datareporting.healthreport.infoURL", "");
 user_pref("datareporting.healthreport.service.firstRun", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
-user_pref("device.sensors.enabled", false);  // disable device sensors
 user_pref("devtools.debugger.force-local", true);  // disable remote debugging
 user_pref("devtools.devedition.promo.url", "");
 user_pref("devtools.onboarding.telemetry.logged", true);
@@ -152,7 +154,6 @@ user_pref("gecko.handlerService.migrated", true);
 user_pref("gecko.handlerService.schemes.webcal.0.uriTemplate", "");
 user_pref("general.warnOnAboutConfig", false);  // disable about:config warning
 user_pref("geo.enabled", false);  // no geo-location
-user_pref("geo.provider.ms-windows-location", false);  // disable geo on windows
 user_pref("geo.provider.use_corelocation", false);  // disable geo on mac
 user_pref("geo.provider.use_geoclue", false);  // disable geo on linux
 user_pref("geo.provider.use_gpsd", false);  // disable geo on linux
@@ -165,7 +166,6 @@ user_pref("javascript.options.jit_trustedprincipals", true);
 user_pref("javascript.options.wasm", false);  // disable webassembly
 user_pref("keyword.enabled", false);  // do not submit invalid URLs to search engine
 user_pref("layout.spellcheckDefault", 0);  // spell-check; 0: none; 1: multi-line; 2: multi- and single-line
-user_pref("mathml.disabled", true);  // disable Mathematical Markup Language
 user_pref("media.autoplay.default", 2);  // HTML5 media - 0: allow; 1: block; 2: prompt
 user_pref("media.eme.enabled", false);  // disable EME (Encryption Media Extension)
 user_pref("media.gmp-provider.enabled", false);  // disable GMP (Gecko Media Plugins)

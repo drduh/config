@@ -51,7 +51,6 @@ user_pref("extensions.getAddons.cache.enabled", false);
 user_pref("general.useragent.override", "");
 user_pref("general.warnOnAboutConfig", false);
 user_pref("geo.enabled", false);
-user_pref("geo.provider.ms-windows-location", false);
 user_pref("geo.provider.use_corelocation", false);
 user_pref("geo.provider.use_geoclue", false);
 user_pref("geo.provider.use_gpsd", false);
