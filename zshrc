@@ -120,6 +120,7 @@ alias gitcommit="git commit"
 alias gitdiff="git diff"
 alias gitpull="git pull"
 alias gitpush="git push"
+alias gitreset="git reset --hard origin/main"
 alias gitstatus="git status"
 alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --color --text"
@@ -211,9 +212,6 @@ function adbpkg {
 function audit_getcap {
   getcap -r ${1:=.} 2> /dev/null }
 
-function audit_recent {
-  getcap -r ${1:=.} 2> /dev/null }
-
 function audit_setuid {
   find ${1:=.} -type f -perm -04000 -ls 2> /dev/null }
 
@@ -297,8 +295,10 @@ function dump_ssl {
       -e x509sat.universalString -e x509sat.IA5String \
         -e x509sat.teletexString -Eseparator=, }
 
-function e {  # appx bits of entropy: e <chars> <length>
-  awk -S -v c="${1}" -v l="${2}" "BEGIN { print log(c^l)/log(2) }" }
+function e {
+  printf "%s entropy bits in %s characters at %s length\n" \
+    $(awk -S -v c="${1}" -v l="${2}" "BEGIN { print log(c^l)/log(2) }") \
+      "${1}" "${2}" }
 
 function encrypt {  # list preferred id last
   output="${HOME}/$(basename ${1}).${today}.enc"
@@ -310,6 +310,9 @@ function encrypt {  # list preferred id last
 
 function f {
   find . -iname "*${1}*" }
+
+function fail {
+  tput setaf 1 ; printf "ERROR: %s\n" "${1}" ; tput sgr0 }
 
 function fd {
   find . -iname "*${1}*" -type d }
@@ -337,7 +340,9 @@ function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
 
 function percent_diff {
-  awk -S -v x="${1}" -v y="${2}" "BEGIN { print (y-x)/x * 100 }" }
+  printf "%s%% diff between %s and %s\n" \
+    $(awk -S -v x="${1}" -v y="${2}" "BEGIN { print (y-x)/x * 100 }") \
+      "${1}" "${2}" }
 
 function png2jpg {
   for png in $(find . -type f -name "*.png") ; do
@@ -412,7 +417,8 @@ function top_history {
 
 function upload {
   curl -s -F "file=@${@}" ${UPLOAD} | \
-    grep -q "Saved" && printf "Uploaded ${@}\n" }
+    grep -q "Saved" && printf "Uploaded %s to %s\n" "${@}" "${SERVER}" || \
+      fail "Could not upload ${@} to ${SERVER}" }
 
 function username {  # "username 8" - generate 8 usernames
   for i in {1..${1}} ; do
@@ -503,4 +509,3 @@ path "/bin"
 #gpg-connect-agent updatestartuptty /bye >/dev/null
 
 #export VAULT_ADDR="http://127.0.0.1:8200"
-
