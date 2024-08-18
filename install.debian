@@ -50,14 +50,17 @@ iotop
 iperf
 iptables
 iptables-persistent
+iw
 kdenlive
 kiwix
+libclang-dev
 libevent-dev
 libimage-exiftool-perl
 libncurses5-dev
 libnftables-dev
 libnl-3-dev
 libnl-genl-3-dev
+libpcap-dev
 libpcre3-dev
 libpcsclite-dev
 libreoffice
@@ -69,6 +72,7 @@ libx11-dev
 libxft-dev
 libxinerama-dev
 libxrandr-dev
+llvm-dev
 lshw
 lsof
 m4
@@ -84,6 +88,7 @@ nmap
 ntp
 ntpdate
 nvtop
+oathtool
 openssl
 paperkey
 parted
@@ -96,11 +101,14 @@ printer-driver-brlaser
 privoxy
 pv
 pylint
+python3-bpfcc
 python3-flask
 python3-gnupg
 python3-pil
 python3-pip
+python3-psutil
 python3-pyscard
+python3-scapy
 python3-venv
 python3-watchdog
 qemu-system-x86
@@ -136,7 +144,6 @@ tmux
 traceroute
 tree
 tshark
-ufw
 unzip
 upower
 vim

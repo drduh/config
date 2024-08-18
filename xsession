@@ -4,6 +4,7 @@
 set -x
 [ -f ~/.fehbg ] && /bin/sh ~/.fehbg &
 #xidle &
+#xinput --set-prop 10 'libinput Accel Speed' 0.5
 xset b off
 xsetroot -name "$(date '+%A %j') | $(uname -sv) "
 exec /usr/local/bin/dwm

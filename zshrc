@@ -8,18 +8,18 @@ bindkey "^[[1;3C" forward-word
 bindkey "^[[1;5D" vi-backward-word
 bindkey "^[[1;3D" backward-word
 
-today="$(date +%F)"
-ts="$(date +%s)"
-PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
-SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
-NETWORK="$(ip a | sed -n '/state UP/ s/.: //p' | sed 's/:.*//g')"
-ROOT="$(command -v sudo || command -v doas)"
-SERVER="http://192.168.1.1"
-DOWNLOAD="${SERVER}/upload/"
-UPLOAD="${SERVER}/cgi-bin/upload.py"
-HISTFILE="${HOME}/.histfile"
-HISTSIZE=200
-SAVEHIST=${HISTSIZE}
+export today="$(date +%F)"
+export ts="$(date +%s)"
+export PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
+export SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
+export NETWORK="$(ip a | sed -n '/state UP/ s/.: //p' | sed 's/:.*//g')"
+export ROOT="$(command -v sudo || command -v doas)"
+export SERVER="http://192.168.1.1"
+export DOWNLOAD="${SERVER}/upload/"
+export UPLOAD="${SERVER}/cgi-bin/upload.py"
+export HISTFILE="${HOME}/.histfile"
+export HISTSIZE=200
+export SAVEHIST=${HISTSIZE}
 
 #export http_proxy="127.0.0.1:8118"
 #export https_proxy="127.0.0.1:8118"
@@ -89,6 +89,7 @@ alias -g XP="| xclip -o"
 alias l="ls -ltrhsa"
 alias ls="ls -lha"
 alias lo="libreoffice"
+alias logs="journalctl --follow"
 alias t="tail -f"
 alias v="vim -p"
 alias cat="cat -t"
@@ -100,13 +101,19 @@ alias audio="pgrep pulseaudio||pulseaudio &;pacmd list-sinks|egrep '\*|card:'"
 alias audio_set="pacmd set-default-sink ${1}"
 alias bim="vim"
 alias bios="${ROOT} dmidecode -s bios-version"
+alias blk="lsblk -e 7 -o name,fstype,size,fsused,label,partlabel,mountpoint,parttype"
+alias boots="journalctl --list-boots"
 alias card-status="gpg --card-status"
 alias cr="firejail --dbus-user=none chromium --enable-unveil --incognito --no-referrers --no-pings --no-experiments --disable-translate --dns-prefetch-disable --disable-background-mode --no-first-run --no-default-browser-check --ssl-version-min=tls1.2"
+alias d="du -hd1 ."
 alias dif="diff"
+alias dimages="docker images --format '{{.Repository}}-{{.Tag}}' | sort"
 alias dmsg="${ROOT} dmesg -wHT"
 alias et="exiftool"
 alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --image-bg black --verbose"
 alias ff="firefox --ProfileManager --no-remote"
+alias fonts="fc-list : family | sort"
+alias fre="free -h"
 alias ftb="firejail --profile=firejailed-tor-browser ${HOME}/Browser/start-tor-browser"
 alias gitadd="git add"
 alias gitcommit="git commit"
@@ -118,19 +125,29 @@ alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --color --text"
 alias grepv="grep --invert-match"
 alias html="html2text | tr -d '^I' | sed '/^[[:space:]]*$/d'"
-alias mail="ssh -Y openbsd -t thunderbird"
+alias mailo="virsh --connect qemu:///system start 'openbsd' && sleep 10 && ssh -Y virtual -t thunderbird && virsh --connect qemu:///system shutdown 'openbsd'"
 alias mnt="${ROOT} mount -o uid=1000 ${1}"
+alias off="${ROOT} shutdown -h now"
 alias ollama="docker exec ollama ollama"
+alias p="python3"
 alias pkg-info="apt-cache show"
 alias proc="ps axjf"
 alias rebootfw="systemctl reboot --firmware-setup"
 alias resize_view="xrandr --output Virtual1 --mode 1600x1200"
+alias sb="mokutil --sb-state"
+alias setcap_net="${ROOT} setcap cap_net_raw=eip ${1}"
 alias slow_startup="systemd-analyze blame"
 alias start_ollama="docker run --network=host -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama"
 alias start_webui="docker run --network=host -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:latest"
 alias tb="thunderbird --ProfileManager --no-remote"
+alias test_sound="aplay -d 0 /usr/share/sounds/alsa/Front_Center.wav"
+alias update="sudo apt update && sudo apt -y upgrade"
 alias vm="virt-manager"
+alias vnc_start="x0vncserver -passwordfile ~/.vnc/passwd -display :0"
+alias vnc_tv="ssh -Y tv -t remmina -c /home/media/.local/share/remmina/group_vnc_quick-connect_127-0-0-1-5900.remmina"
+alias wifi="${ROOT} wpa_cli status"
 alias wifich="iwlist ${NETWORK} channel | sed -n '/Current/ s/.*://p'"
+alias wifi_scan="nmcli -f all dev wifi || ${ROOT} iwlist ${NETWORK} scan | grep -A5 Cell"
 alias x="startx"
 alias yt="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4 --format 'best[height<=720]'"
 alias yt_max="youtube-dl --restrict-filenames --no-overwrites --write-info-json --write-thumbnail --no-call-home --force-ipv4"
@@ -140,11 +157,12 @@ alias x230_read_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/s
 alias x230_write_bot="flashrom -c 'MX25L6406E/MX25L6408E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-bottom.rom"
 alias x230_write_top="flashrom -c 'MX25L3206E/MX25L3208E' -p linux_spi:dev=/dev/spidev0.0,spispeed=512 -w coreboot-top.rom"
 
-function .. { cd ".." ; }
-function ... { cd "../.." ; }
-function .... { cd "../../.." ; }
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
-function days_until() {
+function days_until {
   echo $(( ($(date -d "${1}" +%s) - $(date +%s)) / 86400 )) }
 
 function dedupe {
@@ -155,15 +173,18 @@ function dedupe_fast {
   time find "${@}" ! -empty -type f -exec crc32 {} + | \
     sort | uniq -w8 -D }
 
-function domain () {  # truncate to top level domain
-  awk -F "." '!/^\s*$/{print ( $(NF-1)"."$(NF) )}' "${1}" }
+function domain {  # truncate to top level domain
+  awk -S -F "." '!/^\s*$/{print ( $(NF-1)"."$(NF) )}' "${1}" }
 
-function download () {
+function download {
   curl -O ${DOWNLOAD}/"${@}" }
 
 function gpg_restart {
   pkill "gpg|pinentry|ssh-agent"
   eval $(gpg-agent --daemon --enable-ssh-support) }
+
+function length {
+  awk -S -v len="${1:=80}" 'length($0) > len' }
 
 function lock {
   date
@@ -180,14 +201,27 @@ function grep_url {
     "(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]" "${@}" }
 
 function adbpkg {
-  for p in $(adb shell pm list package|awk -F "package:" '{print $2}'); \
+  for p in $(adb shell pm list package|awk -S -F "package:" '{print $2}'); \
     do echo -n "$p: "
       adb shell dumpsys package $p | \
         grep -i versionname | \
-          awk -F "=" '{print $2}'
+          awk -S -F "=" '{print $2}'
   done > adb.pkg.${today} }
 
-function backup () {
+function audit_getcap {
+  getcap -r ${1:=.} 2> /dev/null }
+
+function audit_recent {
+  getcap -r ${1:=.} 2> /dev/null }
+
+function audit_setuid {
+  find ${1:=.} -type f -perm -04000 -ls 2> /dev/null }
+
+function b {
+  echo ${1:=100} | \
+    sudo tee /sys/class/backlight/amdgpu_bl1/brightness }
+
+function backup {
   cp -v "${1}" "${1}.${ts}" }
 
 function bat {
@@ -195,7 +229,7 @@ function bat {
     grep -E "state|to\ full|percentage" || apm }
 
 function calc {
-  awk "BEGIN { print "$*" }" }
+  awk -S "BEGIN { print "$*" }" }
 
 function cert {
   cn="${1:-${ts}}"
@@ -264,14 +298,14 @@ function dump_ssl {
         -e x509sat.teletexString -Eseparator=, }
 
 function e {  # appx bits of entropy: e <chars> <length>
-  awk -v c="${1}" -v l="${2}" "BEGIN { print log(c^l)/log(2) }" }
+  awk -S -v c="${1}" -v l="${2}" "BEGIN { print log(c^l)/log(2) }" }
 
 function encrypt {  # list preferred id last
   output="${HOME}/$(basename ${1}).${today}.enc"
   gpg --armor --encrypt \
-    --output ${output} \
-    -r 0xFF00000000000000 \
-    -r yubikey@example \
+    --output "${output}" \
+    -r "0xFF00000000000000" \
+    -r "yubikey@example" \
     "${1}" && echo "${1} -> ${output}" }
 
 function f {
@@ -280,40 +314,49 @@ function f {
 function fd {
   find . -iname "*${1}*" -type d }
 
+function firefox_history {
+  sqlite3 "${1:=places.sqlite}" ".mode line" \
+    "select title, url, datetime(last_visit_date/1000000, 'unixepoch') \
+    as visit from moz_places order by last_visit_date desc;" }
+
 function gas {  # get CIDRs for AS number
   whois -h whois.radb.net '!g'${1} }
 
 function md {
   mkdir -p "${1:-${today}}" && cd "${1:-${today}}" }
 
+function mem {
+  ps -eo rss,pid,euser,args:100 --sort "%mem" | grep -i "${@}" | \
+    awk -S '{printf $1/1024 "MB"; $1=""; print }' }
+
 function myip {
   curl -s "https://icanhazip.com/" || \
     dig @resolver1.opendns.com ANY myip.opendns.com +short }
-
-function p {
-  ping -D -4 -c5 -i.5 "${1:-1.1.1.1}" }
 
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
 
 function percent_diff {
-  awk -v x="${1}" -v y="${2}" "BEGIN { print (y-x)/x * 100 }" }
+  awk -S -v x="${1}" -v y="${2}" "BEGIN { print (y-x)/x * 100 }" }
 
 function png2jpg {
   for png in $(find . -type f -name "*.png") ; do
     image="${png%.*}"
     convert "${image}.png" "${image}.jpg" ; done }
 
+function pong {
+  ping -D -4 -c5 -i.5 "${1:-1.1.1.1}" }
+
 function newline_to_comma {
   sed -z 's/\n/,/g' ${1} }
 
-function nonlocal () {
+function nonlocal {
   egrep -ve "^#|^255.255.255.255|^127.|^0.|^::1|^ff..::|^fe80::" "${1}" | \
     egrep -e "[1,2]|::" }
 
 function nxdomains {
   for x in $(${ROOT} grep NXDOMAIN /var/log/dnsmasq | \
-    awk '{print $6}' | sort | uniq) ; do printf "0.0.0.0 $x\n" ; done }
+    awk -S '{print $6}' | sort | uniq) ; do printf "0.0.0.0 $x\n" ; done }
 
 function rand {
   for item in \
@@ -328,7 +371,7 @@ function rand_mac {
 
 function rand_pass {
   LC_ALL=C tr -dc 'A-Z1-9' < /dev/urandom | \
-    tr -d "1IOS5U" | fold -w 30 | head -n10 | \
+    tr -d "1IOS5U7T" | fold -w 30 | head -n10 | \
     sed "-es/./ /"{1..26..5} | cut -c2- | tr " " "-" }
 
 function resize_ff {
@@ -354,24 +397,27 @@ function secret {
 function sort_ip {
   sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n "${@}" }
 
+function sort_length {
+  awk -S '{print length, $0}' | sort -n | cut -d " " -f2- }
+
 function srl {
   doas cu -r -s 115200 -l cuaU0 2>/dev/null || \
     sudo minicom -D /dev/ttyUSB0 2>/dev/null || \
       printf "serial console disconnected\n" }
 
 function top_history {
-  history 1 | awk '{CMD[$2]++;count++;}END {
+  history 1 | awk -S '{CMD[$2]++;count++;}END {
     for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
       column -c3 -s " " -t | sort -nr | nl |  head -n25 }
 
 function upload {
-   curl -s -F "file=@${@}" ${UPLOAD} | \
-     grep -q "Saved" && printf "Uploaded ${@}\n" }
+  curl -s -F "file=@${@}" ${UPLOAD} | \
+    grep -q "Saved" && printf "Uploaded ${@}\n" }
 
-function username () {  # "username 8" - generate 8 usernames
+function username {  # "username 8" - generate 8 usernames
   for i in {1..${1}} ; do
   printf "%s%s\n" \
-    "$(awk 'length > 2 && length < 12 {print(tolower($0))}' \
+    "$(awk -S 'length > 2 && length < 12 {print(tolower($0))}' \
     /usr/share/dict/words | grep -v "'" | sort -R | head -n2 | \
     tr "\n" "_" | iconv -f utf-8 -t ascii//TRANSLIT)" \
     "$(tr -dc "[:digit:]" < /dev/urandom | fold -w 4 | head -1)"
@@ -386,7 +432,7 @@ function zshaddhistory {
   line=${1%%$'\n'}
   cmd=${line%% *}
   [[ ${#line} -ge 5 \
-    && ${cmd} != (apm|apt-cache|base64|bzip2|cal|calc|cat|cd|chmod|convert|cp|curl|cvs|date|df|dig|disklabel|dmesg|doas|download|du|e|egrep|enc|ent|et|exiftool|f|fdisk|feh|ffplay|file|find|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|libreoffice|lp|ls|mail|make|man|mkdir|mnt|mount|mpv|mv|nc|nvtop|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|ps|pylint|rm|rsync|scp|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|ykman|yt|./pwd.sh|./purse.sh)
+    && ${cmd} != (apm|apt-cache|b|base64|bzip2|cal|calc|cat|cd|chmod|convert|cp|curl|cvs|date|df|dig|dimages|disklabel|dmesg|doas|download|du|e|egrep|enc|ent|et|exiftool|f|fdisk|feh|ffplay|file|firejail|gimp|git|gpg|grep|hdiutil|head|hostname|ifconfig|kill|less|libreoffice|lp|ls|mail|make|man|mem|mkdir|mnt|mount|mpv|mv|myip|nc|nvtop|openssl|patch|pdf|pdfinfo|pgrep|ping|pkg_info|pkill|proc|ps|pylint|rand|rand_pass|rm|rsync|scp|screenfetch|scrot|set|sha256|secret|sort|srm|ssh|ssh-keygen|startx|stat|strip|sudo|sysctl|tar|tmux|top|umount|uname|unzip|upload|uptime|useradd|vlc|vi|vim|wc|wget|which|whoami|whois|wireshark|xclip|xxd|ykman|yt|./pwd.sh|./purse.sh)
   ]]
 }
 
@@ -415,6 +461,8 @@ path "/bin"
 #path "/usr/X11R6/bin"
 #path "${HOME}/go/bin"
 
+#export PWDSH_CLIP="xclip"
+#export PWDSH_CLIP_ARGS="-i -selection clipboard"
 #export PWDSH_DEST="screen"
 #export PWDSH_TIME=5
 #export PWDSH_COMMENT="pwd.sh ${HOST} ${today}"
@@ -428,17 +476,19 @@ path "/bin"
 #export PWDSH_CHARS="A-Z0-9!?"
 #export PWDSH_PEPPER="${HOME}/pwd.pepper"
 
-#export PURSE_DEST=$PWDSH_DEST
-#export PURSE_TIME=$PWDSH_TIME
+#export PURSE_CLIP=${PWDSH_CLIP}
+#export PURSE_CLIP_ARGS=${PWDSH_CLIP_ARGS}
+#export PURSE_DEST=${PWDSH_DEST}
+#export PURSE_TIME=${PWDSH_TIME}
 #export PURSE_COMMENT="purse ${HOST} ${today}"
-#export PURSE_DAILY=$PWDSH_DAILY
-#export PURSE_COPY=$PWDSH_COPY
-#export PURSE_ECHO=$PWDSH_ECHO
-#export PURSE_LEN=$PWDSH_LEN
-#export PURSE_SAFE=$PWDSH_SAFE
+#export PURSE_DAILY=${PWDSH_DAILY}
+#export PURSE_COPY=${PWDSH_COPY}
+#export PURSE_ECHO=${PWDSH_ECHO}
+#export PURSE_LEN=${PWDSH_LEN}
+#export PURSE_SAFE=${PWDSH_SAFE}
 #export PURSE_INDEX="purse.index"
 #export PURSE_BACKUP="purse.${HOST}.${today}.${ts}.tar"
-#export PURSE_CHARS=$PWDSH_CHARS
+#export PURSE_CHARS=${PWDSH_CHARS}
 #export PURSE_ENCIX=1
 
 #export HOMEBREW_CASK_OPTS=--require-sha
@@ -453,3 +503,4 @@ path "/bin"
 #gpg-connect-agent updatestartuptty /bye >/dev/null
 
 #export VAULT_ADDR="http://127.0.0.1:8200"
+
