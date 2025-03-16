@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/blob/master/scripts/android-update.sh
+# https://github.com/drduh/config/blob/main/scripts/android-update.sh
 #
 # Requires:
 # $ git clone https://github.com/LineageOS/update_verifier
