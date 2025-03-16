@@ -1,4 +1,5 @@
 # https://github.com/drduh/config/blob/master/domains/apple
+# https://support.apple.com/en-us/101555
 address=/aaplimg.com/
 address=/apple-cloudkit.com/
 address=/apple-dns.cn/
@@ -7,6 +8,8 @@ address=/apple-finance.query.yahoo.com/
 address=/apple-icloud.cn/
 address=/apple-livephotoskit.com/
 address=/apple-mapkit.com/
+address=/apple-relay.cloudflare.com/
+address=/apple-relay.fastly-edge.com/
 address=/apple.co/
 address=/apple.com.akadns.net/
 address=/apple.com.c.footprint.net/
@@ -70,6 +73,7 @@ address=/me.com.akadns.net/
 address=/me.com/
 address=/metrics.icloud.com/
 address=/mzstatic.com/
+address=/networking.apple/
 address=/oa-apple.com.akadns.net/
 address=/origin-apple.com.akadns.net/
 address=/push-apple.com.akadns.net/
