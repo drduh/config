@@ -1,15 +1,27 @@
 # https://github.com/drduh/config/blob/master/domains/microsoft
+# https://learn.microsoft.com/en-us/azure/azure-portal/azure-portal-safelist-urls
+# https://learn.microsoft.com/en-us/azure/security/fundamentals/azure-domains
+#address=/aadrm.com/
+#address=/azconfig.io/
+#address=/azmk8s.io/
+#address=/azure-api.net/
 #address=/azure-dns.com/
 #address=/azure-dns.info/
 #address=/azure-dns.net/
 #address=/azure-dns.org/
+#address=/azure-mobile.net/
 #address=/azure.com/
 #address=/azure.net/
+#address=/azurecontainer.io/
+#address=/azurecr.io/
 #address=/azuredns-cloud.net/
 #address=/azureedge.net/
 #address=/azurefd.net/
 #address=/azurestaticapps.net/
+#address=/azuresynapse.net/
 #address=/azurewebsites.net/
+#address=/loganalytics.io/
+#address=/msidentity.com/
 address=/1drv.com/
 address=/1drv.ms/
 address=/a-msedge.net/
