@@ -1,4 +1,4 @@
-// https://github.com/drduh/config/blob/master/thunderbird.user.js
+// https://github.com/drduh/config/blob/main/thunderbird.user.js
 // https://kb.mozillazine.org/Mail_and_news_settings
 // https://www.enigmail.net/index.php/en/user-manual/advanced-operations
 //user_pref("extensions.enigmail.mimeHashAlgorithm", 5);  // SHA-512
