@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/blob/master/scripts/pki.sh
+# https://github.com/drduh/config/blob/main/scripts/pki.sh
 # https://tools.ietf.org/html/rfc5280
+# Generates RSA PKI with root, server and client certificates
+
 #set -x # uncomment to debug
 set -o errtrace
 set -o nounset
@@ -8,12 +10,29 @@ set -o pipefail
 
 umask 077
 
+# Directory to save output materials
+readonly MATS="pki"
+
+# Path to openssl binary
 readonly OPENSSL="/usr/bin/openssl"
+
+# Path to openssl configuration
 readonly OPENSSL_CONF="./openssl.cnf"
-readonly CA_DAYS="3653"
+
+# Days to self-sign CA for (1 year + 15 days)
+readonly CA_DAYS="380"
+
+# Days to sign leaf certificates
 readonly CERT_DAYS="90"
-readonly DEFAULT_MD="sha512"
+
+# Key size (RSA)
 readonly KEYSIZE="4096"
+
+# Signing algo
+readonly DEFAULT_MD="sha384"
+
+# Serial number size (in bytes)
+readonly SERIAL_SIZE=32
 
 if [[ ! -x ${OPENSSL} ]] ; then
   printf "need ${OPENSSL}\n" ; exit 1
@@ -23,39 +42,56 @@ if [[ ! -f ${OPENSSL_CONF} ]] ; then
   printf "need ${OPENSSL_CONF}\n" ; exit 1
 fi
 
-for name in CN_AUTHORITY CN_SERVER CN_CLIENT ; do
-  readonly $name="$(tr -dc '[:xdigit:]' < /dev/urandom | fold -w 10 | head -n1)"
+# Generate random common name strings or set custom ones
+readonly RAND_FUNC="$(tr -dc '[:upper:]' < /dev/urandom | fold -w 6 | head -1)"
+for cn in CA SERVER CLIENT ; do
+  export ${cn}="${cn}-${RAND_FUNC}"
+  #CA="My CA"
+  #SERVER="My Server"
+  #CLIENT="My Client"
 done
 
-for key in ca client server ; do
-  ${OPENSSL} genrsa -out $key.key ${KEYSIZE}
+# Prepare output directory
+mkdir -p ${MATS} >/dev/null
+
+# Generate private keys
+for key in ca server client ; do
+  ${OPENSSL} genrsa -out ${MATS}/${key}.key ${KEYSIZE}
 done
 
+# Self-sign CA (v3)
 ${OPENSSL} req -new -x509 -days ${CA_DAYS} -${DEFAULT_MD} \
-  -subj "/CN=${CN_AUTHORITY}" \
+  -subj "/CN=${CA}" \
   -config ${OPENSSL_CONF} -extensions v3_ca \
-  -set_serial "0x$(${OPENSSL} rand -hex 32)" \
-  -key ca.key -out ca.pem
+  -set_serial "0x$(${OPENSSL} rand -hex ${SERIAL_SIZE})" \
+  -key ${MATS}/ca.key -out ${MATS}/ca.pem
 
-${OPENSSL} req -new -${DEFAULT_MD} \
-  -subj "/CN=${CN_SERVER}" \
-  -key server.key -out server.csr
+# Create server request
+${OPENSSL} req -new -${DEFAULT_MD} -subj "/CN=${SERVER}" \
+  -key ${MATS}/server.key -out ${MATS}/server.csr
 
-${OPENSSL} req -new -${DEFAULT_MD} \
-  -subj "/CN=${CN_CLIENT}" \
-  -key client.key -out client.csr
-
+# Sign server certificate
 ${OPENSSL} x509 -req -days ${CERT_DAYS} -${DEFAULT_MD} \
   -extfile ${OPENSSL_CONF} -extensions tls_server \
-  -CA ca.pem -CAkey ca.key \
-  -set_serial "0x$(${OPENSSL} rand -hex 32)" \
-  -in server.csr -out server.pem
+  -set_serial "0x$(${OPENSSL} rand -hex ${SERIAL_SIZE})" \
+  -CA ${MATS}/ca.pem -CAkey ${MATS}/ca.key \
+  -in ${MATS}/server.csr -out ${MATS}/server.pem 2>/dev/null
 
+# Create client request
+${OPENSSL} req -new -${DEFAULT_MD} -subj "/CN=${CLIENT}" \
+  -key ${MATS}/client.key -out ${MATS}/client.csr
+
+# Sign client certiicate
 ${OPENSSL} x509 -req -days ${CERT_DAYS} -${DEFAULT_MD} \
   -extfile ${OPENSSL_CONF} -extensions tls_client \
-  -CA ca.pem -CAkey ca.key \
-  -set_serial "0x$(${OPENSSL} rand -hex 32)" \
-  -in client.csr -out client.pem
+  -set_serial "0x$(${OPENSSL} rand -hex ${SERIAL_SIZE})" \
+  -CA ${MATS}/ca.pem -CAkey ${MATS}/ca.key \
+  -in ${MATS}/client.csr -out ${MATS}/client.pem 2>/dev/null
 
-#${OPENSSL} pkcs12 -inkey client.key -in client.pem \
-#  -export -out client.pfx
+# Print materials
+for cert in ca server client ; do
+  printf "\n**** %s ****\n" "${cert}"
+  ${OPENSSL} x509 -subject -issuer -enddate -serial \
+    -fingerprint -sha256 -noout -in ${MATS}/${cert}.pem
+  printf "*%.0s" {1..16}
+done

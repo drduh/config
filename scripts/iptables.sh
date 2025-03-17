@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/blob/master/scripts/iptables.sh
+# https://github.com/drduh/config/blob/main/scripts/iptables.sh
 set -o errtrace
 set -o nounset
 set -o pipefail

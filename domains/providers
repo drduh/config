@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/domains/providers
+# https://github.com/drduh/config/blob/main/domains/providers
 # https://lots-project.com/
 # for x in $(curl -s "https://lots-project.com/" | grep href | \
 #   sed -e "s/..a>$//g" -e "s/.*>//g" -e "s/\*\.//g" | sort | uniq) ; \

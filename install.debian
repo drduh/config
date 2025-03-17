@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/install.debian
+# https://github.com/drduh/config/blob/main/install.debian
 adb
 alsa-utils
 apparmor
@@ -8,6 +8,7 @@ apt-transport-https
 at
 auditd
 autoconf
+base58
 binwalk
 bsdmainutils
 build-essential
@@ -23,6 +24,7 @@ debsums
 dirmngr
 dnsmasq
 dnsutils
+efitools
 evince
 feh
 ffmpeg
@@ -42,6 +44,7 @@ gnat
 gnome-tweaks
 gnupg-agent
 gnupg2
+gnutls-bin
 golang
 html2text
 htop
@@ -87,9 +90,9 @@ netcat-openbsd
 nmap
 ntp
 ntpdate
-nvtop
 oathtool
 openssl
+p11-kit
 paperkey
 parted
 pciutils
@@ -129,6 +132,7 @@ selinux-policy-default
 shellcheck
 signify-openbsd
 signify-openbsd-keys
+smartmontools
 speedtest-cli
 ssh
 sshfs

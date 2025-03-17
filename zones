@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/zones
+# https://github.com/drduh/config/blob/main/zones
 # https://ipdeny.com/ipblocks/
 #us  # UNITED STATES
 af  # AFGHANISTAN
@@ -44,7 +44,7 @@ cf  # CENTRAL AFRICAN REPUBLIC
 td  # CHAD
 cl  # CHILE
 cn  # CHINA
-ng  # COCOS KEEL
+cc  # COCOS (KEELING) ISLANDS
 co  # COLOMBIA
 km  # COMOROS
 cg  # CONGO
@@ -67,7 +67,7 @@ gq  # EQUATORIAL GUINEA
 er  # ERITREA
 ee  # ESTONIA
 et  # ETHIOPIA
-as  # FALKLAND ISLANDS MALVI
+fk  # FALKLAND ISLANDS MALVI
 fo  # FAROE ISLANDS
 fj  # FIJI
 fi  # FINLAND
@@ -90,7 +90,7 @@ gw  # GUINEA-BISSAU
 gn  # GUINEA
 gy  # GUYANA
 ht  # HAITI
-te  # HOLY SEE VATICAN CITY ST
+va  # HOLY SEE VATICAN CITY ST
 hn  # HONDURAS
 hk  # HONG KONG
 hu  # HUNGARY

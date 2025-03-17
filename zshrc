@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/zshrc
+# https://github.com/drduh/config/blob/main/zshrc
 umask 077
 autoload -U colors && colors
 autoload -U compinit && compinit
@@ -14,9 +14,6 @@ export PS1="%{$fg[red]%}%h %{$fg[yellow]%}%~ %{$reset_color%}% "
 export SPROMPT="$fg[red]%R$reset_color did you mean $fg[green]%r?$reset_color "
 export NETWORK="$(ip a | sed -n '/state UP/ s/.: //p' | sed 's/:.*//g')"
 export ROOT="$(command -v sudo || command -v doas)"
-export SERVER="http://192.168.1.1"
-export DOWNLOAD="${SERVER}/upload/"
-export UPLOAD="${SERVER}/cgi-bin/upload.py"
 export HISTFILE="${HOME}/.histfile"
 export HISTSIZE=200
 export SAVEHIST=${HISTSIZE}
@@ -122,6 +119,8 @@ alias gitpull="git pull"
 alias gitpush="git push"
 alias gitreset="git reset --hard origin/main"
 alias gitstatus="git status"
+alias goinit="go mod init main && go mod tidy"
+alias gorun="go run ."
 alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --color --text"
 alias grepv="grep --invert-match"
@@ -130,6 +129,11 @@ alias mailo="virsh --connect qemu:///system start 'openbsd' && sleep 10 && ssh -
 alias mnt="${ROOT} mount -o uid=1000 ${1}"
 alias off="${ROOT} shutdown -h now"
 alias ollama="docker exec ollama ollama"
+alias oath="oathtool --totp=sha1 --base32"
+function oathcode_a { oath "$(cat ${HOME}/secrets/a)" }
+function oathcode_b { oath "$(cat ${HOME}/secrets/b)" }
+alias oathcode_c="ykman oath accounts code c"
+alias oathcode_d="ykman oath accounts code d"
 alias p="python3"
 alias pkg-info="apt-cache show"
 alias proc="ps axjf"
@@ -143,6 +147,7 @@ alias start_webui="docker run --network=host -d -p 3000:8080 --add-host=host.doc
 alias tb="thunderbird --ProfileManager --no-remote"
 alias test_sound="aplay -d 0 /usr/share/sounds/alsa/Front_Center.wav"
 alias update="sudo apt update && sudo apt -y upgrade"
+alias utc="date -u '+%Y.%m.%dT%H:%M'"
 alias vm="virt-manager"
 alias vnc_start="x0vncserver -passwordfile ~/.vnc/passwd -display :0"
 alias vnc_tv="ssh -Y tv -t remmina -c /home/media/.local/share/remmina/group_vnc_quick-connect_127-0-0-1-5900.remmina"
@@ -174,24 +179,23 @@ function dedupe_fast {
   time find "${@}" ! -empty -type f -exec crc32 {} + | \
     sort | uniq -w8 -D }
 
+function dns_cf {
+  curl -H "Accept: application/dns-json" \
+    "https://1.1.1.1/dns-query?name=${1}" }
+
 function domain {  # truncate to top level domain
   awk -S -F "." '!/^\s*$/{print ( $(NF-1)"."$(NF) )}' "${1}" }
 
-function download {
-  curl -O ${DOWNLOAD}/"${@}" }
+function gas {  # get CIDRs for AS number
+  whois -h whois.radb.net '!g'${1} }
+
+function get_goes {
+  curl -s -o "geo.${1}.$(date -u '+%Y%m%dT%H:%M').jpg" \
+    "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/${1}/GEOCOLOR/latest.jpg" }
 
 function gpg_restart {
   pkill "gpg|pinentry|ssh-agent"
   eval $(gpg-agent --daemon --enable-ssh-support) }
-
-function length {
-  awk -S -v len="${1:=80}" 'length($0) > len' }
-
-function lock {
-  date
-  xhost &>/dev/null || return
-  (sleep 1 ; slock) 2>/dev/null &
-  sleep 1 ; systemctl suspend }
 
 function grep_ip {
   grep -Eo \
@@ -228,6 +232,23 @@ function bat {
 
 function calc {
   awk -S "BEGIN { print "$*" }" }
+
+function calc_grow {
+  printf "%s at %s for %s:\n" \
+    "${1:-100}" "${2:-1.10}" "${3:-10}"
+  awk -S -v p="${1:-100}" -v rate="${2:-1.10}" -v y="${3:-10}" \
+    'BEGIN {for (i=0; i<=y; i++) {b = p * rate; p = b; print i ": " p }}' }
+
+function calc_percent () {
+  for i in {-9..9}; do
+    p=$((${1} * i / 100))
+    v=$((${1} + p))
+    if [ "$i" -lt 0 ]; then
+      printf "%s%%: %s\n" "${i}" "${v}"
+    else
+      printf "+%s%%: %s\n" "${i}" "${v}"
+    fi
+  done }
 
 function cert {
   cn="${1:-${ts}}"
@@ -322,8 +343,14 @@ function firefox_history {
     "select title, url, datetime(last_visit_date/1000000, 'unixepoch') \
     as visit from moz_places order by last_visit_date desc;" }
 
-function gas {  # get CIDRs for AS number
-  whois -h whois.radb.net '!g'${1} }
+function length {
+  awk -S -v len="${1:=80}" 'length($0) > len' }
+
+function lock {
+  date
+  xhost &>/dev/null || return
+  (sleep 1 ; slock) 2>/dev/null &
+  sleep 1 ; systemctl suspend }
 
 function md {
   mkdir -p "${1:-${today}}" && cd "${1:-${today}}" }
@@ -410,15 +437,18 @@ function srl {
     sudo minicom -D /dev/ttyUSB0 2>/dev/null || \
       printf "serial console disconnected\n" }
 
+function temp_c_to_f {
+  printf "%sc is %sf\n" "${1:-100}" \
+    $(awk -S -v c="${1:-100}" 'BEGIN { printf "%.2f\n", (c*9/5)+32 }') }
+
+function temp_f_to_c {
+  printf "%sf is %sc\n" "${1:-100}" \
+    $(awk -S -v f="${1:-100}" 'BEGIN { printf "%.2f\n", (f-32)*5/9 }') }
+
 function top_history {
   history 1 | awk -S '{CMD[$2]++;count++;}END {
     for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
       column -c3 -s " " -t | sort -nr | nl |  head -n25 }
-
-function upload {
-  curl -s -F "file=@${@}" ${UPLOAD} | \
-    grep -q "Saved" && printf "Uploaded %s to %s\n" "${@}" "${SERVER}" || \
-      fail "Could not upload ${@} to ${SERVER}" }
 
 function username {  # "username 8" - generate 8 usernames
   for i in {1..${1}} ; do
@@ -465,7 +495,7 @@ path "/sbin"
 path "/bin"
 #path "/usr/games"
 #path "/usr/X11R6/bin"
-#path "${HOME}/go/bin"
+#path "/usr/local/go/bin"
 
 #export PWDSH_CLIP="xclip"
 #export PWDSH_CLIP_ARGS="-i -selection clipboard"
@@ -508,4 +538,27 @@ path "/bin"
 #gpgconf --launch gpg-agent
 #gpg-connect-agent updatestartuptty /bye >/dev/null
 
+# https://github.com/drduh/gone
+export gone_proto="http"
+export gone_host="localhost"
+#export gone_host="192.168.1.1"
+export gone_port="8080"
+export gone_auth="mySecret"
+export gone_header="X-Auth"
+export gone_server="${gone_proto}://${gone_host}:${gone_port}"
+export gone_cmd="curl -s -H '${gone_header}: ${gone_auth}' ${gone_server}"
+
+alias gone_list="${gone_cmd}/list | jq"
+alias gone_stat="${gone_cmd}/heartbeat | jq"
+alias gone_static="${gone_cmd}/static | jq"
+
+function gone_put {
+  curl -s -F "file=@${1}" -F "downloads=${2:-3}" -F "duration=${3:-20m}" \
+    -H "${gone_header}: ${gone_auth}" "${gone_server}/upload" | jq}
+
+function gone_get {
+  curl -s -H "${gone_header}: ${gone_auth}" \
+    "${gone_server}/download?name=${1}" }
+
 #export VAULT_ADDR="http://127.0.0.1:8200"
+#export VAULT_ADDR="https://vault.local:8200"

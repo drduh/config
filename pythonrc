@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/pythonrc
+# https://github.com/drduh/config/blob/main/pythonrc
 from pprint import pprint as p
 import json
 import urllib as u

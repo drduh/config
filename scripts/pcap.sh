@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/blob/master/scripts/pcap.sh
+# https://github.com/drduh/config/blob/main/scripts/pcap.sh
 #
 # Cycles tcpflow output through foremost to recover jpg files,
 # then executes python script to generate gallery pages and index.

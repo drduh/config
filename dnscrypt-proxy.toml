@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/dnscrypt-proxy.toml
+# https://github.com/drduh/config/blob/main/dnscrypt-proxy.toml
 # https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
 #dnscrypt_ephemeral_keys = true
 #tls_cipher_suite = [52393]  # TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
@@ -67,7 +67,7 @@ log_files_max_backups = 10
 # https://github.com/DNSCrypt/dnscrypt-resolvers/blob/master/v3/public-resolvers.md
 #[static]
 #  [static.quad9-dnscrypt-ip4-filter-ecs-pri-1]
-#    stamp = ''sdns://AQMAAAAAAAAADTkuOS45LjExOjg0NDMgZ8hHuMh1jNEgJFVDvnVnRt803x2EwAuMRwNo34Idhj4ZMi5kbnNjcnlwdC1jZXJ0LnF1YWQ5Lm5ldA'
+#    stamp = 'sdns://AQMAAAAAAAAADTkuOS45LjExOjg0NDMgZ8hHuMh1jNEgJFVDvnVnRt803x2EwAuMRwNo34Idhj4ZMi5kbnNjcnlwdC1jZXJ0LnF1YWQ5Lm5ldA'
 #  [static.quad9-dnscrypt-ip4-filter-ecs-pri-2]
 #    stamp = 'sdns://AQMAAAAAAAAAEzE0OS4xMTIuMTEyLjExOjg0NDMgZ8hHuMh1jNEgJFVDvnVnRt803x2EwAuMRwNo34Idhj4ZMi5kbnNjcnlwdC1jZXJ0LnF1YWQ5Lm5ldA'
 #  [static.quad9-dnscrypt-ip4-filter-pri-1]

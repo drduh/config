@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/grub
+# https://github.com/drduh/config/blob/main/grub
 #GRUB_TERMINAL=serial
 #GRUB_SERIAL_COMMAND="serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1"
 GRUB_GFXMODE=2560x1440

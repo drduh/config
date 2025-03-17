@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/sudoers
+# https://github.com/drduh/config/blob/main/sudoers
 # https://www.sudo.ws/docs/man/sudoers.man/
 Defaults env_reset
 Defaults mail_badpass
@@ -38,6 +38,7 @@ Cmnd_Alias NP = \
   /usr/sbin/service dnsmasq restart, \
   /usr/sbin/service networking restart, \
   /usr/sbin/service ntp restart, \
+  /usr/sbin/service ntpsec restart, \
   /usr/sbin/service privoxy restart, \
   /usr/sbin/shutdown -h now
 

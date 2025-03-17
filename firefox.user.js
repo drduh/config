@@ -1,5 +1,4 @@
-// https://github.com/drduh/config/blob/master/firefox.user.js
-// https://github.com/arkenfox/user.js
+// https://github.com/drduh/config/blob/main/firefox.user.js
 //user_pref("browser.newtabpage.enabled", false);  // blank new tab page
 //user_pref("browser.privatebrowsing.autostart", true);  // private browsing mode only; may break sites
 //user_pref("browser.quitShortcut.disabled", true);  // disable control-q to quit
@@ -14,7 +13,6 @@
 //user_pref("browser.urlbar.suggest.engines", false);
 //user_pref("browser.urlbar.suggest.history", false);
 //user_pref("browser.urlbar.suggest.openpage", false);
-//user_pref("browser.urlbar.suggest.topsites", false);
 //user_pref("device.sensors.enabled", false);  // disable device sensors
 //user_pref("dom.enable_performance", false);  // disable DOM timing; may break sites
 //user_pref("dom.security.https_only_mode", true);
@@ -47,15 +45,18 @@
 //user_pref("network.trr.mode", 2);
 //user_pref("network.trr.uri", "https://dns.quad9.net:5053/dns-query");
 //user_pref("permissions.memory_only", true);  // disable storing permission changes to disk
-//user_pref("privacy.clearOnShutdown.history", true);
-//user_pref("privacy.clearOnShutdown.siteSettings", true);
+//user_pref("privacy.resistFingerprinting", true);  // enable strict fingerprinting resistance features; may break sites
+//user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);  // disable mozAddonManager
+//user_pref("privacy.resistFingerprinting.letterboxing", true);  // letterbox window
 //user_pref("privacy.sanitize.sanitizeOnShutdown", true);  // clear history on exit
 //user_pref("privacy.window.maxInnerHeight", 900);
 //user_pref("privacy.window.maxInnerWidth", 1600);
 //user_pref("security.dialog_enable_delay", 1000);  // ms delay on dialogs
 //user_pref("svg.disabled", true);  // disable SVG (Scalable Vector Graphics)
 //user_pref("ui.use_standins_for_native_colors", true);  // disable exposing system colors to canvas
+//user_pref("webgl.disabled", true);  // disable WebGL (Web Graphics Library)
 //user_pref("webgl.enable-debug-renderer-info", false);  // do not expose graphics driver information
+//user_pref("webgl.enable-webgl2", false);
 user_pref("accessibility.browsewithcaret", true);
 user_pref("accessibility.typeaheadfind", true);  // enable page search by typing
 user_pref("accessibility.typeaheadfind.flashBar", 0);
@@ -69,7 +70,6 @@ user_pref("browser.bookmarks.max_backups", 0);
 user_pref("browser.bookmarks.restore_default_bookmarks", false);
 user_pref("browser.cache.disk.enable", false);  // disable disk cache
 user_pref("browser.contentHandlers.types.0.uri", "");
-user_pref("browser.contentanalysis.default_allow", false);
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);  // control-tab cycles tabs
 user_pref("browser.dictionaries.download.url", "");
 user_pref("browser.disableResetPrompt", true);
@@ -111,17 +111,21 @@ user_pref("browser.shell.shortcutFavicons", false);  // disable shortcuts favico
 user_pref("browser.startup.homepage", "about:blank");
 user_pref("browser.startup.homepage_override.mstone", "ignore");  // disable welcome pages
 user_pref("browser.tabs.crashReporting.sendReport", false);
+user_pref("browser.tabs.hoverPreview.enabled", false);
 user_pref("browser.tabs.searchclipboardfor.middleclick", false);  // disable open url tab with middle click
 user_pref("browser.uitour.enabled", false);  // disable UI tour
 user_pref("browser.uitour.url", "");
 user_pref("browser.urlbar.addons.featureGate", false);
+user_pref("browser.urlbar.fakespot.featureGate", false);
 user_pref("browser.urlbar.mdn.featureGate", false);
 user_pref("browser.urlbar.pocket.featureGate", false);
 user_pref("browser.urlbar.showSearchTerms.enabled", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);
 user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.trending.featureGate", false);
 user_pref("browser.urlbar.weather.featureGate", false);
+user_pref("browser.urlbar.yelp.featureGate", false);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 user_pref("captivedetect.canonicalURL", "");  // disable captive portal helper
 user_pref("clipboard.autocopy", false);  // disable automatic clipboard selection
@@ -156,7 +160,6 @@ user_pref("general.warnOnAboutConfig", false);  // disable about:config warning
 user_pref("geo.enabled", false);  // no geo-location
 user_pref("geo.provider.use_corelocation", false);  // disable geo on mac
 user_pref("geo.provider.use_geoclue", false);  // disable geo on linux
-user_pref("geo.provider.use_gpsd", false);  // disable geo on linux
 user_pref("gfx.webgpu.force-enabled", false);  // disable GPU access
 user_pref("identity.fxaccounts.enabled", false);  // disable Firefox accounts sync
 user_pref("javascript.options.asmjs", false);
@@ -205,25 +208,9 @@ user_pref("pdfjs.enableScripting", false);
 user_pref("permissions.manager.defaultsUrl", "");
 user_pref("pref.browser.homepage.disable_button.current_page", false);
 user_pref("pref.privacy.disable_button.cookie_exceptions", false);
-user_pref("privacy.clearOnShutdown.cache", true);
-user_pref("privacy.clearOnShutdown.cookies", true);
-user_pref("privacy.clearOnShutdown.downloads", true);
-user_pref("privacy.clearOnShutdown.formdata", true);
-user_pref("privacy.clearOnShutdown.offlineApps", true);
-user_pref("privacy.clearOnShutdown.openWindows", true);
-user_pref("privacy.clearOnShutdown.sessions", true);
-user_pref("privacy.clearOnShutdown.siteSettings", false);
-user_pref("privacy.cpd.cache", true);
-user_pref("privacy.cpd.downloads", true);
-user_pref("privacy.cpd.formdata", true);
-user_pref("privacy.cpd.offlineApps", true);
-user_pref("privacy.cpd.sessions", true);
 user_pref("privacy.fingerprintingProtection", true);  // more compatible than resistFingerprinting
 user_pref("privacy.fingerprintingProtection.overrides", "+AllTargets,-CSSPrefersColorScheme");  // dark mode support
 user_pref("privacy.fingerprintingProtection.pbmode", true);
-user_pref("privacy.resistFingerprinting", true);  // enable strict fingerprinting resistance features; may break sites
-user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);  // disable mozAddonManager
-user_pref("privacy.resistFingerprinting.letterboxing", true);  // letterbox window
 user_pref("privacy.resistFingerprinting.pbmode", true);
 user_pref("privacy.resistFingerprinting.target_video_res", 2160);  // default to high-res videos
 user_pref("privacy.trackingprotection.enabled", true);  // https://wiki.mozilla.org/Security/Tracking_protection
@@ -247,6 +234,7 @@ user_pref("startup.homepage_welcome_url.additional", "");
 user_pref("toolkit.coverage.endpoint.base", "");
 user_pref("toolkit.coverage.opt-out", true);  // disable telemetry coverage
 user_pref("toolkit.crashreporter.infoURL", "");
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("toolkit.telemetry.bhrPing.enabled", false);
 user_pref("toolkit.telemetry.coverage.opt-out", true);  // disable telemetry coverage
@@ -265,6 +253,3 @@ user_pref("toolkit.telemetry.updatePing.enabled", false);
 user_pref("toolkit.winRegisterApplicationRestart", false);  // disable session restore
 user_pref("ui.key.menuAccessKey", 0);  // disable Alt key for menu
 user_pref("ui.systemUsesDarkTheme", 1);
-user_pref("webchannel.allowObject.urlWhitelist", "");
-user_pref("webgl.disabled", true);  // disable WebGL (Web Graphics Library)
-user_pref("webgl.enable-webgl2", false);

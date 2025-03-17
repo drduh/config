@@ -1,11 +1,10 @@
-# https://github.com/drduh/config/blob/master/sshd_config
+# https://github.com/drduh/config/blob/main/sshd_config
 # https://linux.die.net/man/5/sshd_config
 #ListenAddress 0.0.0.0
 #Port 2400  # /etc/systemd/system/sockets.target.wants/ssh.socket
 AddressFamily inet
 HostKey /etc/ssh/ssh_host_key
-HostKey /etc/ssh/ssh_host_rsa_key
-AllowUsers sysadm
+AllowUsers sysadm proxy
 Ciphers aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com
 KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
@@ -13,7 +12,7 @@ HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-ed25519
 RekeyLimit 1G 1H
 SyslogFacility AUTH
 LogLevel VERBOSE
-LoginGraceTime 10s
+LoginGraceTime 30s
 MaxStartups 1
 MaxSessions 2
 MaxAuthTries 2

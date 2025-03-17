@@ -1,4 +1,4 @@
-" https://github.com/drduh/config/blob/master/vimrc
+" https://github.com/drduh/config/blob/main/vimrc
 " https://vimhelp.org/vim_faq.txt.html
 set nocompatible
 filetype plugin indent on
@@ -15,6 +15,7 @@ noremap <space><space>  :set list!<cr>
 noremap <space>exec     :!./%<cr>
 noremap <space>ws       :%s/\s\+$//<cr>
 noremap <space>s        :setlocal spell!<cr>
+noremap <space>t o<C-r>=strftime("%F %H:%M:%S ")<cr>
 set autoindent                  " copy indent from current line
 set cursorline                  " underline cursor line
 set expandtab                   " use spaces instead of tabs
@@ -90,6 +91,6 @@ hi Comment ctermfg=9 ctermbg=0
 hi StatusLine ctermfg=0 ctermbg=3
 hi clear SpellBad
 hi SpellBad ctermbg=10
-colorscheme solarized
 autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
 highlight ExtraWhitespace ctermbg=red
+"colorscheme solarized

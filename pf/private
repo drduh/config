@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/pf/private
+# https://github.com/drduh/config/blob/main/pf/private
 #0.0.0.0/8
 #100.64.0.0/10
 #127.0.0.0/8
