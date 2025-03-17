@@ -132,7 +132,8 @@ alias ollama="docker exec ollama ollama"
 alias oath="oathtool --totp=sha1 --base32"
 alias oathcode_a="${oath} $(cat ${HOME}/secrets/a)"
 alias oathcode_b="${oath} $(cat ${HOME}/secrets/b)"
-alias oathcode_c="${oath} $(cat ${HOME}/secrets/c)"
+alias oathcode_c="ykman oath accounts code c"
+alias oathcode_d="ykman oath accounts code d"
 alias p="python3"
 alias pkg-info="apt-cache show"
 alias proc="ps axjf"
@@ -180,7 +181,7 @@ function dedupe_fast {
 
 function dns_cf {
   curl -H "Accept: application/dns-json" \
-    "https://1.1.1.1/dns-query?name=${@}" }
+    "https://1.1.1.1/dns-query?name=${1}" }
 
 function domain {  # truncate to top level domain
   awk -S -F "." '!/^\s*$/{print ( $(NF-1)"."$(NF) )}' "${1}" }

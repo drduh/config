@@ -1,22 +1,28 @@
-# https://github.com/drduh/config/blob/master/privoxy/config
+# https://github.com/drduh/config/blob/main/privoxy/config
 # https://www.privoxy.org/user-manual/config.html
 #forward-socks5t   /               127.0.0.1:9050 .
 #forward   /      parent-proxy.example.org:8080
 #forward   :443   .
 #listen-address 192.168.1.1:8118
 confdir /etc/privoxy
-logdir /var/log/privoxy
+logdir  /var/log/privoxy
 logfile logfile
+
 actionsfile default.action
 actionsfile match-all.action
 actionsfile user.action
-filterfile default.filter
-filterfile user.filter
+filterfile  default.filter
+filterfile  user.filter
+
 accept-intercepted-requests 1
-tolerate-pipelining 1
-keep-alive-timeout 10
-socket-timeout 10
-debug     1 # Log the destination for each request. See also debug 1024.
+tolerate-pipelining         1
+keep-alive-timeout          10
+socket-timeout              10
+
+debug     1  # Log the destination for each request. See also debug 1024.
+debug  1024  # Log the destination for requests Privoxy didn't let through, and the reason why.
+debug  4096  # Startup banner and warnings.
+debug  8192  # Non-fatal errors
 #debug     2 # show each connection status
 #debug     4 # show tagging-related messages
 #debug     8 # show header parsing
@@ -26,9 +32,6 @@ debug     1 # Log the destination for each request. See also debug 1024.
 #debug   128 # debug redirects
 #debug   256 # debug GIF de-animation
 #debug   512 # Common Log Format
-debug  1024 # Log the destination for requests Privoxy didn't let through, and the reason why.
 #debug  2048 # CGI user interface
-debug  4096 # Startup banner and warnings.
-debug  8192 # Non-fatal errors
 #debug 32768 # log all data read from the network
 #debug 65536 # Log the applying actions

@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/privoxy/user.action
+# https://github.com/drduh/config/blob/main/privoxy/user.action
 # https://www.privoxy.org/user-manual/actions-file.html
 # http://config.privoxy.org/show-url-info
 {{alias}}
@@ -10,6 +10,7 @@ unblock = -block -redirect
 
 { +block{social} }
 .discord.
+.disqus.
 .gravatar.
 .licdn.
 .linkedin.
@@ -141,6 +142,7 @@ trk.
 #api.
 #assets*.
 #blog.
+#book.
 #cdn.
 #cdnjs.
 #community.
@@ -155,8 +157,10 @@ trk.
 #images.
 #js.
 #mirror*.
+#order.
 #pages.dev  # Cloudflare Pages
 #pay.
+#pictures.
 #places.
 #ppa.
 #services.
@@ -467,14 +471,11 @@ trk.
 .ifixit.com
 .ign.com
 .images-amazon.com
-.imageshack.com
-.imageshack.us
 .imdb.com
 .imfreedom.org
 .imgbox.com
 .imgix.net
 .imgur.com
-.indiegogo.com
 .intel.com
 .invidious.io
 .ipdeny.com
@@ -502,7 +503,6 @@ trk.
 .last.fm
 .launchpad.net
 .lenovo.com
-.letsblock.it
 .letsencrypt.org
 .levels.fyi
 .lever.co
@@ -888,6 +888,8 @@ www.google.com
 www.openbsd.org
 
 { unblock{local} }
+#127.0.0.1:8080
+#localhost:8080
 127.0.0.1
 10.0.
 172.16.
@@ -896,16 +898,18 @@ www.openbsd.org
 { unblock{infra} }
 .amazontrust.com
 .arpa
+.example.com
 .gov
 .lencr.org
 .openh264.org
+.pki.goog
 .ss2.us
 .ubuntu.com
 cacerts.
 crl.
+myspeed.
 ntp.org
 ocsp.
-pki.goog
 status.rapidssl.com
 status.thawte.com
 zerossl.ocsp.sectigo.com
@@ -922,8 +926,7 @@ test.steampowered.com/204
 { unblock{android} }
 connectivitycheck.gstatic.com/generate_204
 
-#{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36}}
-#{+hide-user-agent{Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.1}}
+#{+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36}}
 #/
 
 #{+set-image-blocker{http://10.8.1.1/}}
