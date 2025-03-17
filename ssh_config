@@ -1,13 +1,10 @@
-# https://github.com/drduh/config/blob/master/ssh_config
+# https://github.com/drduh/config/blob/main/ssh_config
 # https://linux.die.net/man/5/ssh_config
 #Host router
 #  IdentityFile ~/.ssh/router
 #  HostName 192.168.1.1
-#  Port 2222
+#  Port 2400
 #  User sysadm
-#  ControlMaster auto
-#  ControlPath ~/.ssh/master-%r@%h:%p
-#  ControlPersist 300
 Host gitlab.com
   User git
   ControlMaster no
@@ -23,7 +20,6 @@ Host *
   #ControlMaster auto
   #ControlPath ~/.ssh/master-%r@%h:%p
   #ControlPersist 300
-  #AddKeysToAgent yes
   AddressFamily inet
   HashKnownHosts yes
   VisualHostKey yes
