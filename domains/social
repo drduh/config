@@ -1,8 +1,6 @@
-# https://github.com/drduh/config/blob/master/domains/social
+# https://github.com/drduh/config/blob/main/domains/social
 address=/alexa.com/
 address=/alwaysdata.net/
-address=/aol.com/
-address=/aolcdn.com/
 address=/asapp.com/
 address=/bufferapp.com/
 address=/campaign-archive.com/
