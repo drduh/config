@@ -95,15 +95,23 @@ trk.
 { upgrade{patterns} }
 #.*air.com
 #.*api.com
+#.*bakery.com
+#.*carservice.com
 #.*cdn.com
 #.*cdn.net
 #.*cloud.com
+#.*coffee.com
 #.*contenthub.com
 #.*flights.com
+#.*food.com
+#.*grill.com
 #.*img.com
 #.*media.com
 #.*news.com
+#.*realty.com
 #.*static.com
+#.*store.us
+#.*tavern.com
 #.*wiki.com
 #.akadns.net
 #.akadns88.net
@@ -147,6 +155,7 @@ trk.
 #cdnjs.
 #community.
 #content.
+#developers.
 #docs.
 #documentation.
 #download.
@@ -168,6 +177,7 @@ trk.
 #static.
 #store.
 #support.
+#tech.
 #wiki.
 
 { upgrade{everything else} }
@@ -177,6 +187,7 @@ trk.
 .acm.org
 .adafruit.com
 .adblockplus.org
+.admin.ch
 .adtidy.org
 .ae.com
 .aexp-static.com
@@ -185,7 +196,6 @@ trk.
 .algolia.
 .alienvault.com
 .alpinelinux.org
-.alternet.org
 .amazon.com
 .amazonaws.com
 .amd.com
@@ -230,6 +240,7 @@ trk.
 .autotrader.com
 .awesomeopensource.com
 .awsstatic.com
+.awswaf.com
 .azureedge.net
 .azurestandard.com
 .badssl.com
@@ -273,10 +284,13 @@ trk.
 .byexamples.com
 .bytebucket.org
 .ca.gov
+.camelcamelcamel.com
 .canadapost.ca
 .canarytokens.org
 .canon.com
 .canonical.com
+.capitalone.com
+.capitalone360.com
 .cbc.ca
 .ccc.de
 .cdc.gov
@@ -284,6 +298,7 @@ trk.
 .cdn-redfin.com
 .celestrak.com
 .centos.org
+.ch.ch
 .chase.com
 .chatgpt.com
 .chewy.com
@@ -304,11 +319,14 @@ trk.
 .comcast.net
 .congress.gov
 .coreboot.org
+.coredump.cx
 .cornell.edu
+.costco.com
 .cpb.gov
 .cpubenchmark.net
 .craigslist.org
 .creativecommons.org
+.criterion.com
 .crowdsupply.com
 .crt.sh
 .crucial.com
@@ -329,6 +347,7 @@ trk.
 .debian.net
 .debianforum.de
 .dell.com
+.denon.com
 .dev.to
 .dhs.gov
 .die.net
@@ -343,6 +362,7 @@ trk.
 .documentcloud.org
 .docusign.com
 .doi.org
+.dolby.com
 .dropbox.com
 .dropboxatwork.com
 .dropboxteam.com
@@ -365,12 +385,16 @@ trk.
 .enterprise.com
 .eoportal.org
 .epicgames.com
+.equifax.com
+.esa.int
 .eso.org
 .etrade.
 .etsy.com
 .etsystatic.com
 .expedia.com
+.experian.com
 .export.gov
+.faircode.eu
 .fanboy.co.nz
 .fandom.com
 .fbi.gov
@@ -389,6 +413,7 @@ trk.
 .flickr.net
 .flightradar24.com
 .forbes.com
+.fourseasons.com
 .freebsd.org
 .freebsdfoundation.org
 .freedesktop.org
@@ -396,11 +421,13 @@ trk.
 .freelists.org
 .fsdn.com  # sourceforge
 .fsf.org
+.ft.com
 .ftc.gov
 .fwupd.org
 .garmin.com
 .geeqie.org
 .gentoo.org
+.geojson.org
 .gfycat.com
 .ggpht.com
 .ghcr.io
@@ -421,12 +448,14 @@ trk.
 .gnupg.net
 .gnupg.org
 .go.dev
+.gobyexample.com
 .godoc.org
 .gofundme.com
 .gog-statics.com
 .gog.com
 .golang.com
 .golang.org
+.golangci-lint.run
 .goo.gl
 .google
 .google.
@@ -437,6 +466,7 @@ trk.
 .googlesource.com
 .googleusercontent.com
 .googlevideo.com
+.goteleport.com
 .governmentattic.org
 .gparted.org
 .grapheneos.org
@@ -451,9 +481,13 @@ trk.
 .hashicorp.com
 .haxx.se
 .hbr.org
+.hcaptcha.com
 .he.net
+.heinz.com
+.hetzner.com
 .hf.co
 .hf.space
+.hhkeyboard.us
 .hireright.com
 .homedepot.com
 .house.gov
@@ -467,6 +501,7 @@ trk.
 .icanhazip.com
 .icann.org
 .icannwiki.org
+.ieee.org
 .ietf.org
 .ifixit.com
 .ign.com
@@ -491,6 +526,7 @@ trk.
 .justdeleteme.xyz
 .justice.gov
 .jwplatform.com
+.kali.org
 .kde.org
 .kdenlive.org
 .kernel.org
@@ -506,6 +542,7 @@ trk.
 .letsencrypt.org
 .levels.fyi
 .lever.co
+.lexisnexis.com
 .lexus.com
 .lg.com
 .libreoffice.org
@@ -521,6 +558,7 @@ trk.
 .litmos.com
 .lkml.org
 .llvm.org
+.lobste.rs
 .loc.gov
 .logicalincrements.com
 .lots-project.com
@@ -536,6 +574,7 @@ trk.
 .mapquest.com
 .marc.info
 .marketwatch.com
+.martinlogan.com
 .mastodon.social
 .mastodon.world
 .mathopolis.com
@@ -543,6 +582,8 @@ trk.
 .mathsisfun.com
 .matrix.org
 .matterport.com
+.maxar.com
+.mayoclinic.org
 .media-amazon.com
 .medium.com
 .meetup.com
@@ -550,6 +591,7 @@ trk.
 .metafilter.com
 .mit.edu
 .mitre.org
+.monoprice.com
 .morganstanley.com
 .mozaws.net
 .mozilla.net
@@ -561,16 +603,21 @@ trk.
 .muckrock.com
 .mwl.io
 .namecheap.com
+.narescue.com
 .nasa.gov
+.nature.com
 .nc-img.com
 .netdna-ssl.com
+.netguard.me
 .netify.ai
 .newegg.com
 .neweggimages.com
+.newpipe.net
 .nextdoor.com
 .nexusmods.com
 .nginx.org
 .nh.us
+.nhs.uk
 .nih.gov
 .nixos.org
 .noaa.gov
@@ -580,6 +627,7 @@ trk.
 .npr.org
 .nro.net
 .nsf.gov
+.ntppool.org
 .nvidia.com
 .nypost.com
 .nyt.com
@@ -605,6 +653,7 @@ trk.
 .opnsense.org
 .optionstrat.com
 .optoutprescreen.com
+.osmand.net
 .ovh.com
 .ovh.net
 .ovh.us
@@ -613,6 +662,7 @@ trk.
 .pandoc.org
 .parallels.com
 .pastebin.com
+.patagonia.com
 .patreon.com
 .patreonusercontent.com
 .pcengines.ch
@@ -632,6 +682,7 @@ trk.
 .plosone.org
 .podman.io
 .popular.pics
+.porsche.com
 .posteo.de
 .princeton.edu
 .privacyguides.org
@@ -653,7 +704,9 @@ trk.
 .raspberrypi.com
 .raspberrypi.org
 .readthedocs.io
+.realtor.com
 .recaptcha.net
+.redcross.org
 .redd.it
 .reddit.com
 .redditmedia.com
@@ -686,6 +739,7 @@ trk.
 .scotusblog.com
 .scribd.com
 .scribdassets.com
+.se.com
 .sec.gov
 .sec.report
 .securelist.com
@@ -694,6 +748,7 @@ trk.
 .shellcheck.net
 .shipstation.com
 .shodan.io
+.shopifyinc.com
 .signal.org
 .singleplatform.com
 .slack-edge.com
@@ -704,6 +759,7 @@ trk.
 .smapi.io
 .snapcraft.io
 .someonewhocares.org
+.sony.com
 .soundcloud.com
 .sourceforge.io
 .sourceforge.net
@@ -741,6 +797,7 @@ trk.
 .streamable.com
 .stunnel.org
 .suckless.org
+.sunrise-sunset.org
 .superuser.com
 .suse.com
 .swappa.com
@@ -749,6 +806,7 @@ trk.
 .tableau.com
 .tableausoftware.com
 .tacdn.com  # tripadvisor
+.tails.net
 .target.com
 .targetimg1.com
 .taxfoundation.org
@@ -768,6 +826,7 @@ trk.
 .toyota.com
 .tractorsupply.com
 .tradingview.com
+.transunion.com
 .travel-assets.com
 .tripadvisor.com
 .trmm.net
@@ -789,6 +848,7 @@ trk.
 .usps.com
 .utah.gov
 .vanguard.com
+.vaultproject.io
 .verizon.com
 .verizonwireless.com
 .vermont.gov
@@ -850,13 +910,16 @@ trk.
 .youtube-nocookie.com
 .youtube.com
 .yoyo.org
+.yp.to
 .ytimg.com
 .yubico.com
 .zdassets.com  # zendesk
 .zdnet.com
 .zendesk.com
+.zojirushi.com
 .zoom.us
 .zoominfo.com
+1.1.1.1
 accounts.google.com
 calendar.google.com
 cdimage.debian.org
@@ -870,7 +933,6 @@ developer.chrome.com
 docs.google.com
 drive.google.com
 ftp.openbsd.org
-libreddit.
 lists.debian.org
 mail.google.com
 man.openbsd.org

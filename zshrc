@@ -130,8 +130,8 @@ alias mnt="${ROOT} mount -o uid=1000 ${1}"
 alias off="${ROOT} shutdown -h now"
 alias ollama="docker exec ollama ollama"
 alias oath="oathtool --totp=sha1 --base32"
-alias oathcode_a="${oath} $(cat ${HOME}/secrets/a)"
-alias oathcode_b="${oath} $(cat ${HOME}/secrets/b)"
+function oathcode_a { oath "$(cat ${HOME}/secrets/a)" }
+function oathcode_b { oath "$(cat ${HOME}/secrets/b)" }
 alias oathcode_c="ykman oath accounts code c"
 alias oathcode_d="ykman oath accounts code d"
 alias p="python3"
