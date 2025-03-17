@@ -1,4 +1,4 @@
-# https://github.com/drduh/config/blob/master/sudoers
+# https://github.com/drduh/config/blob/main/sudoers
 # https://www.sudo.ws/docs/man/sudoers.man/
 Defaults env_reset
 Defaults mail_badpass

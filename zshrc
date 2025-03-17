@@ -537,5 +537,27 @@ path "/bin"
 #gpgconf --launch gpg-agent
 #gpg-connect-agent updatestartuptty /bye >/dev/null
 
+# https://github.com/drduh/gone
+export gone_proto="http"
+export gone_host="localhost"
+#export gone_host="192.168.1.1"
+export gone_port="8080"
+export gone_auth="mySecret"
+export gone_header="X-Auth"
+export gone_server="${gone_proto}://${gone_host}:${gone_port}"
+export gone_cmd="curl -s -H '${gone_header}: ${gone_auth}' ${gone_server}"
+
+alias gone_list="${gone_cmd}/list | jq"
+alias gone_stat="${gone_cmd}/heartbeat | jq"
+alias gone_static="${gone_cmd}/static | jq"
+
+function gone_put {
+  curl -s -F "file=@${1}" -F "downloads=${2:-3}" -F "duration=${3:-20m}" \
+    -H "${gone_header}: ${gone_auth}" "${gone_server}/upload" | jq}
+
+function gone_get {
+  curl -s -H "${gone_header}: ${gone_auth}" \
+    "${gone_server}/download?name=${1}" }
+
 #export VAULT_ADDR="http://127.0.0.1:8200"
 #export VAULT_ADDR="https://vault.local:8200"
