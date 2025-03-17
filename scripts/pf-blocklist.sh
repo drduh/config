@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/blob/master/scripts/pf-blocklist.sh
+# https://github.com/drduh/config/blob/main/scripts/pf-blocklist.sh
 #
 # Downloads IP addresses and ranges for blocking with PF:
 #   1) Published lists of ad/malware hosts
 #   2) Organizational Autonomous System (AS) assignments
-#      (Requires https://github.com/drduh/config/tree/master/asns/*)
+#      (Requires https://github.com/drduh/config/tree/main/asns/*)
 #   3) Country AS assignments
-#      (Requires https://github.com/drduh/config/tree/master/zones)
+#      (Requires https://github.com/drduh/config/tree/main/zones)
 
 #set -x
 
@@ -45,7 +45,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   wc -l $threats
 
   # https://bgp.he.net/
-  # https://github.com/drduh/config/tree/master/asns/*
+  # https://github.com/drduh/config/tree/main/asns/*
   printf "Checking asns ..."
   for asn in $(find ../asns -type f) ; do
     printf "# $asn\n" >> $custom
@@ -58,7 +58,7 @@ if [[ "${action}" =~ ^([yY])$ ]] ; then
   wc -l $custom
 
   # https://www.ipdeny.com/ipblocks/
-  # https://github.com/drduh/config/tree/master/zones
+  # https://github.com/drduh/config/tree/main/zones
   printf "Checking zones ..."
   for zone in $(grep -v "^#" ../zones | sed "s/\ \ \#.*//g") ; do
     printf " $zone"

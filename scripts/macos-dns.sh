@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/blob/master/scripts/macos-dns.sh
+# https://github.com/drduh/config/blob/main/scripts/macos-dns.sh
 sudo scutil << EOF
 get State:/Network/Service/gpd.pan/DNS
 d.remove SearchDomains

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# https://github.com/drduh/config/blob/master/scripts/dig.sh
+# https://github.com/drduh/config/blob/main/scripts/dig.sh
 # https://en.wikipedia.org/wiki/List_of_DNS_record_types
 pause="1"
 server="1.1.1.1"
