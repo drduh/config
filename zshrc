@@ -532,6 +532,9 @@ path "/bin"
 #export HOMEBREW_NO_AUTO_UPDATE=1
 #export HOMEBREW_NO_INSECURE_REDIRECT=1
 
+#export VAULT_ADDR="http://127.0.0.1:8200"
+#export VAULT_ADDR="https://vault.local:8200"
+
 #export GNUPGHOME="${HOME}/.gnupg"
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -560,5 +563,6 @@ function gone_get {
   curl -s -H "${gone_header}: ${gone_auth}" \
     "${gone_server}/download?name=${1}" }
 
-#export VAULT_ADDR="http://127.0.0.1:8200"
-#export VAULT_ADDR="https://vault.local:8200"
+function gone_msg {
+  curl -s -H "${gone_header}: ${gone_auth}" \
+    -F "message=${1}" "${gone_server}/msg" }
