@@ -363,6 +363,14 @@ function myip {
   curl -s "https://icanhazip.com/" || \
     dig @resolver1.opendns.com ANY myip.opendns.com +short }
 
+function pass {
+  LC_ALL=C tr -dc "A-Z2-9" < /dev/urandom | \
+    tr -d "IOUS5" | \
+    fold  -w  ${PASS_FOLD:-4} | \
+    paste -sd ${PASS_DELIM:--} - | \
+    head  -c  ${PASS_LENGTH:-29}
+  echo }
+
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
 
@@ -449,6 +457,12 @@ function top_history {
   history 1 | awk -S '{CMD[$2]++;count++;}END {
     for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
       column -c3 -s " " -t | sort -nr | nl |  head -n25 }
+
+function top_size {
+  du -hd1 . | awk '{printf "%s %08.2f\t%s\n",
+    index("KMG", substr($1, length($1))),
+    substr($1, 0, length($1)-1), $0}' |
+  sort -r | cut -f2,3 }
 
 function username {  # "username 8" - generate 8 usernames
   for i in {1..${1}} ; do
@@ -561,7 +575,7 @@ function gone_put {
 
 function gone_get {
   curl -s -H "${gone_header}: ${gone_auth}" \
-    "${gone_server}/download?name=${1}" }
+    "${gone_server}/download/${1}" }
 
 function gone_msg {
   curl -s -H "${gone_header}: ${gone_auth}" \
