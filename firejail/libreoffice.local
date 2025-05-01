@@ -1,4 +1,0 @@
-# https://github.com/drduh/config/blob/master/firejail/libreoffice.local
-# ~/.config/firejail/libreoffice.local
-net none
-apparmor
