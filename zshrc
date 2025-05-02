@@ -363,6 +363,14 @@ function myip {
   curl -s "https://icanhazip.com/" || \
     dig @resolver1.opendns.com ANY myip.opendns.com +short }
 
+function pass {
+  LC_ALL=C tr -dc "A-Z2-9" < /dev/urandom | \
+    tr -d "IOUS5" | \
+    fold  -w  ${PASS_FOLD:-4} | \
+    paste -sd ${PASS_DELIM:--} - | \
+    head  -c  ${PASS_LENGTH:-29}
+  echo }
+
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
 
@@ -450,6 +458,12 @@ function top_history {
     for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
       column -c3 -s " " -t | sort -nr | nl |  head -n25 }
 
+function top_size {
+  du -hd1 . | awk '{printf "%s %08.2f\t%s\n",
+    index("KMG", substr($1, length($1))),
+    substr($1, 0, length($1)-1), $0}' |
+  sort -r | cut -f2,3 }
+
 function username {  # "username 8" - generate 8 usernames
   for i in {1..${1}} ; do
   printf "%s%s\n" \
@@ -493,9 +507,13 @@ path "/usr/sbin"
 path "/usr/bin"
 path "/sbin"
 path "/bin"
+path "/usr/local/go/bin"
 #path "/usr/games"
 #path "/usr/X11R6/bin"
-#path "/usr/local/go/bin"
+
+#export PASS_DELIM="-"
+#export PASS_FOLD=6
+#export PASS_LENGTH=34
 
 #export PWDSH_CLIP="xclip"
 #export PWDSH_CLIP_ARGS="-i -selection clipboard"
@@ -532,6 +550,9 @@ path "/bin"
 #export HOMEBREW_NO_AUTO_UPDATE=1
 #export HOMEBREW_NO_INSECURE_REDIRECT=1
 
+#export VAULT_ADDR="http://127.0.0.1:8200"
+#export VAULT_ADDR="https://vault.local:8200"
+
 #export GNUPGHOME="${HOME}/.gnupg"
 #export GPG_TTY="$(tty)"
 #export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -551,6 +572,7 @@ export gone_cmd="curl -s -H '${gone_header}: ${gone_auth}' ${gone_server}"
 alias gone_list="${gone_cmd}/list | jq"
 alias gone_stat="${gone_cmd}/heartbeat | jq"
 alias gone_static="${gone_cmd}/static | jq"
+alias gone_random="${gone_cmd}/random/"
 
 function gone_put {
   curl -s -F "file=@${1}" -F "downloads=${2:-3}" -F "duration=${3:-20m}" \
@@ -558,7 +580,8 @@ function gone_put {
 
 function gone_get {
   curl -s -H "${gone_header}: ${gone_auth}" \
-    "${gone_server}/download?name=${1}" }
+    "${gone_server}/download/${1}" }
 
-#export VAULT_ADDR="http://127.0.0.1:8200"
-#export VAULT_ADDR="https://vault.local:8200"
+function gone_msg {
+  curl -s -H "${gone_header}: ${gone_auth}" \
+    -F "message=${1}" "${gone_server}/msg" }
