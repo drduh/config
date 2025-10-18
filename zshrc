@@ -109,6 +109,7 @@ alias dmsg="${ROOT} dmesg -wHT"
 alias et="exiftool"
 alias feh="feh --auto-rotate --auto-zoom --draw-filename --recursive --scale-down --image-bg black --verbose"
 alias ff="firefox --ProfileManager --no-remote"
+#alias ff="/Applications/Firefox.app/Contents/MacOS/firefox --ProfileManager --no-remote"
 alias fonts="fc-list : family | sort"
 alias fre="free -h"
 alias ftb="firejail --profile=firejailed-tor-browser ${HOME}/Browser/start-tor-browser"
@@ -125,15 +126,16 @@ alias gp="for r in */.git ; do ( cd \$r/.. && git pull ; ) ; done"
 alias grep="grep --color --text"
 alias grepv="grep --invert-match"
 alias html="html2text | tr -d '^I' | sed '/^[[:space:]]*$/d'"
+alias kiwix-serve="docker run -v ${HOME}/kiwix:/data -p 8080:8080 ghcr.io/kiwix/kiwix-serve '*.zim'"
 alias mailo="virsh --connect qemu:///system start 'openbsd' && sleep 10 && ssh -Y virtual -t thunderbird && virsh --connect qemu:///system shutdown 'openbsd'"
 alias mnt="${ROOT} mount -o uid=1000 ${1}"
 alias off="${ROOT} shutdown -h now"
-alias ollama="docker exec ollama ollama"
+alias ollamaDocker="docker exec ollama ollama"
 alias oath="oathtool --totp=sha1 --base32"
-function oathcode_a { oath "$(cat ${HOME}/secrets/a)" }
-function oathcode_b { oath "$(cat ${HOME}/secrets/b)" }
-alias oathcode_c="ykman oath accounts code c"
-alias oathcode_d="ykman oath accounts code d"
+function oath_lowsec_a { oath "$(cat ${HOME}/secrets/a)" }
+function oath_lowsec_b { oath "$(cat ${HOME}/secrets/b)" }
+alias oath_a="ykman oath accounts code a"
+alias oath_b="ykman oath accounts code b"
 alias p="python3"
 alias pkg-info="apt-cache show"
 alias proc="ps axjf"
@@ -338,10 +340,14 @@ function fail {
 function fd {
   find . -iname "*${1}*" -type d }
 
-function firefox_history {
+function firefoxHistory {
   sqlite3 "${1:=places.sqlite}" ".mode line" \
     "select title, url, datetime(last_visit_date/1000000, 'unixepoch') \
     as visit from moz_places order by last_visit_date desc;" }
+
+function firefoxVersion {
+  curl "https://www.firefox.com/en-US/firefox/notes/" -v 2>&1 | \
+    grep location | sed 's/.*firefox.//g' | sed 's/.release.*//g' }
 
 function length {
   awk -S -v len="${1:=80}" 'length($0) > len' }
@@ -363,14 +369,6 @@ function myip {
   curl -s "https://icanhazip.com/" || \
     dig @resolver1.opendns.com ANY myip.opendns.com +short }
 
-function pass {
-  LC_ALL=C tr -dc "A-Z2-9" < /dev/urandom | \
-    tr -d "IOUS5" | \
-    fold  -w  ${PASS_FOLD:-4} | \
-    paste -sd ${PASS_DELIM:--} - | \
-    head  -c  ${PASS_LENGTH:-29}
-  echo }
-
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
 
@@ -385,7 +383,7 @@ function png2jpg {
     convert "${image}.png" "${image}.jpg" ; done }
 
 function pong {
-  ping -D -4 -c5 -i.5 "${1:-1.1.1.1}" }
+  ping -D -c5 -i.1 "${1:-1.1.1.1}" }
 
 function newline_to_comma {
   sed -z 's/\n/,/g' ${1} }
@@ -398,21 +396,24 @@ function nxdomains {
   for x in $(${ROOT} grep NXDOMAIN /var/log/dnsmasq | \
     awk -S '{print $6}' | sort | uniq) ; do printf "0.0.0.0 $x\n" ; done }
 
+function pass {
+  LC_ALL=C tr -dc "A-Z2-9" < /dev/urandom | \
+    tr -d "IOS5U7T" | \
+    fold  -w  ${PASS_FOLD:-4} | \
+    paste -sd ${PASS_DELIM:--} - | \
+    head  -c  ${PASS_LENGTH:-29}
+  echo }
+
 function rand {
   for item in \
     '[:digit:]' '[:upper:]' \
     '[:xdigit:]' '[:alnum:]' '[:graph:]' ; do \
-      tr -dc "${item}" < /dev/urandom | \
+      LC_ALL=C tr -dc "${item}" < /dev/urandom | \
       fold -w 64 | head -n 3 | \
       sed "-es/./ /"{1..64..16} ; done }
 
 function rand_mac {
   openssl rand -hex 6 | sed "s/\(..\)/\1:/g; s/.$//" }
-
-function rand_pass {
-  LC_ALL=C tr -dc 'A-Z1-9' < /dev/urandom | \
-    tr -d "1IOS5U7T" | fold -w 30 | head -n10 | \
-    sed "-es/./ /"{1..26..5} | cut -c2- | tr " " "-" }
 
 function resize_ff {
   xdotool windowsize \
@@ -444,14 +445,6 @@ function srl {
   doas cu -r -s 115200 -l cuaU0 2>/dev/null || \
     sudo minicom -D /dev/ttyUSB0 2>/dev/null || \
       printf "serial console disconnected\n" }
-
-function temp_c_to_f {
-  printf "%sc is %sf\n" "${1:-100}" \
-    $(awk -S -v c="${1:-100}" 'BEGIN { printf "%.2f\n", (c*9/5)+32 }') }
-
-function temp_f_to_c {
-  printf "%sf is %sc\n" "${1:-100}" \
-    $(awk -S -v f="${1:-100}" 'BEGIN { printf "%.2f\n", (f-32)*5/9 }') }
 
 function top_history {
   history 1 | awk -S '{CMD[$2]++;count++;}END {
@@ -490,6 +483,41 @@ function zzz {
   /usr/sbin/zzz 2>/dev/null || \
     systemctl suspend }
 
+function distanceKmToMi {
+  printf "%s km is %s mi\n" "${1:-100}" \
+    $(awk -S -v f="${1:-100}" \
+      'BEGIN { printf "%.2f\n", f*0.6214 }') }
+
+function distanceMiToKm {
+  printf "%s mi is %s km\n" "${1:-100}" \
+    $(awk -S -v f="${1:-100}" \
+      'BEGIN { printf "%.2f\n", f*1.609344 }') }
+
+function tempCtoF {
+  printf "%sc is %sf\n" "${1:-100}" \
+    $(awk -S -v c="${1:-100}" \
+      'BEGIN { printf "%.2f\n", (c*9/5)+32 }') }
+
+function tempFtoC {
+  printf "%sf is %sc\n" "${1:-100}" \
+    $(awk -S -v f="${1:-100}" \
+      'BEGIN { printf "%.2f\n", (f-32)*5/9 }') }
+
+function volumeFlozToMl {
+  printf "%s fl oz is %s ml\n" "${1:-100}" \
+    $(awk -S -v f="${1:-100}" \
+      'BEGIN { printf "%.2f\n", f*28.413 }') }
+
+function weightKgToLbg {
+  printf "%s kg is %s lb\n" "${1:-100}" \
+    $(awk -S -v f="${1:-100}" \
+      'BEGIN { printf "%.2f\n", f*2.2046226218 }') }
+
+function weightLbToKg {
+  printf "%s lb is %s kg\n" "${1:-100}" \
+    $(awk -S -v f="${1:-100}" \
+      'BEGIN { printf "%.2f\n", f*0.45359237 }') }
+
 function path {
   if [[ -d "${1}" ]] ; then
     if [[ -z "${PATH}" ]] ; then
@@ -508,6 +536,9 @@ path "/usr/bin"
 path "/sbin"
 path "/bin"
 path "/usr/local/go/bin"
+#path "${HOME}/.local/bin"
+#path "${HOME}/.docker/bin/"
+#path "/opt/homebrew/bin"
 #path "/usr/games"
 #path "/usr/X11R6/bin"
 
@@ -561,27 +592,28 @@ path "/usr/local/go/bin"
 
 # https://github.com/drduh/gone
 export gone_proto="http"
-export gone_host="localhost"
-#export gone_host="192.168.1.1"
+export gone_host="127.0.0.1"
 export gone_port="8080"
 export gone_auth="mySecret"
 export gone_header="X-Auth"
 export gone_server="${gone_proto}://${gone_host}:${gone_port}"
 export gone_cmd="curl -s -H '${gone_header}: ${gone_auth}' ${gone_server}"
 
-alias gone_list="${gone_cmd}/list | jq"
-alias gone_stat="${gone_cmd}/heartbeat | jq"
-alias gone_static="${gone_cmd}/static | jq"
-alias gone_random="${gone_cmd}/random/"
+alias goneList="${gone_cmd}/list | jq"
+alias goneStat="${gone_cmd}/heartbeat | jq"
+alias goneStatic="${gone_cmd}/static | jq"
+alias goneRandom="${gone_cmd}/random/"
+alias goneRandomCoin="${gone_cmd}/random/coin"
+alias goneRandomNumber="${gone_cmd}/random/number"
 
-function gone_put {
+function gonePut {
   curl -s -F "file=@${1}" -F "downloads=${2:-3}" -F "duration=${3:-20m}" \
     -H "${gone_header}: ${gone_auth}" "${gone_server}/upload" | jq}
 
-function gone_get {
+function goneGet {
   curl -s -H "${gone_header}: ${gone_auth}" \
     "${gone_server}/download/${1}" }
 
-function gone_msg {
+function goneMsg {
   curl -s -H "${gone_header}: ${gone_auth}" \
     -F "message=${1}" "${gone_server}/msg" }
