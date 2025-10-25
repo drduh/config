@@ -276,12 +276,13 @@ function colours {
     printf "\x1b[38;5;${i}m${i}\n" | \
     tr "\n" " " ; done | fold -w 255 }
 
-function convert_epoch {
-  date -d "@${1}" }
+function convertEpoch {
+  date -r "${1}" '+%m/%d/%Y-%H:%M:%S' }
 
-function convert_secs {
+function convertSecs {
   ((h=${1}/3600)) ; ((m=(${1}%3600)/60)) ; ((s=${1}%60))
-  printf "%02d:%02d:%02d\n" ${h} ${m} ${s} }
+  printf "${1} seconds is %02d hours, %02d minutes and %02d seconds\n" \
+    ${h} ${m} ${s} }
 
 function dump_arp {
   ${ROOT} tcpdump -eni ${NETWORK} -w arp-${ts}.pcap \
@@ -345,9 +346,9 @@ function firefoxHistory {
     "select title, url, datetime(last_visit_date/1000000, 'unixepoch') \
     as visit from moz_places order by last_visit_date desc;" }
 
-function firefoxVersion {
+function versionFirefox {
   curl "https://www.firefox.com/en-US/firefox/notes/" -v 2>&1 | \
-    grep location | sed 's/.*firefox.//g' | sed 's/.release.*//g' }
+    grep "location" | sed 's/.*firefox.//g' | sed 's/.release.*//g' }
 
 function length {
   awk -S -v len="${1:=80}" 'length($0) > len' }
@@ -357,6 +358,10 @@ function lock {
   xhost &>/dev/null || return
   (sleep 1 ; slock) 2>/dev/null &
   sleep 1 ; systemctl suspend }
+
+function log {
+  jq -c -n --arg t "$(date +%s)" --arg e "${1}" --arg m "${2}" \
+    '{"time": $t, "event": $e, "message": $m}' }
 
 function md {
   mkdir -p "${1:-${today}}" && cd "${1:-${today}}" }
