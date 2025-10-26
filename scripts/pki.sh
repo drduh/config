@@ -14,13 +14,14 @@ umask 077
 readonly MATS="pki"
 
 # Path to openssl binary
+#readonly OPENSSL="/opt/homebrew/bin/openssl"
 readonly OPENSSL="/usr/bin/openssl"
 
 # Path to openssl configuration
 readonly OPENSSL_CONF="./openssl.cnf"
 
-# Days to self-sign CA for (1 year + 15 days)
-readonly CA_DAYS="380"
+# Days to self-sign CA for (1 year - 15 days)
+readonly CA_DAYS="350"
 
 # Days to sign leaf certificates
 readonly CERT_DAYS="90"
@@ -42,8 +43,14 @@ if [[ ! -f ${OPENSSL_CONF} ]] ; then
   printf "need ${OPENSSL_CONF}\n" ; exit 1
 fi
 
+fail () {
+  # Print an error in red and exit.
+  tput setaf 1 ; printf "\nERROR: %s\n" "${1}" ; tput sgr0
+  exit 1
+}
+
 # Generate random common name strings or set custom ones
-readonly RAND_FUNC="$(tr -dc '[:upper:]' < /dev/urandom | fold -w 6 | head -1)"
+readonly RAND_FUNC="$(LC_ALL=C tr -dc '[:upper:]' < /dev/urandom | fold -w 6 | head -1)"
 for cn in CA SERVER CLIENT ; do
   export ${cn}="${cn}-${RAND_FUNC}"
   #CA="My CA"
@@ -54,17 +61,20 @@ done
 # Prepare output directory
 mkdir -p ${MATS} >/dev/null
 
-# Generate private keys
+# Generate keys
 for key in ca server client ; do
-  ${OPENSSL} genrsa -out ${MATS}/${key}.key ${KEYSIZE}
+  if [[ ! -f "${MATS}/${key}.key" ]] ; then
+    ${OPENSSL} genrsa -out ${MATS}/${key}.key ${KEYSIZE}
+  fi
 done
 
-# Self-sign CA (v3)
+# Self-sign authority certificate
 ${OPENSSL} req -new -x509 -days ${CA_DAYS} -${DEFAULT_MD} \
   -subj "/CN=${CA}" \
   -config ${OPENSSL_CONF} -extensions v3_ca \
   -set_serial "0x$(${OPENSSL} rand -hex ${SERIAL_SIZE})" \
-  -key ${MATS}/ca.key -out ${MATS}/ca.pem
+  -key ${MATS}/ca.key -out ${MATS}/ca.pem || \
+    fail "failed to sign certificate authority"
 
 # Create server request
 ${OPENSSL} req -new -${DEFAULT_MD} -subj "/CN=${SERVER}" \
@@ -95,3 +105,4 @@ for cert in ca server client ; do
     -fingerprint -sha256 -noout -in ${MATS}/${cert}.pem
   printf "*%.0s" {1..16}
 done
+

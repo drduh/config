@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-https://github.com/drduh/config/blob/master/scripts/rename.py
+https://github.com/drduh/config/blob/main/scripts/rename.py
 
 Random rename of files at path.
 """
