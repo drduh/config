@@ -5,8 +5,8 @@
 upgrade = -block +redirect{s@http://@https://@}
 unblock = -block -redirect
 
-#{ +block{all} }
-#/  # block all requests
+{ +block{all} }
+.  # block all requests
 
 { +block{social} }
 .discord.
@@ -154,6 +154,7 @@ trk.
 #.fastlydns.net
 #.jsdelivr.net
 #.mywebsitebuilder.com
+#.oraclecloud.com
 #.s3
 #.salesforce-sites.com
 #.shop.app
@@ -161,6 +162,7 @@ trk.
 #.shopifyapps.com
 #.shopifycdn.
 #.shopifycs.com
+#.shopifyinc.com
 #.shopifysvc.com
 #.static.pub
 #.statically.io
@@ -205,6 +207,55 @@ trk.
 #tech.
 #wiki.
 
+{ upgrade{amazon} }
+#.amazonaws.com
+#.payments-amazon.com
+.a2z.com
+.amazon.com
+.images-amazon.com
+.media-amazon.com
+.ssl-images-amazon.com
+
+{ upgrade{google} }
+#accounts.google.com
+.goo.gl
+.google
+.google.
+.googleapis.com
+.googleblog.com
+.googlecode.com
+.googlemail.com
+.googlesource.com
+.googleusercontent.com
+.googlevideo.com
+.youtu.be
+.youtube-dl.org
+.youtube-nocookie.com
+.youtube.com
+.ytimg.com
+calendar.google.com
+docs.google.com
+drive.google.com
+mail.google.com
+maps.google.com
+meet.google.com
+photos.google.com
+voice.google.com
+www.google.com
+
+{ upgrade{steam} }
+.steamcommunity.com
+.steamcontent.com  # streams
+.steamdb.info
+.steamdeck.com
+.steamgames.com
+.steamos.cloud
+.steampowered.com
+.steamserver.net
+.steamstatic.com
+images.steamusercontent.com
+steamuserimages-a.akamaihd.net
+
 { upgrade{everything else} }
 .0x0.st
 .3m.com
@@ -214,15 +265,15 @@ trk.
 .adblockplus.org
 .admin.ch
 .adtidy.org
+.adyen.com
 .ae.com
 .aexp-static.com
 .aexp.com
 .aftership.com
+.airtable.com
 .algolia.
 .alienvault.com
 .alpinelinux.org
-.amazon.com
-.amazonaws.com
 .amd.com
 .americanbar.org
 .americanexpress.com
@@ -234,6 +285,7 @@ trk.
 .anaconda.org
 .android.com
 .annualcreditreport.com
+.anthropic.com
 .ap.org
 .apache.org
 .apc.com
@@ -256,6 +308,7 @@ trk.
 .asrock.com
 .asus.com
 .atl-paas.net  # atlassian
+.atlasofsurveillance.org
 .atlassian.com
 .atlassian.net
 .auspost.com.au
@@ -278,6 +331,7 @@ trk.
 .beamng.com
 .benjaminmoore.com
 .benq.com
+.berkeley.edu
 .bestbuy.com
 .bhphoto.com
 .bhphotovideo.com
@@ -299,6 +353,7 @@ trk.
 .box.net
 .boxcdn.net
 .boxcloud.com
+.brave.com
 .brew.sh
 .bringatrailer.com
 .broadcom.com
@@ -309,6 +364,7 @@ trk.
 .byexamples.com
 .bytebucket.org
 .ca.gov
+.cambridge.org
 .camelcamelcamel.com
 .canadapost.ca
 .canarytokens.org
@@ -316,6 +372,7 @@ trk.
 .canonical.com
 .capitalone.com
 .capitalone360.com
+.captcha-delivery.com
 .cbc.ca
 .ccc.de
 .cdc.gov
@@ -333,6 +390,8 @@ trk.
 .cisco.com
 .cisecurity.org
 .citizenlab.ca
+.claude.ai
+.clojure.org
 .cloudflarestorage.com
 .cnet.com
 .codeberg.org
@@ -340,6 +399,7 @@ trk.
 .coderpad.io
 .colorado.gov
 .colostate.edu
+.comcast.com
 .comcast.net
 .congress.gov
 .coreboot.org
@@ -382,11 +442,15 @@ trk.
 .discourse-cdn.com
 .distrowatch.com
 .docker.com
+.dockerstatic.com
 .docker.io
 .documentcloud.org
+.documentfoundation.org
 .docusign.com
+.docusign.net
 .doi.org
 .dolby.com
+.dp.la
 .dropbox.com
 .dropboxatwork.com
 .dropboxteam.com
@@ -399,11 +463,12 @@ trk.
 .ebayrtm.com
 .ebaystatic.com
 .ecfr.gov
-.editmysite.com
 .edx-cdn.org
 .edx.org
 .eff.org
 .ehi.com
+.elsevier.com
+.elsevierhealth.com
 .emacswiki.org
 .emergingthreats.net
 .enterprise.com
@@ -412,15 +477,19 @@ trk.
 .equifax.com
 .esa.int
 .eso.org
-.etrade.
+.etrade.com
+.etrade.net
 .etsy.com
 .etsystatic.com
+.eventbrite.com
 .expedia.com
 .experian.com
 .export.gov
+.f-droid.org
 .faircode.eu
 .fanboy.co.nz
 .fandom.com
+.fast.com
 .fbi.gov
 .fbinaa.org
 .fccid.io
@@ -457,6 +526,7 @@ trk.
 .ghcr.io
 .gimp.org
 .giphy.com
+.git-scm.com
 .github.blog
 .github.com
 .githubcopilot.com
@@ -478,19 +548,10 @@ trk.
 .gofundme.com
 .gog-statics.com
 .gog.com
+.gohugo.io
 .golang.com
 .golang.org
 .golangci-lint.run
-.goo.gl
-.google
-.google.
-.googleapis.com
-.googleblog.com
-.googlecode.com
-.googlemail.com
-.googlesource.com
-.googleusercontent.com
-.googlevideo.com
 .goteleport.com
 .governmentattic.org
 .gparted.org
@@ -503,12 +564,15 @@ trk.
 .gvt2.com
 .gvt3.com
 .happycow.net
+.harvard.edu
 .hashicorp.com
+.hathitrust.org
 .haxx.se
 .hbr.org
 .hcaptcha.com
 .he.net
 .heinz.com
+.hetzner.cloud
 .hetzner.com
 .hf.co
 .hf.space
@@ -526,11 +590,12 @@ trk.
 .icanhazip.com
 .icann.org
 .icannwiki.org
+.icmconference.org
+.id.me
 .ieee.org
 .ietf.org
 .ifixit.com
 .ign.com
-.images-amazon.com
 .imdb.com
 .imfreedom.org
 .imgbox.com
@@ -554,6 +619,7 @@ trk.
 .kali.org
 .kde.org
 .kdenlive.org
+.keepassxc.org
 .kernel.org
 .keybase.io
 .keylength.com
@@ -611,15 +677,20 @@ trk.
 .matterport.com
 .maxar.com
 .mayoclinic.org
-.media-amazon.com
+.mcgill.ca
+.mechanix.com
+.mediawiki.org
 .medium.com
 .meetup.com
 .meetupstatic.com
+.merriam-webster.com
 .metafilter.com
+.milwaukeetool.com
 .mit.edu
 .mitre.org
 .monoprice.com
 .morganstanley.com
+.morganstanleyclientserv.com
 .mozaws.net
 .mozilla.net
 .mozilla.org
@@ -628,6 +699,7 @@ trk.
 .msi.com
 .muckrack.com
 .muckrock.com
+.mullvad.net
 .mwl.io
 .namecheap.com
 .narescue.com
@@ -660,6 +732,8 @@ trk.
 .nypost.com
 .nyt.com
 .nytimes.com
+.obdev.at
+.oclc.org
 .octocaptcha.com
 .okstate.edu
 .okta.com
@@ -667,8 +741,10 @@ trk.
 .ollama.com
 .oneplus.com
 .onerng.info
+.ontrac.com
 .openai.com
 .opencensus.io
+.openpgp.org
 .openra.net
 .openshot.org
 .openssl.org
@@ -678,6 +754,7 @@ trk.
 .openvpn.org
 .openwall.com
 .openwebui.com
+.openwrt.org
 .opnsense.org
 .optionstrat.com
 .optoutprescreen.com
@@ -685,14 +762,18 @@ trk.
 .ovh.com
 .ovh.net
 .ovh.us
+.ovhcloud.com
 .owasp.org
 .pages.dev
+.panasonic.com
 .pandoc.org
 .parallels.com
 .pastebin.com
 .patagonia.com
 .patreon.com
 .patreonusercontent.com
+.paypal.com
+.paypalobjects.com
 .pcengines.ch
 .pcmag.com
 .pcpartpicker.com
@@ -714,6 +795,8 @@ trk.
 .posteo.de
 .princeton.edu
 .privacyguides.org
+.privacyguides.net
+.privacyguidesusercontent.com
 .privoxy.org
 .propublica.org
 .proton.me
@@ -753,6 +836,7 @@ trk.
 .ripe.net
 .riseup.net
 .rottentomatoes.com
+.rsaconference.com
 .rtings.com
 .rubygems.org
 .rust-lang.org
@@ -776,7 +860,6 @@ trk.
 .shellcheck.net
 .shipstation.com
 .shodan.io
-.shopifyinc.com
 .signal.org
 .singleplatform.com
 .slack-edge.com
@@ -800,7 +883,6 @@ trk.
 .splunk.com
 .squarespace-cdn.com
 .squarespace.com
-.ssl-images-amazon.com
 .ssllabs.com
 .sstatic.net
 .stackauth.com
@@ -812,21 +894,13 @@ trk.
 .static.pub
 .staticflickr.com
 .statuspage.io
-.steamcommunity.com
-.steamcontent.com  # streams
-.steamdb.info
-.steamdeck.com
-.steamgames.com
-.steamos.cloud
-.steampowered.com
-.steamserver.net
-.steamstatic.com
 .stlouisfed.org
 .streamable.com
 .stunnel.org
 .suckless.org
 .sunrise-sunset.org
 .superuser.com
+.sudo.ws
 .suse.com
 .swappa.com
 .sweetwater.com
@@ -852,6 +926,7 @@ trk.
 .tonic.to
 .torproject.org
 .toyota.com
+.tp-link.com
 .tractorsupply.com
 .tradingview.com
 .transunion.com
@@ -877,6 +952,7 @@ trk.
 .utah.gov
 .vanguard.com
 .vaultproject.io
+.verisign.com
 .verizon.com
 .verizonwireless.com
 .vermont.gov
@@ -885,6 +961,7 @@ trk.
 .videolan.org
 .vimeo.com
 .vimeocdn.com
+.visa.com
 .virustotal.com
 .vmware.com
 .voidlinux.org
@@ -902,6 +979,7 @@ trk.
 .whonix.org
 .wikibooks.org
 .wikidata.org
+.wikihow.com
 .wikimedia.org
 .wikimediafoundation.org
 .wikinews.org
@@ -920,8 +998,10 @@ trk.
 .wiz.io
 .wordpress.com
 .wordpress.org
+.worldmarket.com
 .wp.com
 .wp.org
+.wsj.com
 .xcp-ng.org
 .xda-developers.com
 .xfinity.com
@@ -934,13 +1014,8 @@ trk.
 .yelp.com
 .yelpcdn.com
 .yimg.com  # yahoo
-.youtu.be
-.youtube-dl.org
-.youtube-nocookie.com
-.youtube.com
 .yoyo.org
 .yp.to
-.ytimg.com
 .yubico.com
 .zdassets.com  # zendesk
 .zdnet.com
@@ -949,8 +1024,6 @@ trk.
 .zoom.us
 .zoominfo.com
 1.1.1.1
-accounts.google.com
-calendar.google.com
 cdimage.debian.org
 cdn.openbsd.org
 cdnjs.cloudflare.com
@@ -959,32 +1032,23 @@ cr.yp.to
 cvsweb.openbsd.org
 debian.org
 developer.chrome.com
-docs.google.com
-drive.google.com
 ftp.openbsd.org
 lists.debian.org
-mail.google.com
 man.openbsd.org
-maps.google.com
-meet.google.com
 openbsd.org
-photos.google.com
 release.debian.org
 security-tracker.debian.org
-steamuserimages-a.akamaihd.net
-voice.google.com
 wiki.debian.org
 www.debian.org
-www.google.com
 www.openbsd.org
 
 { unblock{local} }
 #127.0.0.1:8080
 #localhost:8080
-127.0.0.1
-10.0.
-172.16.
-192.168.
+#127.0.0.1
+#10.0.
+#172.16.
+#192.168.
 
 { unblock{infra} }
 .amazontrust.com
@@ -992,15 +1056,23 @@ www.openbsd.org
 .example.com
 .gov
 .lencr.org
+.ocsp.sectigo.com
 .openh264.org
 .pki.goog
 .ss2.us
+.ssl.com
 .ubuntu.com
 cacerts.
+certs.apple.com
 crl.
+crt.sectigo.com
+crt.usertrust.co
 myspeed.
 ntp.org
 ocsp.
+ocsp2.apple.com
+ocsp2.globalsign.com
+status.geotrust.com
 status.rapidssl.com
 status.thawte.com
 zerossl.ocsp.sectigo.com

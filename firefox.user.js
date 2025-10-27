@@ -45,6 +45,7 @@
 //user_pref("network.trr.mode", 2);
 //user_pref("network.trr.uri", "https://dns.quad9.net:5053/dns-query");
 //user_pref("permissions.memory_only", true);  // disable storing permission changes to disk
+//user_pref("privacy.fingerprintingProtection.pbmode", true);
 //user_pref("privacy.resistFingerprinting", true);  // enable strict fingerprinting resistance features; may break sites
 //user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);  // disable mozAddonManager
 //user_pref("privacy.resistFingerprinting.letterboxing", true);  // letterbox window
@@ -64,6 +65,7 @@ user_pref("app.normandy.api_url", "");
 user_pref("app.normandy.enabled", false);
 user_pref("app.normandy.first_run", false);
 user_pref("app.shield.optoutstudies.enabled", false);  // disable studies
+user_pref("app.update.suppressPrompts", true);
 user_pref("breakpad.reportURL", "");  // disable crash reports
 user_pref("browser.aboutConfig.showWarning", false);
 user_pref("browser.bookmarks.max_backups", 0);
@@ -85,9 +87,11 @@ user_pref("browser.geolocation.warning.infoURL", "");
 user_pref("browser.helperApps.deleteTempFileOnExit", true);
 user_pref("browser.link.open_newwindow", 3);  // open new windows in tabs instead
 user_pref("browser.link.open_newwindow.restriction", 0);
+user_pref("browser.ml.chat.enabled", false);
 user_pref("browser.newtabpage.activity-stream.default.sites", "");
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
 user_pref("browser.newtabpage.enabled", false);  // blank new tab
@@ -116,6 +120,7 @@ user_pref("browser.tabs.searchclipboardfor.middleclick", false);  // disable ope
 user_pref("browser.uitour.enabled", false);  // disable UI tour
 user_pref("browser.uitour.url", "");
 user_pref("browser.urlbar.addons.featureGate", false);
+user_pref("browser.urlbar.amp.featureGate", false);
 user_pref("browser.urlbar.fakespot.featureGate", false);
 user_pref("browser.urlbar.mdn.featureGate", false);
 user_pref("browser.urlbar.pocket.featureGate", false);
@@ -124,7 +129,9 @@ user_pref("browser.urlbar.speculativeConnect.enabled", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.trending.featureGate", false);
+user_pref("browser.urlbar.trimURLs", false);  // do not trim url prefix
 user_pref("browser.urlbar.weather.featureGate", false);
+user_pref("browser.urlbar.wikipedia.featureGate", false);
 user_pref("browser.urlbar.yelp.featureGate", false);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 user_pref("captivedetect.canonicalURL", "");  // disable captive portal helper
@@ -154,6 +161,7 @@ user_pref("extensions.formautofill.creditCards.enabled", false);
 user_pref("extensions.getAddons.showPane", false);
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("extensions.postDownloadThirdPartyPrompt", false);
+user_pref("extensions.webcompat-reporter.enabled", false);
 user_pref("gecko.handlerService.migrated", true);
 user_pref("gecko.handlerService.schemes.webcal.0.uriTemplate", "");
 user_pref("general.warnOnAboutConfig", false);  // disable about:config warning
@@ -210,7 +218,6 @@ user_pref("pref.browser.homepage.disable_button.current_page", false);
 user_pref("pref.privacy.disable_button.cookie_exceptions", false);
 user_pref("privacy.fingerprintingProtection", true);  // more compatible than resistFingerprinting
 user_pref("privacy.fingerprintingProtection.overrides", "+AllTargets,-CSSPrefersColorScheme");  // dark mode support
-user_pref("privacy.fingerprintingProtection.pbmode", true);
 user_pref("privacy.resistFingerprinting.pbmode", true);
 user_pref("privacy.resistFingerprinting.target_video_res", 2160);  // default to high-res videos
 user_pref("privacy.trackingprotection.enabled", true);  // https://wiki.mozilla.org/Security/Tracking_protection
@@ -219,6 +226,7 @@ user_pref("privacy.userContext.enabled", true);  // enable container tabs
 user_pref("privacy.userContext.ui.enabled", true);  // enable container tabs ui
 user_pref("security.OCSP.require", true);  // hard-fail on ocsp unreachable
 user_pref("security.cert_pinning.enforcement_level", 2);  // strict PKP enforcement
+user_pref("security.csp.reporting.enabled", false);
 user_pref("security.ssl.require_safe_negotiation", true);
 user_pref("security.ssl.require_safe_negotiation", true);  // require secure renegotiation
 user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
