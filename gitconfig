@@ -13,6 +13,6 @@
 	#url = https://github.com/drduh/config
 	url = git@github.com:drduh/config.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
-[branch "master"]
+[branch "main"]
 	remote = origin
-	merge = refs/heads/master
+	merge = refs/heads/main

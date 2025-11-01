@@ -2,6 +2,7 @@
 // https://kb.mozillazine.org/Mail_and_news_settings
 // https://www.enigmail.net/index.php/en/user-manual/advanced-operations
 //user_pref("extensions.enigmail.mimeHashAlgorithm", 5);  // SHA-512
+//user_pref("mail.showCondensedAddresses", false);
 //user_pref("mail.SpellCheckBeforeSend", false);
 //user_pref("mail.openpgp.allow_external_gnupg", true);
 //user_pref("mail.phishing.detection.enabled", false);
@@ -74,7 +75,7 @@ user_pref("mail.cloud_files.enabled", false);
 user_pref("mail.cloud_files.learn_more_url", "");
 user_pref("mail.collect_addressbook", false);
 user_pref("mail.collect_email_address_outgoing", false);
-user_pref("mail.compose.add_link_preview", false);
+user_pref("mail.compose.add_link_preview", false);  // disable pasted URL previews
 user_pref("mail.compose.attachment_reminder", false);  // disable attachment reminder
 user_pref("mail.compose.autosaveinterval", 10);  // save drafts every 10 minutes
 user_pref("mail.compose.big_attachments.notify", true);
@@ -103,7 +104,6 @@ user_pref("mail.sanitize_date_header", true);
 user_pref("mail.save_msg_filename_underscores_for_space", true);
 user_pref("mail.shell.checkDefaultClient", false);
 user_pref("mail.shell.checkDefaultMail", false);
-user_pref("mail.showCondensedAddresses", false);
 user_pref("mail.smtpserver.default.hello_argument", "[127.0.0.1]");
 user_pref("mail.spam.version", 1);
 user_pref("mail.store_conversion_enabled", true);
@@ -116,12 +116,12 @@ user_pref("mailnews.auto_config.guess.enabled", false);
 user_pref("mailnews.auto_config_url", "");
 user_pref("mailnews.display.date_senders_timezone", false);
 user_pref("mailnews.display.disallow_mime_handlers", 3);
-user_pref("mailnews.display.html_as", 1);  // 0: normal; 1: plaintext; 2: source; 3: sanitize
+user_pref("mailnews.display.html_as", 3);  // 0: normal; 1: plaintext; 2: source; 3: sanitize
 user_pref("mailnews.display.original_date", false);
 user_pref("mailnews.display.prefer_plaintext", true);
 user_pref("mailnews.downloadToTempFile", false);  // disable "Allow antivirus clients to quarantine ..."
 user_pref("mailnews.headers.showSender", true);
-user_pref("mailnews.headers.showUserAgent", false);
+user_pref("mailnews.headers.showUserAgent", true);
 user_pref("mailnews.message_display.allow_plugins", false);
 user_pref("mailnews.message_display.disable_remote_image", true);
 user_pref("mailnews.reply_header_authorwrotesingle", "#1 wrote:");
