@@ -122,6 +122,7 @@ user_pref("mailnews.display.prefer_plaintext", true);
 user_pref("mailnews.downloadToTempFile", false);  // disable "Allow antivirus clients to quarantine ..."
 user_pref("mailnews.headers.showSender", true);
 user_pref("mailnews.headers.showUserAgent", true);
+user_pref("mailnews.headers.sendUserAgent", false);
 user_pref("mailnews.message_display.allow_plugins", false);
 user_pref("mailnews.message_display.disable_remote_image", true);
 user_pref("mailnews.reply_header_authorwrotesingle", "#1 wrote:");

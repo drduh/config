@@ -155,7 +155,7 @@ checkConnection() {
 
 main() {
   # Main function.
-  checkConnection 
+  checkConnection
   updateAllGit
   updateAllUrl
 }
