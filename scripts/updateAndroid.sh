@@ -7,8 +7,10 @@ set -o errtrace
 set -o nounset
 set -o pipefail
 
-keytool="/Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/keytool"
-apksigner="${HOME}/Library/Android/sdk/build-tools/36.1.0/apksigner"
+keytool="$(command -v keytool || command -v \
+  /Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/keytool)"
+apksigner="$(command -v apksigner || command -v \
+  ${HOME}/Library/Android/sdk/build-tools/36.1.0/apksigner)"
 
 certAegis="C6:DB:80:A8:E1:4E:52:30:C1:DE:84:15:EF:82:0D:13:DC:90:1D:8F:E3:3C:F3:AC:B5:7B:68:62:D8:58:A8:23"
 certFairEmail="E0:20:67:24:9F:5A:35:0E:0E:C7:03:FE:9D:F4:DD:68:2E:02:91:A0:9F:0C:2E:04:10:50:BB:E7:C0:64:F5:C9"
@@ -91,7 +93,7 @@ getPackageGit() {
     author package url count mtime < <(getReleaseGit "${1}")
   printRelease "${package} (${author}@${mtime}, ${count} downloads)"
   if [[ ! -f "${package}" ]] ; then
-		printLoad "${package}" ; download "${url}" ; fi
+    printLoad "${package}" ; download "${url}" ; fi
   verify "${package}" "${2}" && printValid "${package}"
 }
 
