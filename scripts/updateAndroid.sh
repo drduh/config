@@ -13,23 +13,20 @@ apksigner="$(command -v apksigner || command -v \
 certAegis="c6db80a8e14e5230c1de8415ef820d13dc901d8fe33cf3acb57b6862d858a823"
 certFairEmail="e02067249f5a350e0ec703fe9df4dd682e0291a09f0c2e041050bbe7c064f5c9"
 certFirefox="a78b62a5165b4494b2fead9e76a280d22d937fee6251aece599446b2ea319b04"
+certFossify="affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292"
 certNetGuard="e4a260a2dce7b7af23ee919c489e15fd0102b93f9e7c9d82b09c0b395000e4d4"
 certNewPipe="cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab"
 certProton="dcc9439ec1a6c6a8d0203f3423ee42bcc8b970628e53cb73a0393f398dd5b853"
 certSignal="4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8"
 
-pkgAegis="beemdevelopment/Aegis"
-pkgFairEmail="M66B/FairEmail"
-pkgNetGuard="M66B/NetGuard"
-pkgProton="ProtonMail/android-mail"
-pkgNewPipe="TeamNewPipe/NewPipe"
-
 gitRepos="https://api.github.com/repos"
-gitRepoAegis="${gitRepos}/${pkgAegis}"
-gitRepoFairEmail="${gitRepos}/${pkgFairEmail}"
-gitRepoNetGuard="${gitRepos}/${pkgNetGuard}"
-gitRepoNewPipe="${gitRepos}/${pkgNewPipe}"
-gitRepoProton="${gitRepos}/${pkgProton}"
+gitRepoAegis="${gitRepos}/beemdevelopment/Aegis"
+gitRepoCalendar="${gitRepos}/FossifyOrg/Calendar"
+gitRepoFairEmail="${gitRepos}/M66B/FairEmail"
+gitRepoGallery="${gitRepos}/FossifyOrg/Gallery"
+gitRepoNetGuard="${gitRepos}/M66B/NetGuard"
+gitRepoNewPipe="${gitRepos}/TeamNewPipe/NewPipe"
+gitRepoProton="${gitRepos}/ProtonMail/android-mail"
 gitUrl="https://github.com"
 
 urlFirefox="https://archive.mozilla.org/pub/fenix/releases"
@@ -94,8 +91,16 @@ updateAegis() {
   getPackageGit "${gitRepoAegis}" "${certAegis}"
 }
 
+updateCalendar() {
+  getPackageGit "${gitRepoCalendar}" "${certFossify}"
+}
+
 updateFairEmail() {
   getPackageGit "${gitRepoFairEmail}" "${certFairEmail}"
+}
+
+updateGallery() {
+  getPackageGit "${gitRepoGallery}" "${certFossify}"
 }
 
 updateNetGuard() {
@@ -136,11 +141,12 @@ updateSignal() {
 updateAllGit() {
   # Update packages from Git.
   updateAegis
+  updateCalendar
   updateFairEmail
+  updateGallery
   updateNetGuard
   updateNewPipe
   updateProton
-
 }
 
 updateAllUrl() {
