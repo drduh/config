@@ -16,6 +16,7 @@ certFirefox="a78b62a5165b4494b2fead9e76a280d22d937fee6251aece599446b2ea319b04"
 certFossify="affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292"
 certNetGuard="e4a260a2dce7b7af23ee919c489e15fd0102b93f9e7c9d82b09c0b395000e4d4"
 certNewPipe="cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab"
+certOsmand="d192f4fffff2fae37f2821e4ca44f4cbe2483e7ffa24a8472043f685dd5bed27"
 certProton="dcc9439ec1a6c6a8d0203f3423ee42bcc8b970628e53cb73a0393f398dd5b853"
 certSignal="4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8"
 
@@ -30,6 +31,7 @@ gitRepoProton="${gitRepos}/ProtonMail/android-mail"
 gitUrl="https://github.com"
 
 urlFirefox="https://archive.mozilla.org/pub/fenix/releases"
+urlOsmand="https://download.osmand.net/releases"
 urlSignal="https://updates.signal.org/android/latest.json"
 
 
@@ -117,7 +119,7 @@ updateProton() {
 
 updateFirefox() {
   version=$(curl -s "${urlFirefox}/" | \
-    grep -Eo "[0-9]{1,}.[0-9]{1,}.[0-9]{1,}" | sort -V | grep -v b | tail -1)
+    grep -Eo "[0-9]{1,}.[0-9]{1,}.[0-9]{1,}" | grep -v b | sort -V | tail -1)
   apkPath="fenix-${version}-android-arm64-v8a"
   package="fenix-${version}.multi.android-arm64-v8a.apk"
   if [[ ! -f "${package}" ]] ; then
@@ -128,12 +130,24 @@ updateFirefox() {
   verify "${package}" "${certFirefox}" && printValid "${package}"
 }
 
+updateOsmand() {
+  package=$(curl -s "${urlOsmand}/" | \
+    grep -Eo "net.osmand-[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}.apk" | sort -V | tail -1)
+  if [[ ! -f "${package}" ]] ; then
+    printLoad "${package}"
+    curl -sLfO "${urlOsmand}/${package}" || \
+      fail "could not download '${package}'"
+  fi
+  verify "${package}" "${certOsmand}" && printValid "${package}"
+}
+
 updateSignal() {
   version=$(curl -s "${urlSignal}" | jq -r '.url')
   package=$(basename "${version}")
   if [[ ! -f "${package}" ]] ; then
     printLoad "${package}"
-    curl -sLfO "${version}" || fail "could not download Signal"
+    curl -sLfO "${version}" || \
+      fail "could not download '${package}'"
   fi
   verify "${package}" "${certSignal}" && printValid "${package}"
 }
@@ -152,6 +166,7 @@ updateAllGit() {
 updateAllUrl() {
   # Update packages from Urls.
   updateFirefox
+  updateOsmand
   updateSignal
 }
 
