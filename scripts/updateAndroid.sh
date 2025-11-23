@@ -7,18 +7,16 @@ set -o errtrace
 set -o nounset
 set -o pipefail
 
-keytool="$(command -v keytool || command -v \
-  /Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/keytool)"
 apksigner="$(command -v apksigner || command -v \
   ${HOME}/Library/Android/sdk/build-tools/36.1.0/apksigner)"
 
-certAegis="C6:DB:80:A8:E1:4E:52:30:C1:DE:84:15:EF:82:0D:13:DC:90:1D:8F:E3:3C:F3:AC:B5:7B:68:62:D8:58:A8:23"
-certFairEmail="E0:20:67:24:9F:5A:35:0E:0E:C7:03:FE:9D:F4:DD:68:2E:02:91:A0:9F:0C:2E:04:10:50:BB:E7:C0:64:F5:C9"
-certFirefox="A7:8B:62:A5:16:5B:44:94:B2:FE:AD:9E:76:A2:80:D2:2D:93:7F:EE:62:51:AE:CE:59:94:46:B2:EA:31:9B:04"
-certNetGuard="E4:A2:60:A2:DC:E7:B7:AF:23:EE:91:9C:48:9E:15:FD:01:02:B9:3F:9E:7C:9D:82:B0:9C:0B:39:50:00:E4:D4"
-certNewPipe="CB:84:06:9B:D6:81:16:BA:FA:E5:EE:4E:E5:B0:8A:56:7A:A6:D8:98:40:4E:7C:B1:2F:9E:75:6D:F5:CF:5C:AB"
-certProton="DC:C9:43:9E:C1:A6:C6:A8:D0:20:3F:34:23:EE:42:BC:C8:B9:70:62:8E:53:CB:73:A0:39:3F:39:8D:D5:B8:53"
-certSignal="29:F3:4E:5F:27:F2:11:B4:24:BC:5B:F9:D6:71:62:C0:EA:FB:A2:DA:35:AF:35:C1:64:16:FC:44:62:76:BA:26"
+certAegis="c6db80a8e14e5230c1de8415ef820d13dc901d8fe33cf3acb57b6862d858a823"
+certFairEmail="e02067249f5a350e0ec703fe9df4dd682e0291a09f0c2e041050bbe7c064f5c9"
+certFirefox="a78b62a5165b4494b2fead9e76a280d22d937fee6251aece599446b2ea319b04"
+certNetGuard="e4a260a2dce7b7af23ee919c489e15fd0102b93f9e7c9d82b09c0b395000e4d4"
+certNewPipe="cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab"
+certProton="dcc9439ec1a6c6a8d0203f3423ee42bcc8b970628e53cb73a0393f398dd5b853"
+certSignal="4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8"
 
 pkgAegis="beemdevelopment/Aegis"
 pkgFairEmail="M66B/FairEmail"
@@ -66,14 +64,9 @@ download() {
 }
 
 verify() {
-  # Verify signature with keytool and apksigner,
-  # return 0 on success or exit on fail.
-  "${keytool}" -printcert -jarfile "${1}" 2>/dev/null | grep -q "${2}" || \
-    fail "keytool could not verify '${1}'"
+  # Verify signature with apksigner or exit on fail.
   "${apksigner}" verify --verbose --print-certs "${1}" 2>/dev/null | \
-    grep -q "$(printf "%s" "${2}" | \
-    tr '[:upper:]' '[:lower:]' | tr -d ':')" || \
-    fail "apksigner could not verify '${1}'"
+    grep -q "${2}" || fail "could not verify '${1}'"
 }
 
 getReleaseGit() {
@@ -134,7 +127,7 @@ updateSignal() {
   version=$(curl -s "${urlSignal}" | jq -r '.url')
   package=$(basename "${version}")
   if [[ ! -f "${package}" ]] ; then
-    printLoad "Signal"
+    printLoad "${package}"
     curl -sLfO "${version}" || fail "could not download Signal"
   fi
   verify "${package}" "${certSignal}" && printValid "${package}"
@@ -147,6 +140,7 @@ updateAllGit() {
   updateNetGuard
   updateNewPipe
   updateProton
+
 }
 
 updateAllUrl() {
