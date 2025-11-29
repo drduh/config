@@ -39,6 +39,7 @@ fb*.akamaihd.net
 
 { +block{ads and trackers} }
 .google-analytics.
+.qualtrics.com
 ad.
 adnxs.
 adsrv.
@@ -103,6 +104,7 @@ trk.
 #.*carservice.com
 #.*cdn.com
 #.*cdn.net
+#.*chronicle.com
 #.*cloud.com
 #.*club.com
 #.*coffee.com
@@ -139,7 +141,6 @@ trk.
 #.akamaihd.net
 #.akamaitech.net
 #.akamaized.net
-#.awswaf.com
 #.azure.
 #.azureedge.net
 #.bootstrapcdn.com
@@ -157,6 +158,7 @@ trk.
 #.oraclecloud.com
 #.s3
 #.salesforce-sites.com
+#.scene7.com
 #.shop.app
 #.shopify.com
 #.shopifyapps.com
@@ -207,17 +209,44 @@ trk.
 #tech.
 #wiki.
 
+{ upgrade{github} }
+.github.blog
+.github.com
+.githubcopilot.com
+.github.io
+.githubapp.com
+.githubassets.com
+.githubusercontent.com
+.gh.io
+
+{ upgrade{apple} }
+.aaplimg.com
+.apple.com
+.apple.map.fastly.net
+.cdn-apple.com
+.dsce9.akamaiedge.net
+.dsct.akamaiedge.net
+.ls-apple.com.akadns.net
+
 { upgrade{amazon} }
+#.a.co
+#.a2z.com
 #.amazonaws.com
+#.amazonforum.com
+#.amazontrust.com
+#.awswaf.com
 #.payments-amazon.com
-.a2z.com
+#.primevideo.com
 .amazon.com
+.awsstatic.com
+.awswaf.com
 .images-amazon.com
 .media-amazon.com
 .ssl-images-amazon.com
 
 { upgrade{google} }
 #accounts.google.com
+.go.dev
 .goo.gl
 .google
 .google.
@@ -234,14 +263,24 @@ trk.
 .youtube.com
 .ytimg.com
 calendar.google.com
+dl.google.com
 docs.google.com
 drive.google.com
 mail.google.com
 maps.google.com
+maps.googleapis.com
 meet.google.com
 photos.google.com
 voice.google.com
 www.google.com
+
+{ upgrade{mozilla} }
+.mozaws.net
+.mozilla.net
+.mozilla.org
+.mozillafoundation.org
+.mozillazine.org
+.thunderbird.net
 
 { upgrade{steam} }
 .steamcommunity.com
@@ -257,9 +296,7 @@ images.steamusercontent.com
 steamuserimages-a.akamaihd.net
 
 { upgrade{everything else} }
-.0x0.st
 .3m.com
-.aaplimg.com
 .acm.org
 .adafruit.com
 .adblockplus.org
@@ -290,7 +327,6 @@ steamuserimages-a.akamaihd.net
 .apache.org
 .apc.com
 .appimage.org
-.apple.com
 .arcgis.com
 .arcgisonline.com
 .archive.is
@@ -317,8 +353,6 @@ steamuserimages-a.akamaihd.net
 .autocheck.com
 .autotrader.com
 .awesomeopensource.com
-.awsstatic.com
-.awswaf.com
 .azureedge.net
 .azurestandard.com
 .badssl.com
@@ -376,7 +410,6 @@ steamuserimages-a.akamaihd.net
 .cbc.ca
 .ccc.de
 .cdc.gov
-.cdn-apple.com
 .cdn-redfin.com
 .celestrak.com
 .centos.org
@@ -392,6 +425,7 @@ steamuserimages-a.akamaihd.net
 .citizenlab.ca
 .claude.ai
 .clojure.org
+.cloudflareregistrar.com
 .cloudflarestorage.com
 .cnet.com
 .codeberg.org
@@ -527,13 +561,6 @@ steamuserimages-a.akamaihd.net
 .gimp.org
 .giphy.com
 .git-scm.com
-.github.blog
-.github.com
-.githubcopilot.com
-.github.io
-.githubapp.com
-.githubassets.com
-.githubusercontent.com
 .gitlab.com
 .gitlab.io
 .gizmodo.com
@@ -691,10 +718,6 @@ steamuserimages-a.akamaihd.net
 .monoprice.com
 .morganstanley.com
 .morganstanleyclientserv.com
-.mozaws.net
-.mozilla.net
-.mozilla.org
-.mozillazine.org
 .mqcdn.com  # mapquest
 .msi.com
 .muckrack.com
@@ -919,7 +942,6 @@ steamuserimages-a.akamaihd.net
 .thehomedepot.com
 .theverge.com
 .threatpost.com
-.thunderbird.net
 .time.gov
 .tldp.org
 .tomshardware.com
