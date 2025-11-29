@@ -14,6 +14,7 @@ certAegis="c6db80a8e14e5230c1de8415ef820d13dc901d8fe33cf3acb57b6862d858a823"
 certFairEmail="e02067249f5a350e0ec703fe9df4dd682e0291a09f0c2e041050bbe7c064f5c9"
 certFirefox="a78b62a5165b4494b2fead9e76a280d22d937fee6251aece599446b2ea319b04"
 certFossify="affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292"
+certKiwix="6dfbfc62e16587a78aa2d9585ae9bb7f6973c2bf84034b7b90101a401409f5aa"
 certNetGuard="e4a260a2dce7b7af23ee919c489e15fd0102b93f9e7c9d82b09c0b395000e4d4"
 certNewPipe="cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab"
 certOsmand="d192f4fffff2fae37f2821e4ca44f4cbe2483e7ffa24a8472043f685dd5bed27"
@@ -25,6 +26,7 @@ gitRepoAegis="${gitRepos}/beemdevelopment/Aegis"
 gitRepoCalendar="${gitRepos}/FossifyOrg/Calendar"
 gitRepoFairEmail="${gitRepos}/M66B/FairEmail"
 gitRepoGallery="${gitRepos}/FossifyOrg/Gallery"
+gitRepoKiwix="${gitRepos}/kiwix/kiwix-android"
 gitRepoNetGuard="${gitRepos}/M66B/NetGuard"
 gitRepoNewPipe="${gitRepos}/TeamNewPipe/NewPipe"
 gitRepoProton="${gitRepos}/ProtonMail/android-mail"
@@ -105,6 +107,10 @@ updateGallery() {
   getPackageGit "${gitRepoGallery}" "${certFossify}"
 }
 
+updateKiwix() {
+  getPackageGit "${gitRepoKiwix}" "${certKiwix}"
+}
+
 updateNetGuard() {
   getPackageGit "${gitRepoNetGuard}" "${certNetGuard}"
 }
@@ -132,7 +138,8 @@ updateFirefox() {
 
 updateOsmand() {
   package=$(curl -s "${urlOsmand}/" | \
-    grep -Eo "net.osmand-[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}.apk" | sort -V | tail -1)
+    grep -Eo "net.osmand-[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}.apk" | \
+      sort -V | tail -1)
   if [[ ! -f "${package}" ]] ; then
     printLoad "${package}"
     curl -sLfO "${urlOsmand}/${package}" || \
@@ -158,6 +165,7 @@ updateAllGit() {
   updateCalendar
   updateFairEmail
   updateGallery
+  updateKiwix
   updateNetGuard
   updateNewPipe
   updateProton

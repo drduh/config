@@ -1,6 +1,7 @@
 # https://github.com/drduh/config/blob/main/dnscrypt-proxy.toml
 # https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
 #dnscrypt_ephemeral_keys = true
+#offline_mode = false
 #tls_cipher_suite = [52393]  # TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
 listen_addresses = ['127.0.0.1:5300']
 max_clients = 250
@@ -10,27 +11,40 @@ dnscrypt_servers = true
 doh_servers = false
 odoh_servers = false
 require_dnssec = false
+require_nolog = true
+require_nofilter = true
+disabled_server_names = []
+
 block_ipv6 = true
 block_unqualified = true
 block_undelegated = true
-reject_ttl = 30
+reject_ttl = 10
+
 force_tcp = false
+http3 = false
+http3_probe = false
+
 timeout = 5000
 keepalive = 30
 cert_refresh_delay = 240
+
 tls_disable_session_tickets = true
 bootstrap_resolvers = ['9.9.9.11:53', '8.8.8.8:53']
 ignore_system_dns = false
 netprobe_timeout = 60
+netprobe_address = '9.9.9.9:53'
+
 cache = true
 cache_size = 4096
-cache_min_ttl = 600
+cache_min_ttl = 2400
 cache_max_ttl = 86400
 cache_neg_min_ttl = 60
 cache_neg_max_ttl = 600
+
 forwarding_rules = 'forwarding-rules.txt'
 log_level = 2
 log_file = 'dnscrypt.log'
+
 log_files_max_size = 10
 log_files_max_age = 30
 log_files_max_backups = 10
