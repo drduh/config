@@ -191,7 +191,7 @@ function domain {  # truncate to top level domain
 function gas {  # get CIDRs for AS number
   whois -h whois.radb.net '!g'${1} }
 
-function get_goes {
+function getGoes {
   curl -s -o "geo.${1}.$(date -u '+%Y%m%dT%H:%M').jpg" \
     "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/${1}/GEOCOLOR/latest.jpg" }
 
@@ -199,11 +199,11 @@ function gpg_restart {
   pkill "gpg|pinentry|ssh-agent"
   eval $(gpg-agent --daemon --enable-ssh-support) }
 
-function grep_ip {
+function grepAddr {
   grep -Eo \
     "([0-9]{1,3}\.){3}[0-9]{1,3}" "${@}" }
 
-function grep_url {
+function grepUrl {
   grep -Eo \
     "(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]" "${@}" }
 
@@ -346,10 +346,6 @@ function firefoxHistory {
     "select title, url, datetime(last_visit_date/1000000, 'unixepoch') \
     as visit from moz_places order by last_visit_date desc;" }
 
-function versionFirefox {
-  curl "https://www.firefox.com/en-US/firefox/notes/" -v 2>&1 | \
-    grep "location" | sed 's/.*firefox.//g' | sed 's/.release.*//g' }
-
 function length {
   awk -S -v len="${1:=80}" 'length($0) > len' }
 
@@ -372,12 +368,13 @@ function mem {
 
 function myip {
   curl -s "https://icanhazip.com/" || \
-    dig @resolver1.opendns.com ANY myip.opendns.com +short }
+    curl -s "https://am.i.mullvad.net/ip" || \
+      dig @resolver1.opendns.com ANY myip.opendns.com +short }
 
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
 
-function percent_diff {
+function percentDiff {
   printf "%s%% diff between %s and %s\n" \
     $(awk -S -v x="${1}" -v y="${2}" "BEGIN { print (y-x)/x * 100 }") \
       "${1}" "${2}" }
@@ -390,8 +387,11 @@ function png2jpg {
 function pong {
   ping -D -c5 -i.1 "${1:-1.1.1.1}" }
 
-function newline_to_comma {
+function newlineToComma {
   sed -z 's/\n/,/g' ${1} }
+
+function noComment {
+  grep -ve "^#" "${1}" }
 
 function nonlocal {
   egrep -ve "^#|^255.255.255.255|^127.|^0.|^::1|^ff..::|^fe80::" "${1}" | \
@@ -399,7 +399,7 @@ function nonlocal {
 
 function nxdomains {
   for x in $(${ROOT} grep NXDOMAIN /var/log/dnsmasq | \
-    awk -S '{print $6}' | sort | uniq) ; do printf "0.0.0.0 $x\n" ; done }
+    awk '{print $6}' | sort | uniq) ; do printf "0.0.0.0 $x\n" ; done }
 
 function pass {
   LC_ALL=C tr -dc "A-Z2-9" < /dev/urandom | \
@@ -417,10 +417,10 @@ function rand {
       fold -w 64 | head -n 3 | \
       sed "-es/./ /"{1..64..16} ; done }
 
-function rand_mac {
+function randMac {
   openssl rand -hex 6 | sed "s/\(..\)/\1:/g; s/.$//" }
 
-function resize_ff {
+function resizeFirefox {
   xdotool windowsize \
     $(xdotool search --name firefox | tail -n1) 1366 768 }
 
@@ -440,10 +440,10 @@ function secret {
       --output ${output} \
       "${1}" && echo "${1} -> ${output}" }
 
-function sort_ip {
+function sortAddr {
   sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n "${@}" }
 
-function sort_length {
+function sortLength {
   awk -S '{print length, $0}' | sort -n | cut -d " " -f2- }
 
 function srl {
@@ -451,12 +451,15 @@ function srl {
     sudo minicom -D /dev/ttyUSB0 2>/dev/null || \
       printf "serial console disconnected\n" }
 
-function top_history {
+function stringLower {
+  printf "${1}" | tr '[:upper:]' '[:lower:]' | tr -d ':' }
+
+function topHistory {
   history 1 | awk -S '{CMD[$2]++;count++;}END {
     for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | \
       column -c3 -s " " -t | sort -nr | nl |  head -n25 }
 
-function top_size {
+function topSize {
   du -hd1 . | awk '{printf "%s %08.2f\t%s\n",
     index("KMG", substr($1, length($1))),
     substr($1, 0, length($1)-1), $0}' |
@@ -470,6 +473,15 @@ function username {  # "username 8" - generate 8 usernames
     tr "\n" "_" | iconv -f utf-8 -t ascii//TRANSLIT)" \
     "$(tr -dc "[:digit:]" < /dev/urandom | fold -w 4 | head -1)"
   done }
+
+function versionFirefox {
+  curl "https://www.firefox.com/en-US/firefox/notes/" -v 2>&1 | \
+    grep "location" | sed 's/.*firefox.//g' | sed 's/.release.*//g' }
+
+function versionThunderbird {
+  curl "https://www.thunderbird.net/en-US/thunderbird/releases/atom.xml" -v 2>&1 | \
+    grep "releasenotes" | sed 's/.*thunderbird.//g' | sed 's/.release.*//g' | \
+      uniq | head -1 }
 
 function vpn {
   ssh -C -N -L 5555:127.0.0.1:8118 vpn }

@@ -1,10 +1,12 @@
 # https://github.com/drduh/config/blob/main/domains/mozilla
 # https://support.mozilla.org/en-US/kb/domains-allow-firefox
+#address=/allizom.org/
 #address=/atp.fox/
 #address=/firefox.com-v2.edgesuite.net/
 #address=/firefox.com/
 #address=/firefoxusercontent.com/
 #address=/getfirefox.com/
+#address=/hg-edge-mozilla.fastly-edge.com/
 #address=/mdnplay.dev/
 #address=/moz.works/
 #address=/mozaws.net/
@@ -13,6 +15,8 @@
 #address=/mozilla.net/
 #address=/mozilla.org.cdn.cloudflare.net/
 #address=/mozilla.org/
+#address=/mozilla-backup.org/
+#address=/mozilla-download.fastly-edge.com/
 #address=/thunderbird.net/
 address=/accounts.firefox.com/
 address=/aus5.mozilla.org/
