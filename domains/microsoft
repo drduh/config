@@ -1,6 +1,7 @@
 # https://github.com/drduh/config/blob/main/domains/microsoft
 # https://learn.microsoft.com/en-us/azure/azure-portal/azure-portal-safelist-urls
 # https://learn.microsoft.com/en-us/azure/security/fundamentals/azure-domains
+# https://learn.microsoft.com/en-us/defender-cloud-apps/troubleshooting-proxy-url
 #address=/aadrm.com/
 #address=/azconfig.io/
 #address=/azmk8s.io/
@@ -20,7 +21,11 @@
 #address=/azurestaticapps.net/
 #address=/azuresynapse.net/
 #address=/azurewebsites.net/
+#address=/fb-t-msedge.net/
 #address=/loganalytics.io/
+#address=/mcas.ms/
+#address=/mcas-df.ms/
+#address=/msftauth.net/
 #address=/msidentity.com/
 address=/1drv.com/
 address=/1drv.ms/
