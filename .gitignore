@@ -5,5 +5,3 @@
 *.pem
 *.tmp
 *.zip
-update_verifier/
-venv/

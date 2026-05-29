@@ -17,8 +17,9 @@
 	remote = origin
 	merge = refs/heads/main
 [alias]
-	authors = !git log --format='%aN <%aE>' | sort -u
-	dif     = diff
-	last    = !stat -f \"%Sm\" $(git rev-parse --show-toplevel)/.git/FETCH_HEAD
-	og      = log
-	pending = diff --cached origin/main
+	authors  = !git log --format='%aN <%aE>' | sort -u
+	dif      = diff
+	diffmain = diff main..HEAD
+	last     = !stat -f \"%Sm\" $(git rev-parse --show-toplevel)/.git/FETCH_HEAD
+	og       = log
+	pending  = diff --cached origin/main
