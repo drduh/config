@@ -235,6 +235,7 @@
 #address=/google.ee/
 #address=/google.es/
 #address=/google.eu/
+#address=/google.fastly-edge.com/
 #address=/google.fi/
 #address=/google.fm/
 #address=/google.fr/
