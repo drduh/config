@@ -2,7 +2,6 @@
 # https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
 #dnscrypt_ephemeral_keys = true
 #offline_mode = false
-#tls_cipher_suite = [52393]  # TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
 listen_addresses = ['127.0.0.1:5300']
 max_clients = 250
 ipv4_servers = true

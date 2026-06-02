@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/main/scripts/updateAndroid.sh
-# Download and verify APK files (requires Android Studio).
+# Download and verify APK files
+# macOS: requires Android Studio
 
 #set -x  # uncomment to debug
 set -o errtrace
@@ -20,6 +21,9 @@ certNewPipe="cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab"
 certOsmand="d192f4fffff2fae37f2821e4ca44f4cbe2483e7ffa24a8472043f685dd5bed27"
 certProton="dcc9439ec1a6c6a8d0203f3423ee42bcc8b970628e53cb73a0393f398dd5b853"
 certSignal="4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8"
+# older 1024-bit signing certificate
+#certSignal="29f34e5f27f211b424bc5bf9d67162c0eafba2da35af35c16416fc446276ba26"
+certWireGuard="5204d82e766e8aa14dcbb06dc70aebae2bdd812d4d6203cd521a8a685d7d3d80"
 
 gitRepos="https://api.github.com/repos"
 gitRepoAegis="${gitRepos}/beemdevelopment/Aegis"
@@ -29,7 +33,9 @@ gitRepoGallery="${gitRepos}/FossifyOrg/Gallery"
 gitRepoKiwix="${gitRepos}/kiwix/kiwix-android"
 gitRepoNetGuard="${gitRepos}/M66B/NetGuard"
 gitRepoNewPipe="${gitRepos}/TeamNewPipe/NewPipe"
+gitRepoNotes="${gitRepos}/FossifyOrg/Notes"
 gitRepoProton="${gitRepos}/ProtonMail/android-mail"
+gitRepoWireGuard="${gitRepos}/wgtunnel/android"
 gitUrl="https://github.com"
 
 urlFirefox="https://archive.mozilla.org/pub/fenix/releases"
@@ -119,8 +125,16 @@ updateNewPipe() {
   getPackageGit "${gitRepoNewPipe}" "${certNewPipe}"
 }
 
+updateNotes() {
+  getPackageGit "${gitRepoNotes}" "${certFossify}"
+}
+
 updateProton() {
   getPackageGit "${gitRepoProton}" "${certProton}"
+}
+
+updateWireGuard() {
+  getPackageGit "${gitRepoWireGuard}" "${certWireGuard}"
 }
 
 updateFirefox() {
@@ -168,7 +182,9 @@ updateAllGit() {
   updateKiwix
   updateNetGuard
   updateNewPipe
+  updateNotes
   updateProton
+  updateWireGuard
 }
 
 updateAllUrl() {

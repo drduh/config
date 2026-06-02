@@ -1,4 +1,7 @@
 # https://github.com/drduh/config/blob/main/domains/tlds
+# https://en.wikipedia.org/wiki/List_of_English-language_generic_Internet_top-level_domains
+#address=/new/
+#address=/world/
 address=/ad/
 address=/ax/
 address=/bar/
@@ -85,7 +88,6 @@ address=/website/
 address=/win/
 address=/work/
 address=/works/
-address=/world/
 address=/wow/
 address=/xin/
 address=/xml/

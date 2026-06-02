@@ -10,9 +10,16 @@
 	logallrefupdates = true
 	pager = less -XRF
 [remote "origin"]
-	#url = https://github.com/drduh/config
-	url = git@github.com:drduh/config.git
+	url = https://github.com/drduh/config
+	pushurl = git@github.com:drduh/config.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
 [branch "main"]
 	remote = origin
 	merge = refs/heads/main
+[alias]
+	authors  = !git log --format='%aN <%aE>' | sort -u
+	dif      = diff
+	diffmain = diff main..HEAD
+	last     = !stat -f \"%Sm\" $(git rev-parse --show-toplevel)/.git/FETCH_HEAD
+	og       = log
+	pending  = diff --cached origin/main

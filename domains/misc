@@ -1,17 +1,25 @@
 # https://github.com/drduh/config/blob/main/domains/misc
+address=/bom.so/
 address=/ddg.co/
-address=/duck.com/
 address=/ddg.gg/
-address=/indeed.com/
 address=/doordash.com/
+address=/duck.com/
 address=/duckduckgo.com/
 address=/force.com/
+address=/goo.su/
 address=/hrblock.com/
+address=/is.gd/
 address=/kaptcha.com/
+address=/linktr.ee/
 address=/myportfolio.com/
 address=/nordvpn.com/
 address=/overwolf.com/
 address=/salesforceliveagent.com/
+address=/shorten.ee/
+address=/shorten.is/
+address=/shorturl.at/
 address=/sumologic.com/
+address=/tr.ee/
+address=/videy.co/
 address=/yahoo.com/
 address=/yandex.com/
