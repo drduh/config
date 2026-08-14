@@ -1,7 +1,7 @@
 # https://github.com/drduh/config/blob/main/gitconfig
 [user]
-	name = drduh
-	email = github@duh.to
+	name       = drduh
+	email      = github@duh.to
 	signingkey = "0xFF3E7D88647EBCDB"
 [core]
 	repositoryformatversion = 0
@@ -20,6 +20,10 @@
 	authors  = !git log --format='%aN <%aE>' | sort -u
 	dif      = diff
 	diffmain = diff main..HEAD
+	diffmstr = diff master..HEAD
+	ignored  = ls-files --others --ignored --exclude-standard
 	last     = !stat -f \"%Sm\" $(git rev-parse --show-toplevel)/.git/FETCH_HEAD
+	lg       = log --graph --decorate --oneline
+	ll       = log --stat
 	og       = log
 	pending  = diff --cached origin/main
