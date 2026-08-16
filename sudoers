@@ -1,48 +1,54 @@
 # https://github.com/drduh/config/blob/main/sudoers
 # https://www.sudo.ws/docs/man/sudoers.man/
-Defaults env_reset
-Defaults mail_badpass
-Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-Defaults use_pty
+# Validate with: visudo -cf sudoers
 
-root	ALL=(ALL:ALL) ALL
+Defaults	env_reset
+Defaults	mail_badpass
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Defaults	use_pty
+#Defaults:sysadm	timestamp_timeout=5
+
+root		ALL=(ALL:ALL) ALL
 sysadm	ALL=(ALL:ALL) ALL
 
-Cmnd_Alias NP = \
-  /bin/dmesg, \
-  /bin/mount /dev/[a-z0-9]*, \
-  /bin/umount /mnt/[a-z]*, \
-  /sbin/cryptsetup luksClose /dev/mapper/*, \
-  /sbin/cryptsetup luksOpen /dev/*, \
-  /sbin/dhclient [a-z0-9]*, \
-  /sbin/fdisk -l, \
-  /sbin/ip route add default via 192.168.1.1 dev wlp2s0, \
-  /sbin/wpa_supplicant -Dnl80211 -iwlp2s0 -cwpa.conf, \
-  /usr/bin/apt autoclean, \
-  /usr/bin/apt autoremove, \
-  /usr/bin/apt dist-upgrade, \
-  /usr/bin/apt update, \
-  /usr/bin/apt upgrade, \
-  /usr/bin/apt -y upgrade, \
-  /usr/bin/lsof -Pni, \
-  /usr/bin/minicom -D /dev/ttyUSB0, \
-  /usr/bin/screen /dev/ttyUSB0 115200 8n1, \
-  /usr/bin/tail -F /var/log/dnsmasq, \
-  /usr/bin/tail -F /var/log/privoxy/logfile, \
-  /usr/bin/tee /sys/class/backlight/*/brightness, \
-  /usr/bin/vim /etc/privoxy/user.action, \
-  /usr/sbin/dmidecode -s bios-version, \
-  /usr/sbin/ntpdate -uv 192.168.1.1, \
-  /usr/sbin/reboot now, \
-  /usr/sbin/route add -net 10.8.1.1 netmask 255.255.255.0 gw 192.168.1.1, \
-  /usr/sbin/service dnsmasq restart, \
-  /usr/sbin/service networking restart, \
-  /usr/sbin/service ntp restart, \
-  /usr/sbin/service ntpsec restart, \
-  /usr/sbin/service privoxy restart, \
-  /usr/sbin/shutdown -h now
+Cmnd_Alias STATUS = \
+	/bin/dmesg, \
+	/sbin/fdisk -l, \
+	/usr/bin/lsof -Pni, \
+	/usr/sbin/dmidecode -s bios-version
 
-sysadm	ALL=(ALL) NOPASSWD:NP
-#sysadm	ALL=(ALL) NOPASSWD:ALL
+Cmnd_Alias MAINTAIN = \
+	/bin/mount /dev/[a-z0-9]*, \
+	/bin/umount /mnt/[a-z]*, \
+	/sbin/cryptsetup luksClose /dev/mapper/*, \
+	/sbin/cryptsetup luksOpen /dev/*, \
+	/usr/bin/apt autoclean, \
+	/usr/bin/apt autoremove, \
+	/usr/bin/apt dist-upgrade, \
+	/usr/bin/apt update, \
+	/usr/bin/apt upgrade, \
+	/usr/bin/apt -y upgrade, \
+	/usr/bin/minicom -D /dev/ttyUSB0, \
+	/usr/bin/screen /dev/ttyUSB0 115200 8n1, \
+	/usr/bin/tail -F /var/log/dnsmasq, \
+	/usr/bin/tail -F /var/log/privoxy/logfile, \
+	/usr/bin/tee /sys/class/backlight/*/brightness
+
+Cmnd_Alias NETWORK = \
+	/sbin/dhclient [a-z0-9]*, \
+	/sbin/ip route add default via 192.168.1.1 dev wlp2s0, \
+	/sbin/wpa_supplicant -Dnl80211 -iwlp2s0 -c /etc/wpa_supplicant.conf, \
+	/usr/sbin/ntpdate -uv 192.168.1.1, \
+	/usr/sbin/route add -net 10.8.1.1 netmask 255.255.255.0 gw 192.168.1.1, \
+	/usr/sbin/service networking restart, \
+	/usr/sbin/service ntp restart, \
+	/usr/sbin/service ntpsec restart, \
+	/usr/sbin/service privoxy restart
+
+Cmnd_Alias POWER = \
+	/usr/sbin/reboot now, \
+	/usr/sbin/shutdown -h now
+
+sysadm	ALL=(ALL:ALL) NOPASSWD: STATUS, MAINTAIN, NETWORK, POWER
 
 #@includedir /etc/sudoers.d
