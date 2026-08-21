@@ -8,7 +8,7 @@ Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/b
 Defaults	use_pty
 #Defaults:sysadm	timestamp_timeout=5
 
-root		ALL=(ALL:ALL) ALL
+root	ALL=(ALL:ALL) ALL
 sysadm	ALL=(ALL:ALL) ALL
 
 Cmnd_Alias STATUS = \
@@ -40,6 +40,7 @@ Cmnd_Alias NETWORK = \
 	/sbin/wpa_supplicant -Dnl80211 -iwlp2s0 -c /etc/wpa_supplicant.conf, \
 	/usr/sbin/ntpdate -uv 192.168.1.1, \
 	/usr/sbin/route add -net 10.8.1.1 netmask 255.255.255.0 gw 192.168.1.1, \
+	/usr/sbin/service dnsmasq restart, \
 	/usr/sbin/service networking restart, \
 	/usr/sbin/service ntp restart, \
 	/usr/sbin/service ntpsec restart, \
