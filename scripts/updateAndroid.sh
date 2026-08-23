@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # https://github.com/drduh/config/blob/main/scripts/updateAndroid.sh
-# Download and verify APK files
+# Download and verify Android package files
 # macOS: requires Android Studio
 
 #set -x  # uncomment to debug
@@ -96,9 +96,6 @@ verify() {
 getReleaseGit() {
   # Get and parse latest Git release information.
   json=$("${cmdCurl[@]}" "${1}/releases/latest" 2>&1)
-  if [[ "$json" == *"403"* ]] ; then
-    fail "request was denied"
-  fi
   if [[ "$json" == *"rate limit exceeded"* ]] ; then
     fail "request was rate limited"
   fi
@@ -125,7 +122,9 @@ getPackageGit() {
   printRelease "${package} (${author}@${mtime}, ${count} downloads)"
   if [[ ! -f "${package}" ]] ; then
     printLoad "${package}" ; download "${url}" ; fi
-  verify "${package}" "${2}" && printValid "${package}"
+
+  local size="$(du -h "${package}" | cut -f1)"
+  verify "${package}" "${2}" && printValid "${package} (${size})"
 }
 
 updateAegis() {
@@ -177,7 +176,8 @@ updateFirefox() {
     printLoad "${package}"
     download "${urlFirefox}/${version}/android/${apkPath}/${package}"
   fi
-  verify "${package}" "${certFirefox}" && printValid "${package}"
+  local size="$(du -h "${package}" | cut -f1)"
+  verify "${package}" "${certFirefox}" && printValid "${package} (${size})"
 }
 
 updateOsmand() {
@@ -188,7 +188,8 @@ updateOsmand() {
     printLoad "${package}"
     download "${urlOsmand}/${package}"
   fi
-  verify "${package}" "${certOsmand}" && printValid "${package}"
+  local size="$(du -h "${package}" | cut -f1)"
+  verify "${package}" "${certOsmand}" && printValid "${package} (${size})"
 }
 
 updateSignal() {
@@ -198,7 +199,8 @@ updateSignal() {
     printLoad "${package}"
     download "${version}"
   fi
-  verify "${package}" "${certSignal}" && printValid "${package}"
+  local size="$(du -h "${package}" | cut -f1)"
+  verify "${package}" "${certSignal}" && printValid "${package} (${size})"
 }
 
 updateAllGit() {
