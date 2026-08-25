@@ -1,5 +1,6 @@
 # https://github.com/drduh/config/blob/main/zsh/zshGone
 # https://github.com/drduh/gone
+
 export gone_proto="http"
 #export gone_proto="https"
 export gone_port="8080"
