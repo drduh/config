@@ -30,7 +30,7 @@ user_pref("browser.send_pings", false);
 user_pref("calendar.extract.service.enabled", false);
 user_pref("calendar.timezone.local", "UTC");
 user_pref("calender.integration.notify", false);
-user_pref("datareporting.healthreport.uploadEnabled", false);  // disable technical and interaction data collection
+user_pref("datareporting.healthreport.uploadEnabled", false);  // disable data collection
 user_pref("datareporting.policy.dataSubmissionEnabled", false);  // disable crash reports
 user_pref("dom.disable_window_move_resize", true);
 user_pref("dom.enable_performance", false);

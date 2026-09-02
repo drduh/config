@@ -11,12 +11,6 @@ Defaults	use_pty
 root	ALL=(ALL:ALL) ALL
 sysadm	ALL=(ALL:ALL) ALL
 
-Cmnd_Alias STATUS = \
-	/bin/dmesg, \
-	/sbin/fdisk -l, \
-	/usr/bin/lsof -Pni, \
-	/usr/sbin/dmidecode -s bios-version
-
 Cmnd_Alias MAINTAIN = \
 	/bin/mount /dev/[a-z0-9]*, \
 	/bin/umount /mnt/[a-z]*, \
@@ -50,6 +44,12 @@ Cmnd_Alias POWER = \
 	/usr/sbin/reboot now, \
 	/usr/sbin/shutdown -h now
 
-sysadm	ALL=(ALL:ALL) NOPASSWD: STATUS, MAINTAIN, NETWORK, POWER
+Cmnd_Alias STATUS = \
+	/bin/dmesg, \
+	/sbin/fdisk -l, \
+	/usr/bin/lsof -Pni, \
+	/usr/sbin/dmidecode -s bios-version
+
+sysadm	ALL=(ALL:ALL) NOPASSWD: MAINTAIN, NETWORK, POWER, STATUS
 
 #@includedir /etc/sudoers.d
