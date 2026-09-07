@@ -1,0 +1,28 @@
+# https://github.com/drduh/config/blob/main/zsh/zshPath
+
+function path {
+  if [[ -d "${1}" ]] ; then
+    if [[ -z "${PATH}" ]] ; then
+      export PATH="${1}"
+    else
+      export PATH="${PATH}:${1}"
+    fi
+  else
+    printf 'invalid path: '%s'\n' "${1}"
+  fi
+}
+
+export PATH=""
+path "/sbin"
+path "/bin"
+path "/usr/sbin"
+path "/usr/bin"
+path "/usr/local/sbin"
+path "/usr/local/bin"
+path "/usr/local/go/bin"
+#path "/opt/homebrew/bin"
+#path "/usr/games"
+#path "/usr/X11R6/bin"
+#path "${HOME}/.docker/bin/"
+#path "${HOME}/.local/bin"
+#path "${HOME}/bin"

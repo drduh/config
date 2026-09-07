@@ -1,16 +1,19 @@
 # https://github.com/drduh/config/blob/main/ssh_config
 # https://linux.die.net/man/5/ssh_config
-#Host router
+
+#Host r route router
 #  HostName 192.168.1.1
 #  IdentityFile ~/.ssh/router
 #  Port 2400
 #  User sysadm
+
 Host github.com
   User git
   ControlMaster no
   IdentitiesOnly yes
   IdentityFile ~/.ssh/github
   MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
+
 Host *
   #ControlMaster auto
   #ControlPath ~/.ssh/ctl-%r@%h:%p
@@ -27,7 +30,11 @@ Host *
   ForwardX11Trusted no
   ServerAliveInterval 300
   ServerAliveCountMax 2
-  Ciphers aes256-gcm@openssh.com
-  HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-ed25519
+  # ssh -Q cipher
+  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+  # ssh -Q mac
   MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
-  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+  # ssh -Q kex
+  KexAlgorithms mlkem768x25519-sha256,sntrup761x25519-sha512@openssh.com,curve25519-sha256,diffie-hellman-group16-sha512
+  # ssh -Q key
+  HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-ed25519

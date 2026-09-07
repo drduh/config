@@ -1,0 +1,66 @@
+# https://github.com/drduh/config/blob/main/zsh/zshGone
+# https://github.com/drduh/gone
+
+export gone_proto="http"
+#export gone_proto="https"
+export gone_port="8080"
+export gone_host="127.0.0.1"
+#export gone_host="192.168.1.1"
+export gone_header="X-Auth"
+export gone_secret="mySecret"
+export gone_server="${gone_proto}://${gone_host}:${gone_port}"
+export gone_cmd="curl -s -H '${gone_header}: ${gone_secret}' ${gone_server}"
+
+alias goneClear="${gone_cmd}/clear"
+
+alias goneList="${gone_cmd}/list | jq"
+alias goneListNames="${gone_cmd}/list | jq '.[].name'"
+alias goneListOwners="${gone_cmd}/list | jq -r '.[].owner | \"\(.mask):\(.agent)\"' | sort | uniq"
+alias goneListRemain="${gone_cmd}/list | jq -r '.[] | [.time.remain, .name] | @tsv'"
+alias goneListSizes="${gone_cmd}/list | jq '.[] | \"\(.name):\(.size)\"'"
+alias goneListSums="${gone_cmd}/list | jq '.[] | \"\(.sum):\(.name)\"'"
+alias goneListType="${gone_cmd}/list | jq '.[] | \"\(.name):\(.type)\"'"
+
+alias goneStat="${gone_cmd}/status | jq"
+alias goneStatic="${gone_cmd}/static | jq"
+
+alias goneRandom="${gone_cmd}/random/ | jq -r '.[]'"
+alias goneRandomCoin="${gone_cmd}/random/coin | jq -r '.[]'"
+alias goneRandomHex="${gone_cmd}/random/hex | jq -r '.[]'"
+alias goneRandomID="${gone_cmd}/random/id | jq -r '.[]'"
+alias goneRandomMask="${gone_cmd}/random/mask | jq -r '.[]'"
+alias goneRandomName="${gone_cmd}/random/name | jq -r '.[]'"
+alias goneRandomNato="${gone_cmd}/random/nato | jq -r '.[]'"
+alias goneRandomNumber="${gone_cmd}/random/number | jq -r '.[]'"
+alias goneRandomPass="${gone_cmd}/random/pass | jq -r '.[]'"
+
+function goneGet {
+  curl -s -H "${gone_header}: ${gone_secret}" \
+    "${gone_server}/download/${1}" }
+
+function goneMsg {
+  curl -s -H "${gone_header}: ${gone_secret}" \
+    "${gone_server}/msg" }
+
+function goneMsgAdd {
+  curl -s -H "${gone_header}: ${gone_secret}" \
+    -d "message=${1}" "${gone_server}/msg/add" }
+
+function goneMsgDelete {
+  curl -s -H "${gone_header}: ${gone_secret}" \
+    "${gone_server}/msg/delete/{1}" }
+
+function goneMsgClear {
+  curl -s -H "${gone_header}: ${gone_secret}" \
+    "${gone_server}/msg/clear" }
+
+function gonePut {
+  curl -s -H "${gone_header}: ${gone_secret}" \
+    -F "file=@${1}" \
+    -F "downloads=${2:-1}" \
+    -F "duration=${3:-20m}" \
+      "${gone_server}/upload" | jq }
+
+function goneWall {
+  curl -s -H "${gone_header}: ${gone_secret}" \
+    -F "wall=${1}" "${gone_server}/wall" }

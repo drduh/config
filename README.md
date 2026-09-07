@@ -4,5 +4,6 @@ Miscellaneous scripts and program configuration files used in:
 - [macOS-Security-and-Privacy-Guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide)
 - [pwd.sh](https://github.com/drduh/pwd.sh)
 - [Purse](https://github.com/drduh/Purse)
+- [gone](https://github.com/drduh/gone)
 - [PC-Engines-APU-Router-Guide](https://github.com/drduh/PC-Engines-APU-Router-Guide)
 - [Debian-Privacy-Server-Guide](https://github.com/drduh/Debian-Privacy-Server-Guide)

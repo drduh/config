@@ -1,9 +1,9 @@
 # https://github.com/drduh/config/blob/main/privoxy/config
 # https://www.privoxy.org/user-manual/config.html
-#forward-socks5t   /               127.0.0.1:9050 .
-#forward   /      parent-proxy.example.org:8080
-#forward   :443   .
+
+listen-address 127.0.0.1:8118
 #listen-address 192.168.1.1:8118
+
 confdir /etc/privoxy
 logdir  /var/log/privoxy
 logfile logfile
@@ -15,13 +15,16 @@ filterfile  default.filter
 filterfile  user.filter
 
 accept-intercepted-requests 1
-tolerate-pipelining         1
 keep-alive-timeout          10
 socket-timeout              10
 
-debug     1  # Log the destination for each request. See also debug 1024.
-debug  1024  # Log the destination for requests Privoxy didn't let through, and the reason why.
-debug  4096  # Startup banner and warnings.
+enable-edit-actions       0
+enable-remote-http-toggle 0
+enable-remote-toggle      0
+
+debug     1  # Log the destination for each request
+debug  1024  # Log the destination for blocked requests
+debug  4096  # Startup banner and warnings
 debug  8192  # Non-fatal errors
 #debug     2 # show each connection status
 #debug     4 # show tagging-related messages
