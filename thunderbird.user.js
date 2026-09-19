@@ -2,6 +2,7 @@
 // https://kb.mozillazine.org/Mail_and_news_settings
 // https://www.enigmail.net/index.php/en/user-manual/advanced-operations
 //user_pref("extensions.enigmail.mimeHashAlgorithm", 5);  // SHA-512
+//user_pref("javascript.enabled", false);
 //user_pref("mail.showCondensedAddresses", false);
 //user_pref("mail.SpellCheckBeforeSend", false);
 //user_pref("mail.openpgp.allow_external_gnupg", true);
@@ -28,8 +29,8 @@ user_pref("browser.search.suggest.enabled", false);
 user_pref("browser.search.update", false);
 user_pref("browser.send_pings", false);
 user_pref("calendar.extract.service.enabled", false);
+user_pref("calendar.integration.notify", false);
 user_pref("calendar.timezone.local", "UTC");
-user_pref("calender.integration.notify", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);  // disable data collection
 user_pref("datareporting.policy.dataSubmissionEnabled", false);  // disable crash reports
 user_pref("dom.disable_window_move_resize", true);
@@ -58,7 +59,6 @@ user_pref("geo.provider.use_gpsd", false);
 user_pref("gfx.downloadable_fonts.disable_cache", true);
 user_pref("gfx.font_rendering.graphite.enabled", false);
 user_pref("gfx.font_rendering.opentype_svg.enabled", false);
-user_pref("javascript.enabled", false);
 user_pref("javascript.options.asmjs", false);
 user_pref("javascript.options.baselinejit", false);
 user_pref("javascript.options.ion", false);
@@ -129,12 +129,10 @@ user_pref("mailnews.reply_header_authorwrotesingle", "#1 wrote:");
 user_pref("mailnews.reply_header_type", 1);
 user_pref("mailnews.reply_in_default_charset", true);
 user_pref("mailnews.send_default_charset", "UTF-8");
-user_pref("mailnews.sendformat.auto_downgrade", false);
-user_pref("mailnews.sendformat.auto_downgrade", true);
 user_pref("mailnews.start_page.enabled", false);
 user_pref("mailnews.start_page.url", "");
 user_pref("mailnews.start_page_override.mstone", "ignore");
-user_pref("mailnews.use_received_date", "true");
+user_pref("mailnews.use_received_date", true);
 user_pref("mailnews.view_default_charset", "UTF-8");
 user_pref("mathml.disabled", true);
 user_pref("media.autoplay.blocking_policy", 2);
