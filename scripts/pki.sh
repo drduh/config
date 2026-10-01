@@ -91,7 +91,7 @@ ${OPENSSL} x509 -req -days ${CERT_DAYS} -${DEFAULT_MD} \
 ${OPENSSL} req -new -${DEFAULT_MD} -subj "/CN=${CLIENT}" \
   -key ${MATS}/client.key -out ${MATS}/client.csr
 
-# Sign client certiicate
+# Sign client certificate
 ${OPENSSL} x509 -req -days ${CERT_DAYS} -${DEFAULT_MD} \
   -extfile ${OPENSSL_CONF} -extensions tls_client \
   -set_serial "0x$(${OPENSSL} rand -hex ${SERIAL_SIZE})" \

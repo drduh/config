@@ -21,10 +21,10 @@ certNetGuard="e4a260a2dce7b7af23ee919c489e15fd0102b93f9e7c9d82b09c0b395000e4d4"
 certNewPipe="cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab"
 certOsmand="d192f4fffff2fae37f2821e4ca44f4cbe2483e7ffa24a8472043f685dd5bed27"
 certProton="dcc9439ec1a6c6a8d0203f3423ee42bcc8b970628e53cb73a0393f398dd5b853"
-certSignal="4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8"
-# legacy 1024-bit signing certificate
-#certSignal="29f34e5f27f211b424bc5bf9d67162c0eafba2da35af35c16416fc446276ba26"
 certWireGuard="5204d82e766e8aa14dcbb06dc70aebae2bdd812d4d6203cd521a8a685d7d3d80"
+certSignal="4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8"
+# Signal: uncomment next line to use legacy 1024-bit certificate instead
+#certSignal="29f34e5f27f211b424bc5bf9d67162c0eafba2da35af35c16416fc446276ba26"
 
 gitBase="https://api.github.com"
 gitRateLimit="${gitBase}/rate_limit"
@@ -49,7 +49,7 @@ cmdCurl=(
   curl
   --proto =https
   --tlsv1.2
-  --user-agent "$userAgent"
+  --user-agent "${userAgent}"
   --connect-timeout 5
   --silent
   --show-error
@@ -89,8 +89,14 @@ download() {
 
 verify() {
   # Verify signature with apksigner or exit on fail.
-  "${apksigner}" verify --verbose --print-certs "${1}" 2>/dev/null |
-    grep -q "${2}" || fail "could not verify '${1}'"
+  local package="${1}" authority="${2}"
+  local signature="$(${apksigner} verify \
+    --print-certs "${package}" 2>/dev/null | awk -F': ' \
+      '/Signer #1 certificate SHA-256 digest:/ {print $2}')"
+  printf '%s' "${signature}" | grep -q "${authority}" ||
+    fail "could not verify '${package}'"
+  local size="$(du -h "${package}" | cut -f1)"
+  printValid "${package} (${size}) signed with ${authority}"
 }
 
 getReleaseGit() {
@@ -112,60 +118,29 @@ getPackageGit() {
   IFS=$'\t' read -r \
     author package url count mtime < <(getReleaseGit "${1}")
   if [[ "$author" == *"rate limited"* ]] ; then
-    warn "failed to get ${1} release: $author"
+    warn "failed to get ${1} release: ${author}"
     return
   fi
   if [[ "$author" == *"denied"* ]] ; then
-    warn "failed to get ${1} release: $author"
+    warn "failed to get ${1} release: ${author}"
     return
   fi
   printRelease "${package} (${author}@${mtime}, ${count} downloads)"
   if [[ ! -f "${package}" ]] ; then
     printLoad "${package}" ; download "${url}" ; fi
-
-  local size="$(du -h "${package}" | cut -f1)"
-  verify "${package}" "${2}" && printValid "${package} (${size})"
+  verify "${package}" "${2}"
 }
 
-updateAegis() {
-  getPackageGit "${gitRepoAegis}" "${certAegis}"
-}
-
-updateCalendar() {
-  getPackageGit "${gitRepoCalendar}" "${certFossify}"
-}
-
-updateFairEmail() {
-  getPackageGit "${gitRepoFairEmail}" "${certFairEmail}"
-}
-
-updateGallery() {
-  getPackageGit "${gitRepoGallery}" "${certFossify}"
-}
-
-updateKiwix() {
-  getPackageGit "${gitRepoKiwix}" "${certKiwix}"
-}
-
-updateNetGuard() {
-  getPackageGit "${gitRepoNetGuard}" "${certNetGuard}"
-}
-
-updateNewPipe() {
-  getPackageGit "${gitRepoNewPipe}" "${certNewPipe}"
-}
-
-updateNotes() {
-  getPackageGit "${gitRepoNotes}" "${certFossify}"
-}
-
-updateProton() {
-  getPackageGit "${gitRepoProton}" "${certProton}"
-}
-
-updateWireGuard() {
-  getPackageGit "${gitRepoWireGuard}" "${certWireGuard}"
-}
+updateAegis()     { getPackageGit "${gitRepoAegis}"     "${certAegis}"     ; }
+updateCalendar()  { getPackageGit "${gitRepoCalendar}"  "${certFossify}"   ; }
+updateFairEmail() { getPackageGit "${gitRepoFairEmail}" "${certFairEmail}" ; }
+updateGallery()   { getPackageGit "${gitRepoGallery}"   "${certFossify}"   ; }
+updateKiwix()     { getPackageGit "${gitRepoKiwix}"     "${certKiwix}"     ; }
+updateNetGuard()  { getPackageGit "${gitRepoNetGuard}"  "${certNetGuard}"  ; }
+updateNewPipe()   { getPackageGit "${gitRepoNewPipe}"   "${certNewPipe}"   ; }
+updateNotes()     { getPackageGit "${gitRepoNotes}"     "${certFossify}"   ; }
+updateProton()    { getPackageGit "${gitRepoProton}"    "${certProton}"    ; }
+updateWireGuard() { getPackageGit "${gitRepoWireGuard}" "${certWireGuard}" ; }
 
 updateFirefox() {
   version=$("${cmdCurl[@]}" "${urlFirefox}/" |
@@ -176,8 +151,7 @@ updateFirefox() {
     printLoad "${package}"
     download "${urlFirefox}/${version}/android/${apkPath}/${package}"
   fi
-  local size="$(du -h "${package}" | cut -f1)"
-  verify "${package}" "${certFirefox}" && printValid "${package} (${size})"
+  verify "${package}" "${certFirefox}"
 }
 
 updateOsmand() {
@@ -188,8 +162,7 @@ updateOsmand() {
     printLoad "${package}"
     download "${urlOsmand}/${package}"
   fi
-  local size="$(du -h "${package}" | cut -f1)"
-  verify "${package}" "${certOsmand}" && printValid "${package} (${size})"
+  verify "${package}" "${certOsmand}"
 }
 
 updateSignal() {
@@ -199,8 +172,7 @@ updateSignal() {
     printLoad "${package}"
     download "${version}"
   fi
-  local size="$(du -h "${package}" | cut -f1)"
-  verify "${package}" "${certSignal}" && printValid "${package} (${size})"
+  verify "${package}" "${certSignal}"
 }
 
 updateAllGit() {
@@ -224,15 +196,22 @@ updateAllUrl() {
   updateSignal
 }
 
+checkApksigner() {
+  if [[ -z "${apksigner}" || ! -x "${apksigner}" ]]; then
+    fail "apksigner not found or not executable"
+  fi
+}
+
 checkConnection() {
   # Check connectivity to Git or exit.
   "${cmdCurl[@]}" ${gitRateLimit} |
     jq -e '.rate.remaining == 0' >/dev/null &&
-    fail "github api rate limit"
+      fail "github api rate limit"
 }
 
 main() {
   # Main function.
+  checkApksigner
   checkConnection
   updateAllGit
   updateAllUrl
