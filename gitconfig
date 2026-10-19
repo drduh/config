@@ -18,6 +18,7 @@
 	merge      = refs/heads/main
 [alias]
 	authors    = !git log --format='%aN <%aE>' | sort -u
+	count      = count-objects -vH
 	dif        = diff
 	diffmain   = diff main..HEAD
 	diffmstr   = diff master..HEAD
