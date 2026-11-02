@@ -63,7 +63,7 @@
 //user_pref("privacy.window.maxInnerHeight", 900);
 //user_pref("privacy.window.maxInnerWidth", 1600);
 //user_pref("security.dialog_enable_delay", 1000);  // ms delay on dialogs
-//user_pref("svg.disabled", true);  // disable SVG (Scalable Vector Graphics)
+//user_pref("svg.disabled", true);  // disable SVG; will break sites
 //user_pref("webgl.disabled", true);  // disable WebGL (Web Graphics Library)
 //user_pref("webgl.enable-debug-renderer-info", false);  // do not expose graphics driver information
 //user_pref("webgl.enable-webgl2", false);

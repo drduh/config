@@ -92,7 +92,7 @@ verify() {
   local package="${1}" authority="${2}"
   local signature="$(${apksigner} verify \
     --print-certs "${package}" 2>/dev/null | awk -F': ' \
-      '/Signer #1 certificate SHA-256 digest:/ {print $2}')"
+      '/Signer .* certificate SHA-256 digest:/ {print $2}')"
   printf '%s' "${signature}" | grep -q "${authority}" ||
     fail "could not verify '${package}'"
   local size="$(du -h "${package}" | cut -f1)"
