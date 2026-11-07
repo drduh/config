@@ -475,13 +475,12 @@ function username {  # "username 8" - generate 8 usernames
   done }
 
 function versionFirefox {
-  curl "https://www.firefox.com/en-US/firefox/notes/" -v 2>&1 | \
-    grep "location" | sed 's/.*firefox.//g' | sed 's/.release.*//g' }
+  curl -s "https://product-details.mozilla.org/1.0/firefox_versions.json" |
+    jq -r '.LATEST_FIREFOX_VERSION' }
 
 function versionThunderbird {
-  curl "https://www.thunderbird.net/en-US/thunderbird/releases/atom.xml" -v 2>&1 | \
-    grep "releasenotes" | sed 's/.*thunderbird.//g' | sed 's/.release.*//g' | \
-      uniq | head -1 }
+  curl -s "https://product-details.mozilla.org/1.0/thunderbird_versions.json" |
+    jq -r '.LATEST_THUNDERBIRD_VERSION' }
 
 function vpn {
   ssh -C -N -L 5555:127.0.0.1:8118 vpn }
