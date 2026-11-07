@@ -1,7 +1,5 @@
 // https://github.com/drduh/config/blob/main/thunderbird.user.js
 // https://kb.mozillazine.org/Mail_and_news_settings
-// https://www.enigmail.net/index.php/en/user-manual/advanced-operations
-//user_pref("extensions.enigmail.mimeHashAlgorithm", 5);  // SHA-512
 //user_pref("javascript.enabled", false);
 //user_pref("mail.showCondensedAddresses", false);
 //user_pref("mail.SpellCheckBeforeSend", false);
@@ -43,12 +41,6 @@ user_pref("dom.push.enabled", false);
 user_pref("dom.push.userAgentID", "");
 user_pref("dom.webaudio.enabled", false);
 user_pref("dom.webnotifications.enabled", false);
-user_pref("extensions.cardbook.useOnlyEmail", true);
-user_pref("extensions.enigmail.addHeaders", false);
-user_pref("extensions.enigmail.agentAdditionalParam", "--no-emit-version --no-comments");
-user_pref("extensions.enigmail.keyRefreshOn", false);
-user_pref("extensions.enigmail.protectedSubjectText", "");
-user_pref("extensions.enigmail.useDefaultComment", true);
 user_pref("extensions.getAddons.cache.enabled", false);
 user_pref("general.useragent.override", "");
 user_pref("general.warnOnAboutConfig", false);
@@ -86,9 +78,6 @@ user_pref("mail.default_send_format", 1);
 user_pref("mail.display_glyph", false);
 user_pref("mail.html_compose", false);
 user_pref("mail.identity.default.compose_html", false);
-user_pref("mail.identity.id1.header.InReplyTo", "");
-user_pref("mail.identity.id1.header.References", "");
-user_pref("mail.identity.id1.headers", "");
 user_pref("mail.imap.mime_parts_on_demand", true);
 user_pref("mail.imap.ssl.show_insecure_images", false);
 user_pref("mail.inline_attachments", false);
@@ -117,6 +106,7 @@ user_pref("mailnews.auto_config_url", "");
 user_pref("mailnews.display.date_senders_timezone", false);
 user_pref("mailnews.display.disallow_mime_handlers", 3);
 user_pref("mailnews.display.html_as", 3);  // 0: normal; 1: plaintext; 2: source; 3: sanitize
+user_pref("mailnews.display.html_sanitizer.drop_media", true); // suppress inline content in Simple HTML mode
 user_pref("mailnews.display.original_date", false);
 user_pref("mailnews.display.prefer_plaintext", true);
 user_pref("mailnews.downloadToTempFile", false);  // disable "Allow antivirus clients to quarantine ..."
@@ -142,11 +132,6 @@ user_pref("media.gmp-provider.enabled", false);
 user_pref("media.hardware-video-decoding.enabled", false);
 user_pref("media.navigator.enabled", false);
 user_pref("media.peerconnection.enabled", false);
-user_pref("messenger.conversations.autoAcceptChatInvitations", false);
-user_pref("messenger.options.filterMode", 0);
-user_pref("messenger.startup.action", 0);
-user_pref("messenger.status.awayWhenIdle", false);
-user_pref("messenger.status.reportIdle", false);
 user_pref("network.IDN_show_punycode", true);
 user_pref("network.cookie.cookieBehavior", 2);  // 0: all cookies allowed; 1: no 3p cookies; 2: disable cookies
 user_pref("network.dns.disableIPv6", true);
@@ -173,10 +158,6 @@ user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 user_pref("privacy.trackingprotection.enabled", true);
-user_pref("purple.conversations.im.send_typing", false);
-user_pref("purple.logging.log_chats", false);
-user_pref("purple.logging.log_ims", false);
-user_pref("purple.logging.log_system", false);
 user_pref("rss.display.prefer_plaintext", true);
 user_pref("rss.message.loadWebPageOnSelect", 0);
 user_pref("security.OCSP.require", true);
@@ -198,7 +179,6 @@ user_pref("toolkit.telemetry.infoURL", "");
 user_pref("toolkit.telemetry.newProfilePing.enabled", false);
 user_pref("toolkit.telemetry.prompted", 2);
 user_pref("toolkit.telemetry.rejected", true);
-user_pref("toolkit.telemetry.server", "");
 user_pref("toolkit.telemetry.server", "data:,");
 user_pref("toolkit.telemetry.shutdownPingSender.enabled", false);
 user_pref("toolkit.telemetry.unified", false);
