@@ -19,6 +19,7 @@ Host *
   #ControlPath ~/.ssh/ctl-%r@%h:%p
   #ControlPersist 300
   AddressFamily inet
+  ConnectTimeout 10
   HashKnownHosts yes
   VisualHostKey yes
   PasswordAuthentication no

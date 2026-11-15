@@ -16,11 +16,13 @@ filterfile  user.filter
 
 accept-intercepted-requests 1
 keep-alive-timeout          10
-socket-timeout              10
+socket-timeout              120
 
 enable-edit-actions       0
 enable-remote-http-toggle 0
 enable-remote-toggle      0
+
+enforce-blocks 0
 
 debug     1  # Log the destination for each request
 debug  1024  # Log the destination for blocked requests

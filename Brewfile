@@ -1,39 +1,37 @@
 # https://github.com/drduh/config/blob/main/Brewfile
 # https://docs.brew.sh/Brew-Bundle-and-Brewfile
-
-# brew bundle check
-# brew bundle dump
-# brew bundle list
-# brew bundle install
-
-brew "openssl@3"
+# Review a package:  brew info <formula>
+# Install packages:  brew bundle install
 brew "dnsmasq"
 brew "exiftool"
-brew "libtiff"
-brew "readline"
 brew "gnupg"
 brew "golangci-lint"
 brew "gosec"
-brew "m4"
 brew "graphviz"
 brew "libp11"
+brew "libtiff"
+brew "m4"
 brew "minisign"
 brew "ncurses"
-brew "sqlite"
 brew "nmap"
 brew "opensc"
+brew "openssl"
 brew "pinentry-mac"
 brew "privoxy", restart_service: :changed
 brew "qpdf"
+brew "readline"
 brew "shellcheck"
 brew "shfmt"
 brew "signify-osx"
+brew "sqlite"
 brew "sslscan"
 brew "staticcheck"
 brew "tmux"
+brew "tree"
 brew "unbound"
 brew "wget"
 brew "ykman"
 brew "ykpers"
 brew "yubico-piv-tool"
+brew "yubikey-personalization"
 brew "zbar"

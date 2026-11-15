@@ -367,17 +367,16 @@ function mem {
     awk -S '{printf $1/1024 "MB"; $1=""; print }' }
 
 function myip {
-  curl -s "https://icanhazip.com/" || \
-    curl -s "https://am.i.mullvad.net/ip" || \
-      dig @resolver1.opendns.com ANY myip.opendns.com +short }
+  curl -fs --max-time 5 'https://icanhazip.com' ||
+  curl -fs --max-time 5 'https://am.i.mullvad.net/ip' ||
+  dig +short @resolver1.opendns.com myip.opendns.com A }
 
 function pdf {
   mupdf -r 180 -C FDF6E3 "${1}" }
 
 function percentDiff {
-  printf "%s%% diff between %s and %s\n" \
-    $(awk -S -v x="${1}" -v y="${2}" "BEGIN { print (y-x)/x * 100 }") \
-      "${1}" "${2}" }
+  awk -v x="$1" -v y="$2" 'BEGIN {
+    printf "%.2f%% diff between %s and %s\n", (y - x) / x * 100, x, y}' }
 
 function png2jpg {
   for png in $(find . -type f -name "*.png") ; do
@@ -475,13 +474,12 @@ function username {  # "username 8" - generate 8 usernames
   done }
 
 function versionFirefox {
-  curl "https://www.firefox.com/en-US/firefox/notes/" -v 2>&1 | \
-    grep "location" | sed 's/.*firefox.//g' | sed 's/.release.*//g' }
+  curl -s "https://product-details.mozilla.org/1.0/firefox_versions.json" |
+    jq -r '.LATEST_FIREFOX_VERSION' }
 
 function versionThunderbird {
-  curl "https://www.thunderbird.net/en-US/thunderbird/releases/atom.xml" -v 2>&1 | \
-    grep "releasenotes" | sed 's/.*thunderbird.//g' | sed 's/.release.*//g' | \
-      uniq | head -1 }
+  curl -s "https://product-details.mozilla.org/1.0/thunderbird_versions.json" |
+    jq -r '.LATEST_THUNDERBIRD_VERSION' }
 
 function vpn {
   ssh -C -N -L 5555:127.0.0.1:8118 vpn }
